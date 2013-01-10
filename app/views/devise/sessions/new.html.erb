@@ -1,17 +1,33 @@
-<h2>Sign in</h2>
+<div class="row-fluid">
+
+  <div class="span6">
+  <h2>Sign in</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <div><%= f.email_field :email, :placeholder => 'Email', :autofocus => true %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div><%= f.password_field :password, :placeholder => 'Password' %></div>
 
   <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+  
+    <div><label class="checkbox"><%= f.check_box :remember_me %> Remember me</label></div>
+  <!--<%= f.label :remember_me %>-->
   <% end -%>
 
-  <div><%= f.submit "Sign in" %></div>
+  <div><%= f.submit "Sign in", :class => 'btn btn-primary' %></div>
 <% end %>
 
+</div>
+
+<div class="span6">
+  <h2>...with Facebook?</h2>
+<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => 'btn btn-primary' %>
+  </div>
+
+</div>
+
+<hr />
+
+<h6>
 <%= render "devise/shared/links" %>
+</h6>
