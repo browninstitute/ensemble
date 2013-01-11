@@ -1,4 +1,6 @@
 StoryCollab::Application.routes.draw do
+  resources :stories
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get "home/index"

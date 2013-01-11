@@ -8,14 +8,24 @@
 </head>
 <body>
 
-<div class="container">
 
-<div>
-  <% if user_signed_in? %>
-  <div style="float: right;"><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></div>
-  <% end %>
-  <h4><%= link_to "story-collab", root_path %></h4>
+
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <a class="brand" style="margin-left: 0px;" href="<%= root_path %>">story-collab</a>
+
+    <% if user_signed_in? %>
+    <ul class="nav">
+      <li><%= link_to "stories", stories_path %></li>
+    </ul>
+    <ul class="nav pull-right">
+      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+    </ul>
+    <% end %>
+  </div>
 </div>
+
+<div class="container">
 
 <p class="notice"><%= notice %></p>
 <p class="notice" style="color: red;"><%= alert %></p>

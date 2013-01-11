@@ -1,11 +1,8 @@
 == Notes
 
-* If errors happen, `bundle update` and `rake db:migrate` are your friends!
+* If errors happen, +bundle update+ and +rake db:migrate+ are your friends!
 
 == Setup
-* You need to temporarily comment out the devise call in app/models/user.rb and the devise_for call in config/routes.rb
-* Run rails g devise:install
-* Run rake db:migrate
-* Uncomment out the lines in user.rb and routes.rb (or just check them out again)
-* Rename /config/initializers/devise.rb.sample to devise.rb and modify the Facebook APP_ID and SECRET.
-* Run rails server and you're up and running!
+* Run +rake db:migrate+
+* Rename +/config/initializers/devise.rb.sample+ to +devise.rb+ and modify the Facebook APP_ID and SECRET.
+* Run +rails server+ and you're up and running!
