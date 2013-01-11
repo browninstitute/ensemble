@@ -9,18 +9,37 @@
 <body>
 
 <div class="container">
+  <header>
+    <% if user_signed_in? %>
+      <div class="meta-nav">
+        <%= link_to current_user.name %> (<%= current_user.email %>) | 
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      </div>
+    <% end %>
+  
+    <div class="navbar">
+      <div class="navbar-inner">
+        
+        <%= link_to "storycollab", root_path, :class => "brand" %>
+        
+        <nav>
+          <ul class="nav">
+            <li><%= link_to "About" %></li>
+            <li class="active"><%= link_to "Current Story" %></li>
+            <li><%= link_to "Stories" %></li>
+          </ul>
+          
+          <form class="navbar-search">
+            <input type="text" class="search-query" placeholder="Search">
+          </form>
+        </nav>
+      </div>
+    </div>    
+  </header>
 
-<div>
-  <% if user_signed_in? %>
-  <div style="float: right;"><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></div>
-  <% end %>
-  <h4><%= link_to "story-collab", root_path %></h4>
-</div>
+  <%= render 'layouts/notices' %>
 
-<p class="notice"><%= notice %></p>
-<p class="notice" style="color: red;"><%= alert %></p>
-
-<%= yield %>
+  <%= yield %>
 
 </div>
 
