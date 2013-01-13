@@ -30,6 +30,8 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-wysihtml5-rails (0.3.1.16)
+      railties (>= 3.0)
     builder (3.0.4)
     cancan (1.6.8)
     coffee-rails (3.2.2)
@@ -149,6 +151,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-wysihtml5-rails
   cancan
   coffee-rails (~> 3.2.1)
   devise
