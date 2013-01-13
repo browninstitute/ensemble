@@ -2,6 +2,94 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$lightgrey: #666;
+$darkgrey: #444;
+$accent: #23ADE8;
+
+/* Viewing Stories */
+.story {
+  width: 67%;
+  float: left;
+
+  h1 {
+    font-family: Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
+    font-size: 1.8em;
+    font-weight: normal;
+    margin: 0;
+    line-height: 1.2em;
+  }
+
+  .subtitle {
+    float: left;
+  }
+
+  .meta {
+    color: $lightgrey;
+    text-align: right;
+    font-size: 0.85em;
+  }
+
+  .content {
+    font-family: Cambria, Georgia, Times, Times New Roman, serif;
+  }
+}
+
+.storybar {
+  width: 30%;
+  float: right;
+  margin-left: 20px;
+
+  .question-box {
+    border: 1px solid $darkgrey;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;     
+    width: 250px;
+    font-size: 0.85em;
+    line-height: 1.5em;
+    position: relative;
+
+    .likes {
+      float: left;
+      text-align: center;
+      width: 15px;
+    }
+
+    .question-info {
+      float: left;
+      width: 230px;
+      padding-left: 5px;
+    
+      .question-text {
+        font-weight: bold;
+      }
+
+      .asker {
+        color: $lightgrey;
+      }
+
+      .answers {
+        color: $accent; 
+      }
+    }
+  }
+
+  .question-box:after {
+    right: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(68,68,68,0);
+    border-right-color: #444;
+    border-width: 10px;
+    top: 50%;
+    margin-top: -10px;
+  }
+}
+
 .question {
   display: inline-block;
   width: 12px;

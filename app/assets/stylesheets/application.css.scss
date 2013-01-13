@@ -14,9 +14,13 @@
  */
 
 $darkgrey: #444;
+$lightgrey: #666;
 $accent: #23ADE8;
 
+/* Layout styles */
 header {
+  margin-bottom: 15px;
+    
   .navbar {
     .navbar-inner {
       background: none;

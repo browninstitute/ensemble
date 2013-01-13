@@ -1,21 +1,29 @@
-<p>
-  <b>Title:</b>
-  <%= @story.title %>
-</p>
+<div class="story">
+  <h1>
+    <%= @story.title %>
+  </h1>
 
-<p>
-  <b>Subtitle:</b>
-  <%= @story.subtitle %>
-</p>
+  <p class="subtitle">
+    <%= @story.subtitle %>
+  </p>
 
-<p>
-  <b>User:</b>
-  <%= @story.user.name %> (<%= @story.user.id %>)
-</p>
+  <p class="meta">
+    <span class="author">
+      started by <%= link_to @story.user.name, "#" %>
+    </span>
+    <span class="timestamp">
+      <%= time_ago_in_words(@story.created_at) %> ago
+    </span>    
+  </p>
 
-<p>
-  <%= @story.story_text %>
-</p>
+  <div class="content">
+    <%= @story.story_text %>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_story_path(@story) %> |
-<%= link_to 'Back', stories_path %>
+<div class="storybar">
+  <%= link_to 'Edit Story', edit_story_path(@story), :class => "btn" %>
+  <%= link_to content_tag(:i, "", :class => "icon-plus-sign") + " New Question", "#", :class => "btn" %>
+
+  <%= render 'question' %>
+</div>
