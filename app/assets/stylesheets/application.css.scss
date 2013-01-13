@@ -1,0 +1,87 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require bootstrap-wysihtml5
+ *= require_tree .
+ */
+
+$darkgrey: #444;
+$accent: #23ADE8;
+
+header {
+  .navbar {
+    .navbar-inner {
+      background: none;
+      box-shadow: none;
+      border: 0;
+      padding: 0;
+
+      .brand {
+        text-transform: lowercase;
+        font-size: 2.2em;
+        color: $darkgrey;
+
+        span:nth-child(2) {
+          color: $accent;
+        }
+      }
+
+      .nav {
+        li {
+          padding-left: 20px;
+
+          a {
+            font-family: Consolas, Lucida Console, Monaco, monospace;
+            padding: 10px 0 10px 0;
+          }
+        }
+
+        li.active {
+          a {
+            background: none;
+            box-shadow: none;
+            color: $darkgrey;
+          }
+        }
+      }
+
+      .navbar-search {
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .metanav {
+    margin: 5px 0;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      text-align: right;
+
+      li {
+        display: inline;
+        padding-left: 15px;
+        font-size: 0.85em;
+        text-transform: lowercase;
+
+        a {
+          color: $darkgrey;
+          font-weight: bold;
+        }
+        a:hover {
+          text-decoration: none;
+          color: $accent;
+        }
+      }
+    }
+  }
+}
