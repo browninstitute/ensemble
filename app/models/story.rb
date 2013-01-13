@@ -9,7 +9,8 @@ class Story < ActiveRecord::Base
 
   # Retrieves the most recent version of the story's text.
   def story_text
-    StoryText.find(:first, :order => 'updated_at DESC').content
+    @story_text = StoryText.find(:first, :conditions => { :story_id => id }, :order => 'updated_at DESC')
+    @story_text.nil? ? "" : @story_text.content
   end
 
   # Saves a new version of the story's text.
@@ -19,9 +20,8 @@ class Story < ActiveRecord::Base
     @story_text.save
   end
 
-  # Create a StoryText object to go with the Story object.
+  # On Story create, gives the StoryText the right ID.
   def create_story_text
-    @story_text = StoryText.new :content => "Fill in your story here!"
     @story_text.story_id = id
     @story_text.save
   end
