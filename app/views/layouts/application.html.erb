@@ -9,35 +9,8 @@
 <body>
   <div class="container">
     <header>
-      <div class="metanav">
-        <ul>
-          <% if user_signed_in? %>
-            <li><%= link_to current_user.name, "#" %> (<%= current_user.email %>)</li>
-            <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-          <% else %>
-            <li><%= link_to "Login", new_user_session_path %></li>
-            <li><%= link_to "Register", new_user_registration_path %></li>
-          <% end %>
-        </ul>
-      </div>
-      
-      <div class="navbar navbar-static-top">
-        <div class="navbar-inner">
-          <%= link_to content_tag(:span, "Story") + content_tag(:span, "Collab"), root_path, :class => "brand" %>
-
-          <% if user_signed_in? %>
-            <form class="navbar-search pull-right">
-              <input type="text" class="search-query" placeholder="search" />
-            </form>
-            
-            <ul class="nav pull-right">
-              <li><%= link_to "About", "#" %></li>
-              <li class="<%= 'active' if current_page?(current_story_path) %>"><%= link_to "Current Story", current_story_path %></li>
-              <li class="<%= 'active' if current_page?(stories_path) %>"><%= link_to "Stories", stories_path %></li>
-            </ul>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'layouts/metanav' %>
+      <%= render 'layouts/nav' %>
     </header>
 
     <%= render 'layouts/notices' %>
