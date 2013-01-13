@@ -14,35 +14,7 @@
 </p>
 
 <p>
-  <textarea id="some-textarea" rows="16" class="span8 wysihtml5" placeholder="Enter text ..."></textarea>
-  <button class="btn" id="add-blank">Mark Text</button>
-  <script type="text/javascript">
-    // Configure WYSIHTML5 (see https://github.com/jhollingworth/bootstrap-wysihtml5)
-    $("#some-textarea").wysihtml5({
-      "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
-      "emphasis": true, //Italics, bold, etc. Default true
-      "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-      "html": true, //Button which allows you to edit the generated HTML. Default false
-      "link": true, //Button to insert a link. Default true
-      "image": true, //Button to insert an image. Default true,
-      "color": false, //Button to change color of font
-      parserRules: {
-        classes: {
-          "question": 1
-        },
-        tags: {
-          span: {}
-        }
-      },
-      stylesheets: ["<%= path_to_stylesheet("stories") %>"]
-    });
-    
-    // Add a "blank" or a marker for a question
-    $('#add-blank').click(function() {
-      $('#some-textarea').data("wysihtml5").editor.composer.commands.exec("insertHTML", "<span>&nbsp;</span><span class=\"question\"></span><span>&nbsp;</span>");
-      $('#some-textarea').data("wysihtml5").editor.composer.focus();
-    })
-  </script>
+  <%= @story.story_text %>
 </p>
 
 <%= link_to 'Edit', edit_story_path(@story) %> |
