@@ -81,4 +81,19 @@ class StoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # Shows the current story being worked on by the community.
+  # TODO: Right now this defaults to the first story in the DB.
+  def current_story
+    @story = Story.find(:first)
+    if @story.nil?
+      render 'no_current_story'
+      return
+    end
+
+    respond_to do |format|
+      format.html { render action: "show" } # show.html.erb
+      format.json { render json: @story }
+    end
+ end
 end

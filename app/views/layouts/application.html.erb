@@ -10,10 +10,11 @@
 
 <div class="navbar navbar-static-top">
   <div class="navbar-inner">
-    <a class="brand" style="margin-left: 0px;" href="<%= root_path %>">story-collab</a>
+    <a class="brand" href="<%= root_path %>">story-collab</a>
 
     <% if user_signed_in? %>
     <ul class="nav">
+      <li><%= link_to "current story", current_story_path %></li>
       <li><%= link_to "stories", stories_path %></li>
     </ul>
     <ul class="nav pull-right">
@@ -24,12 +25,8 @@
 </div>
 
 <div class="container">
-
-<p class="notice"><%= notice %></p>
-<p class="notice" style="color: red;"><%= alert %></p>
-
+  <%= render 'layouts/notices' %>
   <%= yield %>
-
 </div>
 
 </body>
