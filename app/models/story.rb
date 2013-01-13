@@ -1,6 +1,6 @@
 class Story < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :subtitle, :title, :public
+  attr_accessible :subtitle, :title, :public, :story_text
 
   validates :title, :presence => true
 
@@ -10,6 +10,13 @@ class Story < ActiveRecord::Base
   # Retrieves the most recent version of the story's text.
   def story_text
     StoryText.find(:first, :order => 'updated_at DESC').content
+  end
+
+  # Saves a new version of the story's text.
+  def story_text=(text)
+    @story_text = StoryText.new :content => text
+    @story_text.story_id = id
+    @story_text.save
   end
 
   # Create a StoryText object to go with the Story object.

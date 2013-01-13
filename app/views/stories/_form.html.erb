@@ -20,13 +20,11 @@
     <%= f.text_field :subtitle %>
   </div>
   <p>
-    <textarea id="some-textarea" rows="16" class="span8 wysihtml5" placeholder="Enter text ...">
-      <%= @story.story_text %>
-    </textarea>
+    <%= f.text_area :story_text, :rows => 16, :class => "span8 wysihtml5", :placeholder => "Enter text..." %>
     <button class="btn" id="add-blank">Mark Text</button>
     <script type="text/javascript">
       // Configure WYSIHTML5 (see https://github.com/jhollingworth/bootstrap-wysihtml5)
-      $("#some-textarea").wysihtml5({
+      $("#story_story_text").wysihtml5({
           "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
           "emphasis": true, //Italics, bold, etc. Default true
           "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
