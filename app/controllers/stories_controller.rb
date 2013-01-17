@@ -95,5 +95,26 @@ class StoriesController < ApplicationController
       format.html { render action: "show" } # show.html.erb
       format.json { render json: @story }
     end
- end
+  end
+
+  def save_draft
+    @story = Story.find(params[:id])
+
+    respond_to do |format|
+      if @story.save_draft(params[:story][:story_text])
+        flash[:notice] = "Draft successfully saved."
+        format.html { redirect_to :action => "edit" }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to :action => "edit" }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy_draft
+  end
+
+  def preview
+  end
 end

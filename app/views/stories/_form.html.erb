@@ -1,4 +1,19 @@
-<%= form_for(@story) do |f| %>
+<script type="text/javascript">
+  // Change the form action depending on the button clicked.
+  $(document).ready(function() {
+    var story_id = '<%= @story.id %>';  
+    $("#save_draft").click(function() {
+      var action = '<%= save_draft_story_path(@story) %>';
+      $("#edit_story_" + story_id).attr('action', action).submit();
+    });    
+    $("#preview").click(function() {
+      var action = '<%= preview_story_path(@story) %>';
+      $("#edit_story_" + story_id).attr('action', action).submit();  
+    });
+  });
+</script>
+
+<%= form_for(@story, :method => :post) do |f| %>
   <% if @story.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
@@ -52,6 +67,14 @@
   </p>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Publish", :class => "btn" %>
+    <%= link_to "Save Draft", "#", 
+                :class => "btn", :id => "save_draft" %>
+    <%= link_to "Preview", "#", :class => "btn", :id => "preview" %>
+    <%= link_to "Clear Draft", destroy_draft_story_path(@story), :class => "btn" %>
+  </div>
+
+  <div class="status">
+    <%= @story.story_text_object.has_draft? ? "Last saved draft at #{@story.story_text_object.draft.updated_at}" : "No draft saved." %>
   </div>
 <% end %>

@@ -1,5 +1,12 @@
 StoryCollab::Application.routes.draw do
-  resources :stories
+  resources :stories do
+    member do
+      post 'save_draft'
+      post 'destroy_draft'
+      get 'preview'
+    end
+  end
+  
   match 'currentstory' => 'stories#current_story', :as => 'current_story'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

@@ -9,7 +9,7 @@ class Story < ActiveRecord::Base
 
   # Retrieves the most recent version of the story's text.
   def story_text
-    @story_text = StoryText.find(:first, :conditions => { :story_id => id }, :order => 'updated_at DESC')
+    @story_text = story_text_object
     @story_text.nil? ? "" : @story_text.content
   end
 
@@ -18,6 +18,10 @@ class Story < ActiveRecord::Base
     @story_text = StoryText.new :content => text
     @story_text.story_id = id
     @story_text.save
+  end
+
+  def story_text_object
+    @story_text = StoryText.find(:first, :conditions => { :story_id => id }, :order => 'updated_at DESC')
   end
 
   # On Story create, gives the StoryText the right ID.
@@ -29,5 +33,12 @@ class Story < ActiveRecord::Base
   # Destroy StoryText objects related to the Story object.
   def destroy_story_texts
     StoryText.destroy_all(:story_id => id)
+  end
+
+  # Saves a draft based on the current story text. 
+  def save_draft(text)
+    @story_text = story_text_object
+    @story_text.instantiate_draft! if !@story_text.has_draft?
+    @story_text.draft.update_attributes :content => text
   end
 end
