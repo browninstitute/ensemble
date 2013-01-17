@@ -6,7 +6,7 @@ class Story < ActiveRecord::Base
     attr_accessible :content
   end
   
-  #has_paper_trail
+  has_paper_trail
 
   after_update :destroy_draft
 

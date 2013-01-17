@@ -152,10 +152,11 @@ class StoriesController < ApplicationController
 
   def view_version
     @story = Story.find(params[:id])
-    @story_text = @story.versions[params[:version].to_i].reify
-    
+    @story = @story.versions[params[:version].to_i].reify
+   
+
     respond_to do |format|
-      format.html { redirect_to story_path(@story) }
+      format.html { render :version }
       format.html { head :no_content }
     end
   end

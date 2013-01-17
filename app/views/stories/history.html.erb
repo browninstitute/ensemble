@@ -9,7 +9,13 @@
   </tr>
   <% @versions.each do |v| %>
     <tr>
-      <td><%= link_to v.index, version_story_path(@story, v.index) %></td>
+      <td>
+        <% if v.event == "update"%>
+          <%= link_to v.index, version_story_path(@story, v.index) %>
+        <% else %>
+          <%= v.index %>
+        <% end %>  
+      </td>
       <td><%= v.event %></td>
       <td><%= v.whodunnit %></td>
       <td><%= v.created_at %></td> 
