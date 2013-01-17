@@ -41,4 +41,10 @@ class Story < ActiveRecord::Base
     @story_text.instantiate_draft! if !@story_text.has_draft?
     @story_text.draft.update_attributes :content => text
   end
+
+  # Retrieves draft if available, otherwise gets published text.
+  def draft_or_story_text
+    @story_text = story_text_object
+    @story_text.has_draft? ? @story_text.draft.content : @story_text.content
+  end
 end

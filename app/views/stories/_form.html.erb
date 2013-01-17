@@ -35,7 +35,7 @@
     <%= f.text_field :subtitle %>
   </div>
   <p>
-    <%= f.text_area :story_text, :rows => 16, :class => "span8 wysihtml5", :placeholder => "Enter text..." %>
+    <%= f.text_area :story_text, :rows => 16, :class => "span8 wysihtml5", :value => @story.draft_or_story_text, :placeholder => "Enter text..." %>
     <button class="btn" id="add-blank">Mark Text</button>
     <script type="text/javascript">
       // Configure WYSIHTML5 (see https://github.com/jhollingworth/bootstrap-wysihtml5)
