@@ -113,6 +113,18 @@ class StoriesController < ApplicationController
   end
 
   def destroy_draft
+    @story = Story.find(params[:id])
+
+    respond_to do |format|
+      if @story.destroy_draft
+        flash[:notice] = "Draft successfully deleted."
+        format.html { redirect_to :action => "edit" }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to :action => "edit" }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def preview

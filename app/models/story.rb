@@ -47,4 +47,11 @@ class Story < ActiveRecord::Base
     @story_text = story_text_object
     @story_text.has_draft? ? @story_text.draft.content : @story_text.content
   end
+
+  # Destroy's current draft, if there is one
+  def destroy_draft
+    @story_text = story_text_object
+    @story_text.destroy_draft! if @story_text.has_draft?
+    !@story_text.has_draft? # successful if there is no draft
+  end
 end

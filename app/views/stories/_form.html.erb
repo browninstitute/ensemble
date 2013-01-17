@@ -73,10 +73,11 @@
     <%= link_to "Save Draft", "#", 
                 :class => "btn", :id => "save_draft" %>
     <%= link_to "Preview", "#", :class => "btn", :id => "preview" %>
-    <%= link_to "Clear Draft", destroy_draft_story_path(@story), :class => "btn" %>
+    <%= link_to "Clear Draft", destroy_draft_story_path(@story), :class => "btn", :method => :post, :confirm => "Are you sure you want to delete your draft?" %>
   </div>
 
   <div class="status">
-    <%= @story.story_text_object.has_draft? ? "Last saved draft at #{@story.story_text_object.draft.updated_at}" : "No draft saved." %>
+    <%= @story.story_text_object.has_draft? ? "Draft last saved #{time_ago_in_words(@story.story_text_object.draft.updated_at)} ago." : "No draft saved." %> 
+    Last published <%= time_ago_in_words(@story.story_text_object.created_at) %> ago.
   </div>
 <% end %>
