@@ -73,7 +73,7 @@
     <%= link_to "Save Draft", "#", 
                 :class => "btn", :id => "save_draft" %>
     <%= link_to "Preview", "#", :class => "btn", :id => "preview" %>
-    <%= link_to "Clear Draft", destroy_draft_story_path(@story), :class => "btn", :method => :post, :confirm => "Are you sure you want to delete your draft?" %>
+    <%= link_to "Discard Draft", destroy_draft_story_path(@story), :class => "btn", :method => :post, :confirm => "Are you sure you want to discard your draft?" %>
   </div>
 
   <div class="status">

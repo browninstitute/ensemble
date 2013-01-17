@@ -3,7 +3,7 @@ StoryCollab::Application.routes.draw do
     member do
       post 'save_draft'
       post 'destroy_draft'
-      get 'preview'
+      post 'preview'
     end
   end
   

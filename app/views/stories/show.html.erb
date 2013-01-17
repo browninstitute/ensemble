@@ -1,4 +1,12 @@
 <div class="story">
+  <% if params[:preview] %>
+  <div class="alert alert-info">
+    <%= link_to content_tag(:i, "", :class => "icon-chevron-left") + " Back to Editing", 
+                edit_story_path(@story), :class => "btn btn-small" %> 
+    Your story has not been published yet. You are viewing a <strong>preview</strong> of your story.
+  </div>
+  <% end %>
+  
   <h1>
     <%= @story.title %>
   </h1>
@@ -17,7 +25,7 @@
   </p>
 
   <div class="content">
-    <%= @story.story_text %>
+    <%= params[:preview] ? @story.draft_or_story_text : @story.story_text %>
   </div>
 </div>
 
