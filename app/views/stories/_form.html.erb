@@ -4,16 +4,18 @@
     var story_id = '<%= @story.id %>';  
     $("#save_draft").click(function() {
       var action = '<%= save_draft_story_path(@story) %>';
+      $("[name='_method']").remove();
       $("#edit_story_" + story_id).attr('action', action).submit();
     });    
     $("#preview").click(function() {
       var action = '<%= preview_story_path(@story) %>';
+      $("[name='_method']").remove();
       $("#edit_story_" + story_id).attr('action', action).submit();  
     });
   });
 </script>
 
-<%= form_for(@story, :method => :post) do |f| %>
+<%= form_for(@story) do |f| %>
   <% if @story.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@story.errors.count, "error") %> prohibited this story from being saved:</h2>
