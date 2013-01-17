@@ -1,20 +1,3 @@
-<script type="text/javascript">
-  // Change the form action depending on the button clicked.
-  $(document).ready(function() {
-    var story_id = '<%= @story.id %>';  
-    $("#save_draft").click(function() {
-      var action = '<%= save_draft_story_path(@story) %>';
-      $("[name='_method']").remove();
-      $("#edit_story_" + story_id).attr('action', action).submit();
-    });    
-    $("#preview").click(function() {
-      var action = '<%= preview_story_path(@story) %>';
-      $("[name='_method']").remove();
-      $("#edit_story_" + story_id).attr('action', action).submit();  
-    });
-  });
-</script>
-
 <%= form_for(@story) do |f| %>
   <% if @story.errors.any? %>
     <div id="error_explanation">
@@ -35,6 +18,10 @@
   <div class="field">
     <%= f.label :subtitle %><br />
     <%= f.text_field :subtitle %>
+  </div>
+  <div class="status">
+    <%= draft_status(@story) %>
+    <%= published_status(@story) %>
   </div>
   <p>
     <%= f.text_area :story_text, :rows => 16, :class => "span8 wysihtml5", :value => @story.draft_or_story_text, :placeholder => "Enter text..." %>
@@ -69,15 +56,28 @@
   </p>
   
   <div class="actions">
+    <script type="text/javascript">
+      // Change the form action depending on the button clicked.
+      $(document).ready(function() {
+        var story_id = '<%= @story.id %>';  
+        $("#save_draft").click(function() {
+          var action = '<%= save_draft_story_path(@story) %>';
+          $("[name='_method']").remove();
+          $("#edit_story_" + story_id).attr('action', action).submit();
+        });    
+        $("#preview").click(function() {
+          var action = '<%= preview_story_path(@story) %>';
+          $("[name='_method']").remove();
+          $("#edit_story_" + story_id).attr('action', action).submit();  
+        });
+      });
+    </script>
+
     <%= f.submit "Publish", :class => "btn" %>
     <%= link_to "Save Draft", "#", 
                 :class => "btn", :id => "save_draft" %>
     <%= link_to "Preview", "#", :class => "btn", :id => "preview" %>
-    <%= link_to "Discard Draft", destroy_draft_story_path(@story), :class => "btn", :method => :post, :confirm => "Are you sure you want to discard your draft?" %>
-  </div>
-
-  <div class="status">
-    <%= @story.story_text_object.has_draft? ? "Draft last saved #{time_ago_in_words(@story.story_text_object.draft.updated_at)} ago." : "No draft saved." %> 
-    Last published <%= time_ago_in_words(@story.story_text_object.created_at) %> ago.
+    <%= link_to "Discard Draft", destroy_draft_story_path(@story), 
+                :class => "btn", :method => :post, :confirm => "Are you sure you want to discard your draft?" %>
   </div>
 <% end %>

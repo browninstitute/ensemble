@@ -7,7 +7,12 @@ class Story < ActiveRecord::Base
   after_create :create_story_text
   after_destroy :destroy_story_texts
 
-  # Retrieves the most recent version of the story's text.
+  # Retrieves the currently associated StoryText object
+  def story_text_object
+    @story_text = StoryText.find(:first, :conditions => { :story_id => id }, :order => 'updated_at DESC')
+  end
+
+  # Retrieves the story's text.
   def story_text
     @story_text = story_text_object
     @story_text.nil? ? "" : @story_text.content
@@ -18,10 +23,6 @@ class Story < ActiveRecord::Base
     @story_text = StoryText.new :content => text
     @story_text.story_id = id
     @story_text.save
-  end
-
-  def story_text_object
-    @story_text = StoryText.find(:first, :conditions => { :story_id => id }, :order => 'updated_at DESC')
   end
 
   # On Story create, gives the StoryText the right ID.

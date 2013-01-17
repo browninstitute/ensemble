@@ -97,6 +97,7 @@ class StoriesController < ApplicationController
     end
   end
 
+  # Saves a draft of the story.
   def save_draft
     @story = Story.find(params[:id])
 
@@ -112,6 +113,7 @@ class StoriesController < ApplicationController
     end
   end
 
+  # Discards the current story draft, if there is one.
   def destroy_draft
     @story = Story.find(params[:id])
 
@@ -127,6 +129,7 @@ class StoriesController < ApplicationController
     end
   end
 
+  # Allows the user to preview the story draft.
   def preview
     @story = Story.find(params[:id])
   
