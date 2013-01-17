@@ -1,12 +1,9 @@
-<div class="story">
-  <% if params[:preview] %>
-  <div class="alert alert-info">
-    <%= link_to content_tag(:i, "", :class => "icon-chevron-left") + " Back to Editing", 
-                edit_story_path(@story), :class => "btn btn-small" %> 
-    Your story has not been published yet. You are viewing a <strong>preview</strong> of your story.
-  </div>
-  <% end %>
-  
+<% 
+  # Local variables used by this partial
+  preview ||= false
+%>
+
+<div class="story"> 
   <h1>
     <%= @story.title %>
   </h1>
@@ -19,19 +16,23 @@
     <span class="author">
       started by <%= link_to @story.user.name, "#" %>
     </span>
-    <span class="timestamp">
-      <%= time_ago_in_words(@story.created_at) %> ago
-    </span>    
+    <% if !preview %>
+      <span class="timestamp">
+        <%= time_ago_in_words(@story.created_at) %> ago
+      </span>
+    <% end %>
   </p>
 
   <div class="content">
-    <%= params[:preview] ? @story.draft_or_story_text : @story.content %>
+    <%= @story.content %>
   </div>
 </div>
 
 <div class="storybar">
-  <%= link_to 'Edit Story', edit_story_path(@story), :class => "btn" %>
-  <%= link_to content_tag(:i, "", :class => "icon-plus-sign") + " New Question", "#", :class => "btn" %>
+  <% if !preview %>
+    <%= link_to 'Edit Story', edit_story_path(@story), :class => "btn" %>
+    <%= link_to content_tag(:i, "", :class => "icon-plus-sign") + " New Question", "#", :class => "btn" %>
+  <% end %>
 
   <%= render 'question' %>
 </div>

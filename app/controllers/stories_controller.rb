@@ -35,6 +35,11 @@ class StoriesController < ApplicationController
   # GET /stories/1/edit
   def edit
     @story = Story.find(params[:id])
+    if !params[:story].nil?
+      @story.content = params[:story][:content]
+      @story.title = params[:story][:title]
+      @story.subtitle = params[:story][:subtitle]
+    end
   end
 
   # POST /stories
@@ -130,18 +135,13 @@ class StoriesController < ApplicationController
   end
 
   # Allows the user to preview the story draft.
+  # Creates a temporary Story object based on the existing one
+  # to create a preview version.
   def preview
     @story = Story.find(params[:id])
-  
-    respond_to do |format|
-      if @story.save_draft(params[:story][:content])
-        format.html { redirect_to story_path(@story, :preview => true) }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to :action => "edit" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
-    end
+    @story.content = params[:story][:content]
+    @story.title = params[:story][:title]
+    @story.subtitle = params[:story][:subtitle]
   end
 
   # Allows the user to view story history.
@@ -150,10 +150,12 @@ class StoriesController < ApplicationController
     @versions = @story.versions
   end
 
+  # Allows the user to view different versions of a
+  # story.
   def view_version
+    @version = params[:version].to_i
     @story = Story.find(params[:id])
-    @story = @story.versions[params[:version].to_i].reify
-   
+    @story = @story.versions[@version].reify
 
     respond_to do |format|
       format.html { render :version }
