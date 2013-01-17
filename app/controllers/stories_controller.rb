@@ -100,9 +100,9 @@ class StoriesController < ApplicationController
   # Saves a draft of the story.
   def save_draft
     @story = Story.find(params[:id])
-
+    
     respond_to do |format|
-      if @story.save_draft(params[:story][:story_text])
+      if @story.save_draft(params[:story][:content])
         flash[:notice] = "Draft successfully saved."
         format.html { redirect_to :action => "edit" }
         format.json { head :no_content }
@@ -134,7 +134,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
   
     respond_to do |format|
-      if @story.save_draft(params[:story][:story_text])
+      if @story.save_draft(params[:story][:content])
         format.html { redirect_to story_path(@story, :preview => true) }
         format.json { head :no_content }
       else
@@ -147,12 +147,12 @@ class StoriesController < ApplicationController
   # Allows the user to view story history.
   def history
     @story = Story.find(params[:id])
-    @versions = @story.story_text_object.versions
+    @versions = @story.versions
   end
 
   def view_version
     @story = Story.find(params[:id])
-    @story_text = @story.story_text_object.versions[params[:version].to_i].reify
+    @story_text = @story.versions[params[:version].to_i].reify
     
     respond_to do |format|
       format.html { redirect_to story_path(@story) }
