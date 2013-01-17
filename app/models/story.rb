@@ -20,7 +20,12 @@ class Story < ActiveRecord::Base
 
   # Saves a new version of the story's text.
   def story_text=(text)
-    @story_text = StoryText.new :content => text
+    @story_text = story_text_object
+    if @story_text.nil?
+      @story_text = StoryText.new :content => text
+    else
+      @story_text.update_attributes :content => text
+    end
     @story_text.story_id = id
     @story_text.save
   end
@@ -46,6 +51,8 @@ class Story < ActiveRecord::Base
   # Retrieves draft if available, otherwise gets published text.
   def draft_or_story_text
     @story_text = story_text_object
+    return "" if @story_text.nil?
+
     @story_text.has_draft? ? @story_text.draft.content : @story_text.content
   end
 

@@ -4,4 +4,5 @@ class StoryText < ActiveRecord::Base
   has_draft do
     attr_accessible :content
   end
+  has_paper_trail
 end
