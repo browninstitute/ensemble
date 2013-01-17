@@ -143,4 +143,20 @@ class StoriesController < ApplicationController
       end
     end
   end
+
+  # Allows the user to view story history.
+  def history
+    @story = Story.find(params[:id])
+    @versions = @story.story_text_object.versions
+  end
+
+  def view_version
+    @story = Story.find(params[:id])
+    @story_text = @story.story_text_object.versions[params[:version].to_i].reify
+    
+    respond_to do |format|
+      format.html { redirect_to story_path(@story) }
+      format.html { head :no_content }
+    end
+  end
 end

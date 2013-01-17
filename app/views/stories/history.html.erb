@@ -1,0 +1,18 @@
+<h1>Edit History</h1>
+<h2>For "<%= @story.title %>"</h2>
+<table class="table">
+  <tr>
+    <th>Version</th>
+    <th>Event</th>
+    <th>Edited By</th>
+    <th>Timestamp</th>
+  </tr>
+  <% @versions.each do |v| %>
+    <tr>
+      <td><%= link_to v.index, version_story_path(@story, v.index) %></td>
+      <td><%= v.event %></td>
+      <td><%= v.whodunnit %></td>
+      <td><%= v.created_at %></td> 
+    </tr>
+  <% end %>
+</table>

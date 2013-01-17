@@ -4,6 +4,8 @@ StoryCollab::Application.routes.draw do
       post 'save_draft'
       post 'destroy_draft'
       post 'preview'
+      get 'history'
+      get 'history/:version', :action => 'view_version', :as => 'version'
     end
   end
   

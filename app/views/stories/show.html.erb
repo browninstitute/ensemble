@@ -25,7 +25,7 @@
   </p>
 
   <div class="content">
-    <%= params[:preview] ? @story.draft_or_story_text : @story.story_text %>
+    <% params[:preview] ? @story.draft_or_story_text : @story.story_text %>
   </div>
 </div>
 
