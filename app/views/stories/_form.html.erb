@@ -1,111 +1,3 @@
-<div class="stext">
-  <div>
-    <div class="ttab">
-      +
-    </div>
-    <div class="tbox">
-      <textarea class="txt"></textarea>
-    </div>
-  </div>
-  <div>
-    <div class="ttab">
-      +
-    </div>
-    <div class="tbox">
-      <textarea class="txt"></textarea>
-    </div>
-  </div>
-</div>
-<script>
-var observe;
-if (window.attachEvent) {
-    observe = function (element, event, handler) {
-        element.attachEvent('on'+event, handler);
-    };
-}
-else {
-    observe = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-    };
-}
-
-function observeBox(boxElt) {
-  var text = boxElt;
-  function resize () {
-      text.style.height = 'auto';
-      text.style.height = text.scrollHeight+'px';
-  }
-  /* 0-timeout to get the already changed text */
-  function delayedResize () {
-      window.setTimeout(resize, 0);
-  }
-  observe(text, 'change',  resize);
-  observe(text, 'cut',     delayedResize);
-  observe(text, 'paste',   delayedResize);
-  observe(text, 'drop',    delayedResize);
-  observe(text, 'keydown', delayedResize);
-}
-
-$().ready(function() {
-  $('.txt').each(function() {
-    observeBox(this);
-  });
-
-  var prevSelectionStart = -1;
-  $('.txt').live('focus', function() {
-    prevSelectionStart = this.selectionStart;
-  })
-  $('.txt').live('keyup', function(e) {
-    console.log(this.selectionStart);
-
-    // See if we want to jump to the next textarea
-    if (this.selectionStart == prevSelectionStart || this.selectionStart == $(this).val().length) {
-      $next = $(this).parent().parent().next().find('.txt');
-      if (e.keyCode == 40) { // Down arrow
-        $next.focus();
-      } else if (e.keyCode == 39 && this.selectionStart == $(this).val().length) { // Right arrow
-        $next.focus();
-      }
-    }
-
-    // See if we want to jump to the previous textarea
-    if (this.selectionStart == prevSelectionStart || this.selectionStart == 0) {
-      $prev = $(this).parent().parent().prev().find('.txt');
-      if (e.keyCode == 38) { // Up arrow
-        $prev.focus();
-      } else if (e.keyCode == 37) { // Left arrow
-        $prev.focus();
-        $prev[0].setSelectionRange($prev.val().length * 2, $prev.val().length * 2);
-      } else if (e.keyCode == 8 && this.selectionStart == 0) {
-        $prev.focus();
-        if ($(this).val().length == 0 && $('.stext .txt').length > 1) {
-          $(this).parent().parent().remove();
-        }
-      }
-    }
-
-    // Create a new textarea with a double return
-    if($(this).val().indexOf("\n\n") !== -1) {
-      $(this).parent().parent().after("<div><div class=\"ttab\">+</div><div class=\"tbox\"><textarea class=\"txt\"></textarea></div></div>");
-      var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
-      var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
-      $(this).val(prev);
-      this.style.height = 'auto';
-      this.style.height = this.scrollHeight+'px';
-      var $next = $(this).parent().parent().next().find('.txt');
-      observeBox($next[0]);
-      $next.val(next).focus();
-      $next[0].style.height = 'auto';
-      $next[0].style.height = $next[0].scrollHeight+'px';
-    }
-    prevSelectionStart = this.selectionStart;
-  });
-});
-// TODO http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
-</script>
-
-<br /><br /><br /><br /><br /><br />
-
 <%= form_for(@story) do |f| %>
   <% if @story.errors.any? %>
     <div id="error_explanation">
@@ -123,92 +15,43 @@ $().ready(function() {
     <%= f.text_field :title, :placeholder => 'Title', :class => 'largely' %><br />
     <%= f.text_field :subtitle, :placeholder => 'Subtitle' %>
   </div>
-  <div class="field">
-  </div>
   <div class="status">
     <%= draft_status(@story) %>
     <%= published_status(@story) %>
   </div>
-  <p>
 
-    <%= f.text_area :content, :rows => 16, :class => "span8 wysihtml5", :value => @story.draft_or_story_text, :placeholder => "Enter text..." %>
-    <button class="btn" id="add-blank">Mark Text</button>
-    <script type="text/javascript">
-      // Configure WYSIHTML5 (see https://github.com/jhollingworth/bootstrap-wysihtml5)
-      $("#story_content").wysihtml5({
-          "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
-          "emphasis": true, //Italics, bold, etc. Default true
-          "lists": false, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-          "html": true, //Button which allows you to edit the generated HTML. Default false
-          "link": false, //Button to insert a link. Default true
-          "image": false, //Button to insert an image. Default true,
-          "color": false, //Button to change color of font
-          parserRules: {
-            classes: {
-              "question": 1,
-              "highlight": 1
-            },
-            tags: {
-              span: {
-                "check_attributes": {
-                  "id": "numbers"                  
-                }
-              },
-              b: {},
-              i: {},
-              u: {},
-              p: {},
-              br: {}
-            }
-          },
-          stylesheets: ["<%= path_to_stylesheet("stories") %>"]
-      });
+  <%= render :partial => 'paragraphs' %>
 
-      // 
+  <br />
 
-      // // Add a "blank" or a marker for a question
-      // $('#add-blank').click(function() {
-      //   $('#story_story_text').data("wysihtml5").editor.composer.commands.exec("insertHTML", "<span>&nbsp;</span><span class=\"question\"></span><span>&nbsp;</span>");
-      //   $('#story_story_text').data("wysihtml5").editor.composer.focus();
-      //   return false;
-      // })
-      
-      $().ready(function() {
-        $('b').live('mouseover', function() {
-          alert("hi!");
-        });        
-      });
-    </script>
-    <span class="highlight">h<b>i</b>!</span>
-  </p>
+  <%= f.hidden_field :content, :value => @story.draft_or_story_text %> 
   
   <div class="actions">
     <%= f.submit "Publish", :class => "btn" %>
-
     <% if !current_page?(new_story_path) %>
-    <script type="text/javascript">
-      // Change the form action depending on the button clicked.
-      $(document).ready(function() {
-        var story_id = '<%= @story.id %>';  
-        $("#save_draft").click(function() {
-          var action = '<%= save_draft_story_path(@story) %>';
-          $("[name='_method']").remove();
-          $("#edit_story_" + story_id).attr('action', action).submit();
-        });    
-        $("#preview").click(function() {
-          var action = '<%= preview_story_path(@story) %>';
-          $("[name='_method']").remove();
-          $("#edit_story_" + story_id).attr('action', action).submit();  
+      <script type="text/javascript">
+        // Change the form action depending on the button clicked.
+        $(document).ready(function() {
+          var story_id = '<%= @story.id %>';  
+          $("#save_draft").click(function() {
+            var action = '<%= save_draft_story_path(@story) %>';
+            $("[name='_method']").remove();
+            $("#edit_story_" + story_id).attr('action', action).submit();
+          });    
+          $("#preview").click(function() {
+            var action = '<%= preview_story_path(@story) %>';
+            $("[name='_method']").remove();
+            $("#edit_story_" + story_id).attr('action', action).submit();  
+          });
         });
-      });
-    </script>
+      </script>
 
-    <%= link_to "Save Draft", "#", 
-                :class => "btn", :id => "save_draft" %>
-    <%= link_to "Preview", "#", :class => "btn", :id => "preview" %>
-    <%= link_to "Discard Draft", destroy_draft_story_path(@story), 
-                :class => "btn", :method => :post, :confirm => "Are you sure you want to discard your draft?" %>
-    <% end %>            
+      <%= link_to "Save Draft", "#", 
+                  :class => "btn", :id => "save_draft" %>
+      <%= link_to "Preview", "#", :class => "btn", :id => "preview" %>
+      <%= link_to "Discard Draft", destroy_draft_story_path(@story), 
+                  :class => "btn", :method => :post, :confirm => "Are you sure you want to discard your draft?" %>
+    <% end %>
   </div>
 
 <% end %>

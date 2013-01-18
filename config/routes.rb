@@ -3,7 +3,6 @@ StoryCollab::Application.routes.draw do
     collection do
       get 'current'
     end
-  end
     member do
       post 'save_draft'
       post 'destroy_draft'

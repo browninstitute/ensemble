@@ -1,4 +1,5 @@
 class StoriesController < ApplicationController
+
   # GET /stories
   # GET /stories.json
   def index

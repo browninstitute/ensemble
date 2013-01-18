@@ -1,0 +1,170 @@
+<div class="stoolbar">
+  <ul>
+    <li class="btn" id="stoolbar_bold">B</li>
+    <li class="btn" id="stoolbar_italic">i</li>
+  </ul>
+</div>
+<div class="stext">
+<!--   <div>
+    <div class="ttab">
+      +
+    </div>
+    <div class="tbox">
+      <textarea class="txt"></textarea>
+    </div>
+  </div> -->
+</div>
+<script>
+
+$().ready(function() {
+  $('#stoolbar_bold').click(function() {
+    $('.txt').each(function() {
+      var start = this.selectionStart;
+      var end = this.selectionEnd;
+      if (end - start > 0) {
+        $(this).val(
+          $(this).val().substring(0, start) + 
+          "**" + $(this).val().substring(start, end) + "**" +
+          $(this).val().substring(end)
+        );      
+        this.setSelectionRange(start, end + 4);        
+      }
+    });
+    updateMain();
+  });
+  $('#stoolbar_italic').click(function() {
+    $('.txt').each(function() {
+      var start = this.selectionStart;
+      var end = this.selectionEnd;
+      if (end - start > 0) {
+        $(this).val(
+          $(this).val().substring(0, start) + 
+          "_" + $(this).val().substring(start, end) + "_" +
+          $(this).val().substring(end)
+        );
+        this.setSelectionRange(start, end + 2);        
+      }
+    });
+    updateMain();
+  });
+});
+
+function convertToParagraphs() {
+  // Parse out content
+  var content = $('#story_content').val();
+  $(content.split("{{p}}")).each(function(i) {
+    if (i > 0) {
+      $para = $("<div><div class=\"ttab\">+</div><div class=\"tbox\"><textarea class=\"txt\">"+ this +"</textarea></div></div>");
+      $(".stext").append($para);      
+    }
+  });
+
+  // Resize textareas
+  $('.txt').each(function() {
+    resizeNow(this);
+    observeBox(this);
+  });
+}
+
+function updateMain() {
+  var newContent = "";
+  $('.txt').each(function() {
+    newContent += "{{p}}" + $(this).val();
+  });
+  $('#story_content').val(newContent);
+}
+
+// Thanks to http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
+var observe;
+if (window.attachEvent) {
+    observe = function (element, event, handler) {
+        element.attachEvent('on'+event, handler);
+    };
+}
+else {
+    observe = function (element, event, handler) {
+        element.addEventListener(event, handler, false);
+    };
+}
+
+function resizeNow(text) {
+  text.style.height = 'auto';
+  text.style.height = text.scrollHeight+'px';
+}
+
+function observeBox(boxElt) {
+  var text = boxElt;
+
+  function resize () {
+    text.style.height = 'auto';
+    text.style.height = text.scrollHeight+'px';
+  }
+
+  /* 0-timeout to get the already changed text */
+  function delayedResize () {
+      window.setTimeout(resize, 0);
+  }
+  observe(text, 'change',  resize);
+  observe(text, 'cut',     delayedResize);
+  observe(text, 'paste',   delayedResize);
+  observe(text, 'drop',    delayedResize);
+  observe(text, 'keydown', delayedResize);
+}
+
+$().ready(function() {
+
+  convertToParagraphs();
+
+  $('.txt').on('change', function() {
+    updateMain();
+  });
+
+  var prevSelectionStart = -1;
+  $('.txt').live('focus', function() {
+    prevSelectionStart = this.selectionStart;
+  })
+  $('.txt').live('keyup', function(e) {
+    // console.log(this.selectionStart);
+
+    // See if we want to jump to the next textarea
+    if (this.selectionStart == prevSelectionStart || this.selectionStart == $(this).val().length) {
+      $next = $(this).parent().parent().next().find('.txt');
+      if (e.keyCode == 40) { // Down arrow
+        $next.focus();
+      } else if (e.keyCode == 39 && this.selectionStart == $(this).val().length) { // Right arrow
+        $next.focus();
+      }
+    }
+
+    // See if we want to jump to the previous textarea
+    if (this.selectionStart == prevSelectionStart || this.selectionStart == 0) {
+      $prev = $(this).parent().parent().prev().find('.txt');
+      if (e.keyCode == 38) { // Up arrow
+        $prev.focus();
+      } else if (e.keyCode == 37) { // Left arrow
+        $prev.focus();
+        $prev[0].setSelectionRange($prev.val().length * 2, $prev.val().length * 2);
+      } else if (e.keyCode == 8 && this.selectionStart == 0) {
+        $prev.focus();
+        if ($(this).val().length == 0 && $('.stext .txt').length > 1) {
+          $(this).parent().parent().remove();
+        }
+      }
+    }
+
+    // Create a new textarea with a double return
+    if($(this).val().indexOf("\n\n") !== -1) {
+      $(this).parent().parent().after("<div><div class=\"ttab\">+</div><div class=\"tbox\"><textarea class=\"txt\"></textarea></div></div>");
+      var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
+      var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
+      $(this).val(prev);
+      resizeNow(this);
+      var $next = $(this).parent().parent().next().find('.txt');
+      observeBox($next[0]);
+      $next.val(next).focus();
+      resizeNow($next[0]);
+    }
+    prevSelectionStart = this.selectionStart;
+  });
+});
+</script>
