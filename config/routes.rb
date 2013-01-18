@@ -1,6 +1,9 @@
 StoryCollab::Application.routes.draw do
-  resources :stories
-  match 'currentstory' => 'stories#current_story', :as => 'current_story'
+  resources :stories do
+    collection do
+      get 'current'
+    end
+  end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

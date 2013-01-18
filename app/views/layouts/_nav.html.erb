@@ -9,7 +9,7 @@
 
       <ul class="nav pull-right">
         <li><%= link_to "About", "#" %></li>
-        <li class="<%= 'active' if current_page?(current_story_path) %>"><%= link_to "Current Story", current_story_path %></li>
+        <li class="<%= 'active' if current_page?(current_stories_path) %>"><%= link_to "Current Story", current_stories_path %></li>
         <li class="<%= 'active' if current_page?(stories_path) %>"><%= link_to "Stories", stories_path %></li>
       </ul>
     <% end %>

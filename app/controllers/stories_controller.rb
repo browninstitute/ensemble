@@ -84,7 +84,7 @@ class StoriesController < ApplicationController
 
   # Shows the current story being worked on by the community.
   # TODO: Right now this defaults to the first story in the DB.
-  def current_story
+  def current
     @story = Story.find(:first)
     if @story.nil?
       render 'no_current_story'

@@ -17,7 +17,7 @@
   </p>
 
   <div class="content">
-    <%= @story.story_text %>
+    <%= raw @story.story_text %>
   </div>
 </div>
 
@@ -27,3 +27,5 @@
 
   <%= render 'question' %>
 </div>
+
+<%= render 'popover' %>
