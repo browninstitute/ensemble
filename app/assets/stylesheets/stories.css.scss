@@ -151,13 +151,54 @@ $accent: #23ADE8;
     background-color: #efefef;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    vertical-align: top;
+    width: 20px;
+    overflow: hidden;
+
+    textarea {
+      display: none;
+    }
+  }
+
+  .ttab_expanded {
+
+    width: 287px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+    textarea {
+      display: inline;
+      width: 260px;
+      border: 0;
+      background-color: #efefef;
+      outline: none;
+      resize: none;
+      box-shadow: none;
+      font-size: small;
+      margin-top: -6px;
+    }
   }
 
   .tbox {
     margin-left: 10px;
   }
 
-  textarea {
+  .tbox_collapsed {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-left: 300px;
+    width: 440px;
+
+    textarea {
+      width: 440px;
+    }
+  }
+
+  .txt {
     border: none;
     border-left: 1px solid #cfcfcf;
     outline: none;

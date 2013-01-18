@@ -12,12 +12,22 @@
 </div>
 <script>
 
+$().ready(function() {
+  $('.stext').on('click', '.ttab', function() {
+    $('.tbox').addClass('tbox_collapsed');
+    setTimeout(function() {
+      $('.ttab').addClass('ttab_expanded');
+      $('.stext').off('click', '.ttab');
+    }, 5);
+  });
+});
+
 //
 // Toolbar functions
 //
 $().ready(function() {
   $('#stoolbar_bold').click(function() {
-    $('.txt').each(function() {
+    $('textarea').each(function() {
       var start = this.selectionStart;
       var end = this.selectionEnd;
       if (end - start > 0) {
@@ -32,7 +42,7 @@ $().ready(function() {
     paragraphsToContent();
   });
   $('#stoolbar_italic').click(function() {
-    $('.txt').each(function() {
+    $('textarea').each(function() {
       var start = this.selectionStart;
       var end = this.selectionEnd;
       if (end - start > 0) {
@@ -56,8 +66,13 @@ function contentToParagraphs() {
   var content = $('#story_content').val();
   $(content.split("{{p}}")).each(function(i) {
     if (i > 0) {
-      $para = $("<div><div class=\"ttab\">+</div><div class=\"tbox\"><textarea class=\"txt\">"+ this +"</textarea></div></div>");
-      $(".stext").append($para);      
+      var parts = ["", this];
+      if (this.indexOf("{{s}}") !== -1) {
+        parts = this.split("{{s}}");
+      }
+      $para = $("<div><div class=\"ttab\">+<textarea /></div><div class=\"tbox\"><textarea class=\"txt\">"+ parts[1] +"</textarea></div></div>");
+      $para.find('.ttab textarea').val(parts[0]);
+      $(".stext").append($para);
     }
   });
 
@@ -70,10 +85,16 @@ function contentToParagraphs() {
 function paragraphsToContent() {
   var newContent = "";
   $('.txt').each(function() {
-    newContent += "{{p}}" + $(this).val();
+    newContent += "{{p}}" + $(this).parent().parent().find('.ttab textarea').val() + "{{s}}" + $(this).val();
   });
   $('#story_content').val(newContent);
 }
+$().ready(function() {
+  contentToParagraphs();
+  $('.stext').on('change', 'textarea', function() {
+    paragraphsToContent();
+  });
+});
 
 //
 // Textarea Resizing - Thanks to http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
@@ -113,21 +134,14 @@ function observeBox(boxElt) {
 }
 
 //
-// Main and Textarea Navigation
+// Textarea Navigation
 //
 $().ready(function() {
-
-  contentToParagraphs();
-
-  $('.txt').on('change', function() {
-    paragraphsToContent();
-  });
-
   var prevSelectionStart = -1;
-  $('.txt').live('focus', function() {
+  $('.stext').on('focus', '.txt', function() {
     prevSelectionStart = this.selectionStart;
   })
-  $('.txt').live('keyup', function(e) {
+  $('.stext').on('keyup', '.txt', function(e) {
     // console.log(this.selectionStart);
 
     // See if we want to jump to the next textarea
@@ -158,7 +172,7 @@ $().ready(function() {
 
     // Create a new textarea with a double return
     if($(this).val().indexOf("\n\n") !== -1) {
-      $(this).parent().parent().after("<div><div class=\"ttab\">+</div><div class=\"tbox\"><textarea class=\"txt\"></textarea></div></div>");
+      $(this).parent().parent().after("<div><div class=\"ttab\">+<textarea /></div><div class=\"tbox\"><textarea class=\"txt\"></textarea></div></div>");
       var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
       var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
       $(this).val(prev);
