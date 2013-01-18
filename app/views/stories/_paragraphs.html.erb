@@ -5,17 +5,16 @@
   </ul>
 </div>
 <div class="stext">
-<!--   <div>
-    <div class="ttab">
-      +
-    </div>
-    <div class="tbox">
-      <textarea class="txt"></textarea>
-    </div>
-  </div> -->
+  <!--<div>
+    <div class="ttab">+</div>
+    <div class="tbox"><textarea class="txt"></textarea></div>
+  </div>-->
 </div>
 <script>
 
+//
+// Toolbar functions
+//
 $().ready(function() {
   $('#stoolbar_bold').click(function() {
     $('.txt').each(function() {
@@ -30,7 +29,7 @@ $().ready(function() {
         this.setSelectionRange(start, end + 4);        
       }
     });
-    updateMain();
+    paragraphsToContent();
   });
   $('#stoolbar_italic').click(function() {
     $('.txt').each(function() {
@@ -45,11 +44,14 @@ $().ready(function() {
         this.setSelectionRange(start, end + 2);        
       }
     });
-    updateMain();
+    paragraphsToContent();
   });
 });
 
-function convertToParagraphs() {
+//
+// Paragraph <=> Content Conversion
+//
+function contentToParagraphs() {
   // Parse out content
   var content = $('#story_content').val();
   $(content.split("{{p}}")).each(function(i) {
@@ -65,8 +67,7 @@ function convertToParagraphs() {
     observeBox(this);
   });
 }
-
-function updateMain() {
+function paragraphsToContent() {
   var newContent = "";
   $('.txt').each(function() {
     newContent += "{{p}}" + $(this).val();
@@ -74,7 +75,9 @@ function updateMain() {
   $('#story_content').val(newContent);
 }
 
-// Thanks to http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
+//
+// Textarea Resizing - Thanks to http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
+//
 var observe;
 if (window.attachEvent) {
     observe = function (element, event, handler) {
@@ -94,12 +97,10 @@ function resizeNow(text) {
 
 function observeBox(boxElt) {
   var text = boxElt;
-
   function resize () {
     text.style.height = 'auto';
     text.style.height = text.scrollHeight+'px';
   }
-
   /* 0-timeout to get the already changed text */
   function delayedResize () {
       window.setTimeout(resize, 0);
@@ -111,12 +112,15 @@ function observeBox(boxElt) {
   observe(text, 'keydown', delayedResize);
 }
 
+//
+// Main and Textarea Navigation
+//
 $().ready(function() {
 
-  convertToParagraphs();
+  contentToParagraphs();
 
   $('.txt').on('change', function() {
-    updateMain();
+    paragraphsToContent();
   });
 
   var prevSelectionStart = -1;
