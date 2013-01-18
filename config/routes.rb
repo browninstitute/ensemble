@@ -4,6 +4,14 @@ StoryCollab::Application.routes.draw do
       get 'current'
     end
   end
+    member do
+      post 'save_draft'
+      post 'destroy_draft'
+      match 'preview'
+      get 'history'
+      get 'history/:version', :action => 'view_version', :as => 'version'
+    end
+  end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

@@ -125,12 +125,17 @@ $().ready(function() {
   </div>
   <div class="field">
   </div>
+  <div class="status">
+    <%= draft_status(@story) %>
+    <%= published_status(@story) %>
+  </div>
   <p>
-    <%= f.text_area :story_text, :rows => 20, :class => "span8 wysihtml5", :placeholder => "Enter text..." %>
-    <!-- <button class="btn" id="add-blank">Mark Text</button> -->
+
+    <%= f.text_area :content, :rows => 16, :class => "span8 wysihtml5", :value => @story.draft_or_story_text, :placeholder => "Enter text..." %>
+    <button class="btn" id="add-blank">Mark Text</button>
     <script type="text/javascript">
       // Configure WYSIHTML5 (see https://github.com/jhollingworth/bootstrap-wysihtml5)
-      $("#story_story_text").wysihtml5({
+      $("#story_content").wysihtml5({
           "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
           "emphasis": true, //Italics, bold, etc. Default true
           "lists": false, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
@@ -178,7 +183,32 @@ $().ready(function() {
   </p>
   
   <div class="actions">
-    <%= f.submit :class => 'btn' %>
+    <%= f.submit "Publish", :class => "btn" %>
+
+    <% if !current_page?(new_story_path) %>
+    <script type="text/javascript">
+      // Change the form action depending on the button clicked.
+      $(document).ready(function() {
+        var story_id = '<%= @story.id %>';  
+        $("#save_draft").click(function() {
+          var action = '<%= save_draft_story_path(@story) %>';
+          $("[name='_method']").remove();
+          $("#edit_story_" + story_id).attr('action', action).submit();
+        });    
+        $("#preview").click(function() {
+          var action = '<%= preview_story_path(@story) %>';
+          $("[name='_method']").remove();
+          $("#edit_story_" + story_id).attr('action', action).submit();  
+        });
+      });
+    </script>
+
+    <%= link_to "Save Draft", "#", 
+                :class => "btn", :id => "save_draft" %>
+    <%= link_to "Preview", "#", :class => "btn", :id => "preview" %>
+    <%= link_to "Discard Draft", destroy_draft_story_path(@story), 
+                :class => "btn", :method => :post, :confirm => "Are you sure you want to discard your draft?" %>
+    <% end %>            
   </div>
 
 <% end %>

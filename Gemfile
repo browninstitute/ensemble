@@ -7,6 +7,9 @@ gem 'rails', '3.2.6'
 
 gem 'sqlite3'
 
+group :development do
+  gem 'debugger'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -32,6 +35,8 @@ gem 'omniauth-facebook'
 gem 'cancan'
 
 gem 'bootstrap-wysihtml5-rails'
+gem 'has_draft'
+gem 'paper_trail', '~> 2'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

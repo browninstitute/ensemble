@@ -1,0 +1,13 @@
+<%= form_for(@story, :url => edit_story_path(@story), :method => :get) do |f| %>
+  <%= f.hidden_field :title, :value => @story.title %>
+  <%= f.hidden_field :subtitle, :value => @story.subtitle %>
+  <%= f.hidden_field :content, :value => @story.content %>
+  <%= button_tag content_tag(:i, '', :class => 'icon-chevron-left') + ' Back to Editing',
+               :class => "btn btn-small" %>
+<% end %>
+  
+<div class="alert alert-info">
+  Your story has not been published yet. You are viewing a <strong>preview</strong> of your story.
+</div>
+
+<%= render :partial => 'stories/story', :locals => {:preview => true} %>

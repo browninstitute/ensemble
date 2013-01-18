@@ -35,6 +35,11 @@ class StoriesController < ApplicationController
   # GET /stories/1/edit
   def edit
     @story = Story.find(params[:id])
+    if !params[:story].nil?
+      @story.content = params[:story][:content]
+      @story.title = params[:story][:title]
+      @story.subtitle = params[:story][:subtitle]
+    end
   end
 
   # POST /stories
@@ -95,5 +100,66 @@ class StoriesController < ApplicationController
       format.html { render action: "show" } # show.html.erb
       format.json { render json: @story }
     end
- end
+  end
+
+  # Saves a draft of the story.
+  def save_draft
+    @story = Story.find(params[:id])
+    
+    respond_to do |format|
+      if @story.save_draft(params[:story][:content])
+        flash[:notice] = "Draft successfully saved."
+        format.html { redirect_to :action => "edit" }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to :action => "edit" }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # Discards the current story draft, if there is one.
+  def destroy_draft
+    @story = Story.find(params[:id])
+
+    respond_to do |format|
+      if @story.destroy_draft
+        flash[:notice] = "Draft successfully discarded."
+        format.html { redirect_to :action => "edit" }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to :action => "edit" }
+        format.json { render json: @story.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # Allows the user to preview the story draft.
+  # Creates a temporary Story object based on the existing one
+  # to create a preview version.
+  def preview
+    @story = Story.find(params[:id])
+    @story.content = params[:story][:content]
+    @story.title = params[:story][:title]
+    @story.subtitle = params[:story][:subtitle]
+  end
+
+  # Allows the user to view story history.
+  def history
+    @story = Story.find(params[:id])
+    @versions = @story.versions
+  end
+
+  # Allows the user to view different versions of a
+  # story.
+  def view_version
+    @version = params[:version].to_i
+    @story = Story.find(params[:id])
+    @story = @story.versions[@version].reify
+
+    respond_to do |format|
+      format.html { render :version }
+      format.html { head :no_content }
+    end
+  end
 end

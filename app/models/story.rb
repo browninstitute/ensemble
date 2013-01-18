@@ -1,33 +1,31 @@
 class Story < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :subtitle, :title, :public, :story_text
+  attr_accessible :subtitle, :title, :public, :content
+
+  has_draft do
+    attr_accessible :content
+  end
+  
+  has_paper_trail
+
+  after_update :destroy_draft
 
   validates :title, :presence => true
 
-  after_create :create_story_text
-  after_destroy :destroy_story_texts
-
-  # Retrieves the most recent version of the story's text.
-  def story_text
-    @story_text = StoryText.find(:first, :conditions => { :story_id => id }, :order => 'updated_at DESC')
-    @story_text.nil? ? "" : @story_text.content
+  # Saves a draft based on the current story text. 
+  def save_draft(text)
+    self.instantiate_draft! if !self.has_draft?
+    self.draft.update_attributes :content => text
   end
 
-  # Saves a new version of the story's text.
-  def story_text=(text)
-    @story_text = StoryText.new :content => text
-    @story_text.story_id = id
-    @story_text.save
+  # Retrieves draft if available, otherwise gets published text.
+  def draft_or_story_text
+    self.has_draft? ? self.draft.content : self.content
   end
 
-  # On Story create, gives the StoryText the right ID.
-  def create_story_text
-    @story_text.story_id = id
-    @story_text.save
-  end
-
-  # Destroy StoryText objects related to the Story object.
-  def destroy_story_texts
-    StoryText.destroy_all(:story_id => id)
+  # Destroy's current draft, if there is one
+  def destroy_draft
+    self.destroy_draft! if self.has_draft?
+    self.has_draft? # successful if there is no draft
   end
 end
