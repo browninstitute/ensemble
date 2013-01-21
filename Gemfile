@@ -7,6 +7,10 @@ gem 'rails', '3.2.6'
 
 gem 'sqlite3'
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 group :development do
   gem 'debugger'
 end

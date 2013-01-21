@@ -16,6 +16,7 @@ class Story < ActiveRecord::Base
   def save_draft(text)
     self.instantiate_draft! if !self.has_draft?
     self.draft.update_attributes :content => text
+    self.draft
   end
 
   # Retrieves draft if available, otherwise gets published text.

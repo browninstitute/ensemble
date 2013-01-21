@@ -10,3 +10,6 @@
 == Models
 * Story - story metadata
 * StoryText - story text (current and previous versions)
+
+== Tests
+* Run +rspec spec+ to run all tests.
