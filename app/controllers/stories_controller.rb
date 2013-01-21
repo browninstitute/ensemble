@@ -140,9 +140,7 @@ class StoriesController < ApplicationController
   # to create a preview version.
   def preview
     @story = Story.find(params[:id])
-    @story.content = params[:story][:content]
-    @story.title = params[:story][:title]
-    @story.subtitle = params[:story][:subtitle]
+    @story.assign_attributes(params[:story])
   end
 
   # Allows the user to view story history.
