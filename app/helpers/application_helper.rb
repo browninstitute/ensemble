@@ -1,20 +1,22 @@
 module ApplicationHelper
 
   def parse_story(text)
+    parts = []
     parsed = text.split("{{p}}").map do |para|
+      next if para.size == 0
+      part = { :para => "", :scene => "" }
       if para.include? "{{s}}"
-        parts = para.split("{{s}}")
-        if parts[0].size > 0
-          "### " + parts[0] + "\n\n" + parts[1]
-        else
-          parts[1]
+        para_parts = para.split("{{s}}")
+        if para_parts[0].size > 0
+          part[:scene] = markdown(para_parts[0])
         end
+        part[:para] = markdown(para_parts[1])
       else
-        para
+        part[:para] = markdown(para)
       end
+      parts << part
     end
-
-    markdown(parsed.join("\n\n"))
+    parts
   end
 
   def markdown(text)

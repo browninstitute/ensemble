@@ -8,31 +8,59 @@ $accent: #23ADE8;
 
 /* Viewing Stories */
 .story {
-  width: 67%;
-  float: left;
-  font-size: 1.3em;
+  /* width: 67%; */
+  font-size: 1.0em;
+  font-family: 'Open Sans', Cambria, Georgia, Times, Times New Roman, serif;
 
   h1 {
-    font-family: Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
-    font-size: 1.8em;
+    font-family: 'Merriweather', Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
+    font-size: 3.2em;
     font-weight: normal;
     margin: 0;
-    line-height: 1.2em;
+    line-height: 1.5em;
   }
 
   .subtitle {
-    float: left;
+    font-size: 1.5em;
   }
 
   .meta {
     color: $lightgrey;
-    text-align: right;
     font-size: 0.85em;
   }
 
+  .editing {
+    background-color: #f0f0f0;
+    min-height: 5px;
+    padding: 5px 10px;
+    margin: 8px 0;
+    text-align: right;
+  }
+
   .content {
-    font-family: Cambria, Georgia, Times, Times New Roman, serif;
-    line-height: 1.5em;
+    line-height: 1.8em;
+
+    .paragraph {
+      margin-bottom: 1.8em;
+      background-color: #fff;
+
+      .span4 {
+        font-size: larger;
+      }
+
+      -webkit-transition: all 0.4s ease;
+      -moz-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      transition: all 0.4s ease;
+
+      &:hover {
+        background-color: #fbfbfb;
+        -webkit-transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+      }
+    }
   }
 }
 
@@ -129,76 +157,33 @@ $accent: #23ADE8;
 }
 
 .stext {
+  font-family: 'Open Sans', Cambria;
   border: 1px solid #cccccc;
   border-radius: 5px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
   padding: 5px;
-  width: 756px;
 
   .ttab {
-    float: left;
-    font-size: 20px;
-    line-height: 10px;
-    font-weight: 500;
-    padding: 4px;
-    padding-bottom: 8px;
-    margin: 4px;
-    margin-right: 0;
-    border: 1px solid #cfcfcf;
-    border-radius: 4px;
-    border-width: 1px 0 1px 1px;
-    background-color: #efefef;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    vertical-align: top;
-    width: 20px;
-    overflow: hidden;
-
     textarea {
-      display: none;
-    }
-  }
-
-  .ttab_expanded {
-
-    width: 287px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-
-    textarea {
-      display: inline;
-      width: 260px;
-      border: 0;
-      background-color: #efefef;
+      font-family: 'Open Sans', Cambria;
+      font-size: larger;
+      line-height: 2.0em;
+      border: none;
       outline: none;
       resize: none;
       box-shadow: none;
-      font-size: small;
-      margin-top: -6px;
-    }
-  }
-
-  .tbox {
-    margin-left: 10px;
-  }
-
-  .tbox_collapsed {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    margin-left: 300px;
-    width: 440px;
-
-    textarea {
-      width: 440px;
+      -webkit-box-shadow: none;
+      overflow: hidden;
+      margin-left: 0;
+      border-radius: 0;
+      width: 95%;
     }
   }
 
   .txt {
+    font-family: 'Open Sans', Cambria;
+    line-height: 1.8em;
     border: none;
     border-left: 1px solid #cfcfcf;
     outline: none;
@@ -208,7 +193,15 @@ $accent: #23ADE8;
     overflow: hidden;
     margin-left: 0;
     border-radius: 0;
-    width: 706px;
+    width: 95%;
+  }
+
+  .move {
+    display: block;
+    width: 20px;
+    height: 20px;
+    cursor: move;
+    margin: 11px 4px;
   }
 }
 
@@ -223,7 +216,6 @@ $accent: #23ADE8;
     border-bottom-left-radius: 0;
     background-color: #fcfcfc;
     display: block;
-    width: 756px;
 
     &::after {
       clear: both;
@@ -237,6 +229,16 @@ $accent: #23ADE8;
       list-style: none;
       margin: 5px 0 5px 5px;
       font-size: larger;
+
+      &.divider {
+        min-width: 1px;
+        border-right: 1px solid #efefef;
+        margin-right: 9px;
+        padding-right: 5px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        height: 30px;
+      }
     }
 
     #stoolbar_bold {
@@ -248,5 +250,12 @@ $accent: #23ADE8;
       font-family: serif;
       font-style: italic;
     }
+  }
+}
+
+#textModal {
+  textarea {
+    width: 500px;
+    height: 300px;
   }
 }

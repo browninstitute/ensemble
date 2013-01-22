@@ -12,27 +12,45 @@
     <%= @story.subtitle %>
   </p>
 
-  <p class="meta">
-    <span class="author">
-      started by <%= link_to @story.user.name, "#" %>
-    </span>
-    <% if !preview %>
-      <span class="timestamp">
-        <%= time_ago_in_words(@story.created_at) %> ago
-      </span>
-    <% end %>
-  </p>
+  <div class="meta">
+    <div class="author">
+      Started by <%= link_to @story.user.name, "#" %>
+      <% if !preview %>
+        <span class="timestamp">
+          <%= time_ago_in_words(@story.created_at) %> ago
+        </span>
+      <% end %>
+    </div>
+  </div>
 
+  <div class="editing">
+    <% if !preview %>
+      <%= link_to edit_story_path(@story), :class => "btn" do %>
+      <i class="icon-edit"></i> Edit Story
+      <% end %>
+      <!--<%= link_to content_tag(:i, "", :class => "icon-plus-sign") + " New Question", "#", :class => "btn" %>-->
+    <% end %>
+  </div>
+  
   <div class="content">
-    <%= parse_story @story.content %>
+    <% parse_story(@story.content).each do |para| %>
+    <div class="paragraph row-fluid">
+      <div class="span1">
+        10 <i class="icon-heart"></i>
+      </div>
+      <div class="span4">
+        <%= para[:scene] %>
+        <a class="btn btn-mini"><i class="icon-comment"></i> Respond</a>
+      </div>
+      <div class="span7">
+        <%= para[:para] %>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>
 
-<div class="storybar">
-  <% if !preview %>
-    <%= link_to 'Edit Story', edit_story_path(@story), :class => "btn" %>
-    <%= link_to content_tag(:i, "", :class => "icon-plus-sign") + " New Question", "#", :class => "btn" %>
-  <% end %>
 
+<!-- <div class="storybar">
   <%= render 'question' %>
-</div>
+</div> -->
