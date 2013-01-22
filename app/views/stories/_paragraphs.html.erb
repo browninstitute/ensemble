@@ -1,5 +1,9 @@
 <div class="stoolbar row-fluid">
   <div class="span12">
+    <div class="status pull-right">
+      <%= draft_status(@story) %>
+      <%= published_status(@story) %>
+    </div>
   <ul>
     <li class="btn" id="stoolbar_bold">B</li>
     <li class="btn" id="stoolbar_italic">i</li>
@@ -86,7 +90,7 @@ function contentToParagraphs() {
       if (this.indexOf("{{s}}") !== -1) {
         parts = this.split("{{s}}");
       }
-      $para = $("<div class=\"row-fluid\"><div class=\"span1\"><span class=\"move\"><i class=\"icon-move\"></i></span></div><div class=\"span4 ttab\"><textarea /></div><div class=\"span7 tbox\"><textarea class=\"txt\">"+ parts[1] +"</textarea></div></div>");
+      $para = $("<div class=\"row-fluid\"><div class=\"span7 tbox\"><textarea class=\"txt\">"+ parts[1] +"</textarea></div><div class=\"span4 ttab\"><textarea /></div><div class=\"span1\"><span class=\"move\"><i class=\"icon-move\"></i></span></div></div>");
       $para.find('.ttab textarea').val(parts[0]);
       $(".stext").append($para);
     }
@@ -194,7 +198,7 @@ $().ready(function() {
 
     // Create a new textarea with a double return
     if($(this).val().indexOf("\n\n") !== -1) {
-      $(this).parent().parent().after("<div class=\"row-fluid\"><div class=\"span1\"><span class=\"move\"><i class=\"icon-move\"></i></span></div><div class=\"span4 ttab\"><textarea /></div><div class=\"span7 tbox\"><textarea class=\"txt\"></textarea></div></div>");
+      $(this).parent().parent().after("<div class=\"row-fluid\"><div class=\"span7 tbox\"><textarea class=\"txt\"></textarea></div><div class=\"span4 ttab\"><textarea /></div><div class=\"span1\"><span class=\"move\"><i class=\"icon-move\"></i></span></div></div>");
       var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
       var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
       $(this).val(prev);

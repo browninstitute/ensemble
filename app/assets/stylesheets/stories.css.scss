@@ -44,6 +44,10 @@ $accent: #23ADE8;
       margin-bottom: 1.8em;
       background-color: #fff;
 
+      .span1 {
+        text-align: center;
+      }
+
       .span4 {
         font-size: larger;
       }
@@ -153,7 +157,8 @@ $accent: #23ADE8;
 }
 
 .status {
-  margin: 5px;
+  margin: 8px;
+  margin-top: 12px;
 }
 
 .stext {
@@ -170,6 +175,7 @@ $accent: #23ADE8;
       font-size: larger;
       line-height: 2.0em;
       border: none;
+      /*border-left: 1px solid #cfcfcf;*/
       outline: none;
       resize: none;
       box-shadow: none;
@@ -185,7 +191,6 @@ $accent: #23ADE8;
     font-family: 'Open Sans', Cambria;
     line-height: 1.8em;
     border: none;
-    border-left: 1px solid #cfcfcf;
     outline: none;
     resize: none;
     box-shadow: none;

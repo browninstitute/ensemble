@@ -2,6 +2,8 @@ class Story < ActiveRecord::Base
   belongs_to :user
   attr_accessible :subtitle, :title, :public, :content
 
+  has_many :scenes, :order => :position
+
   has_draft do
     attr_accessible :content
   end

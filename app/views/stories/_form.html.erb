@@ -15,10 +15,6 @@
     <%= f.text_field :title, :placeholder => 'Title', :class => 'largely' %><br />
     <%= f.text_field :subtitle, :placeholder => 'Subtitle' %>
   </div>
-  <div class="status">
-    <%= draft_status(@story) %>
-    <%= published_status(@story) %>
-  </div>
 
   <%= render :partial => 'paragraphs' %>
 

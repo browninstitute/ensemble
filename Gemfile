@@ -39,8 +39,11 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancan'
 
+gem 'acts_as_list'
 gem 'has_draft'
 gem 'paper_trail', '~> 2'
+
+gem 'acts_as_votable', '~> 0.5.0'
 
 gem 'redcarpet'
 

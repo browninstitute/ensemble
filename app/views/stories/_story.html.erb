@@ -31,19 +31,19 @@
       <!--<%= link_to content_tag(:i, "", :class => "icon-plus-sign") + " New Question", "#", :class => "btn" %>-->
     <% end %>
   </div>
-  
+
   <div class="content">
     <% parse_story(@story.content).each do |para| %>
     <div class="paragraph row-fluid">
+      <div class="span7">
+        <%= para[:para] %>
+      </div>
       <div class="span1">
         10 <i class="icon-heart"></i>
       </div>
       <div class="span4">
         <%= para[:scene] %>
         <a class="btn btn-mini"><i class="icon-comment"></i> Respond</a>
-      </div>
-      <div class="span7">
-        <%= para[:para] %>
       </div>
     </div>
     <% end %>
