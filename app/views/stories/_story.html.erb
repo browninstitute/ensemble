@@ -33,7 +33,7 @@
   </div>
 
   <div class="content">
-    <% parse_story(@story.content).each do |para| %>
+    <% @story.parse_story.each do |para| %>
     <div class="paragraph row-fluid">
       <div class="span7">
         <%= para[:para] %>
