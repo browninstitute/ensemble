@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122210542) do
+ActiveRecord::Schema.define(:version => 20130122213603) do
 
   create_table "paragraphs", :force => true do |t|
     t.string   "title"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20130122210542) do
     t.integer  "story_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position"
   end
 
   add_index "scenes", ["story_id"], :name => "index_scenes_on_story_id"
