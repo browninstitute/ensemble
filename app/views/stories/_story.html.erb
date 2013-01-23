@@ -47,6 +47,28 @@
       </div>
     </div>
     <% end %>
+    <!-- temporary place for submitting inline answers -->
+    <% @story.scenes.each do |scene| %>
+      <div>Scene Title: <%= scene.title %></div>
+      <% classes = "paragraph row-fluid" %>
+      <% classes += " multiple" if scene.paragraphs.length > 1 %>
+      <% classes += " unwritten" if scene.paragraphs.length < 1 %>
+      <div class="<%= classes %>">
+        <% if scene.paragraphs.length == 0 %>
+          This part hasn't been written yet.
+        <% elsif scene.paragraphs.length == 1 %>
+          <%= scene.paragraphs.first.content %> 
+        <% else %>
+          <div class="next-paragraph"><i class="icon-caret-right"></i></div>
+          <div class="prev-paragraph"><i class="icon-caret-left"></i></div>
+          <% scene.paragraphs.each_with_index do |p, i| %>
+            <div class="paragraph-inner <%= "hide" if i != 0 %>">
+              <%= p.content %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
 
