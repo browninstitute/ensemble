@@ -5,13 +5,14 @@
 $(document).ready ->
   $(".next-paragraph").click nextParagraph
   $(".prev-paragraph").click prevParagraph
+  $(".new-paragraph").click newParagraph
 
 nextParagraph = ->
   _this = $(this)
   
   return if _this.hasClass('disabled')
 
-  current = _this.parent().children(".paragraph-inner:visible")
+  current = _this.parent().children(".paragraphs-container").children(".paragraph-inner:visible")
   next = current.next(".paragraph-inner")
     
   _this.parent().children('.btn').removeClass('disabled')
@@ -31,7 +32,7 @@ prevParagraph = ->
   
   return if _this.hasClass('disabled')
 
-  current = _this.parent().children(".paragraph-inner:visible")
+  current = _this.parent().children(".paragraphs-container").children(".paragraph-inner:visible")
   prev = current.prev(".paragraph-inner")
     
   _this.parent().children('.btn').removeClass('disabled')
@@ -45,3 +46,11 @@ prevParagraph = ->
         _this.click prevParagraph
       )
     )
+
+newParagraph = ->
+  _this = $(this)
+
+  parent = _this.parents('.scene')
+
+  parent.children('.paragraph').hide()
+  parent.children('.paragraph-form').show()
