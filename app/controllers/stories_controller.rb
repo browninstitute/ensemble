@@ -18,7 +18,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @story }
+      format.json { render json: @story.to_json(:include => { :scenes => { :include => :paragraphs }}) }
     end
   end
 
@@ -51,6 +51,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if @story.save
+        @story.update_contents(params[:story][:content])
         format.html { redirect_to @story, notice: 'Story was successfully created.' }
         format.json { render json: @story, status: :created, location: @story }
       else
@@ -67,6 +68,8 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if @story.update_attributes(params[:story])
+        @story.update_contents(params[:story][:content])
+        
         format.html { redirect_to @story, notice: 'Story was successfully updated.' }
         format.json { head :no_content }
       else
