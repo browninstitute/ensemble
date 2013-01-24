@@ -72,6 +72,23 @@ $accent: #23ADE8;
         transition: all 0.4s ease;
       }
 
+      .paragraph-inner {
+        .paragraph-info {
+          padding: 0 5px;
+          background-color: #eee;
+          position: relative;
+
+          .paragraph-author {
+            margin: 0 20px;
+          }
+
+          .paragraph-actions {
+            position: absolute;
+            right: 5px;
+          }
+        }
+      }
+
       &.multiple {
         .next-paragraph, .prev-paragraph {
           background: #ccc;
