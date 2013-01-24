@@ -6,6 +6,7 @@ $(document).ready ->
   $(".next-paragraph").click nextParagraph
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph
+  $(".cancel-paragraph").click cancelParagraph
 
 nextParagraph = ->
   _this = $(this)
@@ -49,8 +50,12 @@ prevParagraph = ->
 
 newParagraph = ->
   _this = $(this)
-
   parent = _this.parents('.scene')
-
   parent.children('.paragraph').hide()
   parent.children('.paragraph-form').show()
+
+cancelParagraph = ->
+  _this = $(this)
+  parent = _this.parents('.scene')
+  parent.children('.paragraph').show()
+  parent.children('.paragraph-form').hide()

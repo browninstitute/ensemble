@@ -57,9 +57,9 @@
         </div>
         <% @paragraph = Paragraph.new %>
         <%= form_for [scene, @paragraph], :html => { :class => 'paragraph-form span7' } do |f| %>
-          <%= f.text_area :content, :rows => 5, :class => 'span12' %><br />
+          <%= f.text_area :content, :rows => 5, :placeholder => 'How would you write this part?', :class => 'span12' %><br />
           <%= f.submit "Submit", :class => 'btn btn-mini pull-right' %>
-          <%= button_tag "Cancel", :class => 'btn btn-mini pull-right' %>
+          <%= link_to "Cancel", "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
         <% end %>
         <div class="span1">
           10 <i class="icon-heart"></i>
