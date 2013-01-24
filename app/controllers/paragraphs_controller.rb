@@ -1,4 +1,10 @@
 class ParagraphsController < ApplicationController
+  def edit
+    @p = Paragraph.find(params[:id])
+    @story = @p.scene.story
+    render 'stories/show'
+  end
+  
   def create
     @scene = Scene.find(params[:scene_id])
     @p = @scene.paragraphs.build(params[:paragraph])
@@ -6,9 +12,19 @@ class ParagraphsController < ApplicationController
     if @p.save
       redirect_to @p.scene.story
     else
-      flash[:error] = "Your submitted answer cannot be empty. Please type something and then submit."
+      flash.now[:error] = "Your submitted answer cannot be empty. Please type something and then submit."
       @story = @scene.story
       render 'stories/show'
+    end
+  end
+
+  def update
+    @p = Paragraph.find(params[:id])
+
+    if @p.update_attributes(params[:paragraph])
+      redirect_to @p.scene.story, notice: "Paragraph was successfully updated."
+    else
+      render action: "edit" 
     end
   end
 
