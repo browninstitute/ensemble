@@ -52,6 +52,28 @@ $accent: #23ADE8;
         font-size: larger;
       }
 
+      .link_actions {
+        color: #eee;
+        a {
+          text-decoration: none;
+          font-size: 12px;
+          color: #eee;
+          -webkit-transition: all 0.4s ease;
+          -moz-transition: all 0.4s ease;
+          -o-transition: all 0.4s ease;
+          transition: all 0.4s ease;        
+        }
+      }
+
+      &:hover {
+        .link_actions {
+          color: #333;
+          a {
+            color: #0088cc;
+          }
+        }
+      }
+
       -webkit-transition: all 0.4s ease;
       -moz-transition: all 0.4s ease;
       -o-transition: all 0.4s ease;
