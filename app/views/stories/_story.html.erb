@@ -36,14 +36,24 @@
     <% @story.parse_story.each do |para| %>
     <div class="paragraph row-fluid">
       <div class="span7">
-        <%= para[:para] %>
+        <%= Format.markdown(para[:para].content) %>
       </div>
       <div class="span1">
-        10 <i class="icon-heart"></i>
+        <span id="scene_<%= para[:scene].id %>_like_count"><%= para[:scene].likes.size %></span> <i class="icon-heart"></i>
       </div>
       <div class="span4">
-        <%= para[:scene] %>
-        <a class="btn btn-mini"><i class="icon-comment"></i> Respond</a>
+        <%= Format.markdown(para[:scene].content) %>
+        <% puts current_user.inspect %>
+        <% if current_user.voted_up_on? para[:scene] %>
+          <%= link_to like_scene_path(para[:scene]), :id => "scene_" + para[:scene].id.to_s + "_like_button", :disabled => "disabled", :class => "btn btn-mini", :remote => true do %>
+          <i class="icon-heart"></i> Loved
+          <% end %>
+        <% else %>
+          <%= link_to like_scene_path(para[:scene]), :id => "scene_" + para[:scene].id.to_s + "_like_button", :class => "btn btn-mini", :remote => true do %>
+          <i class="icon-heart"></i> Love
+          <% end %>
+        <% end %>
+        <a class="btn btn-mini"><i class="icon-comment"></i> Comment</a>
       </div>
     </div>
     <% end %>

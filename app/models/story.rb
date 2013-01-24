@@ -36,6 +36,8 @@ class Story < ActiveRecord::Base
 
   # Update the contents of this story (scenes and paragraphs),
   # based on JSON generated in _paragraphs.html.erb
+  # TODO Do a belongs-to check to prevent malicious users from updating scenes and paras from other stories
+  # TODO Delete old scenes and paragraphs
   def update_contents(content_json)
     content = ActiveSupport::JSON.decode(content_json)
     # Update each scene, creating a new scene if no id is present
@@ -67,7 +69,7 @@ class Story < ActiveRecord::Base
   def parse_story
     parts = self.scenes.map do |scene|
       para = scene.paragraphs[0]
-      { :para => Format.markdown(para.content), :scene => Format.markdown(scene.content) }
+      { :para => para, :scene => scene }
     end
   end
 

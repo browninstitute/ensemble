@@ -4,4 +4,5 @@ class Scene < ActiveRecord::Base
   acts_as_list :scope => :story
   has_many :paragraphs, :order => :position
   attr_accessible :content, :title, :position, :paragraphs
+  acts_as_votable
 end

@@ -1,3 +1,5 @@
+require 'format'
+
 class StoriesController < ApplicationController
 
   # GET /stories
