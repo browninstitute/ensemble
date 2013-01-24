@@ -53,6 +53,10 @@ $accent: #23ADE8;
         font-size: larger;
       }
 
+      .span7 {
+        position: relative;
+      }
+
       -webkit-transition: all 0.4s ease;
       -moz-transition: all 0.4s ease;
       -o-transition: all 0.4s ease;
@@ -69,20 +73,16 @@ $accent: #23ADE8;
       &.multiple {
         .next-paragraph, .prev-paragraph {
           background: #ccc;
-          width: 10px;
           padding: 0 5px;
           text-align: center;
           border-radius: 5px;
           height: 50px;
           line-height: 50px;
           position: absolute;
-          top: 50%;
-          margin-top: -30px;
-          cursor: pointer;
         }
 
         .next-paragraph {
-          right: 0;
+          right: -25px;
         }
 
         .prev-paragraph {

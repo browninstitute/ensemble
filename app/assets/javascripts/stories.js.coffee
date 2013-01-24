@@ -3,19 +3,45 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  $(".next-paragraph").click (e) ->
-    current = $(e.target).parent().children(".paragraph-inner:visible")
-    next = current.next(".paragraph-inner")
-    $(this).addClass('disabled') if next.size() is 1
-    if (next.size() >= 1) 
-      current.hide("slide", { direction: "left" }, 400, ->
-        next.show("slide", { direction: "right" }, 400)
-      )
+  $(".next-paragraph").click nextParagraph
+  $(".prev-paragraph").click prevParagraph
 
-  $(".prev-paragraph").click (e) ->
-    current = $(e.target).parent().children(".paragraph-inner:visible")
-    prev = current.prev(".paragraph-inner")
-    if (prev.size() >= 1)
-      current.hide("slide", { direction: "right" }, 400, ->
-        prev.show("slide", { direction: "left" }, 400)
+nextParagraph = ->
+  _this = $(this)
+  
+  return if _this.hasClass('disabled')
+
+  current = _this.parent().children(".paragraph-inner:visible")
+  next = current.next(".paragraph-inner")
+    
+  _this.parent().children('.btn').removeClass('disabled')
+  if next.next(".paragraph-inner").length is 0
+    _this.addClass('disabled')
+    
+  if (next.size() >= 1) 
+    _this.unbind()
+    current.hide("slide", { direction: "left" }, 400, ->
+      next.show("slide", { direction: "right" }, 400, ->
+        _this.click nextParagraph
       )
+    )
+
+prevParagraph = ->
+  _this = $(this)
+  
+  return if _this.hasClass('disabled')
+
+  current = _this.parent().children(".paragraph-inner:visible")
+  prev = current.prev(".paragraph-inner")
+    
+  _this.parent().children('.btn').removeClass('disabled')
+  if prev.prev(".paragraph-inner").length is 0
+    _this.addClass('disabled')
+  
+  if (prev.size() >= 1)
+    _this.unbind()
+    current.hide("slide", { direction: "right" }, 400, ->
+      prev.show("slide", { direction: "left" }, 400, ->
+        _this.click prevParagraph
+      )
+    )

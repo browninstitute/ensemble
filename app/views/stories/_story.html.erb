@@ -33,45 +33,37 @@
   </div>
 
   <div class="content">
-    <% @story.parse_story.each do |para| %>
-    <div class="paragraph row-fluid">
-      <div class="span7">
-        <%= para[:para] %>
-      </div>
-      <div class="span1">
-        10 <i class="icon-heart"></i>
-      </div>
-      <div class="span4">
-        <%= para[:scene] %>
-        <a class="btn btn-mini"><i class="icon-comment"></i> Respond</a>
-      </div>
-    </div>
-    <% end %>
-    <!-- temporary place for submitting inline answers -->
     <% @story.scenes.each do |scene| %>
-      <div>Scene Title: <%= scene.title %></div>
       <% classes = "paragraph row-fluid" %>
       <% classes += " multiple" if scene.paragraphs.length > 1 %>
       <% classes += " unwritten" if scene.paragraphs.length < 1 %>
       <div class="<%= classes %>">
-        <% if scene.paragraphs.length == 0 %>
-          This part hasn't been written yet.
-        <% elsif scene.paragraphs.length == 1 %>
-          <%= scene.paragraphs.first.content %> 
-        <% else %>
-          <div class="next-paragraph"><i class="icon-caret-right"></i></div>
-          <div class="prev-paragraph"><i class="icon-caret-left"></i></div>
-          <% scene.paragraphs.each_with_index do |p, i| %>
-            <div class="paragraph-inner <%= "hide" if i != 0 %>">
-              <%= p.content %>
-            </div>
+        <div class="span7">
+          <% if scene.paragraphs.length == 0 %>
+            This part hasn't been written yet.
+          <% elsif scene.paragraphs.length == 1 %>
+            <%= Format.markdown(scene.paragraphs.first.content) %> 
+          <% else %>
+            <button class="btn next-paragraph"><i class="icon-caret-right"></i></button>
+            <button class="btn disabled prev-paragraph"><i class="icon-caret-left"></i></button>
+            <% scene.paragraphs.each_with_index do |p, i| %>
+              <div class="paragraph-inner <%= "hide" if i != 0 %>">
+                <%= Format.markdown(p.content) %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+        <div class="span1">
+          10 <i class="icon-heart"></i>
+        </div>
+        <div class="span4">
+          <%= Format.markdown(scene.content) %>
+          <a class="btn btn-mini"><i class="icon-comment"></i> Respond</a>
+        </div>
       </div>
     <% end %>
   </div>
 </div>
-
 
 <!-- <div class="storybar">
   <%= render 'question' %>
