@@ -1,23 +1,26 @@
 <%= Format.markdown(scene.content) %>
-<div class="link_actions">
-  <% if current_user.voted_up_on? scene %>
-    <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :disabled => "disabled", :remote => true do %>
-    <i class="icon-heart"></i> Loved
-    <% end %>
-  <% else %>
-    <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :remote => true do %>
-    <i class="icon-heart"></i> Love
-    <% end %>
-  <% end %> · 
-  <%= link_to new_comment_scene_path(scene), :remote => true do %>
-    <i class="icon-comment"></i> Comment</a>
-  <% end %>
-</div>
-<div class="comment" style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
 <% unless scene.content.empty? %>
-  <% scene.comments.order('created_at DESC').each do |comment| %>
-    <div class="comment">
-      <%= comment.content %>
-    </div>
-  <% end %>
+  <div class="link_actions">
+    <% if current_user.voted_up_on? scene %>
+      <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :disabled => "disabled", :remote => true do %>
+      <i class="icon-heart"></i> Loved
+      <% end %>
+    <% else %>
+      <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :remote => true do %>
+      <i class="icon-heart"></i> Love
+      <% end %>
+    <% end %> · 
+    <%= link_to new_comment_scene_path(scene), :remote => true do %>
+      <i class="icon-comment"></i> Comment</a>
+    <% end %>
+  </div>
+  <div style="margin-left: 15px; margin-top: 10px; display: none;" id="scene_<%= scene.id %>_comment_box"></div>
+    <% if scene.comments.size > 0 %>
+      <div class="comment">
+        <% scene.comments.order('created_at DESC').each do |comment| %>
+          <%= comment.content %>
+          <hr style="margin: 2px; border: 0; border-top: 1px solid #f0f0f0;" />
+        <% end %>
+      </div>
+    <% end %>
 <% end %>
