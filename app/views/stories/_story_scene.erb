@@ -1,0 +1,23 @@
+<%= Format.markdown(scene.content) %>
+<div class="link_actions">
+  <% if current_user.voted_up_on? scene %>
+    <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :disabled => "disabled", :remote => true do %>
+    <i class="icon-heart"></i> Loved
+    <% end %>
+  <% else %>
+    <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :remote => true do %>
+    <i class="icon-heart"></i> Love
+    <% end %>
+  <% end %> · 
+  <%= link_to new_comment_scene_path(scene), :remote => true do %>
+    <i class="icon-comment"></i> Comment</a>
+  <% end %>
+</div>
+<div class="comment" style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
+<% unless scene.content.empty? %>
+  <% scene.comments.order('created_at DESC').each do |comment| %>
+    <div class="comment">
+      <%= comment.content %>
+    </div>
+  <% end %>
+<% end %>

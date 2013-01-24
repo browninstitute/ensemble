@@ -74,6 +74,28 @@ $accent: #23ADE8;
         }
       }
 
+      .comment {
+        position:relative;
+        padding:3px 5px;
+        margin:1em 0 1em;
+        color:#3c3c3c;
+        background-color: #fbfbfb;
+        margin-left: 10px;
+        font-size: x-small;
+      }
+      .comment:after {
+        content:"";
+        position:absolute;
+        border-style:solid;
+        display:block; 
+        width:0;
+        top:0px; /* controls vertical position */
+        left:-10px; /* value = - border-left-width - border-right-width */
+        bottom:auto;
+        border-width:0px 10px 8px 0;
+        border-color:transparent #fafafa;
+      }
+
       -webkit-transition: all 0.4s ease;
       -moz-transition: all 0.4s ease;
       -o-transition: all 0.4s ease;

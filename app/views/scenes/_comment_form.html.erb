@@ -1,0 +1,6 @@
+<%= form_for(@comment, :url => create_comment_scene_path(@scene), :html => { :class => 'form-inline' }, :remote => true) do |f| %>
+  <div class="input-append">
+    <%= f.text_field :content, :placeholder => 'Type a message?' %>
+    <%= f.submit :class => "btn", :value => 'Comment' %>
+  </div>
+<% end %>

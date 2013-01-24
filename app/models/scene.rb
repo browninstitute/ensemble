@@ -3,6 +3,7 @@ class Scene < ActiveRecord::Base
   belongs_to :story
   acts_as_list :scope => :story
   has_many :paragraphs, :order => :position
+  has_many :comments
   attr_accessible :content, :title, :position, :paragraphs
   acts_as_votable
 end
