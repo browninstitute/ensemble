@@ -1,5 +1,20 @@
 class CommentsController < ApplicationController
 
+  # Toggle likes on a comment
+  def like
+    @comment = Comment.find(params[:id])
+    
+    if current_user.voted_up_on? @comment
+      @comment.disliked_by current_user
+    else
+      @comment.liked_by current_user
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def index
   end
 

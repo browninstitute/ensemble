@@ -1,8 +1,8 @@
 $ ->
   $lb = $('#scene_<%= @scene.id %>_like_button')
   $lc = $('#scene_<%= @scene.id %>_like_count')
-  if $lb.attr('disabled')
-    $lb.html('<i class="icon-heart"></i> Love').removeAttr('disabled')
+  if $lb.hasClass('loved')
+    $lb.html('<i class="icon-heart"></i> Love').removeClass('loved')
   else
-    $lb.html('<i class="icon-heart"></i> Loved').attr('disabled', 'disabled')
+    $lb.html('<i class="icon-heart"></i> Loved').addClass('loved')
   $lc.text('<%= @scene.likes.size %>')

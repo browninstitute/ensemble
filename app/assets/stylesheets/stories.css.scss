@@ -63,6 +63,13 @@ $accent: #23ADE8;
           -o-transition: all 0.4s ease;
           transition: all 0.4s ease;        
         }
+        a.loved {
+          color: #eee;
+        }
+      }
+
+      a.loved {
+        color: red;
       }
 
       &:hover {
@@ -71,7 +78,26 @@ $accent: #23ADE8;
           a {
             color: #0088cc;
           }
+          a.loved {
+            color: red;
+          }
         }
+      }
+
+      .comment_box {
+        .comment_photo {
+          float: left;
+          width: 31px;
+          height: 31px;
+          border: 1px solid #cfcfcf;
+        }
+      }
+
+      .show_more {
+        text-align: center;
+        border: 1px dashed #cfcfcf;
+        font-size: x-small;
+        cursor: pointer;
       }
 
       .comment {
@@ -79,9 +105,34 @@ $accent: #23ADE8;
         padding:3px 5px;
         margin:1em 0 1em;
         color:#3c3c3c;
-        background-color: #fbfbfb;
-        margin-left: 10px;
+        background-color: #f2f0f0;
+        margin-left: 42px;
         font-size: x-small;
+        box-shadow: inset 0 1px #fcfafa;
+        border: 1px solid #cfcfcf;
+
+        .controls {
+          position: absolute;
+          top: 4px;
+          right: 10px;
+          background-color: #efefef;
+          z-index: 2;
+          opacity: 0.1;
+          transition: all 0.4s ease;
+          a {
+            text-decoration: none;
+            padding: 4px;
+          }
+        }
+
+        &:hover {
+          .controls {
+            opacity: 1;
+            a {
+              background-color: white;
+            }
+          }
+        }
       }
       .comment:after {
         content:"";
@@ -93,7 +144,7 @@ $accent: #23ADE8;
         left:-10px; /* value = - border-left-width - border-right-width */
         bottom:auto;
         border-width:0px 10px 8px 0;
-        border-color:transparent #fafafa;
+        border-color:transparent #f2f0f0;
       }
 
       -webkit-transition: all 0.4s ease;
