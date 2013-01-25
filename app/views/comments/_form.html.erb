@@ -1,0 +1,6 @@
+<%= form_for(@comment, :html => { :class => 'form-inline', :style => 'margin: 0' }, :remote => true) do |f| %>
+  <div class="input-append">
+    <%= f.text_field :content, :placeholder => 'Type a message?' %>
+    <%= f.submit :class => "btn", :value => 'Update' %>
+  </div>
+<% end %>
