@@ -26,7 +26,6 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
-
     respond_to do |format|
       format.js
     end
@@ -34,6 +33,8 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
+    authorize! :update, @comment
+
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         format.js

@@ -24,9 +24,11 @@
         </div>
         <div class="comment">
           <div class="controls">
-            <%= link_to edit_comment_path(comment), :remote => true do %>
-            <i class="icon-edit"></i> Edit
-            <% end %>&nbsp;
+            <% if can? :update, comment %>
+              <%= link_to edit_comment_path(comment), :remote => true do %>
+              <i class="icon-edit"></i> Edit
+              <% end %>&nbsp;
+            <% end %>
             <% if current_user.voted_up_on? comment %>
               <%= link_to like_comment_path(comment), :id => "comment_" + comment.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
               <i class="icon-heart"></i> Loved
