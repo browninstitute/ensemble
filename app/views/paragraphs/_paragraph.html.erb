@@ -1,5 +1,16 @@
 <div class="paragraph-inner <%= "hide" if paragraph_counter != 0 %>">
   <div class="paragraph-info">
+    <div class="link_actions">
+    <% if current_user.voted_up_on? paragraph %>
+      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
+      <i class="icon-heart"></i> Loved
+      <% end %>
+    <% else %>
+      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :remote => true do %>
+      <i class="icon-heart"></i> Love
+      <% end %>
+    <% end %>
+    </div>
     <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
     <span class="paragraph-author">by <%= paragraph.user.name %></span>
     <span class="paragraph-actions">

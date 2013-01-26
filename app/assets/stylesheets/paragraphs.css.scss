@@ -1,0 +1,76 @@
+.paragraph-form {
+  margin: 0;
+}
+
+.paragraph {
+  margin-bottom: 1.8em;
+  background-color: #fff;
+  position: relative;
+
+
+  a.loved {
+    color: red;
+  }
+
+  &:hover {
+    .link_actions {
+      color: #333;
+      a {
+        color: #0088cc;
+      }
+      a.loved {
+        color: red;
+      }
+    }
+  }
+
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+
+  &:hover {
+    /* background-color: #fbfbfb; */
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+  }
+
+  .paragraph-inner {
+    .paragraph-info {
+      padding: 0 5px;
+      background-color: #eee;
+      position: relative;
+
+      .paragraph-author {
+        margin: 0 20px;
+      }
+
+      .paragraph-actions {
+        position: absolute;
+        right: 5px;
+      }
+    }
+  }
+
+  &.multiple {
+    .next-paragraph, .prev-paragraph {
+      background: #ccc;
+      padding: 0 5px;
+      text-align: center;
+      border-radius: 5px;
+      height: 50px;
+      line-height: 50px;
+      position: absolute;
+    }
+
+    .next-paragraph {
+      right: 0px;
+    }
+
+    .paragraphs-container {
+      margin: 0 25px;
+    }
+  }
+}
