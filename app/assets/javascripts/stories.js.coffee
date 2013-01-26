@@ -9,6 +9,7 @@ $(document).ready ->
   $(".cancel-paragraph").click cancelParagraph
   $(".expand-paragraphs").click toggleExpandParagraphs
   window.goToParagraph = goToParagraph
+  window.cancelParagraph = cancelParagraph
 
 nextParagraph = ->
   _this = $(this)
@@ -56,11 +57,12 @@ newParagraph = ->
   parent.children('.paragraph').hide()
   parent.children('.paragraph-form').show()
 
-cancelParagraph = ->
+cancelParagraph = (e) ->
   _this = $(this)
   parent = _this.parents('.scene')
   parent.children('.paragraph').show()
   parent.children('.paragraph-form').hide()
+  e.preventDefault()
 
 toggleExpandParagraphs = (e) ->
   _this = $(this)
