@@ -1,2 +1,2 @@
 $('#scene_<%= @scene.id %>_comment_box').hide()
-$('#scene_<%= @scene.id %>_info').html('<%=j render :partial => 'scenes/scene_info', :locals => { :scene => @scene } %>')
+$('#scene_<%= @scene.id %>_comments').prepend("<%= escape_javascript(render :partial => "comments/comment", :locals => {:comment => @comment}) %>")
