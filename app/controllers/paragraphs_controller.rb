@@ -49,4 +49,18 @@ class ParagraphsController < ApplicationController
       format.js
     end
   end
+
+  def winner
+    @p = Paragraph.find(params[:id])
+    
+    if @p.is_winner?
+      @p.unset_as_winner
+    else
+      @p.set_as_winner
+    end
+    
+    respond_to do |format|
+      format.js
+    end
+  end
 end

@@ -11,6 +11,10 @@
       <% end %>
     <% end %>
     </div>
+    <%= link_to winner_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_winner_button", 
+                                                  :class => ("winner" if paragraph.is_winner?), :remote => true do %>
+      <i class="icon-trophy"></i></span>
+    <% end %>
     <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
     <span class="paragraph-author">by <%= paragraph.user.name %></span>
     <span class="paragraph-actions">

@@ -24,6 +24,7 @@ StoryCollab::Application.routes.draw do
   match 'scenes/:id/new_comment' => 'scenes#new_comment', :as => :new_comment_scene
   match 'scenes/:id/create_comment' => 'scenes#create_comment', :as => :create_comment_scene
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
+  match 'paragraphs/:id/winner' => 'paragraphs#winner', :as => :winner_paragraph
 
   resources :comments do
     member do

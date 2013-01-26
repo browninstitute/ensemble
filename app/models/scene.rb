@@ -18,7 +18,7 @@ class Scene < ActiveRecord::Base
   #                   as it belongs to the scene.
   #
   def ordered_paragraphs(order = :desc, options = {})
-    ordered = self.paragraphs 
+    ordered = self.paragraphs.dup 
     if order == :asc 
       ordered.sort! { |x, y| x.likes.size <=> y.likes.size }
     else # desc
@@ -26,11 +26,11 @@ class Scene < ActiveRecord::Base
     end
 
     if options[:id]
-      move = ordered.delete_if { |x| x.id == options[:id] }
-      ordered.unshift(move.first)
+      move = ordered.delete(Paragraph.find(options[:id]))
+      ordered = ordered.unshift(move)
     elsif !options[:ignore_winner] && !self.winner_id.nil?
-      move = ordered.delete_if { |x| x.id == self.winner_id }
-      ordered.unshift(move.first) 
+      move = ordered.delete(Paragraph.find(self.winner_id))
+      ordered = ordered.unshift(move) 
     end
 
     ordered
