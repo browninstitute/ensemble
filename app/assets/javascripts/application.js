@@ -15,6 +15,7 @@
 //= require jquery.ui.sortable
 //= require jquery.ui.effect-slide
 //= require twitter/bootstrap
+//= require rails.validations
 //= require_tree .
 
 /* Global ajax handler to show flash messages. */

@@ -2,6 +2,9 @@
   <%= f.text_area :content, :rows => 5, 
                   :placeholder => 'How would you write this part?', 
                   :class => 'span12' %><br />
+                  
+  <span class="text-error">
+  </span>
   <%= f.submit "Save", :class => 'btn btn-mini pull-right' %>
   <%= link_to "Cancel", "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
 <% end %>

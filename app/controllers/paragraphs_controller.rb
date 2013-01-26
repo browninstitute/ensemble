@@ -25,11 +25,15 @@ class ParagraphsController < ApplicationController
         format.js
       end
     else
-      flash.now[:error] = "Your submitted answer cannot be empty. Please type something and then submit."
+      @errormsg = @p.errors.to_a.each { |e| e.capitalize }.join(". ")
+      respond_to do |format|
+        format.js { render :action => 'error' }
+      end
     end
   end
 
   def update
+    @scene = Scene.find(params[:scene_id])
     @p = Paragraph.find(params[:id])
 
     if @p.update_attributes(params[:paragraph])
@@ -38,7 +42,10 @@ class ParagraphsController < ApplicationController
         format.js
       end
     else
-      render action: "edit" 
+      @errormsg = @p.errors.to_a.each { |e| e.capitalize }.join(". ")
+      respond_to do |format|
+        format.js { render :action => 'error' }
+      end
     end
   end
 
