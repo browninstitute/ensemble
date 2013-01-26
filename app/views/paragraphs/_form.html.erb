@@ -1,0 +1,9 @@
+<% @p = @p || Paragraph.new %>  
+<%= form_for [scene, @p], :html => { :class => paragraph_form_classes(@p, scene) } do |f| %>
+  <%= f.text_area :content, :rows => 5, 
+                  :placeholder => 'How would you write this part?', 
+                  :class => 'span12' %><br />
+  <%= f.submit "Save", :class => 'btn btn-mini pull-right' %>
+  <%= link_to "Cancel", "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
+<% end %>
+

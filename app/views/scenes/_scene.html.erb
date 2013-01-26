@@ -1,0 +1,20 @@
+<div class="scene row-fluid">
+  <div class="<%= paragraphs_classes(@p, scene) %>">
+    <% if scene.paragraphs.length > 1 %>
+      <button class="btn next-paragraph"><i class="icon-caret-right"></i></button>
+      <button class="btn disabled prev-paragraph"><i class="icon-caret-left"></i></button>
+    <% end %>
+    <div class="paragraphs-container">
+      <%= render :partial => "paragraphs/paragraph", 
+                 :collection => scene.paragraphs,
+                 :locals => { :scene => scene } %>          
+    </div>
+  </div>
+  <%= render :partial => 'paragraphs/form', :locals => { :paragraph => @p, :scene => scene } %>
+  <div class="scene-info span4">
+    <%= Format.markdown(scene.content) %>
+    <a class="btn btn-mini"><i class="icon-comment"></i> Respond</a>
+    <a class="btn btn-mini new-paragraph">Submit an answer</a>
+  </div>
+</div>
+

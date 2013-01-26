@@ -33,55 +33,6 @@
   </div>
 
   <div class="content">
-    <% @story.scenes.each do |scene| %>
-      <div class="scene row-fluid">
-        <% classes = "paragraph span8" %>
-        <% classes += " multiple" if scene.paragraphs.length > 1 %>
-        <% classes += " unwritten" if scene.paragraphs.length < 1 %>
-        <% classes += " hide" if !@p.nil? %>
-        <div class="<%= classes %>">
-          <% if scene.paragraphs.length == 0 %>
-            This part hasn't been written yet.
-          <% elsif scene.paragraphs.length == 1 %>
-            <%= Format.markdown(scene.paragraphs.first.content) %> 
-          <% else %>
-            <button class="btn next-paragraph"><i class="icon-caret-right"></i></button>
-            <button class="btn disabled prev-paragraph"><i class="icon-caret-left"></i></button>
-            <div class="paragraphs-container">
-            <% scene.paragraphs.each_with_index do |p, i| %>
-              <div class="paragraph-inner <%= "hide" if i != 0 %>">
-                <div class="paragraph-info">
-                  10 <i class="icon-heart"></i>
-                  <span class="paragraph-author">by <%= p.user.name %></span>
-                  <span class="paragraph-actions">
-                    <%= link_to "Edit", edit_scene_paragraph_path(scene, p) %> 
-                    <%= link_to "Delete", scene_paragraph_path(scene, p), method: :delete, data: { confirm: 'Are you sure?' } %>
-                  </span>
-                </div>
-
-                <div class="paragraph-content">
-                  <%= Format.markdown(p.content) %>
-                </div>
-              </div>
-            <% end %>
-            </div>
-          <% end %>
-        </div>
-        <% form_classes = "paragraph-form span8" %>
-        <% form_classes += " hide" if @p.nil? %>
-        <% @p = @p || Paragraph.new %>
-        <%= form_for [scene, @p], :html => { :class => form_classes } do |f| %>
-          <%= f.text_area :content, :rows => 5, :placeholder => 'How would you write this part?', :class => 'span12' %><br />
-          <%= f.submit "Save", :class => 'btn btn-mini pull-right' %>
-          <%= link_to "Cancel", "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
-        <% end %>
-        <% @p = nil %>
-        <div class="scene-info span4">
-          <%= Format.markdown(scene.content) %>
-          <a class="btn btn-mini"><i class="icon-comment"></i> Respond</a>
-          <a class="btn btn-mini new-paragraph">Submit an answer</a>
-        </div>
-      </div>
-    <% end %>
+    <%= render :partial => 'scenes/scene', :collection => @story.scenes %>
   </div>
 </div>

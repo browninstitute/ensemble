@@ -1,0 +1,14 @@
+<div class="paragraph-inner <%= "hide" if paragraph_counter != 0 %>">
+  <div class="paragraph-info">
+    10 <i class="icon-heart"></i>
+    <span class="paragraph-author">by <%= paragraph.user.name %></span>
+    <span class="paragraph-actions">
+      <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph) %> 
+      <%= link_to "Delete", scene_paragraph_path(scene, paragraph), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </span>
+  </div>
+
+  <div class="paragraph-content">
+    <%= Format.markdown(paragraph.content) %>
+  </div>
+</div>
