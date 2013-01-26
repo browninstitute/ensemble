@@ -1,4 +1,5 @@
 require 'format'
+require 'set'
 
 class Story < ActiveRecord::Base
   belongs_to :user
@@ -38,6 +39,29 @@ class Story < ActiveRecord::Base
   # based on JSON generated in _paragraphs.html.erb
   def update_contents(content_json)
     content = ActiveSupport::JSON.decode(content_json)
+
+    # Ensure that all scene ids and paragraph ids belong to this story
+    content.each do |scene|
+      if scene.include? 'id'
+        s = Scene.find(scene['id'].to_i)
+        raise "Scene Doesn't Belong to Story" if s.story != self
+        scene['paragraphs'].each do |paragraph|
+          if paragraph.include? 'id'
+            p = Paragraph.find(paragraph['id'].to_i)
+            raise "Paragraph Doesn't Belong to Scene" if p.scene != s
+          end
+        end
+      end
+    end
+
+    # Delete old scenes (cascades paragraph deletion)
+    existing_scene_ids = Set.new(self.scenes.map { |scene| scene.id })
+    new_scene_ids = Set.new(content.map { |scene| (scene.include? 'id') ? scene['id'].to_i : 0 })
+    scenes_to_delete_ids = existing_scene_ids - new_scene_ids
+    scenes_to_delete_ids.each do |scene_id|
+      Scene.find(scene_id).destroy
+    end
+
     # Update each scene, creating a new scene if no id is present
     content.each do |scene|
       scene_pos = scene['position'].to_i
@@ -67,7 +91,7 @@ class Story < ActiveRecord::Base
   def parse_story
     parts = self.scenes.map do |scene|
       para = scene.paragraphs[0]
-      { :para => Format.markdown(para.content), :scene => Format.markdown(scene.content) }
+      { :para => para, :scene => scene }
     end
   end
 

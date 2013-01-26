@@ -1,6 +1,6 @@
 <div class="paragraph-inner <%= "hide" if paragraph_counter != 0 %>">
   <div class="paragraph-info">
-    10 <i class="icon-heart"></i>
+    <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
     <span class="paragraph-author">by <%= paragraph.user.name %></span>
     <span class="paragraph-actions">
       <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph) %> 

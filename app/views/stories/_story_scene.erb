@@ -1,0 +1,62 @@
+<div class="scene_text">
+  <%= Format.markdown(scene.content) %>
+</div>
+<% unless scene.content.empty? %>
+  <div class="link_actions">
+    <% if current_user.voted_up_on? scene %>
+      <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
+      <i class="icon-heart"></i> Loved
+      <% end %>
+    <% else %>
+      <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :remote => true do %>
+      <i class="icon-heart"></i> Love
+      <% end %>
+    <% end %> · 
+    <%= link_to new_comment_scene_path(scene), :remote => true do %>
+      <i class="icon-comment"></i> Comment</a>
+    <% end %>
+  </div>
+  <div style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
+  <div id="scene_<%= scene.id %>_comments">
+    <% scene.comments.order('created_at DESC').each do |comment| %>
+      <div class="comment_box">
+        <div class="comment_photo"><%= image_tag "alien.svg" %>
+        </div>
+        <div class="comment">
+          <div class="controls">
+            <% if can? :update, comment %>
+              <%= link_to edit_comment_path(comment), :remote => true do %>
+              <i class="icon-edit"></i> Edit
+              <% end %>&nbsp;
+            <% end %>
+            <% if current_user.voted_up_on? comment %>
+              <%= link_to like_comment_path(comment), :id => "comment_" + comment.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
+              <i class="icon-heart"></i> Loved
+              <% end %>
+            <% else %>
+              <%= link_to like_comment_path(comment), :id => "comment_" + comment.id.to_s + "_like_button", :remote => true do %>
+              <i class="icon-heart"></i> Love
+              <% end %>
+            <% end %>
+          </div>
+          <div id="comment_<%= comment.id %>_content">
+            <%= comment.content %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<script>
+$().ready(function() {
+  $sc = $("#scene_<%= scene.id %>_comments");
+  var count = $(".comment_box:gt(2)", $sc).length;
+  $(".comment_box:gt(2)", $sc).hide();
+  if (count > 0) {
+    $('<div class=\"show_more\">'+ count +' more...</div>').click(function() {
+      $("#scene_<%= scene.id %>_comments .comment_box").show(500);
+      $(this).hide();
+    }).appendTo($sc);
+  }
+});
+</script>

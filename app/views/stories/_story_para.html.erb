@@ -1,0 +1,12 @@
+<%= Format.markdown(para.content) %>
+<div class="link_actions">
+<% if current_user.voted_up_on? para %>
+  <%= link_to like_paragraph_path(para), :id => "para_" + para.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
+  <i class="icon-heart"></i> Loved
+  <% end %>
+<% else %>
+  <%= link_to like_paragraph_path(para), :id => "para_" + para.id.to_s + "_like_button", :remote => true do %>
+  <i class="icon-heart"></i> Love
+  <% end %>
+<% end %>
+</div>

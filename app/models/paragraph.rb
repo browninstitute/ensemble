@@ -4,4 +4,5 @@ class Paragraph < ActiveRecord::Base
   acts_as_list :scope => :scene
   attr_accessible :content, :position, :title
   validates :content, :presence => true
+  acts_as_votable
 end
