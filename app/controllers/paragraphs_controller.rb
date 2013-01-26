@@ -20,15 +20,12 @@ class ParagraphsController < ApplicationController
     @p = @scene.paragraphs.build(params[:paragraph])
     @p.user_id = current_user.id
     if @p.save
+      flash.now[:success] = "Contribution successfully saved."
       respond_to do |format|
         format.js
       end
-      
-      #redirect_to @p.scene.story
     else
       flash.now[:error] = "Your submitted answer cannot be empty. Please type something and then submit."
-      @story = @scene.story
-      render 'stories/show'
     end
   end
 
@@ -36,7 +33,7 @@ class ParagraphsController < ApplicationController
     @p = Paragraph.find(params[:id])
 
     if @p.update_attributes(params[:paragraph])
-      #redirect_to @p.scene.story, notice: "Paragraph was successfully updated."
+      flash.now[:success] = "Contribution was successfully updated."
       respond_to do |format|
         format.js
       end
@@ -49,7 +46,7 @@ class ParagraphsController < ApplicationController
     @p = Paragraph.find(params[:id])
     @p.destroy
 
-    redirect_to @p.scene.story
+    redirect_to @p.scene.story, notice: "Contribution was deleted."
   end
 
   # Toggle likes on a paragraph

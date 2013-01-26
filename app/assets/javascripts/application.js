@@ -16,3 +16,22 @@
 //= require jquery.ui.effect-slide
 //= require twitter/bootstrap
 //= require_tree .
+
+/* Global ajax handler to show flash messages. */
+$(document).ajaxComplete(function(event, request) {
+  var msg = request.getResponseHeader('X-Message');
+  if (!msg) { return; }
+  var type = "";
+  if (request.getResponseHeader('X-Message-Type') == "error") {
+    type = "error";
+  } else {
+    type = "success";
+  }
+
+  var alertbox = "<div class='alert alert-" + type + "'>" + 
+                 "<button type='button' href='#' class='close' data-dismiss='alert'>&#215;</button>" + 
+                 "<div id='flash_" + type + "'>" + msg + "</div>" +
+                 "</div>";
+
+  $("header").after(alertbox);
+});
