@@ -6,7 +6,15 @@ class ParagraphsController < ApplicationController
       format.js
     end
   end
-  
+ 
+  def new
+    @p = Paragraph.new
+    @scene = Scene.find(params[:scene_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     @scene = Scene.find(params[:scene_id])
     @p = @scene.paragraphs.build(params[:paragraph])

@@ -37,8 +37,13 @@
     }
   }
 
+  .next-paragraph, .prev-paragraph {
+    display: none;
+  }
+
   &.multiple {
     .next-paragraph, .prev-paragraph {
+      display: block;
       background: #ccc;
       padding: 0 5px;
       text-align: center;
