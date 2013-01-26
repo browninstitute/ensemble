@@ -6,7 +6,7 @@
     <% end %>
     <div class="paragraphs-container">
       <%= render :partial => "paragraphs/paragraph", 
-                 :collection => scene.paragraphs,
+                 :collection => scene.ordered_paragraphs,
                  :locals => { :scene => scene } %>          
     </div>
   </div>
