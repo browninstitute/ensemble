@@ -7,6 +7,7 @@ $(document).ready ->
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph
   $(".cancel-paragraph").click cancelParagraph
+  $(".expand-paragraphs").click toggleExpandParagraphs
   window.goToParagraph = goToParagraph
 
 nextParagraph = ->
@@ -60,6 +61,23 @@ cancelParagraph = ->
   parent = _this.parents('.scene')
   parent.children('.paragraph').show()
   parent.children('.paragraph-form').hide()
+
+toggleExpandParagraphs = (e) ->
+  _this = $(this)
+  paragraphs = _this.parents('.scene').children('.paragraph')
+  if (paragraphs.hasClass("multiple"))
+    paragraphs.children(".paragraphs-container")
+      .children(".paragraph-inner")
+      .fadeIn()
+    paragraphs.removeClass("multiple")
+    paragraphs.addClass("expanded")
+    _this.html("Collapse")
+  else if (paragraphs.hasClass("expanded"))
+    paragraphs.removeClass("expanded")
+    paragraphs.addClass("multiple")
+    _this.html("See all")
+    resetParagraphs(paragraphs.children(".paragraphs-container"))
+  e.preventDefault()
 
 resetParagraphs = ($container) ->
   current = $container.children(".paragraph-inner:visible")

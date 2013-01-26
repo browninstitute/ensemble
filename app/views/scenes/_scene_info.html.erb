@@ -16,6 +16,10 @@
       <i class="icon-comment"></i> Comment</a>
     <% end %> &sdot;
     <%= link_to "Submit answer", new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" %>
+    <% if scene.paragraphs.length > 1 %>
+      &sdot; 
+      <%= link_to "See all", "#", :class => "expand-paragraphs" %>
+    <% end %>
   </div>
   <div style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
   <div id="scene_<%= scene.id %>_comments">
