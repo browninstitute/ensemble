@@ -1,4 +1,4 @@
-.paragraph-form {
+#new_paragraph {
   margin: 0;
 }
 
@@ -6,23 +6,6 @@
   margin-bottom: 1.8em;
   background-color: #fff;
   position: relative;
-
-
-  a.loved {
-    color: red;
-  }
-
-  &:hover {
-    .link_actions {
-      color: #333;
-      a {
-        color: #0088cc;
-      }
-      a.loved {
-        color: red;
-      }
-    }
-  }
 
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;

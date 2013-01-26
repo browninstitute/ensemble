@@ -105,4 +105,20 @@ header {
     color: #eee;
   }
 }
+  a.loved {
+    color: red;
+  }
+
+  .paragraph:hover, .scene-info:hover {
+    .link_actions {
+      color: #333;
+      a {
+        color: #0088cc;
+      }
+      a.loved {
+        color: red;
+      }
+    }
+  }
+
 

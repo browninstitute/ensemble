@@ -11,10 +11,11 @@
       <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :remote => true do %>
       <i class="icon-heart"></i> Love
       <% end %>
-    <% end %> · 
+    <% end %> &sdot; 
     <%= link_to new_comment_scene_path(scene), :remote => true do %>
       <i class="icon-comment"></i> Comment</a>
-    <% end %>
+    <% end %> &sdot;
+    <%= link_to "Submit answer", "#", :class => "new-paragraph" %>
   </div>
   <div style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
   <div id="scene_<%= scene.id %>_comments">
