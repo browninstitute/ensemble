@@ -1,4 +1,4 @@
-<div class="paragraph-inner <%= "hide" if paragraph_counter != 0 %>">
+<div class="paragraph-inner <%= "hide" if paragraph_counter != 0 %>" id="para_<%= paragraph.id %>">
   <div class="paragraph-info">
     <div class="link_actions">
     <% if current_user.voted_up_on? paragraph %>
@@ -18,7 +18,7 @@
     <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
     <span class="paragraph-author">by <%= paragraph.user.name %></span>
     <span class="paragraph-actions">
-      <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph) %> 
+      <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %> 
       <%= link_to "Delete", scene_paragraph_path(scene, paragraph), method: :delete, data: { confirm: 'Are you sure?' } %>
     </span>
   </div>

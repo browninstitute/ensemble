@@ -7,6 +7,7 @@ $(document).ready ->
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph
   $(".cancel-paragraph").click cancelParagraph
+  window.goToParagraph = goToParagraph
 
 nextParagraph = ->
   _this = $(this)
@@ -59,3 +60,32 @@ cancelParagraph = ->
   parent = _this.parents('.scene')
   parent.children('.paragraph').show()
   parent.children('.paragraph-form').hide()
+
+resetParagraphs = ($container) ->
+  current = $container.children(".paragraph-inner:visible")
+  prev = current.prev(".paragraph-inner")
+    
+  $container.siblings('.btn').removeClass('disabled')
+  $container.siblings('.prev-paragraph').addClass('disabled')
+   
+  if (prev.size() >= 1) 
+    current.hide()
+    prev.show()
+    resetParagraphs($container)
+
+goToParagraph = ($container, id) ->
+  resetParagraphs($container)
+  goToParagraphHelper($container, id)
+
+goToParagraphHelper = ($container, id) ->
+  current = $container.children(".paragraph-inner:visible")
+  next = current.next(".paragraph-inner")
+
+  $container.siblings('.btn').removeClass('disabled')
+  if next.next(".paragraph-inner").length is 0
+    $container.siblings('.next-paragraph').addClass('disabled')
+
+  if (next.size() >= 1 && (current.attr("id") != "para_" + id))
+    current.hide()
+    next.show()
+    goToParagraphHelper($container, id)
