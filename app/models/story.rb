@@ -83,6 +83,7 @@ class Story < ActiveRecord::Base
           scene_obj.paragraphs.create
         end
         para_obj.content = paragraph['content']
+        para_obj.user_id = paragraph['user_id']
         para_obj.save!
       end
     end

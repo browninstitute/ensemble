@@ -114,7 +114,7 @@ function contentToParagraphs() {
       // TODO support multiple paragraphs
       var $para = $("<div class=\"row-fluid\"><div class=\"span7 tbox\"><textarea class=\"txt\"></textarea></div><div class=\"span4 ttab\"><textarea /></div><div class=\"span1\"><span class=\"move\"><i class=\"icon-move\"></i></span></div></div>");
       $para.find('.ttab textarea').attr("data-id", this.id).attr("data-position", this.position).val(this.content); // Scene text
-      $para.find('.txt').attr("data-id", this.paragraphs[0].id).val(this.paragraphs[0].content); // Paragraph text
+      $para.find('.txt').attr("data-id", this.paragraphs[0].id).val(this.paragraphs[0].content).attr("data-user", this.paragraphs[0].user_id); // Paragraph text
       $para.attr('id', 'box_' + arbitraryId++);
       $(".stext").append($para);
       // Resize textareas
@@ -141,8 +141,12 @@ function paragraphsToContent() {
   $('.stext').children().each(function() {
     $parabox = $(this).find('.txt');
     $scenebox = $(this).find('.ttab textarea');
+    var parauser = $parabox.attr("data-user");
+    if (parauser == undefined) {
+      parauser = "<%= current_user.id %>";
+    }
     newContent.push({ 'id': $scenebox.attr('data-id'), 'position': $scenebox.attr('data-position'), 
-      'content': $scenebox.val(), 'paragraphs': [ { 'id': $parabox.attr('data-id'), 'content': $parabox.val() } ] });
+      'content': $scenebox.val(), 'paragraphs': [ { 'id': $parabox.attr('data-id'), 'content': $parabox.val(), 'user_id': parauser } ] });
   });
   $('#story_content').val(JSON.stringify(newContent));
 }
