@@ -6,24 +6,25 @@ $(document).ready ->
   $(".next-paragraph").click nextParagraph
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph
-  $(".expand-paragraphs").click toggleExpandParagraphs
+  $(".expand-paragraphs a").click toggleExpandParagraphs
+  window.resetParagraphs = resetParagraphs
   window.goToParagraph = goToParagraph
   window.cancelParagraph = cancelParagraph
   return true
 
 nextParagraph = ->
   _this = $(this)
-  
+
   return if _this.hasClass('disabled')
 
   current = _this.parent().children(".paragraphs-container").children(".paragraph-inner:visible")
   next = current.next(".paragraph-inner")
-    
+
   _this.parent().children('.btn').removeClass('disabled')
   if next.next(".paragraph-inner").length is 0
     _this.addClass('disabled')
-    
-  if (next.size() >= 1) 
+
+  if (next.size() >= 1)
     _this.unbind()
     current.hide("slide", { direction: "left" }, 400, ->
       next.show("slide", { direction: "right" }, 400, ->
@@ -33,16 +34,16 @@ nextParagraph = ->
 
 prevParagraph = ->
   _this = $(this)
-  
+
   return if _this.hasClass('disabled')
 
   current = _this.parent().children(".paragraphs-container").children(".paragraph-inner:visible")
   prev = current.prev(".paragraph-inner")
-    
+
   _this.parent().children('.btn').removeClass('disabled')
   if prev.prev(".paragraph-inner").length is 0
     _this.addClass('disabled')
-  
+
   if (prev.size() >= 1)
     _this.unbind()
     current.hide("slide", { direction: "right" }, 400, ->
@@ -82,13 +83,25 @@ toggleExpandParagraphs = (e) ->
   e.preventDefault()
 
 resetParagraphs = ($container) ->
+  children = $container.children(".paragraph-inner")
+
+  if ($container.children(".paragraph-inner:visible").size() < 1)
+    $(children[children.length - 1]).show()
+
+  if ($container.parents(".paragraph").hasClass("multiple") && children.size() <= 1)
+    $container.parent(".paragraph").removeClass("multiple")
+    $container.parent(".paragraph").siblings(".scene-info").children(".link_actions").children(".expand-paragraphs").hide()
+
+  resetParagraphsHelper($container)
+
+resetParagraphsHelper = ($container) ->
   current = $container.children(".paragraph-inner:visible")
   prev = current.prev(".paragraph-inner")
-    
+
   $container.siblings('.btn').removeClass('disabled')
   $container.siblings('.prev-paragraph').addClass('disabled')
-   
-  if (prev.size() >= 1) 
+
+  if (prev.size() >= 1)
     current.hide()
     prev.show()
     resetParagraphs($container)

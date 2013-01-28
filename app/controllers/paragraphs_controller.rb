@@ -51,9 +51,13 @@ class ParagraphsController < ApplicationController
 
   def destroy
     @p = Paragraph.find(params[:id])
-    @p.destroy
-
-    redirect_to @p.scene.story, notice: "Contribution was deleted."
+    @scene = @p.scene
+    if @p.destroy
+      flash.now[:notice] = "Contribution was deleted."
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   # Toggle likes on a paragraph

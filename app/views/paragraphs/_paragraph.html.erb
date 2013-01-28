@@ -19,7 +19,7 @@
     <span class="paragraph-author">by <%= paragraph.user.name %></span>
     <span class="paragraph-actions">
       <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %> 
-      <%= link_to "Delete", scene_paragraph_path(scene, paragraph), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
     </span>
   </div>
 
