@@ -85,11 +85,12 @@ toggleExpandParagraphs = (e) ->
 resetParagraphs = ($container) ->
   children = $container.children(".paragraph-inner")
 
-  if ($container.children(".paragraph-inner:visible").size() < 1)
+  if ($container.children(".paragraph-inner:visible").size() == 0)
     $(children[children.length - 1]).show()
 
-  if ($container.parents(".paragraph").hasClass("multiple") && children.size() <= 1)
+  if (children.size() <= 1)
     $container.parent(".paragraph").removeClass("multiple")
+    $container.parent(".paragraph").removeClass("expanded")
     $container.parent(".paragraph").siblings(".scene-info").children(".link_actions").children(".expand-paragraphs").hide()
 
   resetParagraphsHelper($container)
@@ -104,7 +105,7 @@ resetParagraphsHelper = ($container) ->
   if (prev.size() >= 1)
     current.hide()
     prev.show()
-    resetParagraphs($container)
+    resetParagraphsHelper($container)
 
 goToParagraph = ($container, id) ->
   resetParagraphs($container)
