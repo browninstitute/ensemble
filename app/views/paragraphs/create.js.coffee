@@ -6,12 +6,11 @@ $ ->
   $content.html('<%= Format.markdown @p.content %>')
 
   $s.children(".paragraph").children(".paragraphs-container").append(p)
-  console.log($s)
-  console.log($s.children(".paragraph").children(".paragraphs-container"))
   $s.children('.paragraph-form').remove()
 
   if $s.find('.paragraph-inner').size() > 1
     $s.children('.paragraph').addClass('multiple')
+    $s.children('.scene-info').children('.link_actions').children('.expand-paragraphs').show()
 
   $s.children('.paragraph').show()
   goToParagraph($s.children(".paragraph").children('.paragraphs-container'), <%= @p.id %>)
