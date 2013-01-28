@@ -12,33 +12,36 @@ $accent: #23ADE8;
   font-size: 1.0em;
   font-family: 'Open Sans', Cambria, Georgia, Times, Times New Roman, serif;
 
-  h1 {
-    font-family: 'Merriweather', Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
-    font-size: 3.2em;
-    font-weight: normal;
-    margin: 0;
-    line-height: 1.5em;
-  }
+  .story-header {
+    position: relative;
+    
+    h1 {
+      font-family: 'Merriweather', Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
+      font-size: 3.2em;
+      font-weight: normal;
+      margin: 0;
+      line-height: 1.5em;
+    }
 
-  .subtitle {
-    font-size: 1.5em;
-  }
+    .subtitle {
+      font-size: 1.5em;
+    }
 
-  .meta {
-    color: $lightgrey;
-    font-size: 0.85em;
-  }
+    .meta {
+      color: $lightgrey;
+      font-size: 0.85em;
+    }
 
-  .editing {
-    background-color: #f0f0f0;
-    min-height: 5px;
-    padding: 5px 10px;
-    margin: 8px 0;
-    text-align: right;
+    .editing {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
   }
 
   .content {
     line-height: 1.8em;
+    margin-top: 15px;
 
     .scene-info {
       font-size: larger;

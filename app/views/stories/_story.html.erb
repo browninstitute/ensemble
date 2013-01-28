@@ -4,32 +4,31 @@
 %>
 
 <div class="story"> 
-  <h1>
-    <%= @story.title %>
-  </h1>
+  <div class="story-header">
+    <h1>
+      <%= @story.title %>
+    </h1>
 
-  <p class="subtitle">
-    <%= @story.subtitle %>
-  </p>
+    <p class="subtitle">
+      <%= @story.subtitle %>
+    </p>
 
-  <div class="meta">
-    <div class="author">
-      Started by <%= link_to @story.user.name, "#" %>
-      <% if !preview %>
-        <span class="timestamp">
-          <%= time_ago_in_words(@story.created_at) %> ago
-        </span>
+    <div class="meta">
+      <div class="author">
+        Started by <%= link_to @story.user.name, "#" %>
+        <% if !preview %>
+          <span class="timestamp">
+            <%= time_ago_in_words(@story.created_at) %> ago
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="editing">
+      <%= link_to edit_story_path(@story), :class => "btn" do %>
+        <i class="icon-edit"></i> Edit Story
       <% end %>
     </div>
-  </div>
-
-  <div class="editing">
-    <% if !preview %>
-      <%= link_to edit_story_path(@story), :class => "btn" do %>
-      <i class="icon-edit"></i> Edit Story
-      <% end %>
-      <!--<%= link_to content_tag(:i, "", :class => "icon-plus-sign") + " New Question", "#", :class => "btn" %>-->
-    <% end %>
   </div>
 
   <div class="content">
