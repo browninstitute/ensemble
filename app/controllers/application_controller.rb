@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       response.headers['X-Message-Type'] = "success"
     elsif !flash[:notice].blank?
       response.headers['X-Message'] = flash[:notice]
-      response.headers['X-Message-Type'] = "notice"
+      response.headers['X-Message-Type'] = "info" # info instead of notice for bootstrap growl
     end
     flash.discard
   end

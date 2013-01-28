@@ -24,14 +24,10 @@ $(document).ajaxComplete(function(event, request) {
   var type = "";
   if (request.getResponseHeader('X-Message-Type') == "error") {
     type = "error";
+  } else if (request.getResponseHeader('X-Message-Type') == "info") {
+    type = "info";
   } else {
     type = "success";
   }
-
-  var alertbox = "<div class='alert alert-" + type + "'>" + 
-                 "<button type='button' href='#' class='close' data-dismiss='alert'>&#215;</button>" + 
-                 "<div id='flash_" + type + "'>" + msg + "</div>" +
-                 "</div>";
-
-  $("header").after(alertbox);
+  $.bootstrapGrowl(msg, { type: type });
 });
