@@ -13,27 +13,61 @@
   transition: all 0.4s ease;
 
   &:hover {
-    /* background-color: #fbfbfb; */
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
     transition: all 0.4s ease;
+
+    .paragraph-info {
+      background-color: #eee;
+      color: #444 !important;
+      transition: all 0.4s ease;
+    }
+
+    .paragraph-actions {
+      .edit-paragraphs {
+        transition: all 0.4s ease;
+        opacity: 1 !important;
+        height: auto !important;
+      }
+    }
   }
 
   .paragraph-inner {
     .paragraph-info {
       padding: 0 5px;
-      background-color: #eee;
       position: relative;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      text-align: right;
+      color: #999;
+      transition: all 0.4s ease;
 
       .paragraph-author {
-        margin: 0 20px;
+        font-size: 0.8em;
+      }
+    }
+
+    .paragraph-actions {
+      font-size: 0.8em;
+
+      a {
+        text-decoration: none;
       }
 
-      .paragraph-actions {
-        position: absolute;
-        right: 5px;
+      .love-link {
+        float: right;
       }
+
+      .edit-paragraphs {
+        transition: all 0.4s ease;
+        opacity: 0;
+        height: 0;
+      }
+    }
+    
+    .winner i {
+      color: #FFCC40;
     }
   }
 
@@ -42,27 +76,49 @@
   }
 
   &.multiple {
+    .para-navigation {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      text-align: right;
+    }
+    
     .next-paragraph, .prev-paragraph {
       display: block;
-      background: #ccc;
+      float: right;
       padding: 0 5px;
       text-align: center;
       border-radius: 5px;
-      height: 50px;
-      line-height: 50px;
-      position: absolute;
     }
 
     .next-paragraph {
-      right: 0px;
+      margin-left: 5px;
     }
 
-    .paragraphs-container {
-      margin: 0 25px;
+    .paragraph-inner {
+      .paragraph-actions {
+        padding-right: 55px;      
+      }
     }
+  }
 
-    .winner {
-      color: yellow;
+  &.expanded {
+    .paragraph-inner {
+      margin-bottom: 0.8em;
+     
+      .paragraph-info {
+        background-color: #eee;
+        color: #444 !important;
+        transition: all 0.4s ease;
+      }
+
+      .paragraph-actions {
+        .edit-paragraphs {
+          transition: all 0.4s ease;
+          opacity: 1 !important;
+          height: auto !important;
+        }
+      }
     }
   }
 }

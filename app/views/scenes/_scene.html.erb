@@ -1,7 +1,9 @@
 <div class="scene row-fluid" id="scene_<%= scene.id %>">
   <div class="<%= paragraphs_classes(@p, scene) %>">
-    <button class="btn next-paragraph"><i class="icon-caret-right"></i></button>
-    <button class="btn disabled prev-paragraph"><i class="icon-caret-left"></i></button>
+    <div class="para-navigation">
+      <button class="btn next-paragraph"><i class="icon-caret-right icon-large"></i></button>
+      <button class="btn disabled prev-paragraph"><i class="icon-caret-left icon-large"></i></button>
+    </div>  
     <div class="paragraphs-container">
       <%= render :partial => "paragraphs/paragraph", 
                  :collection => scene.ordered_paragraphs,

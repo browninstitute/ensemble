@@ -1,29 +1,44 @@
 <div class="paragraph-inner <%= "hide" if paragraph_counter != 0 %>" id="para_<%= paragraph.id %>">
   <div class="paragraph-info">
-    <div class="link_actions">
-    <% if current_user.voted_up_on? paragraph %>
-      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
-      <i class="icon-heart"></i> Loved
-      <% end %>
-    <% else %>
-      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :remote => true do %>
-      <i class="icon-heart"></i> Love
-      <% end %>
-    <% end %>
-    </div>
-    <%= link_to winner_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_winner_button", 
-                                                  :class => ("winner" if paragraph.is_winner?), :remote => true do %>
-      <i class="icon-trophy"></i></span>
-    <% end %>
-    <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
-    <span class="paragraph-author">by <%= paragraph.user.name %></span>
-    <span class="paragraph-actions">
-      <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %> 
-      <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
+     <span class="paragraph-actions pull-left">
+                                                 
+      <span class="edit-paragraphs">                                              
+        <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %>
+        &sdot;
+        <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
+        &sdot;
+        <%= link_to "Mark as winner", winner_paragraph_path(paragraph), 
+                  :id => "para_" + paragraph.id.to_s + "_winner_button", 
+                  :remote => true %>
+      </span>
     </span>
+
+    
+    <span class="winner <%= "hide" if !paragraph.is_winner? %>">
+      <i class="icon-trophy" rel="tooltip"></i>
+      &sdot;
+    </span>
+    <span class="paragraph-author">By <strong><%= paragraph.user.name %></strong></span>
+    &sdot;
+    <span class="like-count">
+      <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
+    </span> 
+    &sdot;
+    <% if current_user.voted_up_on? paragraph %>
+        <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link loved', :remote => true do %>
+        <i class="icon-heart"></i> Loved
+        <% end %>
+      <% else %>
+        <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link', :remote => true do %>
+        <i class="icon-heart"></i> Love
+        <% end %>
+      <% end %>
+       
+  
   </div>
 
   <div class="paragraph-content">
     <%= Format.markdown(paragraph.content) %>
   </div>
-</div>
+
+ </div>

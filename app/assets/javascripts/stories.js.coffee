@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
+  $(".winner").tooltip({title: "Winner!"})
   $(".next-paragraph").click nextParagraph
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph
@@ -17,7 +18,7 @@ nextParagraph = ->
 
   return if _this.hasClass('disabled')
 
-  current = _this.parent().children(".paragraphs-container").children(".paragraph-inner:visible")
+  current = _this.parent().parent().children(".paragraphs-container").children(".paragraph-inner:visible")
   next = current.next(".paragraph-inner")
 
   _this.parent().children('.btn').removeClass('disabled')
@@ -37,7 +38,7 @@ prevParagraph = ->
 
   return if _this.hasClass('disabled')
 
-  current = _this.parent().children(".paragraphs-container").children(".paragraph-inner:visible")
+  current = _this.parent().parent().children(".paragraphs-container").children(".paragraph-inner:visible")
   prev = current.prev(".paragraph-inner")
 
   _this.parent().children('.btn').removeClass('disabled')
@@ -100,7 +101,7 @@ resetParagraphsHelper = ($container) ->
   prev = current.prev(".paragraph-inner")
 
   $container.siblings('.btn').removeClass('disabled')
-  $container.siblings('.prev-paragraph').addClass('disabled')
+  $container.siblings('.para-navigation').children('.prev-paragraph').addClass('disabled')
 
   if (prev.size() >= 1)
     current.hide()
@@ -117,7 +118,7 @@ goToParagraphHelper = ($container, id) ->
 
   $container.siblings('.btn').removeClass('disabled')
   if next.next(".paragraph-inner").length is 0
-    $container.siblings('.next-paragraph').addClass('disabled')
+    $container.siblings('.para-navigation').children('.next-paragraph').addClass('disabled')
 
   if (next.size() >= 1 && (current.attr("id") != "para_" + id))
     current.hide()
