@@ -4,6 +4,7 @@
   <% end %>
 <% else %>
   <div class="scene_text">
+    <h1><%= Format.markdown(scene.title) if !scene.title.nil? %></h1>
     <%= Format.markdown(scene.content) %>
   </div>
   <div class="link_actions">
@@ -24,6 +25,10 @@
       &sdot; 
       <%= link_to "See all", "#" %>
     </span>
+    &sdot;
+    <%= link_to "Edit", edit_scene_path(scene), :remote => true %>
+    &sdot;
+    <%= link_to "Delete", scene_path(scene), :method => :delete, :remote => true %>
   </div>
   <div style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
   <div id="scene_<%= scene.id %>_comments">

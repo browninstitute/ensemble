@@ -23,6 +23,19 @@ class ScenesController < ApplicationController
     end 
   end
 
+  def destroy
+    @scene = Scene.find(params[:id])
+    @scene.title = ""
+    @scene.content = ""
+
+    if @scene.save
+      flash.now[:success] = "Scene was successfully deleted."
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
   # Toggle likes on a scene
   def like
     @scene = Scene.find(params[:id])
