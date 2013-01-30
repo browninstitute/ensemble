@@ -1,7 +1,6 @@
 <div class="paragraph-inner <%= "hide" if paragraph_counter != 0 %>" id="para_<%= paragraph.id %>">
   <div class="paragraph-info">
      <span class="paragraph-actions pull-left">
-                                                 
       <span class="edit-paragraphs">                                              
         <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %>
         &sdot;
@@ -12,8 +11,6 @@
                   :remote => true %>
       </span>
     </span>
-
-    
     <span class="winner <%= "hide" if !paragraph.is_winner? %>">
       <i class="icon-trophy" rel="tooltip"></i>
       &sdot;
@@ -25,16 +22,14 @@
     </span> 
     &sdot;
     <% if current_user.voted_up_on? paragraph %>
-        <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link loved', :remote => true do %>
+      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link loved', :remote => true do %>
         <i class="icon-heart"></i> Loved
-        <% end %>
-      <% else %>
-        <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link', :remote => true do %>
-        <i class="icon-heart"></i> Love
-        <% end %>
       <% end %>
-       
-  
+    <% else %>
+      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link', :remote => true do %>
+        <i class="icon-heart"></i> Love
+      <% end %>
+    <% end %>
   </div>
 
   <div class="paragraph-content">
