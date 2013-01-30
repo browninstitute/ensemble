@@ -21,14 +21,14 @@ nextParagraph = ->
   current = _this.parent().parent().children(".paragraphs-container").children(".paragraph-inner:visible")
   next = current.next(".paragraph-inner")
 
-  _this.parent().children('.btn').removeClass('disabled')
+  _this.parent().children('button').removeClass('disabled')
   if next.next(".paragraph-inner").length is 0
     _this.addClass('disabled')
 
   if (next.size() >= 1)
     _this.unbind()
-    current.hide("slide", { direction: "left" }, 400, ->
-      next.show("slide", { direction: "right" }, 400, ->
+    current.hide("slide", { direction: "up" }, 400, ->
+      next.show("slide", { direction: "down" }, 400, ->
         _this.click nextParagraph
       )
     )
@@ -41,14 +41,14 @@ prevParagraph = ->
   current = _this.parent().parent().children(".paragraphs-container").children(".paragraph-inner:visible")
   prev = current.prev(".paragraph-inner")
 
-  _this.parent().children('.btn').removeClass('disabled')
+  _this.parent().children('button').removeClass('disabled')
   if prev.prev(".paragraph-inner").length is 0
     _this.addClass('disabled')
 
   if (prev.size() >= 1)
     _this.unbind()
-    current.hide("slide", { direction: "right" }, 400, ->
-      prev.show("slide", { direction: "left" }, 400, ->
+    current.hide("slide", { direction: "down" }, 400, ->
+      prev.show("slide", { direction: "up" }, 400, ->
         _this.click prevParagraph
       )
     )
@@ -100,7 +100,7 @@ resetParagraphsHelper = ($container) ->
   current = $container.children(".paragraph-inner:visible")
   prev = current.prev(".paragraph-inner")
 
-  $container.siblings('.btn').removeClass('disabled')
+  $container.siblings('button').removeClass('disabled')
   $container.siblings('.para-navigation').children('.prev-paragraph').addClass('disabled')
 
   if (prev.size() >= 1)
@@ -116,7 +116,7 @@ goToParagraphHelper = ($container, id) ->
   current = $container.children(".paragraph-inner:visible")
   next = current.next(".paragraph-inner")
 
-  $container.siblings('.btn').removeClass('disabled')
+  $container.siblings('button').removeClass('disabled')
   if next.next(".paragraph-inner").length is 0
     $container.siblings('.para-navigation').children('.next-paragraph').addClass('disabled')
 

@@ -1,3 +1,5 @@
+$accent: #23ADE8;
+
 .scene form.paragraph-form {
   margin: 0;
 }
@@ -46,6 +48,10 @@
       .paragraph-author {
         font-size: 0.8em;
       }
+
+      a {
+        text-decoration: none;
+      }
     }
 
     .paragraph-actions {
@@ -73,26 +79,28 @@
 
   .next-paragraph, .prev-paragraph {
     display: none;
+    border: none;
+    background: none;
+    padding: 0 5px;
+    text-align: center;
+    border-radius: 5px;
+  
+    &.disabled {
+      opacity: 0.5;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    &:hover {
+      color: $accent;
+    }
   }
 
   &.multiple {
-    .para-navigation {
-      position: absolute;
-      right: 0px;
-      bottom: 0px;
-      text-align: right;
-    }
-    
     .next-paragraph, .prev-paragraph {
       display: block;
-      float: right;
-      padding: 0 5px;
-      text-align: center;
-      border-radius: 5px;
-    }
-
-    .next-paragraph {
-      margin-left: 5px;
     }
 
     .paragraph-inner {

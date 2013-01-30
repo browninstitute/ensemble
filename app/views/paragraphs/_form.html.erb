@@ -1,4 +1,4 @@
-<%= form_for [scene, p], :remote => true, :html => { :class => paragraph_form_classes(p, scene) } do |f| %>
+<%= form_for [scene, p], :remote => true, :html => { :class => "paragraph-form span8" } do |f| %>
   <%= f.text_area :content, :rows => 5, 
                   :placeholder => 'How would you write this part?', 
                   :class => 'span12' %><br />

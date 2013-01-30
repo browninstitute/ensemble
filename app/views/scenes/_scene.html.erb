@@ -1,14 +1,14 @@
 <div class="scene row-fluid" id="scene_<%= scene.id %>">
-  <div class="<%= paragraphs_classes(@p, scene) %>">
-    <div class="para-navigation">
-      <button class="btn next-paragraph"><i class="icon-caret-right icon-large"></i></button>
-      <button class="btn disabled prev-paragraph"><i class="icon-caret-left icon-large"></i></button>
-    </div>  
-    <div class="paragraphs-container">
+  <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
+    <div class="paragraphs-container span11">
       <%= render :partial => "paragraphs/paragraph", 
                  :collection => scene.ordered_paragraphs,
                  :locals => { :scene => scene } %>          
     </div>
+    <div class="para-navigation span1">
+      <button class="disabled prev-paragraph"><i class="icon-angle-up icon-large"></i></button>
+      <button class="next-paragraph"><i class="icon-angle-down icon-large"></i></button>
+    </div>  
   </div>
   <div class="scene-info span4">
     <%= render :partial => 'scenes/scene_info', :locals => { :scene => scene } %>
