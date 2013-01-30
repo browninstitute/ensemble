@@ -11,6 +11,8 @@ $(document).ready ->
   window.resetParagraphs = resetParagraphs
   window.goToParagraph = goToParagraph
   window.cancelParagraph = cancelParagraph
+  
+  window.cancelScene = cancelScene
   return true
 
 nextParagraph = ->
@@ -124,3 +126,10 @@ goToParagraphHelper = ($container, id) ->
     current.hide()
     next.show()
     goToParagraphHelper($container, id)
+
+cancelScene = (e) ->
+  _this = $(this)
+  parent = _this.parents('.scene')
+  parent.children('.scene-form').remove()
+  parent.children('.scene-info').show()
+  e.preventDefault()

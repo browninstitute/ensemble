@@ -1,7 +1,11 @@
-<div class="scene_text">
-  <%= Format.markdown(scene.content) %>
-</div>
-<% unless scene.content.empty? %>
+<% if scene.content.empty? %>
+  <%= link_to edit_scene_path(scene), :class => "new-scene", :remote => true do %>
+    Click to create a scene 
+  <% end %>
+<% else %>
+  <div class="scene_text">
+    <%= Format.markdown(scene.content) %>
+  </div>
   <div class="link_actions">
     <% if current_user.voted_up_on? scene %>
       <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
@@ -25,17 +29,17 @@
   <div id="scene_<%= scene.id %>_comments">
     <%= render :partial => "comments/comment", :collection => scene.comments.order('created_at DESC') %>
   </div>
+  <script>
+  $().ready(function() {
+    $sc = $("#scene_<%= scene.id %>_comments");
+    var count = $(".comment_box:gt(2)", $sc).length;
+    $(".comment_box:gt(2)", $sc).hide();
+    if (count > 0) {
+      $('<div class=\"show_more\">'+ count +' more...</div>').click(function() {
+        $("#scene_<%= scene.id %>_comments .comment_box").show(500);
+        $(this).hide();
+      }).appendTo($sc);
+    }
+  });
+  </script>
 <% end %>
-<script>
-$().ready(function() {
-  $sc = $("#scene_<%= scene.id %>_comments");
-  var count = $(".comment_box:gt(2)", $sc).length;
-  $(".comment_box:gt(2)", $sc).hide();
-  if (count > 0) {
-    $('<div class=\"show_more\">'+ count +' more...</div>').click(function() {
-      $("#scene_<%= scene.id %>_comments .comment_box").show(500);
-      $(this).hide();
-    }).appendTo($sc);
-  }
-});
-</script>

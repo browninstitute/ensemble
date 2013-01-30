@@ -1,0 +1,49 @@
+.scene {
+  .scene-info {
+    min-height: 40px;
+
+    .new-scene {
+      display: block;
+      text-decoration: none;
+      opacity: 0;
+      height: 0;
+      transition: all 0.4s ease;
+      min-height: 50px;
+      line-height: 50px;
+      border: 2px orange dashed;
+      border-radius: 15px;
+      font-size: smaller;
+      text-align: center;
+      cursor: pointer;
+      color: #999;
+    }
+
+    &:hover {
+      .new-scene {
+        opacity: 1;
+        height: auto;
+        transition: all 0.4s ease;
+      }
+    }
+  }
+
+  .scene-form {
+    position: relative;
+    background: #eee;
+    padding: 10px;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    text-align: right;
+  }
+
+  .scene-form:before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 20px solid #eee;
+    border-left: 30px solid transparent;  
+  }
+}
