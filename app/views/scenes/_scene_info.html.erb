@@ -3,36 +3,38 @@
     Click to create a scene 
   <% end %>
 <% else %>
-  <div class="scene_text">
-    <h1><%= Format.markdown(scene.title) if !scene.title.nil? %></h1>
-    <%= Format.markdown(scene.content) %>
-  </div>
-  <div class="link_actions">
-    <% if current_user.voted_up_on? scene %>
-      <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
-      <i class="icon-heart"></i> Loved
-      <% end %>
-    <% else %>
-      <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :remote => true do %>
-      <i class="icon-heart"></i> Love
-      <% end %>
-    <% end %> &sdot; 
-    <%= link_to new_comment_scene_path(scene), :remote => true do %>
-      <i class="icon-comment"></i> Comment</a>
-    <% end %> &sdot;
-    <%= link_to "Submit answer", new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" %>
-    <span class="expand-paragraphs <%= "hide" if scene.paragraphs.length <= 1 %>">
-      &sdot; 
-      <%= link_to "See all", "#" %>
-    </span>
-    &sdot;
-    <%= link_to "Edit", edit_scene_path(scene), :remote => true %>
-    &sdot;
-    <%= link_to "Delete", scene_path(scene), :method => :delete, :confirm => "Are you sure?", :remote => true %>
-  </div>
-  <div style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
-  <div id="scene_<%= scene.id %>_comments">
-    <%= render :partial => "comments/comment", :collection => scene.comments.order('created_at DESC') %>
+  <div class="scene-info-inner">
+    <div class="scene_text">
+      <h1><%= Format.markdown(scene.title) if !scene.title.nil? %></h1>
+      <%= Format.markdown(scene.content) %>
+    </div>
+    <div class="link_actions">
+      <% if current_user.voted_up_on? scene %>
+        <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
+        <i class="icon-heart"></i> Loved
+        <% end %>
+      <% else %>
+        <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :remote => true do %>
+        <i class="icon-heart"></i> Love
+        <% end %>
+      <% end %> &sdot; 
+      <%= link_to new_comment_scene_path(scene), :remote => true do %>
+        <i class="icon-comment"></i> Comment</a>
+      <% end %> &sdot;
+      <%= link_to "Submit answer", new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" %>
+      <span class="expand-paragraphs <%= "hide" if scene.paragraphs.length <= 1 %>">
+        &sdot; 
+        <%= link_to "See all", "#" %>
+      </span>
+      &sdot;
+      <%= link_to "Edit", edit_scene_path(scene), :remote => true %>
+      &sdot;
+      <%= link_to "Delete", scene_path(scene), :method => :delete, :confirm => "Are you sure?", :remote => true %>
+    </div>
+    <div style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
+    <div id="scene_<%= scene.id %>_comments">
+      <%= render :partial => "comments/comment", :collection => scene.comments.order('created_at DESC') %>
+    </div>
   </div>
   <script>
   $().ready(function() {

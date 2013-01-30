@@ -1,19 +1,22 @@
 .scene {
   .scene-info {
     min-height: 40px;
+    margin-bottom: 10px;
 
-    .scene_text {
-      font-size: smaller;
-      
-      h1 {
-        font-size: larger;
-        font-weight: normal;
-        margin: 0;
-        line-height: 1.5em;
-      }
+    .scene-info-inner {
+      .scene_text {
+        font-size: smaller;
+        
+        h1 {
+          font-size: larger;
+          font-weight: normal;
+          margin: 0;
+          line-height: 1.5em;
+        }
 
-      p {
-        margin: 0;
+        p {
+          margin: 0;
+        }
       }
     }
 
@@ -42,16 +45,19 @@
     }
   }
 
-  .scene-form {
+  .scene-form, .scene-info-inner {
     position: relative;
     background: #eee;
     padding: 10px;
     border-radius: 5px;
     border-top-left-radius: 0;
+  }
+
+  .scene-form {
     text-align: right;
   }
 
-  .scene-form:before {
+  .scene-form:before, .scene-info-inner:before {
     content: "";
     position: absolute;
     right: 100%;
