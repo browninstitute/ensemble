@@ -2,6 +2,21 @@
   .scene-info {
     min-height: 40px;
 
+    .scene_text {
+      font-size: smaller;
+      
+      h1 {
+        font-size: larger;
+        font-weight: normal;
+        margin: 0;
+        line-height: 1.5em;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
     .new-scene {
       display: block;
       text-decoration: none;

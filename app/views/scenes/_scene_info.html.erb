@@ -28,7 +28,7 @@
     &sdot;
     <%= link_to "Edit", edit_scene_path(scene), :remote => true %>
     &sdot;
-    <%= link_to "Delete", scene_path(scene), :method => :delete, :remote => true %>
+    <%= link_to "Delete", scene_path(scene), :method => :delete, :confirm => "Are you sure?", :remote => true %>
   </div>
   <div style="display: none;" id="scene_<%= scene.id %>_comment_box"></div>
   <div id="scene_<%= scene.id %>_comments">
