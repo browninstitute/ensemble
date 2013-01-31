@@ -137,9 +137,10 @@ cancelScene = (e) ->
   e.preventDefault()
 
 showScene = (e) ->
-  _this = $(this)
-  if _this.hasClass("scene-selected")
-    _this.removeClass("scene-selected")
-  else
-    $(".scene-selected").removeClass("scene-selected")
-    _this.addClass("scene-selected")
+  if (e.target == this || e.target.tagName == "H1" || e.target.tagName == "P")
+    _this = $(this)
+    if _this.hasClass("scene-selected")
+      _this.removeClass("scene-selected")
+    else
+      $(".scene-selected").removeClass("scene-selected")
+      _this.addClass("scene-selected")
