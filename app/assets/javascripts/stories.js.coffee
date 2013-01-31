@@ -15,6 +15,8 @@ $(document).ready ->
   $(".scene-info-inner").click showScene  
   window.cancelScene = cancelScene
   window.showScene = showScene
+  
+  setupComments()
   return true
 
 nextParagraph = ->
@@ -144,3 +146,16 @@ showScene = (e) ->
     else
       $(".scene-selected").removeClass("scene-selected")
       _this.addClass("scene-selected")
+
+setupComments = ->
+  for sc in $(".scene-comments")
+    do (sc) ->
+      $sc = $(sc)
+      totalComments = $(".comment_box", $sc).length
+      count = totalComments - 2
+      $(".comment_box:lt(" + count + ")", $sc).hide()
+      if (count > 0)
+        $('<div class=\"show_more\">' + count + ' more...</div>').click( ->
+          $(".comment_box", $sc).show(500)
+          $(this).hide()
+        ).prependTo($sc)

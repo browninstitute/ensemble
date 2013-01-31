@@ -21,7 +21,25 @@ class CommentsController < ApplicationController
   def show
   end
 
+  def new
+    @scene = Scene.find(params[:scene_id])
+    @comment = @scene.comments.new
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
+    @scene = Scene.find(params[:scene_id])
+    @comment = @scene.comments.new(params[:comment])
+    @comment.user = current_user
+
+    respond_to do |format|
+      if @comment.save
+        format.js
+      end
+    end
   end
 
   def edit

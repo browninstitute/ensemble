@@ -29,23 +29,10 @@
       <%= link_to "Delete", scene_path(scene), :method => :delete, :confirm => "Are you sure?", :remote => true %>
     </div>
     <div id="scene_<%= scene.id %>_comments" class="scene-comments">
-      <%= render :partial => "comments/comment", :collection => scene.comments.order('created_at ASC') %>
+      <%= render :partial => "comments/comment", :collection => scene.comments.order('created_at ASC'), :locals => { :scene => scene } %>
     </div>
     <div id="scene_<%= scene.id %>_comment_box" class="scene-comment-box">
       <%= render :partial => "comments/form", :locals => { :scene => scene, :comment => Comment.new } %>
     </div>
   </div>
-  <script>
-  $().ready(function() {
-    $sc = $("#scene_<%= scene.id %>_comments");
-    var count = $(".comment_box:gt(2)", $sc).length;
-    $(".comment_box:gt(2)", $sc).hide();
-    if (count > 0) {
-      $('<div class=\"show_more\">'+ count +' more...</div>').click(function() {
-        $("#scene_<%= scene.id %>_comments .comment_box").show(500);
-        $(this).hide();
-      }).appendTo($sc);
-    }
-  });
-  </script>
 <% end %>
