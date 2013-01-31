@@ -11,8 +11,10 @@ $(document).ready ->
   window.resetParagraphs = resetParagraphs
   window.goToParagraph = goToParagraph
   window.cancelParagraph = cancelParagraph
-  
+
+  $(".scene-info-inner").click showScene  
   window.cancelScene = cancelScene
+  window.showScene = showScene
   return true
 
 nextParagraph = ->
@@ -133,3 +135,11 @@ cancelScene = (e) ->
   parent.children('.scene-form').remove()
   parent.children('.scene-info').show()
   e.preventDefault()
+
+showScene = (e) ->
+  _this = $(this)
+  if _this.hasClass("scene-selected")
+    _this.removeClass("scene-selected")
+  else
+    $(".scene-selected").removeClass("scene-selected")
+    _this.addClass("scene-selected")

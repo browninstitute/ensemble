@@ -90,35 +90,6 @@ header {
 }
 
 /* Actions */
-.link_actions {
-  color: #eee;
-  a {
-    text-decoration: none;
-    font-size: 12px;
-    color: #eee;
-    -webkit-transition: all 0.4s ease;
-    -moz-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;        
-  }
-  a.loved {
-    color: #eee;
-  }
+a.loved {
+  color: red;
 }
-  a.loved {
-    color: red;
-  }
-
-  .paragraph:hover, .scene-info:hover {
-    .link_actions {
-      color: #333;
-      a {
-        color: #0088cc;
-      }
-      a.loved {
-        color: red;
-      }
-    }
-  }
-
-
