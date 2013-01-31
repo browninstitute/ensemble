@@ -38,6 +38,9 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.js
+      else
+        @errormsg = error_msgs(@comment)
+        format.js { render :action => "error" }
       end
     end
   end
@@ -56,6 +59,9 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         format.js
+      else 
+        @errormsg = error_msgs(@comment)
+        format.js { render :action => "error" }
       end
     end
   end

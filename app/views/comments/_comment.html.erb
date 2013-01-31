@@ -1,4 +1,4 @@
-<div class="comment_box">
+<div id="comment_<%= comment.id %>" class="comment_box">
   <div class="comment_photo"><%= image_tag "alien.svg" %>
   </div>
   <div class="comment">
@@ -7,6 +7,7 @@
         <%= link_to edit_scene_comment_path(scene, comment), :remote => true do %>
           <i class="icon-edit"></i> Edit
         <% end %>&nbsp;
+        <%= link_to "Delete", scene_comment_path(scene, comment), :method => :delete, :confirm => "Are you sure?", :remote => true %>
       <% end %>
       <% if current_user.voted_up_on? comment %>
         <%= link_to like_scene_comment_path(scene, comment), :id => "comment_" + comment.id.to_s + "_like_button", :class => 'loved', :remote => true do %>

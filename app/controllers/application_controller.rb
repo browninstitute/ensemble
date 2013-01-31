@@ -18,4 +18,9 @@ class ApplicationController < ActionController::Base
     flash.discard
   end
 
+  # For creating error messages on object save/create.
+  def error_msgs(obj)
+    obj.errors.to_a.each { |e| e.capitalize }.join(". ")
+  end
+
 end

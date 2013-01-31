@@ -1,1 +1,1 @@
-$('#comment_<%= @comment.id %>_content').html('<%=j render 'form' %>').parent().find('.controls').hide();
+$('#comment_<%= @comment.id %>')  .replaceWith('<%= escape_javascript(render :partial => 'comments/form', :locals => {:scene => @comment.scene, :comment => @comment}) %>')

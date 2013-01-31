@@ -25,7 +25,7 @@ class ParagraphsController < ApplicationController
         format.js
       end
     else
-      @errormsg = @p.errors.to_a.each { |e| e.capitalize }.join(". ")
+      @errormsg = error_msgs(@p)
       respond_to do |format|
         format.js { render :action => 'error' }
       end
@@ -42,7 +42,7 @@ class ParagraphsController < ApplicationController
         format.js
       end
     else
-      @errormsg = @p.errors.to_a.each { |e| e.capitalize }.join(". ")
+      @errormsg = error_msgs(@p)
       respond_to do |format|
         format.js { render :action => 'error' }
       end
