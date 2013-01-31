@@ -67,5 +67,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    respond_to do |format|
+      if @comment.destroy
+        format.js
+      end
+    end
   end
 end
