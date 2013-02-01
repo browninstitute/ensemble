@@ -71,14 +71,8 @@ $().ready(function() {
 
 //
 // Paragraph <=> Content JSON Conversion
-//
-// TODO REFACTOR THIS TO BE DRY
 function contentToParagraphs() {
-  // Resize textareas
-  $('.txt').each(function() {
-    resizeNow(this);
-    observeBox(this);
-  });
+  $('.txt').autosize();
   tick();
 }
 function paragraphsToContent() {
@@ -106,45 +100,6 @@ $().ready(function() {
     paragraphsToContent();
   });
 });
-
-//
-// Textarea Resizing - Thanks to http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
-//
-var observe;
-if (window.attachEvent) {
-    observe = function (element, event, handler) {
-        element.attachEvent('on'+event, handler);
-    };
-}
-else {
-    observe = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-    };
-}
-
-function resizeNow(text) {
-  text.style.height = 'auto';
-  text.style.height = text.scrollHeight+'px';
-  console.log(text.scrollHeight);
-}
-
-function observeBox(boxElt) {
-  var text = boxElt;
-  function resize () {
-    text.style.height = 'auto';
-    text.style.height = text.scrollHeight+'px';
-    console.log(text.scrollHeight);
-  }
-  /* 0-timeout to get the already changed text */
-  function delayedResize () {
-      window.setTimeout(resize, 0);
-  }
-  observe(text, 'change',  resize);
-  observe(text, 'cut',     delayedResize);
-  observe(text, 'paste',   delayedResize);
-  observe(text, 'drop',    delayedResize);
-  observe(text, 'keydown', delayedResize);
-}
 
 //
 // Textarea Navigation
@@ -192,11 +147,9 @@ $().ready(function() {
       var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
       var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
       $(this).val(prev);
-      resizeNow(this);
       var $next = $(this).parent().parent().parent().next().find('.txt');
-      observeBox($next[0]);
       $next.val(next).focus();
-      resizeNow($next[0]);
+      $('.txt', $para).autosize();
     }
     prevSelectionStart = this.selectionStart;
     tick();
