@@ -145,6 +145,7 @@ showScene = (e) ->
       _this.removeClass("scene-selected")
     else
       $(".scene-selected").removeClass("scene-selected")
+      $(".cancel-scene").click()
       _this.addClass("scene-selected")
 
 setupComments = ->

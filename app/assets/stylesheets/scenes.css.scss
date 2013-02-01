@@ -1,5 +1,5 @@
 .scene {
-  .scene-info {
+  .scene-info, .scene-form {
     min-height: 40px;
     margin-bottom: 10px;
     position: relative;
@@ -91,7 +91,7 @@
     }
   }
 
-  .scene-form, .scene-info-inner {
+  .scene-form-inner, .scene-info-inner {
     position: relative;
     background: #eee;
     padding: 10px;
@@ -99,11 +99,16 @@
     border-top-left-radius: 0;
   }
 
-  .scene-form {
+  .scene-form-inner {
     text-align: right;
+    transition: left 0.2s ease-in;
+    position: absolute;
+    left: -10px;
+    background-color: #FFF1C7; 
+    z-index: 99;
   }
 
-  .scene-form:before, .scene-info-inner:before {
+  .scene-form-inner:before, .scene-info-inner:before {
     content: "";
     position: absolute;
     right: 100%;
@@ -112,5 +117,9 @@
     height: 0;
     border-top: 20px solid #eee;
     border-left: 30px solid transparent;  
+  }
+
+  .scene-form-inner:before {
+    border-top-color: #FFF1C7;
   }
 }

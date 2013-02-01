@@ -1,11 +1,13 @@
-<%= form_for scene, :remote => true, :html => { :class => "scene-form span4" } do |f| %>
-  <%= f.text_field :title, :placeholder => 'Scene title', :class => 'span12' %><br />
-  <%= f.text_area :content, :rows => 3, 
-                  :placeholder => 'What should happen in this scene?', 
-                  :class => 'span12' %><br />
-                  
-  <span class="text-error">
-  </span>
-  <%= link_to "Cancel", "#", :class => 'btn btn-mini cancel-scene' %>
-  <%= f.submit "Save", :class => 'btn btn-mini' %>
-<% end %>
+<div class="scene-form span4">
+  <%= form_for scene, :remote => true, :html => { :class => "scene-form-inner" } do |f| %>
+    <%= f.text_field :title, :placeholder => 'Scene title', :class => 'span12' %><br />
+    <%= f.text_area :content, :rows => 3, 
+                    :placeholder => 'What should happen in this scene?', 
+                    :class => 'span12' %><br />
+                    
+    <span class="text-error">
+    </span>
+    <%= link_to "Cancel", "#", :class => 'btn btn-mini cancel-scene' %>
+    <%= f.submit "Save", :class => 'btn btn-mini' %>
+  <% end %>
+</div>
