@@ -42,10 +42,6 @@ $accent: #23ADE8;
   .content {
     line-height: 1.8em;
     margin-top: 15px;
-
-    .scene-info {
-      font-size: larger;
-    }
   }
 }
 
@@ -148,9 +144,19 @@ $accent: #23ADE8;
   border-radius: 5px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  padding: 5px;
+  box-sizing: border-box;
+  margin: 0;
+  line-height: 1.8em;
+
+  .row-fluid {
+    position: relative;
+  }
 
   .ttab {
+    position: absolute;
+    margin: 0;
+    right: -500px;
+    
     textarea {
       font-family: 'Open Sans', Cambria;
       font-size: larger;

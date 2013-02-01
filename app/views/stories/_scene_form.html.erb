@@ -1,0 +1,14 @@
+<div class="row-fluid scene" id="box_<%= scene_counter %>">
+  <div class="span12 tbox">
+    <% if scene.paragraphs.empty? %>
+      <textarea class="txt"></textarea>
+    <% else %>
+      <textarea class="txt" data-id="<%= scene.paragraphs[0].id %>" data-user="<%= scene.paragraphs[0].user_id %>"><%= scene.paragraphs[0].content %></textarea>
+    <% end %>  
+  </div>
+  <div class="span7 ttab scene-info" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
+    <% if !scene.new_record? %>
+      <%= render :partial => 'scenes/scene_info', :locals => { :scene => scene } %>
+    <% end %>  
+  </div>
+</div>

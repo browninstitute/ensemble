@@ -38,10 +38,20 @@ class StoriesController < ApplicationController
   # GET /stories/1/edit
   def edit
     @story = Story.find(params[:id])
-    if !params[:story].nil?
-      @story.content = params[:story][:content]
-      @story.title = params[:story][:title]
-      @story.subtitle = params[:story][:subtitle]
+    #if !params[:story].nil?
+    #  @story.content = params[:story][:content]
+    #  @story.title = params[:story][:title]
+    #  @story.subtitle = params[:story][:subtitle]
+    #end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def cancel_edit
+    @story = Story.find(params[:id])
+    respond_to do |format|
+      format.js
     end
   end
 

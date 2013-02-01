@@ -16,6 +16,8 @@ $(document).ready ->
   window.cancelScene = cancelScene
   window.showScene = showScene
   
+  window.setupComments = setupComments
+ 
   setupComments()
   return true
 

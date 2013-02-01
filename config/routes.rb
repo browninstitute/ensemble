@@ -9,6 +9,7 @@ StoryCollab::Application.routes.draw do
       match 'preview'
       get 'history'
       get 'history/:version', :action => 'view_version', :as => 'version'
+      get 'cancel_edit'
     end
   end
 
