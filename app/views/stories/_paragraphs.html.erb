@@ -1,25 +1,3 @@
-<div class="stoolbar row-fluid">
-  <div class="span7">
-    <div class="status pull-right">
-      <%= draft_status(@story) %>
-      <%= published_status(@story) %>
-    </div>
-    <ul>
-      <li class="btn" id="stoolbar_bold">B</li>
-      <li class="btn" id="stoolbar_italic">i</li>
-      <li class="divider">&nbsp;</li>
-      <li class="btn" id="stoolbar_selectall"><i class="icon-book"></i></li>
-    </ul>
-  </div>
-</div>
-<div class="stext span7">
-  <% if @story.new_record? %>
-    <%= render :partial => "stories/scene_form", :locals => { :scene => Scene.new, :scene_counter => 0 } %>
-  <% else %>
-    <%= render :partial => "stories/scene_form", :collection => @story.scenes, :as => :scene %>
-  <% end %>
-</div>
-
 <div id="textModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -41,7 +19,6 @@ var arbitraryId = <%= @story.new_record? ? 1 : @story.scenes.count %>;
 // Helper Methods
 //
 function tick() {
-  $('.ttab textarea').attr('placeholder', 'What\'s happening in this paragraph?');
   $('textarea').on('focus click', function() {
     selectedTextarea = this;
   });
@@ -97,45 +74,23 @@ $().ready(function() {
 //
 // TODO REFACTOR THIS TO BE DRY
 function contentToParagraphs() {
-  <% if @story.new_record? %>
-  /*var $para = $("<div class=\"row-fluid\"><div class=\"span7 tbox\"><textarea class=\"txt\"></textarea></div><div class=\"span4 ttab\"><textarea /></div><div class=\"span1\"><span class=\"move\"><i class=\"icon-move\"></i></span></div></div>");
-  $para.find('.ttab textarea').attr("data-position", 1); // Scene text
-  $para.attr('id', 'box_' + arbitraryId++);
-  $(".stext").append($para);
-  */
   // Resize textareas
   $('.txt').each(function() {
     resizeNow(this);
     observeBox(this);
   });
-  $('.ttab textarea').each(function() {
-    resizeNow(this);
-    observeBox(this);
-  });
   tick();
-  <% else %>
-  // Parse out content
-  $('.txt').each(function() {
-    resizeNow(this);
-    observeBox(this);
-  });
-  $('.ttab textarea').each(function() {
-    resizeNow(this);
-    observeBox(this);
-  });
-  tick();
-  <% end %>
 }
 function paragraphsToContent() {
   // Update positions
-  $('.stext').children().each(function(i, v) {
-    $(this).find('.ttab').attr('data-position', i + 1);
+  $('.edit-mode').children().each(function(i, v) {
+    $(this).find('.scene-info-inner').attr('data-position', i + 1);
   });
   // Get content as JSON
   var newContent = [];
-  $('.stext').children().each(function() {
+  $('.edit-mode').children().each(function() {
     $parabox = $(this).find('.txt');
-    $scenebox = $(this).find('.ttab');
+    $scenebox = $(this).find('.scene-info-inner');
     var parauser = $parabox.attr("data-user");
     if (parauser == undefined) {
       parauser = "<%= current_user.id %>";
@@ -147,7 +102,7 @@ function paragraphsToContent() {
 }
 $().ready(function() {
   contentToParagraphs();
-  $('.stext').on('change', 'textarea', function() {
+  $('.edit-mode').on('change', 'textarea', function() {
     paragraphsToContent();
   });
 });
@@ -196,15 +151,15 @@ function observeBox(boxElt) {
 //
 $().ready(function() {
   var prevSelectionStart = -1;
-  $('.stext').on('focus', '.txt', function() {
+  $('.edit-mode').on('focus', '.txt', function() {
     prevSelectionStart = this.selectionStart;
   })
-  $('.stext').on('keyup', '.txt', function(e) {
+  $('.edit-mode').on('keyup', '.txt', function(e) {
     // console.log(this.selectionStart);
 
     // See if we want to jump to the next textarea
     if (this.selectionStart == prevSelectionStart || this.selectionStart == $(this).val().length) {
-      $next = $(this).parent().parent().next().find('.txt');
+      $next = $(this).parent().parent().parent().next().find('.txt');
       if (e.keyCode == 40) { // Down arrow
         $next.focus();
       } else if (e.keyCode == 39 && this.selectionStart == $(this).val().length) { // Right arrow
@@ -214,7 +169,7 @@ $().ready(function() {
 
     // See if we want to jump to the previous textarea
     if (this.selectionStart == prevSelectionStart || this.selectionStart == 0) {
-      $prev = $(this).parent().parent().prev().find('.txt');
+      $prev = $(this).parent().parent().parent().prev().find('.txt');
       if (e.keyCode == 38) { // Up arrow
         $prev.focus();
       } else if (e.keyCode == 37) { // Left arrow
@@ -222,23 +177,23 @@ $().ready(function() {
         $prev[0].setSelectionRange($prev.val().length * 2, $prev.val().length * 2);
       } else if (e.keyCode == 8 && this.selectionStart == 0) {
         $prev.focus();
-        if ($(this).val().length == 0 && $('.stext .txt').length > 1) {
-          $(this).parent().parent().remove();
+        if ($(this).val().length == 0 && $('.edit-mode .txt').length > 1) {
+          $(this).parent().parent().parent().remove();
         }
       }
     }
 
     // Create a new textarea with a double return
     if($(this).val().indexOf("\n\n") !== -1) {
-      var $para = $("<%= escape_javascript(render :partial => 'stories/scene_form', :locals => {:scene => Scene.new, :scene_counter => 1 }) %>");
+      var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => Scene.new, :edit_mode => true }) %>");
       $para.attr("id", "box_" + arbitraryId);
       arbitraryId++;
-      $(this).parent().parent().after($para);
+      $(this).parent().parent().parent().after($para);
       var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
       var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
       $(this).val(prev);
       resizeNow(this);
-      var $next = $(this).parent().parent().next().find('.txt');
+      var $next = $(this).parent().parent().parent().next().find('.txt');
       observeBox($next[0]);
       $next.val(next).focus();
       resizeNow($next[0]);
@@ -246,17 +201,6 @@ $().ready(function() {
     prevSelectionStart = this.selectionStart;
     tick();
   });
-});
-
-//
-// Draggable Paragraphs
-//
-$().ready(function() {
-  $('.stext').sortable({
-    handle: '.move',
-    stop: function() {
-      paragraphsToContent();
-    }
-  });
-});
+});    
+  
 </script>

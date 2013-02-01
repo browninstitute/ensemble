@@ -55,6 +55,8 @@ class Story < ActiveRecord::Base
     end
 
     # Delete old scenes (cascades paragraph deletion)
+    # TODO place this under a transaction, so scenes/paragraphs aren't deleted if something
+    # fails later on
     existing_scene_ids = Set.new(self.scenes.map { |scene| scene.id })
     new_scene_ids = Set.new(content.map { |scene| (scene.include? 'id') ? scene['id'].to_i : 0 })
     scenes_to_delete_ids = existing_scene_ids - new_scene_ids
@@ -65,15 +67,15 @@ class Story < ActiveRecord::Base
     # Update each scene, creating a new scene if no id is present
     content.each do |scene|
       scene_pos = scene['position'].to_i
-      scene_obj = if scene.include? 'id'
-        scene_id = scene['id'].to_i
-        Scene.find(scene_id)
+      scene_obj = if !scene.include? 'id'
+        scene_obj = self.scenes.create
+        scene_obj.content = scene['content']
+        scene_obj.insert_at(scene_pos)
+        scene_obj.save!
+        scene_obj
       else
-        self.scenes.create
+        Scene.find(scene['id'])
       end
-      scene_obj.content = scene['content']
-      scene_obj.insert_at(scene_pos)
-      scene_obj.save!
       # Update each paragraph, creating a new paragraph attached to the scene if no id is present
       scene['paragraphs'].each do |paragraph|
         para_obj = if paragraph.include? 'id'

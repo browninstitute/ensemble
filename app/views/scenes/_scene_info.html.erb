@@ -3,7 +3,7 @@
     Click to create a scene 
   <% end %>
 <% else %>
-  <div class="scene-info-inner span12">
+  <div class="scene-info-inner span12" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
     <div class="scene_text">
       <h1><%= Format.markdown(scene.title) if !scene.title.nil? %></h1>
       <%= Format.markdown(scene.content) %>

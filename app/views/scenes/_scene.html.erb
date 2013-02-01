@@ -1,9 +1,15 @@
+<% edit_mode = edit_mode || false %>
 <div class="scene row-fluid" id="scene_<%= scene.id %>">
   <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
     <div class="paragraphs-container span11">
-      <%= render :partial => "paragraphs/paragraph", 
-                 :collection => scene.ordered_paragraphs,
-                 :locals => { :scene => scene } %>          
+      <% if edit_mode %>
+        <%= render :partial => "stories/paragraph_form", 
+                   :locals => { :scene => scene, :scene_counter => 1 } %>
+      <% else %>
+        <%= render :partial => "paragraphs/paragraph", 
+                   :collection => scene.ordered_paragraphs,
+                   :locals => { :scene => scene } %>          
+      <% end %>
     </div>
     <div class="para-navigation span1">
       <button class="disabled prev-paragraph"><i class="icon-angle-up icon-large"></i></button>
@@ -11,7 +17,9 @@
     </div>  
   </div>
   <div class="scene-info span4">
+    <% if !edit_mode %>
     <%= render :partial => 'scenes/scene_info', :locals => { :scene => scene } %>
+  <% end %>
   </div>
 </div>
 

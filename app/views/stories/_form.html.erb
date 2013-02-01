@@ -46,11 +46,11 @@
     </div>
   </div>
 
-  <%= render :partial => 'paragraphs' %>
-
-  <br />
-
   <%= f.hidden_field :content, :value => @story.draft_or_story_text %> 
-  
+
+  <%= render :partial => 'stories/toolbar' %>
 <% end %>
+
+<%= render :partial => 'paragraphs' %>
+
 </div>

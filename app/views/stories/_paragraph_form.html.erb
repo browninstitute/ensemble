@@ -1,0 +1,5 @@
+<% if scene.paragraphs.empty? %>
+<textarea class="txt"></textarea>
+<% else %>
+<textarea class="txt" data-id="<%= scene.paragraphs[0].id %>" data-user="<%= scene.paragraphs[0].user_id %>"><%= scene.paragraphs[0].content %></textarea>
+<% end %>  
