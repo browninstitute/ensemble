@@ -5,7 +5,7 @@ class Scene < ActiveRecord::Base
   has_many :paragraphs, :order => :position, :dependent => :delete_all
   has_many :comments
   attr_accessible :content, :title, :position, :paragraphs
-  #validates :title, :presence => true
+  #validates :title, :presence => true, :on => :update
   acts_as_votable
 
   # Returns paragraphs ordered by votes. By default, the winning paragraph
