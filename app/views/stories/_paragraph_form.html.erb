@@ -1,5 +1,7 @@
 <% if scene.paragraphs.empty? %>
 <textarea class="txt"></textarea>
 <% else %>
-<textarea class="txt" data-id="<%= scene.paragraphs[0].id %>" data-user="<%= scene.paragraphs[0].user_id %>"><%= scene.paragraphs[0].content %></textarea>
+  <% scene.paragraphs.each_with_index do |p, i| %>  
+    <textarea class="txt <%= "hide" if i != 0 %>" data-id="<%= p.id %>" data-user="<%= p.user_id %>"><%= p.content %></textarea>
+  <% end %>
 <% end %>  

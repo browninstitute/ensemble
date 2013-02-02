@@ -5,7 +5,6 @@ $ ->
   <% end %>
   $(".story-header").replaceWith("<%= escape_javascript(render :partial => "stories/form") %>")
   $(".content").addClass("edit-mode")
-  #$(".story").after("<%= escape_javascript(render :partial => "stories/form") %>")
-  #$(".story").remove()
-  #$(".scene-info-inner").click showScene
-  #setupComments()
+  $(".para-navigation button").unbind()
+  $(".prev-paragraph").click prevTextbox
+  $(".next-paragraph").click nextTextbox

@@ -12,13 +12,16 @@ $(document).ready ->
   window.goToParagraph = goToParagraph
   window.cancelParagraph = cancelParagraph
 
-  $(".scene-info-inner").click showScene  
+  $(".scene-info-inner").click showScene
   window.cancelScene = cancelScene
   window.showScene = showScene
-  
+
   window.setupComments = setupComments
- 
+
   setupComments()
+
+  window.nextTextbox = nextTextbox
+  window.prevTextbox = prevTextbox
   return true
 
 nextParagraph = ->
@@ -162,3 +165,45 @@ setupComments = ->
           $(".comment_box", $sc).show(500)
           $(this).hide()
         ).prependTo($sc)
+
+nextTextbox = ->
+  _this = $(this)
+
+  return if _this.hasClass('disabled')
+
+  current = _this.parent().parent().children(".paragraphs-container").children("textarea")
+  next = current.next("textarea")
+
+  _this.parent().children('button').removeClass('disabled')
+  if next.next("textarea").length is 0
+    _this.addClass('disabled')
+
+  if (next.size() >= 1)
+    _this.unbind()
+    current.hide("slide", { direction: "up" }, 400, ->
+      next.show("slide", { direction: "down" }, 400, ->
+        _this.click nextTextbox
+      )
+    )
+
+prevTextbox = ->
+  _this = $(this)
+
+  return if _this.hasClass('disabled')
+
+  current = _this.parent().parent().children(".paragraphs-container").children("textarea")
+  prev = current.prev("textarea")
+
+  _this.parent().children('button').removeClass('disabled')
+  if prev.prev("textarea").length is 0
+    _this.addClass('disabled')
+
+  if (prev.size() >= 1)
+    _this.unbind()
+    current.hide("slide", { direction: "down" }, 400, ->
+      prev.show("slide", { direction: "up" }, 400, ->
+        _this.click prevTextbox
+      )
+    )
+
+
