@@ -78,19 +78,24 @@ function contentToParagraphs() {
 function paragraphsToContent() {
   // Update positions
   $('.edit-mode').children().each(function(i, v) {
-    $(this).find('.scene-info-inner').attr('data-position', i + 1);
+    $(this).attr('data-position', i + 1);
   });
   // Get content as JSON
   var newContent = [];
   $('.edit-mode').children().each(function() {
+    $scenebox = $(this);
     $parabox = $(this).find('.txt');
-    $scenebox = $(this).find('.scene-info-inner');
-    var parauser = $parabox.attr("data-user");
-    if (parauser == undefined) {
-      parauser = "<%= current_user.id %>";
-    }
+
+    var paragraphsJSON = [];
+    $parabox.each(function() {
+      var parauser = $(this).attr("data-user");
+      if (parauser == undefined) {
+        parauser = "<%= current_user.id %>";
+      }
+      paragraphsJSON.push({'id': $(this).attr('data-id'), 'content': $(this).val(), 'user_id': parauser});
+    });
     newContent.push({ 'id': $scenebox.attr('data-id'), 'position': $scenebox.attr('data-position'), 
-      'content': $scenebox.val(), 'paragraphs': [ { 'id': $parabox.attr('data-id'), 'content': $parabox.val(), 'user_id': parauser } ] });
+      'content': $scenebox.val(), 'paragraphs': paragraphsJSON });
   });
   $('#story_content').val(JSON.stringify(newContent));
 }

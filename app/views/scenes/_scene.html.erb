@@ -1,5 +1,5 @@
 <% edit_mode = edit_mode || false %>
-<div class="scene row-fluid" id="scene_<%= scene.id %>">
+<div class="scene row-fluid" id="scene_<%= scene.id %>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
   <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
     <div class="paragraphs-container span11">
       <% if edit_mode %>
