@@ -1,12 +1,16 @@
 <div class="stoolbar row-fluid">
-  <div class="status pull-right">
-    <%= draft_status(@story) %>
-    <%= published_status(@story) %>
+  <div class="span8">
+    <div class="stoolbar-inner span11">
+      <div class="status pull-right">
+        <%= draft_status(@story) %>
+        <%= published_status(@story) %>
+      </div>
+      <ul>
+        <li class="btn" id="stoolbar_bold">B</li>
+        <li class="btn" id="stoolbar_italic">i</li>
+        <li class="divider">&nbsp;</li>
+        <li class="btn" id="stoolbar_selectall"><i class="icon-book"></i></li>
+      </ul>
+    </div>
   </div>
-  <ul>
-    <li class="btn" id="stoolbar_bold">B</li>
-    <li class="btn" id="stoolbar_italic">i</li>
-    <li class="divider">&nbsp;</li>
-    <li class="btn" id="stoolbar_selectall"><i class="icon-book"></i></li>
-  </ul>
 </div>

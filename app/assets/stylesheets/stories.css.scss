@@ -146,13 +146,30 @@ $accent: #23ADE8;
 
 .content.edit-mode {
   font-family: 'Open Sans', Cambria;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  box-sizing: border-box;
   margin: 0;
   line-height: 1.8em;
+  position: relative;
+
+  .edit-background {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    z-index: -9999;
+ 
+    div {
+      height: 100%;
+      margin: 0;
+    }
+
+    .edit-background-inner {
+      border-radius: 5px;
+      border: 1px #ccc solid;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
 
   .row-fluid {
     position: relative;
@@ -168,7 +185,6 @@ $accent: #23ADE8;
       font-size: larger;
       line-height: 2.0em;
       border: none;
-      /*border-left: 1px solid #cfcfcf;*/
       outline: none;
       resize: none;
       box-shadow: none;
@@ -181,7 +197,8 @@ $accent: #23ADE8;
   }
 
   .paragraphs-container {
-    border-right: 1px solid #eee;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
     
     textarea {
       font-family: 'Open Sans', Cambria;
@@ -208,6 +225,10 @@ $accent: #23ADE8;
 }
 
 .stoolbar {
+  .stoolbar-inner {
+    border-bottom: 1px solid #ccc;
+  }
+  
   ul {
     margin: 0;
     padding-right: 10px;
