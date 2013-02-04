@@ -1,6 +1,7 @@
 class ScenesController < ApplicationController
   def new
-    @scene = Scene.new
+    @scene = Scene.new(:temp_id => params[:temp_id])
+    
     respond_to do |format|
       format.js
     end

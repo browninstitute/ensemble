@@ -1,10 +1,10 @@
 $ ->
-  $scene = $("#scene_<%= @scene.id %>")
-
-  # hide new scene div
-  $scene.children(".scene-info").hide()
+  $scene = $("#temp_<%= @scene.temp_id %>")
 
   # add form
-  $scene.children(".scene-info")
-        .after("<%= escape_javascript(render(:partial => 'scenes/form', :locals => {:scene => @scene})) %>")
-  $scene.children(".scene-form").children(".scene-form-inner").children(".cancel-scene").click cancelScene
+  $scene.children(".new-scene")
+        .after("<%= escape_javascript(render(:partial => 'scenes/form', :locals => {:scene => @scene, :buttons => false})) %>")
+  
+  # hide new scene div
+  $scene.children(".new-scene").remove()
+

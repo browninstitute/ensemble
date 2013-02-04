@@ -4,9 +4,22 @@ class Scene < ActiveRecord::Base
   acts_as_list :scope => :story
   has_many :paragraphs, :order => :position, :dependent => :delete_all
   has_many :comments
-  attr_accessible :content, :title, :position, :paragraphs
+  attr_accessible :content, :title, :position, :temp_id, :paragraphs
   #validates :title, :presence => true, :on => :update
   acts_as_votable
+
+  # Generates temporary ID for use with AJAX callbacks on
+  # newly created objects.
+  def temp_id
+    if @temp_id.nil?
+      @temp_id = rand(1000000000)
+    end
+    @temp_id
+  end
+
+  def temp_id=(id)
+    @temp_id = id
+  end
 
   # Returns paragraphs ordered by votes. By default, the winning paragraph
   # for a scene will be shown first, regardless of it's vote count.

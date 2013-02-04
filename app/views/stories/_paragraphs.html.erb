@@ -13,7 +13,6 @@
 <script>
 
 var selectedTextarea = "textarea";  // The currently selected textarea
-var arbitraryId = <%= @story.new_record? ? 1 : @story.scenes.count %>;
 
 //
 // Helper Methods
@@ -147,9 +146,9 @@ $().ready(function() {
 
     // Create a new textarea with a double return
     if($(this).val().indexOf("\n\n") !== -1) {
-      var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => Scene.new, :edit_mode => true }) %>");
-      $para.attr("id", "box_" + arbitraryId);
-      arbitraryId++;
+      <% temp = Scene.new %>
+      var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => temp, :edit_mode => true }) %>");
+      $para.attr("id", "temp_<%= temp.temp_id %>");
       $(this).parent().parent().parent().after($para);
       var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
       var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
