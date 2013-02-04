@@ -3,31 +3,36 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
+  # Initialize 
   $(".winner").tooltip({title: "Winner!"})
   $(".next-paragraph").click nextParagraph
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph
   $(".expand-paragraphs a").click toggleExpandParagraphs
+  
+  $(".scene-info-inner").click showScene
+  $(".new-scene").click showScene
+  
+  setupComments()
+  
+  # Make functions available for AJAX callbacks
   window.nextParagraph = nextParagraph
   window.prevParagraph = prevParagraph
   window.resetAllParagraphs = resetAllParagraphs
   window.resetParagraphs = resetParagraphs
   window.goToParagraph = goToParagraph
   window.cancelParagraph = cancelParagraph
+  window.toggleExpandParagraphs = toggleExpandParagraphs
 
-  $(".scene-info-inner").click showScene
-  $(".new-scene").click showScene
   window.cancelScene = cancelScene
   window.showScene = showScene
 
   window.setupComments = setupComments
 
-  setupComments()
-
   window.nextTextbox = nextTextbox
   window.prevTextbox = prevTextbox
-  return true
 
+# Moves to the next paragraph of a scene, in view mode.
 nextParagraph = ->
   _this = $(this)
 
@@ -48,6 +53,7 @@ nextParagraph = ->
       )
     )
 
+# Moves to the previous paragraph of a scene, in view mode.
 prevParagraph = ->
   _this = $(this)
 
@@ -68,12 +74,14 @@ prevParagraph = ->
       )
     )
 
+# Shows the new paragraph form in view mode.
 newParagraph = ->
   _this = $(this)
   parent = _this.parents('.scene')
   parent.children('.paragraph').hide()
   parent.children('.paragraph-form').show()
 
+# Cancels paragraph editing or creation in view mode.
 cancelParagraph = (e) ->
   _this = $(this)
   parent = _this.parents('.scene')
@@ -81,6 +89,7 @@ cancelParagraph = (e) ->
   parent.children('.paragraph-form').remove()
   e.preventDefault()
 
+# Toggles paragraphs from single to multiple view.
 toggleExpandParagraphs = (e) ->
   _this = $(this)
   paragraphs = _this.parents('.scene').children('.paragraph')
@@ -98,6 +107,7 @@ toggleExpandParagraphs = (e) ->
     resetParagraphs(paragraphs.children(".paragraphs-container"))
   e.preventDefault()
 
+# Resets a scene to show the first paragraph.
 resetParagraphs = ($container) ->
   children = $container.children(".paragraph-inner")
 
@@ -123,10 +133,12 @@ resetParagraphsHelper = ($container) ->
     prev.show()
     resetParagraphsHelper($container)
 
+# Resets all scenes to show the first paragraph.
 resetAllParagraphs = ->
   $(".paragraphs-container").each ->
     resetParagraphs($(this))
 
+# Jumps to the paragraph with the given ID in the given scene.
 goToParagraph = ($container, id) ->
   resetParagraphs($container)
   goToParagraphHelper($container, id)
@@ -144,6 +156,7 @@ goToParagraphHelper = ($container, id) ->
     next.show()
     goToParagraphHelper($container, id)
 
+# Cancels editing of a scene in view mode.
 cancelScene = (e) ->
   _this = $(this)
   parent = _this.parents('.scene')
@@ -154,6 +167,7 @@ cancelScene = (e) ->
     parent.children('.new-scene').show()
   e.preventDefault()
 
+# Shows a scene's details.
 showScene = (e) ->
   if (e.target == this || e.target.tagName == "H1" || e.target.tagName == "P")
     _this = $(this)
@@ -164,6 +178,7 @@ showScene = (e) ->
       $(".cancel-scene").click()
       _this.addClass("scene-selected")
 
+# Condenses a scene's comments so it's not a huge list.
 setupComments = ->
   for sc in $(".scene-comments")
     do (sc) ->
@@ -177,6 +192,7 @@ setupComments = ->
           $(this).hide()
         ).prependTo($sc)
 
+# Goes to the next textbox in edit mode.
 nextTextbox = ->
   _this = $(this)
 
@@ -197,6 +213,7 @@ nextTextbox = ->
       )
     )
 
+# Goes to the previous textbox in edit mode.
 prevTextbox = ->
   _this = $(this)
 
@@ -216,5 +233,3 @@ prevTextbox = ->
         _this.click prevTextbox
       )
     )
-
-
