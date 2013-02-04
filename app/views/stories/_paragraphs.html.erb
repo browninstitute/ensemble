@@ -76,12 +76,12 @@ function contentToParagraphs() {
 }
 function paragraphsToContent() {
   // Update positions
-  $('.edit-mode').children().each(function(i, v) {
+  $('.edit-mode').children(".scene").each(function(i, v) {
     $(this).attr('data-position', i + 1);
   });
   // Get content as JSON
   var newContent = [];
-  $('.edit-mode').children().each(function() {
+  $('.edit-mode').children(".scene").each(function() {
     $scenebox = $(this);
     $parabox = $(this).find('.txt');
 
