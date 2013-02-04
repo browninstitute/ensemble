@@ -8,6 +8,9 @@ $(document).ready ->
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph
   $(".expand-paragraphs a").click toggleExpandParagraphs
+  window.nextParagraph = nextParagraph
+  window.prevParagraph = prevParagraph
+  window.resetAllParagraphs = resetAllParagraphs
   window.resetParagraphs = resetParagraphs
   window.goToParagraph = goToParagraph
   window.cancelParagraph = cancelParagraph
@@ -119,6 +122,10 @@ resetParagraphsHelper = ($container) ->
     current.hide()
     prev.show()
     resetParagraphsHelper($container)
+
+resetAllParagraphs = ->
+  $(".paragraphs-container").each ->
+    resetParagraphs($(this))
 
 goToParagraph = ($container, id) ->
   resetParagraphs($container)
