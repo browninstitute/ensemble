@@ -16,10 +16,14 @@
       <button class="next-paragraph"><i class="icon-angle-down icon-large"></i></button>
     </div>  
   </div>
-  <% if edit_mode or scene.title.blank? or scene.new_record? %>
+  <% if scene.title.blank? or scene.new_record? %>
     <%= render(:partial => 'scenes/new', :locals => { :scene => scene }) %>
   <% else %>
-    <%= render :partial => 'scenes/scene_info', :locals => { :scene => scene } %>
+    <% if edit_mode %>
+      <%= render :partial => 'scenes/form', :locals => { :scene => scene, :buttons => false } %>
+    <% else %>
+      <%= render :partial => 'scenes/scene_info', :locals => { :scene => scene } %>
+    <% end %>
   <% end %>
 </div>
 

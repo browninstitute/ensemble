@@ -102,7 +102,7 @@ function paragraphsToContent() {
 }
 $().ready(function() {
   contentToParagraphs();
-  $('.edit-mode').on('change', 'textarea', function() {
+  $('.edit-mode').on('change', 'textarea, input[type=text]', function() {
     console.log("change");
     paragraphsToContent();
   });
