@@ -1,6 +1,4 @@
 $ ->
-  $(".story-form").after("<%= escape_javascript(render :partial => 'stories/story') %>")
-  $(".story-form").remove()
-  $(".content.edit-mode").remove()
+  $(".story").replaceWith("<%= escape_javascript(render :partial => 'stories/story') %>")
   $(".scene-info-inner").click showScene
   setupComments()
