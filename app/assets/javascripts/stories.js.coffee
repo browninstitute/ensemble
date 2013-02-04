@@ -112,7 +112,7 @@ resetParagraphsHelper = ($container) ->
   current = $container.children(".paragraph-inner:visible")
   prev = current.prev(".paragraph-inner")
 
-  $container.siblings('button').removeClass('disabled')
+  $container.siblings('.para-navigation').children('button').removeClass('disabled')
   $container.siblings('.para-navigation').children('.prev-paragraph').addClass('disabled')
 
   if (prev.size() >= 1)
@@ -128,7 +128,7 @@ goToParagraphHelper = ($container, id) ->
   current = $container.children(".paragraph-inner:visible")
   next = current.next(".paragraph-inner")
 
-  $container.siblings('button').removeClass('disabled')
+  $container.siblings('.para-navigation').children('button').removeClass('disabled')
   if next.next(".paragraph-inner").length is 0
     $container.siblings('.para-navigation').children('.next-paragraph').addClass('disabled')
 
@@ -175,7 +175,7 @@ nextTextbox = ->
 
   return if _this.hasClass('disabled')
 
-  current = _this.parent().parent().children(".paragraphs-container").children("textarea")
+  current = _this.parent().parent().children(".paragraphs-container").children("textarea:visible")
   next = current.next("textarea")
 
   _this.parent().children('button').removeClass('disabled')
@@ -195,7 +195,7 @@ prevTextbox = ->
 
   return if _this.hasClass('disabled')
 
-  current = _this.parent().parent().children(".paragraphs-container").children("textarea")
+  current = _this.parent().parent().children(".paragraphs-container").children("textarea:visible")
   prev = current.prev("textarea")
 
   _this.parent().children('button').removeClass('disabled')
