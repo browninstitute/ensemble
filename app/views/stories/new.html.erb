@@ -1,5 +1,11 @@
-<h1>New story</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', stories_path %>
+<div class="story">
+  <%= render 'form' %>
+  <div class="content edit-mode">
+    <%= render :partial => "scenes/scene", :locals => {:scene => Scene.new, :edit_mode => true} %>
+    <div class="edit-background span8">
+      <div class="span8 row-fluid">
+        <div class="edit-background-inner span11"></div>
+      </div>
+    </div>
+  </div>
+</div>
