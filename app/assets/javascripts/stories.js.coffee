@@ -13,6 +13,7 @@ $(document).ready ->
   window.cancelParagraph = cancelParagraph
 
   $(".scene-info-inner").click showScene
+  $(".new-scene").click showScene
   window.cancelScene = cancelScene
   window.showScene = showScene
 
@@ -140,7 +141,10 @@ cancelScene = (e) ->
   _this = $(this)
   parent = _this.parents('.scene')
   parent.children('.scene-form').remove()
-  parent.children('.scene-info').show()
+  if parent.children('.scene-info').length > 0
+    parent.children('.scene-info').show()
+  else
+    parent.children('.new-scene').show()
   e.preventDefault()
 
 showScene = (e) ->

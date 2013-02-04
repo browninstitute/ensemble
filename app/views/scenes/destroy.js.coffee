@@ -1,6 +1,6 @@
 $ ->
   $scene = $("#scene_<%= @scene.id %>")
 
-  $scene.children(".scene-info").empty()
   $scene.children(".scene-info")
-    .append("<%= escape_javascript(render(:partial => 'scenes/scene_info', :locals => { :scene => @scene })) %>")
+    .replaceWith("<%= escape_javascript(render(:partial => 'scenes/new', :locals => { :scene => @scene })) %>")
+  $scene.children(".new-scene").click showScene

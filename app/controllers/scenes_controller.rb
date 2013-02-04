@@ -1,4 +1,11 @@
 class ScenesController < ApplicationController
+  def new
+    @scene = Scene.new
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   def edit
     @scene = Scene.find(params[:id])
 

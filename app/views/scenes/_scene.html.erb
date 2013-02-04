@@ -1,4 +1,4 @@
-<% edit_mode = edit_mode || false %>
+<% edit_mode = false if local_assigns[:edit_mode].nil? %>
 <div class="scene row-fluid" id="scene_<%= scene.id %>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
   <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
     <div class="paragraphs-container span11">
@@ -16,10 +16,10 @@
       <button class="next-paragraph"><i class="icon-angle-down icon-large"></i></button>
     </div>  
   </div>
-  <div class="scene-info span4">
-    <% if !edit_mode %>
+  <% if edit_mode or scene.title.blank? or scene.new_record? %>
+    <%= render(:partial => 'scenes/new', :locals => { :scene => scene }) %>
+  <% else %>
     <%= render :partial => 'scenes/scene_info', :locals => { :scene => scene } %>
   <% end %>
-  </div>
 </div>
 

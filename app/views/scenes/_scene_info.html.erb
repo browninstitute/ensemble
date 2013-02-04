@@ -1,8 +1,4 @@
-<% if scene.content.blank? %>
-  <%= link_to edit_scene_path(scene), :class => "new-scene", :remote => true do %>
-    Click to create a scene 
-  <% end %>
-<% else %>
+<div class="scene-info span4">
   <div class="scene-info-inner span12">
     <div class="scene_text">
       <h1><%= Format.markdown(scene.title) if !scene.title.nil? %></h1>
@@ -35,4 +31,4 @@
       <%= render :partial => "comments/form", :locals => { :scene => scene, :comment => Comment.new } %>
     </div>
   </div>
-<% end %>
+</div>

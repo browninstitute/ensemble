@@ -69,13 +69,15 @@ class Story < ActiveRecord::Base
       scene_pos = scene['position'].to_i
       scene_obj = if !scene.include? 'id'
         scene_obj = self.scenes.create
-        scene_obj.content = scene['content']
         scene_obj.insert_at(scene_pos)
-        scene_obj.save!
         scene_obj
       else
         Scene.find(scene['id'])
       end
+      scene_obj.title = scene['title']
+      scene_obj.content = scene['content']
+      scene_obj.save!
+      
       # Update each paragraph, creating a new paragraph attached to the scene if no id is present
       scene['paragraphs'].each do |paragraph|
         para_obj = if paragraph.include? 'id'
