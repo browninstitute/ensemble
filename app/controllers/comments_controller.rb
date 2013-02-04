@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   # Toggle likes on a comment
   def like
     @comment = Comment.find(params[:id])

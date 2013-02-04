@@ -1,4 +1,6 @@
 module ScenesHelper
+  # Generates the route for a scene depending
+  # on its status.
   def new_or_edit_scene_path(scene)
     if scene.nil?
       new_scene_path

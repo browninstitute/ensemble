@@ -74,7 +74,8 @@ class ParagraphsController < ApplicationController
       format.js
     end
   end
-
+  
+  # Toggle winner status of a paragraph
   def winner
     @p = Paragraph.find(params[:id])
     

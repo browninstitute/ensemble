@@ -92,7 +92,8 @@ class Story < ActiveRecord::Base
       end
     end
   end
-
+  
+  # TODO what does this do?
   def parse_story
     parts = self.scenes.map do |scene|
       para = scene.paragraphs[0]

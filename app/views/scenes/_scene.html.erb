@@ -3,7 +3,7 @@
   <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
     <div class="paragraphs-container span11">
       <% if edit_mode %>
-        <%= render :partial => "stories/paragraph_form", 
+        <%= render :partial => "paragraphs/story_edit_form", 
                    :locals => { :scene => scene, :scene_counter => 1 } %>
       <% else %>
         <%= render :partial => "paragraphs/paragraph", 

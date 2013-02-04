@@ -1,4 +1,5 @@
 module StoriesHelper
+  # Generates text displaying the draft status of a story.
   def draft_status(story)
     return if story.id.nil?
 
@@ -9,6 +10,7 @@ module StoriesHelper
     end
   end
 
+  # Generates text displaying the published status of a story.
   def published_status(story)
     return if story.updated_at.nil?
 

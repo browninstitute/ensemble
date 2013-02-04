@@ -22,6 +22,8 @@ class Paragraph < ActiveRecord::Base
     self.scene.winner_id == self.id
   end
 
+  # Checks if the deleted paragraph is a winner,
+  # and if so, removes the winning id from the scene.
   def paragraph_cleanup
     if self.scene.winner_id == self.id
       self.scene.winner_id = nil

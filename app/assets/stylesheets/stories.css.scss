@@ -45,79 +45,12 @@ $accent: #23ADE8;
   }
 }
 
-.storybar {
-  width: 30%;
-  float: right;
-  margin-left: 20px;
-
-  .question-box {
-    border: 1px solid $darkgrey;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 5px 0;     
-    width: 250px;
-    font-size: 0.85em;
-    line-height: 1.5em;
-    position: relative;
-
-    .likes {
-      float: left;
-      text-align: center;
-      width: 15px;
-    }
-
-    .question-info {
-      float: left;
-      width: 230px;
-      padding-left: 5px;
-    
-      .question-text {
-        font-weight: bold;
-      }
-
-      .asker {
-        color: $lightgrey;
-      }
-
-      .answers {
-        color: $accent; 
-      }
-    }
-  }
-
-  .question-box:after {
-    right: 100%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(68,68,68,0);
-    border-right-color: #444;
-    border-width: 10px;
-    top: 50%;
-    margin-top: -10px;
-  }
-}
-
 /* Story Index */
 .new-story.btn {
   margin-bottom: 10px;
 }
 
 /* Editing Stories */
-.question {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  vertical-align: text-top;
-  border: 1px solid black;
-  overflow: hidden;
-}
-.highlight {
-  background-color: #ffff33;
-}
 #story_popover {
   z-index: 999;
   
@@ -173,27 +106,6 @@ $accent: #23ADE8;
 
   .row-fluid {
     position: relative;
-  }
-
-  .ttab {
-    position: absolute;
-    margin: 0;
-    right: -500px;
-    
-    textarea {
-      font-family: 'Open Sans', Cambria;
-      font-size: larger;
-      line-height: 2.0em;
-      border: none;
-      outline: none;
-      resize: none;
-      box-shadow: none;
-      -webkit-box-shadow: none;
-      overflow: hidden;
-      margin-left: 0;
-      border-radius: 0;
-      width: 95%;
-    }
   }
 
   .paragraphs-container {
