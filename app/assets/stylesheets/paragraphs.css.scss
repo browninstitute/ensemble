@@ -1,11 +1,12 @@
 $accent: #23ADE8;
+$lightaccent: #60C8F5;
 
 .scene form.paragraph-form {
   margin: 0;
 }
 
 .paragraph {
-  margin-bottom: 1.8em;
+  margin-bottom: 5px;
   background-color: #fff;
   position: relative;
   transition: all 0.4s ease;
@@ -20,26 +21,36 @@ $accent: #23ADE8;
     }
 
     .paragraph-actions {
-      .edit-paragraphs {
+      .edit-paragraphs, .admin-paragraphs {
         transition: all 0.4s ease;
         opacity: 1 !important;
-        height: auto !important;
       }
     }
   }
 
+  &.open {
+    border-left: 3px solid $lightaccent;
+    padding-left: 15px;
+    left: -15px;
+  }
+
   .paragraph-inner {
+    .paragraph-content {
+      font-size: 1.2em;
+    }
+    
     .paragraph-info {
-      padding: 0 5px;
+      padding-left: 8px;
+      padding-bottom: 3px;
       position: relative;
-      border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-      text-align: right;
+      border-bottom-right-radius: 10px;
       color: #999;
       transition: all 0.4s ease;
 
-      .paragraph-author {
+      .paragraph-author, .likes, .paragraph-actions {
         font-size: 0.8em;
+        line-height: 1.7em;
       }
 
       a {
@@ -48,8 +59,6 @@ $accent: #23ADE8;
     }
 
     .paragraph-actions {
-      font-size: 0.8em;
-
       a {
         text-decoration: none;
       }
@@ -58,10 +67,9 @@ $accent: #23ADE8;
         float: right;
       }
 
-      .edit-paragraphs {
+      .edit-paragraphs, .admin-paragraphs {
         transition: all 0.4s ease;
         opacity: 0;
-        height: 0;
       }
     }
     
@@ -97,9 +105,6 @@ $accent: #23ADE8;
     }
 
     .paragraph-inner {
-      .paragraph-actions {
-        padding-right: 55px;      
-      }
     }
   }
 
