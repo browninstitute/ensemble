@@ -5,15 +5,6 @@
       <%= Format.markdown(scene.content) %>
     </div>
     <div class="link_actions">
-      <% if current_user.voted_up_on? scene %>
-        <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
-        <i class="icon-heart"></i> Loved
-        <% end %>
-      <% else %>
-        <%= link_to like_scene_path(scene), :id => "scene_" + scene.id.to_s + "_like_button", :remote => true do %>
-        <i class="icon-heart"></i> Love
-        <% end %>
-      <% end %> &sdot; 
       <%= link_to "Submit answer", new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" %>
       <span class="expand-paragraphs <%= "hide" if scene.paragraphs.length <= 1 %>">
         &sdot; 

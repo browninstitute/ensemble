@@ -6,7 +6,6 @@ class Scene < ActiveRecord::Base
   has_many :comments
   attr_accessible :content, :title, :position, :temp_id, :paragraphs
   #validates :title, :presence => true, :on => :update
-  acts_as_votable
 
   # Generates temporary ID for use with AJAX callbacks on
   # newly created objects.
