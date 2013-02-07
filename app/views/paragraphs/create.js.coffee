@@ -11,7 +11,7 @@ $ ->
   if $s.find('.paragraph-inner').size() > 1
     $s.children('.paragraph').addClass('multiple')
     $('.expand-paragraphs', $s).show()
- 
-  $('.para-count', $s).html("<%= escape_javascript(pluralize(@scene.paragraphs.length, "collab")) %>")
+
+  $('.para-count', $s).html("<%= escape_javascript(pluralize(@scene.paragraphs.length, "suggestion")) %>")
   $s.children('.paragraph').show()
   goToParagraph($s.children(".paragraph").children('.paragraphs-container'), <%= @p.id %>)
