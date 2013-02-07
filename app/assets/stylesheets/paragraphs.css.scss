@@ -112,7 +112,7 @@ $accent: #23ADE8;
       }
 
       .paragraph-actions {
-        .edit-paragraphs {
+        .edit-paragraphs, .admin-paragraphs {
           transition: all 0.4s ease;
           opacity: 1 !important;
           height: auto !important;

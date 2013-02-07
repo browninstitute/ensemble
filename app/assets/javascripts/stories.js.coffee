@@ -179,7 +179,15 @@ showScene = (e) ->
       _this.addClass("scene-selected")
 
 # Condenses a scene's comments so it's not a huge list.
+# Also sets up Comment shortcut link.
 setupComments = ->
+  $(".comment-link").unbind().click (e) ->
+    $s = $(this).parent().parent().parent(); # .scene-info-inner
+    if !$s.hasClass('scene-selected')
+      $s.click()
+    $("#comment_content", $s).focus()
+    e.preventDefault()
+
   for sc in $(".scene-comments")
     do (sc) ->
       $sc = $(sc)

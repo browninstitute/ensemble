@@ -2,7 +2,8 @@ $lightaccent: #60C8F5;
 
 .scene {
   position: relative;
-  
+  min-height: 100px;
+
   &.open {
     border-left: 3px solid $lightaccent;
     padding-left: 15px;
@@ -31,6 +32,7 @@ $lightaccent: #60C8F5;
         .link_actions {
           opacity: 1;
           height: auto;
+          margin-top: 10px;
         }
 
         .scene-comments, .scene-comment-box {
@@ -67,12 +69,17 @@ $lightaccent: #60C8F5;
         }
       }
 
+      .main-actions {
+        font-size: small;
+        line-height: 1.6em;
+      }
+
       .link_actions {
         font-size: 0.7em;
         transition: all 0.2s ease;
         opacity: 0;
         height: 0;
-        
+
         a {
           text-decoration: none;
         }
