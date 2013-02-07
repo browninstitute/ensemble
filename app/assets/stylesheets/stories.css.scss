@@ -18,7 +18,6 @@ $accent: #23ADE8;
     h1 {
       font-family: 'Merriweather', Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
       font-size: 3.2em;
-      font-weight: normal;
       margin: 0;
       line-height: 1.5em;
     }
@@ -113,8 +112,8 @@ $accent: #23ADE8;
     border-right: 1px solid #ccc;
     
     textarea {
-      font-family: 'Open Sans', Cambria;
-      font-size: 1.2em;
+      font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+      font-size: 1.5em;
       line-height: 1.8em;
       border: none;
       outline: none;
