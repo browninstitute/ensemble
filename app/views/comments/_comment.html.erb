@@ -9,15 +9,6 @@
         <% end %>&nbsp;
         <%= link_to "Delete", scene_comment_path(scene, comment), :method => :delete, :confirm => "Are you sure?", :remote => true %>
       <% end %>
-      <% if current_user.voted_up_on? comment %>
-        <%= link_to like_scene_comment_path(scene, comment), :id => "comment_" + comment.id.to_s + "_like_button", :class => 'loved', :remote => true do %>
-          <i class="icon-heart"></i> Loved
-        <% end %>
-      <% else %>
-        <%= link_to like_scene_comment_path(scene, comment), :id => "comment_" + comment.id.to_s + "_like_button", :remote => true do %>
-          <i class="icon-heart"></i> Love
-        <% end %>
-      <% end %>
     </div>
     <div id="comment_<%= comment.id %>_content">
       <%= comment.content %>
