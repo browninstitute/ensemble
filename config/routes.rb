@@ -4,8 +4,6 @@ StoryCollab::Application.routes.draw do
       get 'current'
     end
     member do
-      post 'save_draft'
-      post 'destroy_draft'
       match 'preview'
       get 'history'
       get 'history/:version', :action => 'view_version', :as => 'version'
@@ -14,11 +12,7 @@ StoryCollab::Application.routes.draw do
   end
 
   resources :scenes do
-    resources :comments do
-      member do
-        get 'like'
-      end
-    end
+    resources :comments 
     resources :paragraphs
   end
 
@@ -26,7 +20,6 @@ StoryCollab::Application.routes.draw do
 
   get "home/index"
 
-  match 'scenes/:id/like' => 'scenes#like', :as => :like_scene
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
   match 'paragraphs/:id/winner' => 'paragraphs#winner', :as => :winner_paragraph
 

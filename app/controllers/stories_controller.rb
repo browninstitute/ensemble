@@ -38,11 +38,6 @@ class StoriesController < ApplicationController
   # GET /stories/1/edit
   def edit
     @story = Story.find(params[:id])
-    #if !params[:story].nil?
-    #  @story.content = params[:story][:content]
-    #  @story.title = params[:story][:title]
-    #  @story.subtitle = params[:story][:subtitle]
-    #end
     respond_to do |format|
       format.js
     end
@@ -115,38 +110,6 @@ class StoriesController < ApplicationController
     respond_to do |format|
       format.html { render action: "show" } # show.html.erb
       format.json { render json: @story }
-    end
-  end
-
-  # Saves a draft of the story.
-  def save_draft
-    @story = Story.find(params[:id])
-    
-    respond_to do |format|
-      if @story.save_draft(params[:story][:content])
-        flash[:notice] = "Draft successfully saved."
-        format.html { redirect_to :action => "edit" }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to :action => "edit" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # Discards the current story draft, if there is one.
-  def destroy_draft
-    @story = Story.find(params[:id])
-
-    respond_to do |format|
-      if @story.destroy_draft
-        flash[:notice] = "Draft successfully discarded."
-        format.html { redirect_to :action => "edit" }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to :action => "edit" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
     end
   end
 

@@ -18,35 +18,10 @@
     
     <div class="actions pull-right">
       <%= f.submit "Publish", :class => "btn" %>
-      <% if !current_page?(new_story_path) %>
-        <script type="text/javascript">
-          // Change the form action depending on the button clicked.
-          $(document).ready(function() {
-            var story_id = '<%= @story.id %>';  
-            $("#save_draft").click(function() {
-              var action = '<%= save_draft_story_path(@story) %>';
-              $("[name='_method']").remove();
-              $("#edit_story_" + story_id).attr('action', action).submit();
-            });    
-            $("#preview").click(function() {
-              var action = '<%= preview_story_path(@story) %>';
-              $("[name='_method']").remove();
-              $("#edit_story_" + story_id).attr('action', action).submit();  
-            });
-          });
-        </script>
-
-        <%= link_to "Save Draft", "#", 
-                  :class => "btn", :id => "save_draft" %>
-        <%= link_to "Preview", "#", :class => "btn", :id => "preview" %>
-        <%= link_to "Discard Draft", destroy_draft_story_path(@story), 
-                  :class => "btn", :method => :post, :confirm => "Are you sure you want to discard your draft?" %>
-        <%= link_to "Cancel", cancel_edit_story_path(@story), :class => "btn cancel-story", :remote => true %>
-      <% end %>
+      <%= link_to "Cancel", cancel_edit_story_path(@story), 
+                  :class => "btn cancel-story", :remote => true %>
     </div>
   </div>
-
-  <%= f.hidden_field :content, :value => @story.draft_or_story_text %> 
 
   <%= render :partial => 'stories/toolbar' %>
 <% end %>
