@@ -27,7 +27,7 @@
     <% if can? :edit, @story %>
       <div class="editing">
         <%= link_to story_story_roles_path(@story), :class => "btn", :remote => true do %>
-          <i class="icon-user"></i> Contributors
+          <i class="icon-user"></i> Contributors (<span id="contributor_count"><%= @story.contributors.count %></span>)
         <% end %>
         <%= link_to edit_story_path(@story), :class => "btn edit-story", :remote => true do %>
           <i class="icon-pencil"></i> Edit
