@@ -3,18 +3,19 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-  # Initialize 
+  # Initialize
   $(".winner").tooltip({title: "Winner!"})
   $(".next-paragraph").click nextParagraph
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph
   $(".expand-paragraphs a").click toggleExpandParagraphs
-  
+
   $(".scene-info-inner").click showScene
   $(".new-scene").click showScene
-  
+
+  truncateSceneDesc()
   setupComments()
-  
+
   # Make functions available for AJAX callbacks
   window.nextParagraph = nextParagraph
   window.prevParagraph = prevParagraph
@@ -173,9 +174,12 @@ showScene = (e) ->
     _this = $(this)
     if _this.hasClass("scene-selected")
       _this.removeClass("scene-selected")
+      truncateSceneDesc(_this.parent().parent()) # .scene
     else
       $(".scene-selected").removeClass("scene-selected")
       $(".cancel-scene").click()
+      if ($(".scene_text > p", _this).attr('title'))
+        $(".scene_text > p", _this).trunk8('revert')
       _this.addClass("scene-selected")
 
 # Condenses a scene's comments so it's not a huge list.
@@ -241,3 +245,19 @@ prevTextbox = ->
         _this.click prevTextbox
       )
     )
+
+truncateSceneDesc = ($scene = "all") ->
+  if ($scene == "all")
+    # loop
+    for s in $(".scene")
+      $s = $(s)
+      if ($s.height() <= 110)
+        $(".scene_text > p", $s).trunk8()
+      else
+        $(".scene_text > p", $s).trunk8({lines: 3})
+  else
+    # truncate specific scene description
+    if ($scene.height() <= 110)
+      $(".scene_text > p", $scene).trunk8()
+    else
+      $(".scene_text > p", $scene).trunk8({lines: 3})
