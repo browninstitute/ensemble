@@ -10,7 +10,8 @@ $ ->
 
   if $s.find('.paragraph-inner').size() > 1
     $s.children('.paragraph').addClass('multiple')
-    $s.children('.scene-info').children('.link_actions').children('.expand-paragraphs').show()
-
+    $('.expand-paragraphs', $s).show()
+ 
+  $('.para-count', $s).html("<%= escape_javascript(pluralize(@scene.paragraphs.length, "collab")) %>")
   $s.children('.paragraph').show()
   goToParagraph($s.children(".paragraph").children('.paragraphs-container'), <%= @p.id %>)
