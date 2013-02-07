@@ -5,7 +5,6 @@ module ParagraphsHelper
     classes = ""
     classes += " multiple" if scene.paragraphs.length > 1
     classes += " unwritten" if scene.paragraphs.length < 1
-    classes += " open" if !scene.title.blank? && !edit_mode
     classes
   end
 end

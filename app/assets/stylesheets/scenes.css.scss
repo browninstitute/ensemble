@@ -1,4 +1,14 @@
+$lightaccent: #60C8F5;
+
 .scene {
+  position: relative;
+  
+  &.open {
+    border-left: 3px solid $lightaccent;
+    padding-left: 15px;
+    left: -15px;
+  }
+  
   .scene-info {
     font-size: larger;
   }

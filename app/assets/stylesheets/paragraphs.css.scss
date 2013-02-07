@@ -1,5 +1,4 @@
 $accent: #23ADE8;
-$lightaccent: #60C8F5;
 
 .scene form.paragraph-form {
   margin: 0;
@@ -26,12 +25,6 @@ $lightaccent: #60C8F5;
         opacity: 1 !important;
       }
     }
-  }
-
-  &.open {
-    border-left: 3px solid $lightaccent;
-    padding-left: 15px;
-    left: -15px;
   }
 
   .paragraph-inner {

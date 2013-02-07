@@ -52,6 +52,7 @@ class Story < ActiveRecord::Base
           end
           scene_obj.title = scene['title']
           scene_obj.content = scene['content']
+          scene_obj.insert_at(scene_pos)
           scene_obj.save!
           
           # Update each paragraph, creating a new paragraph attached to the scene if no id is present

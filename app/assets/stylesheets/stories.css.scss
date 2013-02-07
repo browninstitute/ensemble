@@ -130,10 +130,9 @@ $accent: #23ADE8;
 
   .move {
     display: block;
-    width: 20px;
-    height: 20px;
     cursor: move;
-    margin: 11px 4px;
+    padding: 2px;
+    padding-top: 10px;
   }
 }
 

@@ -1,6 +1,6 @@
 <% edit_mode = false if local_assigns[:edit_mode].nil? %>
-<div class="scene row-fluid" id="scene_<%= scene.id %>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
-  <div class="paragraph span8 <%= paragraphs_classes(@p, scene, edit_mode) %>">
+<div class="scene row-fluid <%= "open" if !scene.title.blank? && !edit_mode %>" id="scene_<%= scene.id %>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
+  <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
     <div class="paragraphs-container span11">
       <% if edit_mode %>
         <%= render :partial => "paragraphs/story_edit_form", 
@@ -14,6 +14,7 @@
     <div class="para-navigation span1">
       <button class="disabled prev-paragraph"><i class="icon-angle-up icon-large"></i></button>
       <button class="next-paragraph"><i class="icon-angle-down icon-large"></i></button>
+      <% if edit_mode %><i class="icon-move icon-large move"></i><% end %>
     </div>  
   </div>
   <% if scene.title.blank? or scene.new_record? %>

@@ -8,4 +8,9 @@ $ ->
   $(".para-navigation button").unbind()
   $(".prev-paragraph").click prevTextbox
   $(".next-paragraph").click nextTextbox
-
+ 
+  $('.content').sortable({
+      handle: '.move',
+      stop: -> 
+        paragraphsToContent()
+  })
