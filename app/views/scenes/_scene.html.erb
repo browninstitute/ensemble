@@ -1,6 +1,6 @@
 <% edit_mode = false if local_assigns[:edit_mode].nil? %>
 <div class="scene row-fluid" id="scene_<%= scene.id %>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
-  <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
+  <div class="paragraph span8 <%= paragraphs_classes(@p, scene, edit_mode) %>">
     <div class="paragraphs-container span11">
       <% if edit_mode %>
         <%= render :partial => "paragraphs/story_edit_form", 
