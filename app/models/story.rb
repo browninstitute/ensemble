@@ -6,6 +6,8 @@ class Story < ActiveRecord::Base
   attr_accessible :subtitle, :title, :public, :content
 
   has_many :scenes, :order => :position
+  has_many :story_roles
+  has_many :contributors, :through => :story_roles, :source => :user
 
   has_draft do
     attr_accessible :content

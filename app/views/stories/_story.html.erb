@@ -24,11 +24,16 @@
       </div>
     </div>
 
-    <div class="editing">
-      <%= link_to edit_story_path(@story), :class => "btn edit-story", :remote => true do %>
-        <i class="icon-pencil"></i> Edit
-      <% end %>
-    </div>
+    <% if can? :edit, @story %>
+      <div class="editing">
+        <%= link_to story_story_roles_path(@story), :class => "btn", :remote => true do %>
+          <i class="icon-user"></i> Contributors
+        <% end %>
+        <%= link_to edit_story_path(@story), :class => "btn edit-story", :remote => true do %>
+          <i class="icon-pencil"></i> Edit
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
   <div class="content">

@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource
+
   # Toggle likes on a comment
   def like
     @comment = Comment.find(params[:id])

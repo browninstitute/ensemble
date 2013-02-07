@@ -1,0 +1,1 @@
+$('#contributors_modal .modal-body').html("<%= j render 'index_roles' %>")

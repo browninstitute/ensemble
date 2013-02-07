@@ -1,4 +1,6 @@
 class ParagraphsController < ApplicationController
+  load_and_authorize_resource
+  
   def edit
     @p = Paragraph.find(params[:id])
     @scene = @p.scene

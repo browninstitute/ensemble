@@ -11,6 +11,7 @@ StoryCollab::Application.routes.draw do
       get 'history/:version', :action => 'view_version', :as => 'version'
       get 'cancel_edit'
     end
+    resources :story_roles
   end
 
   resources :scenes do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130126043456) do
+ActiveRecord::Schema.define(:version => 20130207061528) do
 
   create_table "comments", :force => true do |t|
     t.string   "title"
@@ -75,9 +75,20 @@ ActiveRecord::Schema.define(:version => 20130126043456) do
     t.boolean  "public"
   end
 
+  create_table "story_roles", :force => true do |t|
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.string   "role"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "story_roles", ["story_id"], :name => "index_story_roles_on_story_id"
+  add_index "story_roles", ["user_id"], :name => "index_story_roles_on_user_id"
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -86,11 +97,12 @@ ActiveRecord::Schema.define(:version => 20130126043456) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
+    t.boolean  "admin",                  :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

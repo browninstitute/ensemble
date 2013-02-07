@@ -1,22 +1,26 @@
 <div class="paragraph-inner <%= "hide" if paragraph_counter != 0 %>" id="para_<%= paragraph.id %>">
   <div class="paragraph-info">
     <span class="paragraph-actions pull-left">
-      <span class="edit-paragraphs">                                              
-        <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %>
-        &sdot;
-        <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
-        &sdot;
-        <%= link_to "Mark as winner", winner_paragraph_path(paragraph), 
-                  :id => "para_" + paragraph.id.to_s + "_winner_button", 
-                  :remote => true %>
-      </span>
+      <% if can? :manage, paragraph %>
+        <span class="edit-paragraphs">                                              
+          <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %>
+          &sdot;
+          <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
+          &sdot;
+          <%= link_to "Mark as winner", winner_paragraph_path(paragraph), 
+                    :id => "para_" + paragraph.id.to_s + "_winner_button", 
+                    :remote => true %>
+        </span>
+      <% end %>
     </span>
     <span class="winner <%= "hide" if !paragraph.is_winner? %>">
       <i class="icon-trophy" rel="tooltip"></i>
       &sdot;
     </span>
-    <span class="paragraph-author">By <strong><%= paragraph.user.name %></strong></span>
-    &sdot;
+    <% if !paragraph.user.blank? %>
+      <span class="paragraph-author">By <strong><%= paragraph.user.name %></strong></span>
+      &sdot;
+    <% end %>
     <span class="like-count">
       <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
     </span> 
