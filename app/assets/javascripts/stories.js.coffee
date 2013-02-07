@@ -29,6 +29,7 @@ $(document).ready ->
   window.showScene = showScene
 
   window.setupComments = setupComments
+  window.truncateSceneDesc = truncateSceneDesc
 
   window.nextTextbox = nextTextbox
   window.prevTextbox = prevTextbox

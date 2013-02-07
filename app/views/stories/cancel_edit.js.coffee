@@ -5,4 +5,5 @@ $ ->
   $(".prev-paragraph").click prevParagraph
   $(".expand-paragraphs a").click toggleExpandParagraphs
   setupComments()
+  truncateSceneDesc()
   resetAllParagraphs()
