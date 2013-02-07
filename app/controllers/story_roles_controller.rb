@@ -16,7 +16,7 @@ class StoryRolesController < ApplicationController
     @story = Story.find(params[:story_id])
     @story_role.story = @story
     
-    if @story_role.save
+    if @story_role.user != nil && @story_role.save
       @story_role = StoryRole.new
       respond_to do |format|
         format.js
