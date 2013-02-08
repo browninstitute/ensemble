@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130126043456) do
+ActiveRecord::Schema.define(:version => 20130208022756) do
 
   create_table "comments", :force => true do |t|
     t.string   "title"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(:version => 20130126043456) do
 
   add_index "paragraphs", ["scene_id"], :name => "index_paragraphs_on_scene_id"
   add_index "paragraphs", ["user_id"], :name => "index_paragraphs_on_user_id"
+
+  create_table "prompts", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "scene_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "scenes", :force => true do |t|
     t.string   "title"
@@ -103,6 +112,8 @@ ActiveRecord::Schema.define(:version => 20130126043456) do
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
+    t.integer  "scene_id"
+    t.integer  "story_id"
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"

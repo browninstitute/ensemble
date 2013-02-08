@@ -5,6 +5,7 @@ class Scene < ActiveRecord::Base
   has_many :paragraphs, :order => :position, :dependent => :delete_all
   has_many :comments
   attr_accessible :content, :title, :position, :temp_id, :paragraphs
+  has_paper_trail :meta => {:story_id => :story_id}
   #validates :title, :presence => true, :on => :update
 
   # Generates temporary ID for use with AJAX callbacks on

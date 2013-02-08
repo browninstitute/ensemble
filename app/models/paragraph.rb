@@ -4,6 +4,7 @@ class Paragraph < ActiveRecord::Base
   acts_as_list :scope => :scene
   attr_accessible :content, :position, :title
   validates :content, :presence => true
+  has_paper_trail :only => [:content], :meta => {:scene_id => :scene_id}
   acts_as_votable
 
   before_destroy :paragraph_cleanup

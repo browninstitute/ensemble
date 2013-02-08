@@ -66,9 +66,17 @@ class ParagraphsController < ApplicationController
     
     if current_user.voted_up_on? @para
       @para.disliked_by current_user
+      action = "unlike"
     else
       @para.liked_by current_user
+      action = "like"
     end
+    Version.create!({:item_type => "Paragraph",
+                    :item_id => @para.id,
+                    :event => action,
+                    :whodunnit => current_user.id,
+                    :scene_id => @para.scene.id,
+                    :story_id => @para.scene.story.id})
 
     respond_to do |format|
       format.js
@@ -81,9 +89,17 @@ class ParagraphsController < ApplicationController
     
     if @p.is_winner?
       @p.unset_as_winner
+      action = "unwin"
     else
       @p.set_as_winner
+      action = "win" 
     end
+    Version.create!({:item_type => "Paragraph",
+                    :item_id => @p.id,
+                    :event => action,
+                    :whodunnit => current_user.id,
+                    :scene_id => @p.scene.id,
+                    :story_id => @p.scene.story.id})
     
     respond_to do |format|
       format.js

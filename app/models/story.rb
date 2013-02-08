@@ -4,12 +4,26 @@ require 'set'
 class Story < ActiveRecord::Base
   belongs_to :user
   attr_accessible :subtitle, :title, :public, :content
-
   has_many :scenes, :order => :position
-
-  has_paper_trail
-  
+  has_paper_trail :only => [:title, :subtitle]
   validates :title, :presence => true
+
+  # Gets all Story activity as an array.
+  def activity
+    activity = []
+
+    # Story
+    Version.find(:all, :conditions => {:item_type => "Story", :item_id => self.id}).each do |v|
+      activity.push(v)
+    end
+
+    # Scenes, Paragraphs, and Comments
+    Version.find(:all, :conditions => {:story_id => self.id}).each do |v|
+      activity.push(v)
+    end
+
+    activity.sort {|a, b| b.created_at <=> a.created_at }
+  end
 
   # Update the contents of this story (scenes and paragraphs),
   # based on JSON generated in _paragraphs.html.erb

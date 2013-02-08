@@ -1,24 +1,9 @@
-<h1>Edit History</h1>
-<h2>For "<%= @story.title %>"</h2>
-<table class="table">
-  <tr>
-    <th>Version</th>
-    <th>Event</th>
-    <th>Edited By</th>
-    <th>Timestamp</th>
-  </tr>
+<h2>"<%= @story.title %>" - Recent Activity</h2>
+<div class="story-history">
   <% @versions.each do |v| %>
-    <tr>
-      <td>
-        <% if v.event == "update"%>
-          <%= link_to v.index, version_story_path(@story, v.index) %>
-        <% else %>
-          <%= v.index %>
-        <% end %>  
-      </td>
-      <td><%= v.event %></td>
-      <td><%= v.whodunnit %></td>
-      <td><%= v.created_at %></td> 
-    </tr>
+    <div class="activity">
+      <%= activity_text(v).html_safe %>
+      <span class="activity-time pull-right"><%= time_ago_in_words(v.created_at) %> ago</span>
+    </div>
   <% end %>
-</table>
+</div>

@@ -23,4 +23,15 @@ class ApplicationController < ActionController::Base
     obj.errors.to_a.each { |e| e.capitalize }.join(". ")
   end
 
+  # For adding extra metadata to paper_trail version tracking.
+  def info_for_paper_trail
+    story_id = request.parameters[:story_id]
+    scene_id = request.parameters[:scene_id]
+    
+    if (story_id.nil? && !scene_id.nil?)
+      story_id = Scene.find(scene_id).story_id
+    end
+    
+    { :story_id => story_id, :scene_id => scene_id }
+  end
 end

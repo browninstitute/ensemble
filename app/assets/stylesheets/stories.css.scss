@@ -187,6 +187,28 @@ $accent: #23ADE8;
   }
 }
 
+/* Viewing Story History */
+.story-history {
+  .activity {
+    text-decoration: none;
+    background: #eee;
+    margin: 10px 0;
+    padding: 10px;
+    color: #444;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    a {
+      font-weight: bold;
+    }
+
+    .activity-time {
+      font-style: italic;
+      color: #999;
+    }
+  }
+}
+
 #textModal {
   textarea {
     width: 500px;

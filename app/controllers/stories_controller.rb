@@ -124,7 +124,7 @@ class StoriesController < ApplicationController
   # Allows the user to view story history.
   def history
     @story = Story.find(params[:id])
-    @versions = @story.versions
+    @versions = @story.activity
   end
 
   # Allows the user to view different versions of a
