@@ -155,7 +155,7 @@ $().ready(function() {
       $(this).val(prev);
       var $next = $(this).parent().parent().parent().next().find('.txt');
       $next.val(next).focus();
-      $('.txt', $para).autosize();
+      $('.paragraph .txt').trigger('autosize');
     }
     prevSelectionStart = this.selectionStart;
     tick();
