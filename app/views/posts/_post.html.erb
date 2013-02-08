@@ -1,0 +1,18 @@
+<div class="message" id="post_<%= post.id %>">
+  <div class="message-user">
+    <%= image_tag "alien.svg" %>
+    <%= post.user.name %>
+  </div>
+  <div class="message-body">
+    <% unless post.title.blank? %>
+      <strong><%= post.title %></strong><br />
+    <% end %>
+    <%= post.message %><br />
+    <div class="actions">
+      <%= link_to "Reply", reply_story_post_path(@story, post), :remote => true %>
+      <% if can? :manage, post %>
+         &sdot; <%= link_to "Edit", edit_story_post_path(@story, post), :remote => true %>
+      <% end %>
+    </div>
+  </div>
+</div>

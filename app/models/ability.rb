@@ -23,6 +23,7 @@ class Ability
     can :create, Paragraph
     can :create, Story
     can :manage, Comment, :user_id => user.id
+    can :manage, Post, :user_id => user.id
 
     # Define abilities for the passed in user here. For example:
     #

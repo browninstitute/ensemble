@@ -1,0 +1,28 @@
+<div class="story">
+    <div class="story-header">
+    <h1>
+      <%= @story.title %>
+    </h1>
+
+    <p class="subtitle">
+      <%= @story.subtitle %>
+    </p>
+
+    <div class="meta">
+      <div class="author">
+        Started by <%= link_to @story.user.name, "#" %>
+        <span class="timestamp">
+          <%= time_ago_in_words(@story.created_at) %> ago
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-inverse navbar-magic">
+    <div class="navbar-inner">
+      <ul class="nav">
+        <li><%= link_to 'Story', story_path(@story) %></li>
+        <li class="active"><%= link_to "Discussion", story_posts_path(@story) %></li>
+      </ul>
+    </div>
+  </div>
+</div>

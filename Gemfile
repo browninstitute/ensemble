@@ -47,6 +47,10 @@ gem 'acts_as_votable', '~> 0.5.0'
 
 gem 'redcarpet'
 
+gem 'ancestry'
+
+gem 'impressionist'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

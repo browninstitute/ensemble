@@ -23,17 +23,31 @@
         <% end %>
       </div>
     </div>
+  </div>
 
-    <% if can? :edit, @story %>
-      <div class="editing">
-        <%= link_to story_story_roles_path(@story), :class => "btn", :remote => true do %>
-          <i class="icon-user"></i> Contributors (<span id="contributor_count"><%= @story.contributors.count %></span>)
-        <% end %>
-        <%= link_to edit_story_path(@story), :class => "btn edit-story", :remote => true do %>
-          <i class="icon-pencil"></i> Edit
-        <% end %>
-      </div>
-    <% end %>
+  <div class="navbar navbar-inverse navbar-magic">
+    <div class="navbar-inner">
+      <ul class="nav">
+        <li class="active">
+          <a href="#">Story</a>
+        </li>
+        <li><%= link_to 'Discussion', story_posts_path(@story) %></li>
+      </ul>
+      <% if can? :edit, @story %>
+      <ul class="nav pull-right">
+        <li>
+          <%= link_to story_story_roles_path(@story), :remote => true do %>
+            <i class="icon-user"></i> Contributors (<span id="contributor_count"><%= @story.contributors.count %></span>)
+          <% end %>
+        </li>
+        <li>
+          <%= link_to edit_story_path(@story), :remote => true do %>
+            <i class="icon-pencil"></i> Edit
+          <% end %>
+        </li>
+      </ul>
+      <% end %>
+    </div>
   </div>
 
   <div class="content">

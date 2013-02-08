@@ -1,0 +1,1 @@
+$('#post_<%= @post.id %> .message-body').html('<%= j render "edit" %>')
