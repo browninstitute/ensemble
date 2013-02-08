@@ -13,7 +13,9 @@ $(document).ready ->
   $(".scene-info-inner").click showScene
   $(".new-scene").click showScene
 
-  truncateSceneDesc()
+  $(window).bind("load", ->
+    truncateSceneDesc() # force this to only happen after CSS has loaded
+  )
   setupComments()
 
   # Make functions available for AJAX callbacks
@@ -257,12 +259,12 @@ truncateSceneDesc = ($scene = "all") ->
     for s in $(".scene")
       $s = $(s)
       if ($s.height() <= 110)
-        $(".scene_text > p", $s).trunk8()
+        $(".scene_text > p", $s).trunk8({lines: 1})
       else
         $(".scene_text > p", $s).trunk8({lines: 3})
   else
     # truncate specific scene description
     if ($scene.height() <= 110)
-      $(".scene_text > p", $scene).trunk8()
+      $(".scene_text > p", $scene).trunk8({lines: 1})
     else
       $(".scene_text > p", $scene).trunk8({lines: 3})
