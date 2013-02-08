@@ -181,6 +181,7 @@ showScene = (e) ->
       $(".cancel-scene").click()
       if ($(".scene_text > p", _this).attr('title'))
         $(".scene_text > p", _this).trunk8('revert')
+      condenseComments($(".scene-comments", _this))
       _this.addClass("scene-selected")
 
 # Condenses a scene's comments so it's not a huge list.
@@ -195,15 +196,18 @@ setupComments = ->
 
   for sc in $(".scene-comments")
     do (sc) ->
-      $sc = $(sc)
-      totalComments = $(".comment_box", $sc).length
-      count = totalComments - 2
-      $(".comment_box:lt(" + count + ")", $sc).hide()
-      if (count > 0)
-        $('<div class=\"show_more\">' + count + ' more...</div>').click( ->
-          $(".comment_box", $sc).show(500)
-          $(this).hide()
-        ).prependTo($sc)
+      condenseComments($(sc))
+
+condenseComments = ($sc) ->
+  totalComments = $(".comment_box", $sc).length
+  count = totalComments - 2
+  $(".comment_box:lt(" + count + ")", $sc).hide()
+  if (count > 0)
+    $(".show_more").remove()
+    $('<div class=\"show_more\">' + count + ' more...</div>').click( ->
+      $(".comment_box", $sc).show(500)
+      $(this).hide()
+    ).prependTo($sc)
 
 # Goes to the next textbox in edit mode.
 nextTextbox = ->
