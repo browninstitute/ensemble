@@ -3,8 +3,9 @@
 <table class="table table-striped">
   <thead>
     <th>Thread</th>
+    <th>Replies</th>
     <th>Views</th>
-    <th>Last Updated</th>
+    <th>Last Reply</th>
   </thead>
   <tbody>
     <% @posts.each do |post| %>
@@ -15,6 +16,7 @@
             <%= truncate post.message %>
           </p>
         </td>
+        <td><%= post.children.count %></td>
         <td><%= post.impressionist_count(:filter=>:session_hash) %></td>
         <td><%= post.last_updated %></td>
       </tr>
