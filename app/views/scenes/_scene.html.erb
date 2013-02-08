@@ -1,5 +1,5 @@
 <% edit_mode = false if local_assigns[:edit_mode].nil? %>
-<div class="scene row-fluid <%= "open" if !scene.title.blank? && !edit_mode %>" id="scene_<%= scene.id %>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
+<div class="scene row-fluid <%= "open" if !scene.title.blank? && !edit_mode %>" id="<%= scene_id_helper scene%>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
   <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
     <div class="paragraphs-container span11">
       <% if edit_mode %>

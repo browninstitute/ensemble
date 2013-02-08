@@ -19,8 +19,10 @@
 
     <div class="actions pull-right">
       <%= f.submit "Publish", :class => "btn" %>
-      <%= link_to "Cancel", cancel_edit_story_path(@story), 
+      <% if !current_page? new_story_path %>
+        <%= link_to "Cancel", cancel_edit_story_path(@story), 
                   :class => "btn cancel-story", :remote => true %>
+      <% end %>
     </div>
   </div>
 

@@ -10,4 +10,13 @@ module ScenesHelper
       edit_scene_path(scene) 
     end
   end
+
+  # Get's ID for sceen in story edit form
+  def scene_id_helper(scene)
+    if scene.new_record?
+      "temp_#{scene.temp_id}"
+    else
+      "scene_#{scene.id}"
+    end
+  end
 end
