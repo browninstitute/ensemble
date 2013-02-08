@@ -46,6 +46,8 @@
     </div>
   </div>
 
+  <%= render 'nav' %>
+
   <%= f.hidden_field :content, :value => @story.draft_or_story_text %> 
 
   <%= render :partial => 'stories/toolbar' %>
