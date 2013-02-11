@@ -1,10 +1,15 @@
 <div class="navbar navbar-inverse navbar-magic">
   <div class="navbar-inner">
     <ul class="nav">
-      <li class="active">
-        <a href="#">Story</a>
+      <li class="<%= 'active' if current_page?(story_path(@story)) %>">
+        <%= link_to 'Story', story_path(@story) %>
       </li>
-      <li><%= link_to 'Discussion', story_posts_path(@story) %></li>
+      <li class="<%= 'active' if current_page?(story_posts_path(@story)) %>">
+        <%= link_to 'Discussion', story_posts_path(@story) %>
+      </li>
+      <li class="<%= 'active' if current_page?(history_story_path(@story)) %>">
+        <%= link_to 'Activity', history_story_path(@story) %>
+      </li>
     </ul>
     <% if can? :edit, @story %>
     <ul class="nav pull-right">

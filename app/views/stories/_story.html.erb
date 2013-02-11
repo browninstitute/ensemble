@@ -3,36 +3,11 @@
   preview ||= false
 %>
 
-<div class="story"> 
-  <div class="story-header">
-    <h1>
-      <%= @story.title %>
-    </h1>
-
-    <p class="subtitle">
-      <%= @story.subtitle %>
-    </p>
-
-    <div class="meta">
-      <div class="author">
-        Started by <%= link_to @story.user.name, "#" %>
-        <% if !preview %>
-          <span class="timestamp">
-            <%= time_ago_in_words(@story.created_at) %> ago
-          </span>
-        <% end %>
-      </div>
-    </div>
-
-    <%= render 'nav' %>
-  </div>
-
-  <div class="content">
-    <%= render :partial => 'scenes/scene', :collection => @story.scenes %>
-    <div class="edit-background span8">
-      <div class="span8 row-fluid">
-        <div class="edit-background-inner span11"></div>
-      </div>
+<div class="content">
+  <%= render :partial => 'scenes/scene', :collection => @story.scenes %>
+  <div class="edit-background span8">
+    <div class="span8 row-fluid">
+      <div class="edit-background-inner span11"></div>
     </div>
   </div>
 </div>

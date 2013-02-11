@@ -1,0 +1,7 @@
+<div class="story"> 
+  <% if !@story.nil? %>
+    <%= render :partial => "stories/header" %>
+  <% end %>
+  <%= yield %>
+</div>
+<%= parent_layout 'application' %>

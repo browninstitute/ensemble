@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   impressionist
+  layout "stories"
 
   def index
     @story = Story.find(params[:story_id])

@@ -1,0 +1,19 @@
+<div class="story-header">
+  <h1>
+    <%= @story.title %>
+  </h1>
+
+  <p class="subtitle">
+    <%= @story.subtitle %>
+  </p>
+
+  <div class="meta">
+    <div class="author">
+      Started by <%= link_to @story.user.name, "#" %>
+      <span class="timestamp">
+        <%= time_ago_in_words(@story.created_at) %> ago
+      </span>
+    </div>
+  </div>
+</div>
+<%= render :partial => "stories/nav" %>
