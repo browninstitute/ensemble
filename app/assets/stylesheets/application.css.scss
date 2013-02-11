@@ -93,3 +93,17 @@ header {
 a.loved {
   color: red;
 }
+
+/* Story Navbar */
+.story .navbar-magic {
+  margin-top: 8px; 
+  .navbar-inner {
+    background-color: #666666;
+    background-image: none;
+    border: none;
+
+    a {
+      color: #cccccc;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<%= render 'header' %>
+
+<div class="post_top">
+  <div class="stat_box">
+    <div class="pull-left">
+      <%= image_tag "alien.svg" %>
+      <%= @post.user.name %>
+    </div>
+    <div class="pull-right">
+      <%= pluralize @post.children.count, "reply" %> /
+      <%= pluralize @post.impressionist_count(:filter=>:session_hash), "view" %>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="info_box">
+    <h2><%= @post.title %></h2>
+    <p class="lead"><%= @post.message %></p>
+  </div>
+</div>
+
+<%= nested_posts @post.descendants.arrange(:order => :created_at) %>
+
+<div class="message reply_box">
+  <div class="message-user">
+    <%= image_tag "alien.svg" %>
+    <%= current_user.name %>
+  </div>
+  <div class="message-body">
+    <%= form_for [@story, @new_post], :html => { :style => "margin: 0" }, :remote => true do |f| %>
+      <%= f.hidden_field :parent_id %>
+      <%= f.text_area :message, :rows => 5, :class => 'span5' %><br />
+      <%= f.submit :class => 'btn btn-primary', :value => "Reply" %>
+    <% end %>
+  </div>
+</div>

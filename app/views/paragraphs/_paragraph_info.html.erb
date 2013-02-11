@@ -19,6 +19,7 @@
     <% end %>
   </div>
   <div class="paragraph-actions">
+    <% if can? :manage, paragraph %>
     <div class="edit-paragraphs">                                              
       <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %>
       &sdot;
@@ -36,5 +37,6 @@
                 :id => "para_" + paragraph.id.to_s + "_winner_button", 
                 :remote => true %>
     </div>
+    <% end %>
   </div>
 </div>

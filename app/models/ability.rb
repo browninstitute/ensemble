@@ -3,7 +3,27 @@ class Ability
 
   def initialize(user)
 
+    if user.admin?
+      can :manage, :all
+    else
+      can :read, :all
+    end
+
+    # Owners of stories can...
+    can :manage, Story, :user_id => user.id
+    can :manage, Scene, :story => { :user_id => user.id }
+    can :manage, Paragraph, :scene => { :story => { :user_id => user.id }}
+    can :manage, Comment, :scene => { :story => { :user_id => user.id }}
+
+    # Trusted users can...
+    can :manage, Scene, :story => { :contributors => { :id => user.id } }
+    can :manage, Paragraph, :scene => { :story => { :contributors => { :id => user.id } } }
+
+    # Anyone can...
+    can :create, Paragraph
+    can :create, Story
     can :manage, Comment, :user_id => user.id
+    can :manage, Post, :user_id => user.id
 
     # Define abilities for the passed in user here. For example:
     #

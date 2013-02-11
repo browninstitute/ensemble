@@ -24,11 +24,7 @@
       </div>
     </div>
 
-    <div class="editing">
-      <%= link_to edit_story_path(@story), :class => "btn edit-story", :remote => true do %>
-        <i class="icon-pencil"></i> Edit
-      <% end %>
-    </div>
+    <%= render 'nav' %>
   </div>
 
   <div class="content">

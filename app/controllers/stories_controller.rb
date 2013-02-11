@@ -1,6 +1,7 @@
 require 'format'
 
 class StoriesController < ApplicationController
+  load_and_authorize_resource
 
   rescue_from ActiveRecord::RecordInvalid, :with => :story_errors
 

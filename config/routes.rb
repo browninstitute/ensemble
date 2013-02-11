@@ -1,4 +1,5 @@
 StoryCollab::Application.routes.draw do
+
   resources :stories do
     collection do
       get 'current'
@@ -8,6 +9,12 @@ StoryCollab::Application.routes.draw do
       get 'history'
       get 'history/:version', :action => 'view_version', :as => 'version'
       get 'cancel_edit'
+    end
+    resources :story_roles
+    resources :posts do
+      member do
+        get 'reply'
+      end
     end
   end
 

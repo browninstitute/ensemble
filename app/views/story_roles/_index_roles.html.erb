@@ -1,0 +1,17 @@
+<table class="table table-condensed table-striped">
+  <% @story.story_roles.each do |story_role| %>
+    <tr>
+      <td><%= story_role.user.name %></td>
+      <td>
+        <%= link_to [@story, story_role], method: :delete, remote: true, :data => { :confirm => "Really remove this user?" } do %>
+          <i class="icon-remove"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<hr />
+<%= form_for [@story, @story_role], :remote => true, :html => { :class => "form-inline" } do |f| %>
+  <%= f.collection_select 'user_id', User.all, :id, :name, {:prompt => "Add a contributor?", :disabled => lambda{|user| @story.contributors.include? user }} %>
+  <%= f.submit 'Add', :class => 'btn btn-primary' %>
+<% end %>

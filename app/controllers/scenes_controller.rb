@@ -1,4 +1,6 @@
 class ScenesController < ApplicationController
+  load_and_authorize_resource
+  
   def new
     @scene = Scene.new(:temp_id => params[:temp_id])
     
