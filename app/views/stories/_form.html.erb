@@ -27,7 +27,9 @@
     </div>
   </div>
 
-  <%= render 'nav' %>
+  <% if !current_page?(new_story_path) %>
+    <%= render 'stories/nav' %>
+  <% end %>
   <%= render :partial => 'stories/toolbar' %>
 <% end %>
 

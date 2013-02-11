@@ -1,5 +1,5 @@
 <div class="story"> 
-  <% if !@story.nil? %>
+  <% if !@story.nil? && !@story.new_record? %>
     <%= render :partial => "stories/header" %>
   <% end %>
   <%= yield %>

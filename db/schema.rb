@@ -77,15 +77,6 @@ ActiveRecord::Schema.define(:version => 20130208023615) do
   add_index "posts", ["story_id"], :name => "index_posts_on_story_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
-  create_table "prompts", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "scene_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "scenes", :force => true do |t|
     t.string   "title"
     t.text     "content"
