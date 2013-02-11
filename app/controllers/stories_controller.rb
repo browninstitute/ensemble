@@ -2,6 +2,8 @@ require 'format'
 
 class StoriesController < ApplicationController
 
+  rescue_from ActiveRecord::RecordInvalid, :with => :story_errors
+
   # GET /stories
   # GET /stories.json
   def index
@@ -55,16 +57,16 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(params[:story])
     @story.user_id = current_user.id
-
-    respond_to do |format|
-      if @story.save
-        @story.update_contents(params[:story][:content])
+    
+    if @story.save && @story.update_contents(params[:story][:content])
+      respond_to do |format|
         format.html { redirect_to @story, notice: 'Story was successfully created.' }
+        format.js { render :js => "window.location.href = ('#{story_path(@story)}');"}
         format.json { render json: @story, status: :created, location: @story }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
+    else
+      @errormsg = @story.errors.to_a.each { |e| e.capitalize }.join(". ")
+      story_errors(@errormsg)
     end
   end
 
@@ -73,16 +75,15 @@ class StoriesController < ApplicationController
   def update
     @story = Story.find(params[:id])
 
-    respond_to do |format|
-      if @story.update_attributes(params[:story])
-        @story.update_contents(params[:story][:content])
-        
+    if @story.update_attributes(params[:story]) && @story.update_contents(params[:story][:content])
+      respond_to do |format|
         format.html { redirect_to @story, notice: 'Story was successfully updated.' }
+        format.js { render :js => "window.location.href = ('#{story_path(@story)}');"}
         format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
+    else
+      @errormsg = @story.errors.to_a.each { |e| e.capitalize }.join(". ")
+      story_errors(@errormsg)
     end
   end
 
@@ -137,6 +138,14 @@ class StoriesController < ApplicationController
     respond_to do |format|
       format.html { render :version }
       format.html { head :no_content }
+    end
+  end
+
+  # Show story saving errors.
+  def story_errors(errors)
+    respond_to do |format| 
+      @errormsg = errors || "Something went wrong. Please check to see if any paragraphs are blank."
+      format.js { render :action => "error" }
     end
   end
 end
