@@ -12,13 +12,12 @@ class Story < ActiveRecord::Base
   def activity
     activity = []
 
-    # Story
     Version.find(:all, :conditions => {:item_type => "Story", :item_id => self.id}).each do |v|
       activity.push(v)
     end
 
     # Scenes, Paragraphs, and Comments
-    Version.find(:all, :conditions => {:story_id => self.id}).each do |v|
+    Version.find(:all, :conditions => ["story_id = ? and item_type is not ?", self.id, "Story"]).each do |v|
       activity.push(v)
     end
 

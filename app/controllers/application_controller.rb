@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   # For adding extra metadata to paper_trail version tracking.
   def info_for_paper_trail
-    story_id = request.parameters[:story_id]
+    story_id = (request.parameters[:controller] == "stories") ? request.parameters[:id] : request.parameters[:story_id] 
     scene_id = request.parameters[:scene_id]
     
     if (story_id.nil? && !scene_id.nil?)

@@ -24,7 +24,7 @@ module StoriesHelper
       when "create"
         "Story was created by #{whodunnit}"
       when "update"
-        "Story title was updated by #{whodunnit}"
+        "Story info was updated by #{whodunnit}"
       when "destroy"
         "Story was deleted by #{whodunnit}"
       end
@@ -33,11 +33,11 @@ module StoriesHelper
 
       case activity.event
       when "create"
-        "#{whodunnit} created a new prompt: \"#{item.title}\""
+        "#{whodunnit} created scene ##{item.id}"
       when "update"
-        "#{whodunnit} edited the prompt: \"#{item.title}\""
+        "#{whodunnit} edited scene ##{item.id}"
       when "destroy"
-        "#{whodunnit} deleted the prompt: \"#{item.title}\""
+        "#{whodunnit} deleted scene ##{item.id}"
       end
     when "Paragraph"
       item = Paragraph.find(activity.item_id)
@@ -45,23 +45,25 @@ module StoriesHelper
 
       case activity.event
       when "create"
-        "#{whodunnit} added a suggestion to the prompt: \"#{scene.title}\""
+        "#{whodunnit} wrote a paragraph for scene ##{scene.id}"
       when "update"
-        "#{whodunnit} edited their suggestion for the prompt \"#{scene.title}\""
+        other = (item.user_id == activity.whodunnit) ? "their" : "#{User.find(item.user_id).name}'s"
+        "#{whodunnit} edited #{other} paragraph for the prompt \"#{scene.id}\""
       when "destroy"
-        "#{whodunnit} deleted their suggestion for the prompt \"#{scene.title}\""
+        other = (item.user_id == activity.whodunnit) ? "their" : "#{User.find(item.user_id).name}'s"
+        "#{whodunnit} deleted #{other} paragraph for the prompt \"#{scene.id}\""
       when "win"
         other = link_to User.find(item.user_id).name, "#"
-        "#{whodunnit} crowned the suggestion by #{other} as a winner"
+        "#{whodunnit} crowned the paragraph by #{other} as a winner"
       when "unwin"
         other = link_to User.find(item.user_id).name, "#"
-        "#{whodunnit} un-crowned the suggestion by #{other} as a winner"
+        "#{whodunnit} un-crowned the paragraph by #{other} as a winner"
       when "like"
         other = link_to User.find(item.user_id).name, "#"
-        "#{whodunnit} liked the suggestion by #{other}"
+        "#{whodunnit} liked the paragraph by #{other}"
       when "unlike"
         other = link_to User.find(item.user_id).name, "#"
-        "#{whodunnit} unliked the suggestion by #{other}"
+        "#{whodunnit} unliked the paragraph by #{other}"
       end
     when "Comment"
       item = Comment.find(activity.item_id)
@@ -69,11 +71,11 @@ module StoriesHelper
 
       case activity.event
       when "create"
-        "#{whodunnit} commented on the prompt: \"#{scene.title}\" and said: \"#{truncate(item.content, :length => 10)}\""
+        "#{whodunnit} commented on scene ##{scene.id} and said: \"#{truncate(item.content, :length => 10)}\""
       when "update"
-        "#{whodunnit} edited their comment on the prompt: \"#{scene.title}\""
+        "#{whodunnit} edited their comment on scene ##{scene.id}"
       when "destroy"
-        "#{whodunnit} deleted their comment on the prompt: \"#{scene.title}\""
+        "#{whodunnit} deleted their comment on scene ##{scene.id}"
       end
     end 
   end

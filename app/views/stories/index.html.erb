@@ -9,7 +9,6 @@
     <th></th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @stories.each do |story| %>
@@ -18,7 +17,6 @@
     <td><%= story.subtitle %></td>
     <td><%= story.user.name %></td>
     <td><%= link_to 'Show', story %></td>
-    <td><%= link_to 'Edit', edit_story_path(story) %></td>
     <td><%= link_to 'History', history_story_path(story) %></td>
     <td><%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
