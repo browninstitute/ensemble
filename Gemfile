@@ -15,6 +15,10 @@ group :development do
   gem 'debugger'
 end
 
+group :production do
+  gem 'rvm-capistrano'
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
