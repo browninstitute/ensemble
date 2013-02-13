@@ -54,8 +54,10 @@ nextParagraph = ->
     current.hide("slide", { direction: "up" }, 400, ->
       next.show("slide", { direction: "down" }, 400, ->
         _this.click nextParagraph
+        truncateSceneDesc(_this.parent().parent().parent()) #.scene
       )
     )
+
 
 # Moves to the previous paragraph of a scene, in view mode.
 prevParagraph = ->
@@ -75,8 +77,10 @@ prevParagraph = ->
     current.hide("slide", { direction: "down" }, 400, ->
       prev.show("slide", { direction: "up" }, 400, ->
         _this.click prevParagraph
+        truncateSceneDesc(_this.parent().parent().parent()) #.scene
       )
     )
+
 
 # Shows the new paragraph form in view mode.
 newParagraph = ->
@@ -109,6 +113,7 @@ toggleExpandParagraphs = (e) ->
     paragraphs.addClass("multiple")
     _this.html("See all")
     resetParagraphs(paragraphs.children(".paragraphs-container"))
+  truncateSceneDesc(_this.parents('.scene')) #.scene
   e.preventDefault()
 
 # Resets a scene to show the first paragraph.

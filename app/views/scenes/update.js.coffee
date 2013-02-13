@@ -8,3 +8,4 @@ $ ->
         .show()
   $scene.children(".scene-info").children(".scene-info-inner").click showScene
   $scene.addClass("open")
+  truncateSceneDesc($scene)
