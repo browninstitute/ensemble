@@ -2,6 +2,11 @@ $accent: #23ADE8;
 
 .scene form.paragraph-form {
   margin: 0;
+
+  textarea {
+    font-size: 1.5em;
+    font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+  }
 }
 
 .paragraph {
