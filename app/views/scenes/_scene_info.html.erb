@@ -9,8 +9,8 @@
         <span class="comment-count"><%= scene.comments.length %></span> <i class="icon-comment"></i> &sdot; <%= link_to "Comment", "#", :class => "comment-link" %><br />
       </div>
       <div class="pull-right">
-        <span class="para-count"><%= pluralize(scene.paragraphs.length, "suggestion") %></span> &sdot; 
-        <%= link_to "Add a suggestion", new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" %>
+        <span class="para-count"><%= pluralize(scene.paragraphs.length, "alternative") %></span> &sdot; 
+        <%= link_to "Add an alternative", new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" %>
         <span class="expand-paragraphs <%= "hide" if scene.paragraphs.length <= 1 %>">
           &sdot; 
           <%= link_to "See all", "#" %>

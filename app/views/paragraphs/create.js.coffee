@@ -12,6 +12,6 @@ $ ->
     $s.children('.paragraph').addClass('multiple')
     $('.expand-paragraphs', $s).show()
 
-  $('.para-count', $s).html("<%= escape_javascript(pluralize(@scene.paragraphs.length, "suggestion")) %>")
+  $('.para-count', $s).html("<%= escape_javascript(pluralize(@scene.paragraphs.length, "alternative")) %>")
   $s.children('.paragraph').show()
   goToParagraph($s.children(".paragraph").children('.paragraphs-container'), <%= @p.id %>)
