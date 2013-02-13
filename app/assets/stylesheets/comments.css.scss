@@ -1,9 +1,28 @@
 .comment_box {
+  margin: 1em 0;
+  overflow: auto;
+
   .comment_photo {
     float: left;
     width: 31px;
     height: 31px;
     border: 1px solid #cfcfcf;
+    overflow: hidden;
+  }
+
+  .comment-info {
+    clear:both;
+    line-height: 1.7em;
+    overflow: auto;
+    font-size: 0.6em;
+
+    .comment-name {
+      font-weight: bold;
+    }
+
+    .comment-time {
+      color: #777;
+    }
   }
 }
 
@@ -17,8 +36,8 @@
 
 .comment {
   position:relative;
-  margin:1em 0 0;
   color:#3c3c3c;
+  line-height: 1.7em;
   margin-left: 42px;
   font-size: x-small;
 
