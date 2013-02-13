@@ -20,6 +20,8 @@ class Ability
     can :manage, Paragraph, :scene => { :story => { :contributors => { :id => user.id } } }
 
     # Anyone can...
+    can :like, Paragraph
+    can :history, Story
     can :create, Paragraph
     can :create, Story
     can :manage, Comment, :user_id => user.id

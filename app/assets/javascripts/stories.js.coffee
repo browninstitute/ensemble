@@ -36,6 +36,9 @@ $(document).ready ->
   window.nextTextbox = nextTextbox
   window.prevTextbox = prevTextbox
 
+  window.toolbarBold = toolbarBold
+  window.toolbarItalic = toolbarItalic
+
 # Moves to the next paragraph of a scene, in view mode.
 nextParagraph = ->
   _this = $(this)
@@ -54,8 +57,10 @@ nextParagraph = ->
     current.hide("slide", { direction: "up" }, 400, ->
       next.show("slide", { direction: "down" }, 400, ->
         _this.click nextParagraph
+        truncateSceneDesc(_this.parent().parent().parent()) #.scene
       )
     )
+
 
 # Moves to the previous paragraph of a scene, in view mode.
 prevParagraph = ->
@@ -75,8 +80,10 @@ prevParagraph = ->
     current.hide("slide", { direction: "down" }, 400, ->
       prev.show("slide", { direction: "up" }, 400, ->
         _this.click prevParagraph
+        truncateSceneDesc(_this.parent().parent().parent()) #.scene
       )
     )
+
 
 # Shows the new paragraph form in view mode.
 newParagraph = ->
@@ -109,6 +116,7 @@ toggleExpandParagraphs = (e) ->
     paragraphs.addClass("multiple")
     _this.html("See all")
     resetParagraphs(paragraphs.children(".paragraphs-container"))
+  truncateSceneDesc(_this.parents('.scene')) #.scene
   e.preventDefault()
 
 # Resets a scene to show the first paragraph.
@@ -268,3 +276,27 @@ truncateSceneDesc = ($scene = "all") ->
       $(".scene_text > p", $scene).trunk8({lines: 1})
     else
       $(".scene_text > p", $scene).trunk8({lines: 3})
+
+toolbarBold = ->
+  $(selectedTextarea).each ->
+    start = this.selectionStart;
+    end = this.selectionEnd;
+    if (end - start > 0)
+      $(this).val(
+          $(this).val().substring(0, start) + 
+          "**" + $(this).val().substring(start, end) + "**" +
+          $(this).val().substring(end)
+      )
+      this.setSelectionRange(start, end + 4)        
+
+toolbarItalic = ->
+  $(selectedTextarea).each ->
+    start = this.selectionStart;
+    end = this.selectionEnd;
+    if (end - start > 0)
+      $(this).val(
+        $(this).val().substring(0, start) + 
+        "_" + $(this).val().substring(start, end) + "_" +
+        $(this).val().substring(end)
+      )
+      this.setSelectionRange(start, end + 2)   
