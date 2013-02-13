@@ -39,6 +39,7 @@ class ScenesController < ApplicationController
     @scene.content = ""
 
     if @scene.save
+      @scene.comments.destroy_all
       flash.now[:success] = "Scene was successfully deleted."
       respond_to do |format|
         format.js
