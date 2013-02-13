@@ -29,6 +29,9 @@ module StoriesHelper
         "Story was deleted by #{whodunnit}"
       end
     when "Scene"
+      if Scene.exists? activity.item_id
+        return
+      end
       item = Scene.find(activity.item_id)
 
       case activity.event
@@ -40,6 +43,9 @@ module StoriesHelper
         "#{whodunnit} deleted scene ##{item.id}"
       end
     when "Paragraph"
+      if !Paragraph.exists? activity.item_id
+        return
+      end
       item = Paragraph.find(activity.item_id)
       scene = item.scene
 
@@ -66,6 +72,9 @@ module StoriesHelper
         "#{whodunnit} unliked the paragraph by #{other}"
       end
     when "Comment"
+      if !Comment.exists? activity.item_id
+        return
+      end
       item = Comment.find(activity.item_id)
       scene = item.scene
 

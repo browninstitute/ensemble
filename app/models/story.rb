@@ -19,7 +19,7 @@ class Story < ActiveRecord::Base
     end
 
     # Scenes, Paragraphs, and Comments
-    Version.find(:all, :conditions => ["story_id = ? and item_type is not ?", self.id, "Story"]).each do |v|
+    Version.find(:all, :conditions => ["story_id = ? and item_type != ?", self.id, "Story"]).each do |v|
       activity.push(v)
     end
 
