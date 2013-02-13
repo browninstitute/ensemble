@@ -2,7 +2,9 @@
   <span class="winner <%= "hide" if !paragraph.is_winner? %>">
     <i class="icon-trophy" rel="tooltip"></i>
   </span>
-  <span class="paragraph-author">By <strong><%= paragraph.user.name %></strong></span>
+  <% if paragraph.user %>
+    <span class="paragraph-author">By <strong><%= paragraph.user.name %></strong></span>
+  <% end %>
   <div class="likes">
     <span class="like-count">
       <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
