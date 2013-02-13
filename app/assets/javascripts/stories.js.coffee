@@ -36,6 +36,9 @@ $(document).ready ->
   window.nextTextbox = nextTextbox
   window.prevTextbox = prevTextbox
 
+  window.toolbarBold = toolbarBold
+  window.toolbarItalic = toolbarItalic
+
 # Moves to the next paragraph of a scene, in view mode.
 nextParagraph = ->
   _this = $(this)
@@ -273,3 +276,27 @@ truncateSceneDesc = ($scene = "all") ->
       $(".scene_text > p", $scene).trunk8({lines: 1})
     else
       $(".scene_text > p", $scene).trunk8({lines: 3})
+
+toolbarBold = ->
+  $(selectedTextarea).each ->
+    start = this.selectionStart;
+    end = this.selectionEnd;
+    if (end - start > 0)
+      $(this).val(
+          $(this).val().substring(0, start) + 
+          "**" + $(this).val().substring(start, end) + "**" +
+          $(this).val().substring(end)
+      )
+      this.setSelectionRange(start, end + 4)        
+
+toolbarItalic = ->
+  $(selectedTextarea).each ->
+    start = this.selectionStart;
+    end = this.selectionEnd;
+    if (end - start > 0)
+      $(this).val(
+        $(this).val().substring(0, start) + 
+        "_" + $(this).val().substring(start, end) + "_" +
+        $(this).val().substring(end)
+      )
+      this.setSelectionRange(start, end + 2)   

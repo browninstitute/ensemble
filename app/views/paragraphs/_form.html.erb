@@ -1,11 +1,33 @@
 <%= form_for [scene, p], :remote => true, :html => { :class => "paragraph-form span8" } do |f| %>
+  
+  <script>
+  var selectedTextarea = "textarea";  // The currently selected textarea
+  $('form').on('focus click', 'textarea', function() { selectedTextarea = this; });
+  $('#stoolbar_bold').click(toolbarBold);
+  $('#stoolbar_italic').click(toolbarItalic);
+  </script>
+
+  <div class="stoolbar row-fluid">
+    <div class="span11">
+      <div class="stoolbar-inner">
+        <ul>
+          <li class="btn" id="stoolbar_bold">B</li>
+          <li class="btn" id="stoolbar_italic">i</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
   <%= f.text_area :content, :rows => 5, 
                   :placeholder => 'How would you write this part?', 
-                  :class => 'span12' %><br />
+                  :class => 'span11' %><br />
                   
   <span class="text-error">
   </span>
-  <%= f.submit "Save", :class => 'btn btn-mini pull-right' %>
-  <%= link_to "Cancel", "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
+  <div class="span11" style="padding-right: 20px;">
+    <%= f.submit "Save", :class => 'btn btn-mini pull-right' %>
+    <%= link_to "Cancel", "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
+  </div>
 <% end %>
 
