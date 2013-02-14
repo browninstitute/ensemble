@@ -54,8 +54,8 @@ nextParagraph = ->
 
   if (next.size() >= 1)
     _this.unbind()
-    current.hide("slide", { direction: "up" }, 400, ->
-      next.show("slide", { direction: "down" }, 400, ->
+    current.hide("slide", { direction: "left" }, 400, ->
+      next.show("slide", { direction: "right" }, 400, ->
         _this.click nextParagraph
         truncateSceneDesc(_this.parent().parent().parent()) #.scene
       )
@@ -77,8 +77,8 @@ prevParagraph = ->
 
   if (prev.size() >= 1)
     _this.unbind()
-    current.hide("slide", { direction: "down" }, 400, ->
-      prev.show("slide", { direction: "up" }, 400, ->
+    current.hide("slide", { direction: "right" }, 400, ->
+      prev.show("slide", { direction: "left" }, 400, ->
         _this.click prevParagraph
         truncateSceneDesc(_this.parent().parent().parent()) #.scene
       )
@@ -283,11 +283,11 @@ toolbarBold = ->
     end = this.selectionEnd;
     if (end - start > 0)
       $(this).val(
-          $(this).val().substring(0, start) + 
+          $(this).val().substring(0, start) +
           "**" + $(this).val().substring(start, end) + "**" +
           $(this).val().substring(end)
       )
-      this.setSelectionRange(start, end + 4)        
+      this.setSelectionRange(start, end + 4)
 
 toolbarItalic = ->
   $(selectedTextarea).each ->
@@ -295,8 +295,8 @@ toolbarItalic = ->
     end = this.selectionEnd;
     if (end - start > 0)
       $(this).val(
-        $(this).val().substring(0, start) + 
+        $(this).val().substring(0, start) +
         "_" + $(this).val().substring(start, end) + "_" +
         $(this).val().substring(end)
       )
-      this.setSelectionRange(start, end + 2)   
+      this.setSelectionRange(start, end + 2)
