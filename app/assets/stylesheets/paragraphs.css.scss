@@ -1,4 +1,5 @@
 $accent: #23ADE8;
+$lightaccent: #60C8F5;
 
 .scene form.paragraph-form {
   margin: 0;
@@ -8,6 +9,12 @@ $accent: #23ADE8;
     line-height: 1.8em;
     font-family: Georgia,Cambria,"Times New Roman",Times,serif;
   }
+}
+
+.scene.open .paragraph {
+  border-left: 3px solid $lightaccent;
+  padding-left: 15px;
+  left: -15px;
 }
 
 .paragraph {
