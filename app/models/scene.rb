@@ -9,6 +9,19 @@ class Scene < ActiveRecord::Base
   #validates :title, :presence => true, :on => :update
 
   # Returns an array of User records representing the
+  # individuals that have written paragraphs for the scene.
+  def contributors
+    users = []
+    self.paragraphs.each do |para|
+      user = User.find(para.user_id)
+      if !users.include? user
+        users.push(user)
+      end
+    end
+    users
+  end
+
+  # Returns an array of User records representing the
   # individuals that have commented on the scene.
   def commenters
     users = []
