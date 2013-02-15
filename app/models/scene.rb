@@ -8,6 +8,19 @@ class Scene < ActiveRecord::Base
   has_paper_trail :meta => {:story_id => :story_id}
   #validates :title, :presence => true, :on => :update
 
+  # Returns an array of User records representing the
+  # individuals that have commented on the scene.
+  def commenters
+    users = []
+    self.comments.each do |comment|
+      user = User.find(comment.user_id)
+      if !users.include? user
+        users.push(user)
+      end
+    end
+    users
+  end
+
   # Generates temporary ID for use with AJAX callbacks on
   # newly created objects.
   def temp_id
