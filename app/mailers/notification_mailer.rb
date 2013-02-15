@@ -3,7 +3,10 @@ class NotificationMailer < ActionMailer::Base
 
   # Sends you an email when a user comments on a scene
   # you commented on or contributed to.
-  def comment_notification(user, other)
+  def comment_notification(user, other, comment)
+    @user = user
+    @other = other
+    @comment = comment
     mail(:to => user.email, :subject => "#{other.name} replied to your comment on Ensemble")
   end
 

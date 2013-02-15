@@ -1,1 +1,7 @@
-They replied to your comment!
+<%= @other.name %> replied to your comment and wrote:
+
+<p style="font-style:italic;">
+<%= @comment.content %>
+</p>
+
+<%= link_to "Go to the story", story_url(@comment.scene.story) %>
