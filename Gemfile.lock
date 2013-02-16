@@ -52,6 +52,7 @@ GEM
     coffee-script-source (1.4.0)
     columnize (0.3.6)
     commonjs (0.2.6)
+    daemons (1.1.9)
     debugger (1.2.4)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
@@ -219,6 +220,7 @@ DEPENDENCIES
   ancestry
   cancan
   coffee-rails (~> 3.2.1)
+  daemons
   debugger
   delayed_job_active_record
   devise
