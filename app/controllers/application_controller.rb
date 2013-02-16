@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :set_mailer_host
   after_filter :flash_to_headers
 
   rescue_from CanCan::AccessDenied do |exception|
