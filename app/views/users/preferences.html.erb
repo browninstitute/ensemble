@@ -13,7 +13,7 @@
     
     <div class="preferences-inner">
       <strong>Receive emails when:</strong>
-      <%= form_for current_user, :url => { :action => "preferences" }, :class => 'email-prefs-form' do |f| %>
+      <%= form_for current_user, :url => { :action => "preferences" }, :html => {:class => 'email-prefs-form'} do |f| %>
         <label class="checkbox">
           <%= check_box_tag "email[comment_notification]", 1, current_user.settings['email.comment_notification'] %> 
           Someone replies to my comment
