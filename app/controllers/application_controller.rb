@@ -7,11 +7,6 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
-  # Set mailer host dynamically.
-  def set_mailer_host
-    ActionMailer::Base.default_url_options[:host] = request.host_with_port
-  end
-
   # For showing flash messages after ajax.
   def flash_to_headers
     return unless request.xhr?
