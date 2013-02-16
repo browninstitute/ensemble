@@ -55,3 +55,5 @@ end
 before "deploy:assets:symlink" do
   config.update
 end
+
+after :bundle_install, "deploy:migrate"
