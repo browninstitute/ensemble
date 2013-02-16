@@ -1,12 +1,12 @@
 require "rvm/capistrano"
 require "bundler/capistrano"
+require "delayed/recipes"
 load "deploy/assets"
 
 set :application, "story-collab"
 set :repository,  "https://github.com/StanfordHCI/story-collab.git"
 
-set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :scm, :git 
 set :branch, "release"
 set :user, "ubuntu"
 set :use_sudo, true
@@ -18,6 +18,8 @@ default_run_options[:pty] = true
 set :deploy_to, "/var/www/story-collab"
 after "deploy", "deploy:migrate"
 
+set :rails_env, "production" # added for delayed_job
+
 role :web, "ensemble.stanford.edu"                          # Your HTTP server, Apache/etc
 role :app, "ensemble.stanford.edu"                          # This may be the same as your `Web` server
 role :db,  "ensemble.stanford.edu", :primary => true # This is where Rails migrations will run
@@ -28,6 +30,11 @@ role :db,  "ensemble.stanford.edu", :primary => true # This is where Rails migra
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
+
+# delayed_job
+after "deploy:stop", "delayed_job:stop"
+after "deploy:start", "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
 
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
