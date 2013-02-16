@@ -16,3 +16,4 @@
 
 *.swp
 config/initializers/devise.rb
+config/initializers/setup_mail.rb

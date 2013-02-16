@@ -42,6 +42,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancan'
+gem 'ledermann-rails-settings', :require => 'rails-settings'
 
 gem 'acts_as_list'
 gem 'has_draft'
@@ -55,6 +56,9 @@ gem 'ancestry'
 
 gem 'impressionist'
 gem 'google-analytics-rails'
+
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,0 +1,50 @@
+<div class="preferences row-fluid">
+  <div class="preferences-nav span3">
+    <h1><%= current_user.name %></h1>
+    <ul>
+      <li>
+      <%= link_to "Email Notifications", users_preferences_path %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="preferences-content span9">
+    <h1>Email Notifications</h1>
+    
+    <div class="preferences-inner">
+      <strong>Receive emails when:</strong>
+      <%= form_for current_user, :url => { :action => "preferences" }, :html => {:class => 'email-prefs-form'} do |f| %>
+        <label class="checkbox">
+          <%= check_box_tag "email[comment_notification]", 1, current_user.settings['email.comment_notification'] %> 
+          Someone replies to my comment
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[comment_para_notification]", 1, current_user.settings['email.comment_para_notification'] %> 
+          Someone comments on a scene you wrote a paragraph for
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[update_paragraph_notification]", 1, current_user.settings['email.update_paragraph_notification'] %>
+          Someone makes edits to a paragraph you wrote
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[paragraph_notification]", 1, current_user.settings['email.paragraph_notification'] %>
+          Someone writes a paragraph for a scene you commented on
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[update_scene_notification]", 1, current_user.settings['email.update_scene_notification'] %>
+          Someone makes edits to a scene you commented on
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[update_scene_para_notification]", 1, current_user.settings['email.update_scene_para_notification'] %>
+          Someone makes edits to a scene you wrote a paragraph for
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[like_notification]", 1, current_user.settings['email.like_notification'] %>
+          Someone likes a paragraph you wrote
+        </label>
+        <br />
+        <%= f.submit "Save" %>
+      <% end %>
+    </div>
+  </div>
+</div>

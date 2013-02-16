@@ -23,7 +23,10 @@ StoryCollab::Application.routes.draw do
     resources :paragraphs
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" } do
+    get "/users/preferences" => "users/registrations#preferences"
+    match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
+  end
 
   get "home/index"
 

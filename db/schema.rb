@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130208023615) do
+ActiveRecord::Schema.define(:version => 20130215233012) do
 
   create_table "comments", :force => true do |t|
     t.string   "title"
@@ -24,6 +24,22 @@ ActiveRecord::Schema.define(:version => 20130208023615) do
 
   add_index "comments", ["scene_id"], :name => "index_comments_on_scene_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "impressions", :force => true do |t|
     t.string   "impressionable_type"
@@ -90,6 +106,17 @@ ActiveRecord::Schema.define(:version => 20130208023615) do
 
   add_index "scenes", ["story_id"], :name => "index_scenes_on_story_id"
   add_index "scenes", ["user_id"], :name => "index_scenes_on_user_id"
+
+  create_table "settings", :force => true do |t|
+    t.string   "var",                       :null => false
+    t.text     "value"
+    t.integer  "target_id"
+    t.string   "target_type", :limit => 30
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
 
   create_table "stories", :force => true do |t|
     t.string   "title"
