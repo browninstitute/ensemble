@@ -42,6 +42,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancan'
+gem 'ledermann-rails-settings', :require => 'rails-settings'
 
 gem 'acts_as_list'
 gem 'has_draft'
