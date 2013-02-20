@@ -1,8 +1,25 @@
-<div class="story">
-  <h1>I am home!</h1>
-  <p>Hi, <%= current_user.name %> (<%= current_user.email %>)!</p>
+<div class="hero-unit">
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="paper_sheet">
+        <h1><%= @story.title %></h1>
+        <%= @story.scenes.first.paragraphs.first.content.truncate(300) %>
+      </div>
+    </div>
+    <div class="span6">
+      <h1>Collaboratively write stories</h1>
+      <p>Ensemble is a platform for massively collaborative story writing.</p>
+      <p>
+        <% if user_signed_in? %>
+          <%= link_to current_stories_path, :class => "btn btn-primary btn-large" do %>
+            Start contributing to a story
+          <% end %>
+        <% else %>
+          <%= link_to new_user_registration_path, :class => "btn btn-primary btn-large" do %>
+            Sign up to start writing!
+          <% end %>
+        <% end %>
+      </p>
+    </div>
+  </div>
 </div>
-
-<div class="questions-bar">
-</div>
-

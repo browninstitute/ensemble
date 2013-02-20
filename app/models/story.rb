@@ -76,7 +76,7 @@ class Story < ActiveRecord::Base
               para_id = paragraph['id'].to_i
               Paragraph.find(para_id)
             else
-              scene_obj.paragraphs.create
+              scene_obj.paragraphs.build
             end
             para_obj.content = paragraph['content']
             para_obj.user_id = paragraph['user_id']
