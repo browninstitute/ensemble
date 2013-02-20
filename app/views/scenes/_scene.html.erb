@@ -4,7 +4,7 @@
     <div class="paragraphs-container span11">
       <% if edit_mode %>
         <%= render :partial => "paragraphs/story_edit_form", 
-                   :locals => { :scene => scene, :scene_counter => 1 } %>
+          :locals => { :scene => scene, :scene_counter => 1 } %>
       <% else %>
         <%= render :partial => "paragraphs/paragraph", 
                    :collection => scene.ordered_paragraphs,
@@ -17,7 +17,7 @@
       <% if edit_mode %><i class="icon-move icon-large move"></i><% end %>
     </div>  
   </div>
-  <% if scene.title.blank? or scene.new_record? %>
+  <% if scene.title.blank? %>
     <%= render(:partial => 'scenes/new', :locals => { :scene => scene }) %>
   <% else %>
     <% if edit_mode %>

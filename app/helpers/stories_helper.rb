@@ -1,6 +1,41 @@
 module StoriesHelper
   include Rails.application.routes.url_helpers
 
+  # Renders the example new story
+  def render_new_story_example
+    new_story_scenes = Array.new
+    new_story_scenes[0] = Scene.new(:title => "Setting the stage",
+                                    :content => "How should the characters and the setting be introduced?",
+                                    :position => 1)
+    new_story_scenes[1] = Scene.new(:title => "The big event", 
+                                    :content => "I need suggestions on the big event that changes the characters' lives and puts the story into motion.", 
+                                    :position => 2)
+    new_story_scenes[2] = Scene.new(:position => 3)
+    new_story_scenes[3] = Scene.new(:position => 4)
+    new_story_scenes[4] = Scene.new(:position => 5)
+   
+    html = ""
+    new_story_scenes.each do |s|
+      html += render :partial => "scenes/scene", :locals => {:scene => s, :edit_mode => true}
+    end
+    html.html_safe
+  end
+
+  def new_story_example_text(position)
+    case position
+    when 1
+      "Once upon a time..."
+    when 2
+      "One day..."
+    when 3
+      "So they..."
+    when 4
+      "Finally, they..."
+    when 5
+      "And they lived happily ever after."
+    end
+  end
+
   # Generates text displaying the published status of a story.
   def published_status(story)
     return if story.updated_at.nil?
