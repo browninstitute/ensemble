@@ -2,6 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.paper_sheet {
+  h1 {
+    font-size: 36px;
+    line-height: 48px;
+  }
+  position: relative;
+  padding: 50px;
+  margin: 0 auto;
+  margin-right: 20px;
+  background-color: #fff;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
 .meta-nav {
   text-align: right;
 }

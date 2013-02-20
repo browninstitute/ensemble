@@ -3,6 +3,8 @@ class Ability
 
   def initialize(user)
 
+    return unless user
+
     if user.admin?
       can :manage, :all
     else
@@ -24,8 +26,10 @@ class Ability
     can :history, Story
     can :create, Paragraph
     can :create, Story
+    can :create, Scene
     can :manage, Comment, :user_id => user.id
     can :manage, Post, :user_id => user.id
+    can :manage, Paragraph, :user_id => user.id
 
     # Define abilities for the passed in user here. For example:
     #
