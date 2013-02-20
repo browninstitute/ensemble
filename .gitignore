@@ -15,4 +15,6 @@
 /tmp
 
 *.swp
+config/deploy.rb
 config/initializers/devise.rb
+config/initializers/setup_mail.rb

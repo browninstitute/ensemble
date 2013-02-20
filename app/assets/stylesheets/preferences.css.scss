@@ -1,0 +1,35 @@
+.preferences {
+  h1 {
+    padding: 15px;
+    margin: 0;
+    font-size: 1em;
+    line-height: 1em;
+    background-color: #eee;
+  }
+
+  & > div {
+    border: 1px solid #ddd;
+  }
+
+  .preferences-nav {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 15px;
+
+      li {
+        line-height: 1em;
+      }
+    }
+  }
+  .preferences-content {
+    .preferences-inner {
+      padding: 15px;
+
+      .email-prefs-form {
+        margin-top: 10px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

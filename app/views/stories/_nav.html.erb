@@ -1,7 +1,7 @@
 <div class="navbar navbar-inverse navbar-magic">
   <div class="navbar-inner">
     <ul class="nav">
-      <li class="<%= 'active' if current_page?(story_path(@story)) %>">
+      <li class="<%= 'active' if current_page?(story_path(@story)) || current_page?(current_stories_path) %>">
         <%= link_to 'Story', story_path(@story) %>
       </li>
       <li class="<%= 'active' if current_page?(story_posts_path(@story)) %>">

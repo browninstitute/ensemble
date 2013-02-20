@@ -23,12 +23,17 @@ StoryCollab::Application.routes.draw do
     resources :paragraphs
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-
-  get "home/index"
+  devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" } do
+    get "/users/preferences" => "users/registrations#preferences"
+    match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
+  end
 
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
   match 'paragraphs/:id/winner' => 'paragraphs#winner', :as => :winner_paragraph
+  
+  # Non-model pages
+  get "home/index"
+  match '/about' => 'pages#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
