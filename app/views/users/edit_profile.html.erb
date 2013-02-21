@@ -19,7 +19,11 @@
             <%= f.label :avatar %> 
           </label>
           <div class="controls">
-            <%= image_tag @user.avatar.url(:medium) %><br />
+            <% if @user.avatar.file? %>
+              <%= image_tag @user.avatar.url(:medium) %>
+            <% else %>
+              <%= image_tag "alien.svg", :style => "width: 300px;" %>
+            <% end %><br />
             <%= f.file_field :avatar, :style => "line-height: 10px;"  %>
           </div>
         </div>
