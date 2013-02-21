@@ -1,0 +1,10 @@
+<div class="preferences-nav span3">
+  <h1><%= current_user.name %></h1>
+  <ul>
+    <li><%= link_to "Profile Settings", users_edit_profile_path %></li>
+    <li><%= link_to "Email Notifications", users_preferences_path %></li>
+    <% if current_user.provider.blank? %>
+      <li><%= link_to "Change Password", users_change_password_path %></li>
+    <% end %>
+  </ul>
+</div>

@@ -1,5 +1,10 @@
 <div class="comment_box" id="<%= "comment_#{comment.id}" if comment.id %>">
-  <div class="comment_photo"><%= image_tag "alien.svg" %>
+  <div class="comment_photo">
+    <% if current_user.avatar.file? %>
+      <%= image_tag current_user.avatar.url(:tiny) %>
+    <% else %>
+      <%= image_tag "alien.svg" %>
+    <% end %>
   </div>
   <div class="comment">
     <%= form_for [scene, comment], :html => { :class => 'form-inline', :style => 'margin: 0' }, :remote => true do |f| %>
