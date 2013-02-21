@@ -16,6 +16,11 @@
         <% scene.paragraphs.each_with_index do |p, i| %>
           <li class="<%= "active" if i == 0 %>"><a href="#para_<%= p.id %>" data-toggle="tab">#<%= p.id %></a></li>
         <% end %>
+        <li>
+          <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" do %>
+            <i class="icon-plus"></i>
+          <% end %>
+        </li>
       </ul>
     </div>
   </div>

@@ -32,6 +32,8 @@ $lightaccent: #60C8F5;
 
     li {
       line-height: 36px;
+      margin-left: -1px;
+      margin-bottom: 0px;
     
       a {
         padding-top: 4px;
@@ -41,7 +43,11 @@ $lightaccent: #60C8F5;
         line-height: 20px;
         border-radius: 0 4px 4px 0;
         border-left-color: transparent;
-        margin-left: -1px;
+        min-width: 30px;
+        display: block;
+        margin-bottom: 5px;
+        text-align: center;
+        text-decoration: none;
       }
 
       &.active a {
