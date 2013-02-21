@@ -29,33 +29,15 @@ function tick() {
 //
 $().ready(function() {
   $('#stoolbar_bold').click(function() {
-    $(selectedTextarea).each(function() {
-      var start = this.selectionStart;
-      var end = this.selectionEnd;
-      if (end - start > 0) {
-        $(this).val(
-          $(this).val().substring(0, start) + 
-          "**" + $(this).val().substring(start, end) + "**" +
-          $(this).val().substring(end)
-        );      
-        this.setSelectionRange(start, end + 4);        
-      }
-    });
+    toolbarBold();
     paragraphsToContent();
   });
   $('#stoolbar_italic').click(function() {
-    $(selectedTextarea).each(function() {
-      var start = this.selectionStart;
-      var end = this.selectionEnd;
-      if (end - start > 0) {
-        $(this).val(
-          $(this).val().substring(0, start) + 
-          "_" + $(this).val().substring(start, end) + "_" +
-          $(this).val().substring(end)
-        );
-        this.setSelectionRange(start, end + 2);        
-      }
-    });
+    toolbarItalic();
+    paragraphsToContent();
+  });
+  $('#stoolbar_ul').click(function() {
+    toolbarUnorderedList();
     paragraphsToContent();
   });
   $('#stoolbar_selectall').click(function() {
@@ -136,11 +118,16 @@ $().ready(function() {
       } else if (e.keyCode == 37) { // Left arrow
         $prev.focus();
         $prev[0].setSelectionRange($prev.val().length * 2, $prev.val().length * 2);
-      } else if (e.keyCode == 8 && this.selectionStart == 0) {
-        $prev.focus();
+      } else if (e.keyCode == 8 && this.selectionStart == 0) { // Backspace - delete or merge depending
         if ($(this).val().length == 0 && $('.edit-mode .txt').length > 1) {
           $(this).parent().parent().parent().remove();
+        } else if ($(this).parent().parent().parent().find('a[class~=new-scene]').length > 0) {
+          $prev.val($prev.val() + $(this).val());
+          $(this).parent().parent().parent().remove();
+          tick();
         }
+        $prev.focus();
+        $('.paragraph .txt').trigger('autosize');
       }
     }
 

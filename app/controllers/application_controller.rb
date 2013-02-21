@@ -6,6 +6,14 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
+  def after_sign_in_path_for(resource_or_scope)
+    if request.env['omniauth.origin'] && request.env['omniauth.origin'] != new_user_session_url
+      request.env['omniauth.origin']
+    else
+      root_path
+    end
+  end
+
   # For showing flash messages after ajax.
   def flash_to_headers
     return unless request.xhr?

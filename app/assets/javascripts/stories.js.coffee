@@ -38,6 +38,7 @@ $(document).ready ->
 
   window.toolbarBold = toolbarBold
   window.toolbarItalic = toolbarItalic
+  window.toolbarUnorderedList = toolbarUnorderedList
 
 # Moves to the next paragraph of a scene, in view mode.
 nextParagraph = ->
@@ -282,21 +283,49 @@ toolbarBold = ->
     start = this.selectionStart;
     end = this.selectionEnd;
     if (end - start > 0)
-      $(this).val(
+      if $(this).val().substring(start, start + 2) == $(this).val().substring(end - 2, end) == '**'
+        $(this).val(
           $(this).val().substring(0, start) +
-          "**" + $(this).val().substring(start, end) + "**" +
+          $(this).val().substring(start + 2, end - 2) +
           $(this).val().substring(end)
-      )
-      this.setSelectionRange(start, end + 4)
+        )
+        this.setSelectionRange(start, end - 4)
+      else
+        $(this).val(
+            $(this).val().substring(0, start) +
+            "**" + $(this).val().substring(start, end) + "**" +
+            $(this).val().substring(end)
+        )
+        this.setSelectionRange(start, end + 4)
 
 toolbarItalic = ->
   $(selectedTextarea).each ->
     start = this.selectionStart;
     end = this.selectionEnd;
     if (end - start > 0)
+      if $(this).val().substring(start, start + 1) == $(this).val().substring(end - 1, end) == '_'
+        $(this).val(
+          $(this).val().substring(0, start) +
+          $(this).val().substring(start + 1, end - 1) +
+          $(this).val().substring(end)
+        )
+        this.setSelectionRange(start, end - 2)
+      else
+        $(this).val(
+          $(this).val().substring(0, start) +
+          "_" + $(this).val().substring(start, end) + "_" +
+          $(this).val().substring(end)
+        )
+        this.setSelectionRange(start, end + 2)
+
+toolbarUnorderedList = ->
+  $(selectedTextarea).each ->
+    start = this.selectionStart;
+    end = this.selectionEnd;
+    if (end - start > 0)
       $(this).val(
         $(this).val().substring(0, start) +
-        "_" + $(this).val().substring(start, end) + "_" +
+        "\n\n- " + $(this).val().substring(start, end) + "\n\n" +
         $(this).val().substring(end)
       )
-      this.setSelectionRange(start, end + 2)
+      this.setSelectionRange(start + 2, end + 4)

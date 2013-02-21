@@ -3,7 +3,7 @@ class Paragraph < ActiveRecord::Base
   belongs_to :scene
   acts_as_list :scope => :scene
   attr_accessible :content, :position, :title
-  validates :content, :presence => true
+  validates :content, :presence => true, :if => lambda {|p| p.user != p.scene.story.user}
   has_paper_trail :only => [:content], :meta => {:scene_id => :scene_id}
   acts_as_votable
 

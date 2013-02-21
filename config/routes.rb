@@ -28,10 +28,12 @@ StoryCollab::Application.routes.draw do
     match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
   end
 
-  get "home/index"
-
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
   match 'paragraphs/:id/winner' => 'paragraphs#winner', :as => :winner_paragraph
+  
+  # Non-model pages
+  get "home/index"
+  match '/about' => 'pages#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
