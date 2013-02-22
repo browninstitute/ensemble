@@ -113,11 +113,10 @@ $().ready(function() {
       $prev = $(this).parents(".scene").prev().find('.txt');
       if (e.keyCode == 38) { // Up arrow
         $prev.focus();
-      } else if (e.keyCode == 37) { // Left arrow
+      } else if (e.keyCode == 37 && this.selectionStart == 0) { // Left arrow
         $prev.focus();
         $prev[0].setSelectionRange($prev.val().length * 2, $prev.val().length * 2);
       } else if (e.keyCode == 8 && this.selectionStart == 0) { // Backspace - delete or merge depending
-        console.log("blah");
         if ($(this).val().length == 0 && $('.edit-mode .txt').length > 1) {
           $(this).parents(".scene").remove();
         } else if ($(this).parents(".scene").find('a[class~=new-scene]').length > 0) {
@@ -129,7 +128,9 @@ $().ready(function() {
         $('.paragraph .txt').trigger('autosize');
       }
     }
+  });
 
+  $('.edit-mode').on('keyup', '.txt', function(e) { 
     // Create a new textarea with a double return
     if($(this).val().indexOf("\n\n") !== -1) {
       <% temp = Scene.new %>
