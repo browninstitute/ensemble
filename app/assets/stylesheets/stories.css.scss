@@ -112,9 +112,15 @@ $accent: #23ADE8;
   }
 
   .paragraphs-container {
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    
+    .tab-content {
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+    }
+   
+    .nav-tabs {
+      margin-left: -1px;
+    }
+
     textarea {
       font-family: Georgia,Cambria,"Times New Roman",Times,serif;
       font-size: 1.5em;

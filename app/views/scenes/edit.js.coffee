@@ -4,16 +4,18 @@ $ ->
   # If editing an existing info box
   if ($(".scene-info", $scene).length > 0)
     # hide new scene div
-    $scene.children(".scene-info").hide()
+    $(".scene-info", $scene).hide()
 
     # add form
-    $scene.children(".scene-info")
+    $(".scene-info", $scene)
           .after("<%= escape_javascript(render(:partial => 'scenes/form', :locals => {:scene => @scene})) %>")
+  # If editing a new info box
   else
     $(".new-scene", $scene).hide()
     if ($(".edit-mode").length > 0)
       $(".new-scene", $scene).after("<%= escape_javascript(render(:partial => 'scenes/form', :locals => {:scene => @scene, :buttons => false})) %>")
+      $(".nav-tabs", $scene).show()
     else
       $(".new-scene", $scene).after("<%= escape_javascript(render(:partial => 'scenes/form', :locals => {:scene => @scene})) %>")
 
-  $scene.children(".scene-form").children(".scene-form-inner").children(".cancel-scene").click cancelScene
+  $(".scene-form .scene-form-inner .cancel-scene", $scene).click cancelScene
