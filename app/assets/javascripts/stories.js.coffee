@@ -6,6 +6,7 @@ $(document).ready ->
   # Initialize
   $(".winner i").tooltip({title: "Winner!"})
   $(".scene .nav-tabs .new-paragraph").tooltip({title: "Add alternative"})
+  $(".scene-info-inner .scene-header i").tooltip({title: "This scene is accepting alternatives."})
   $(".next-paragraph").click nextParagraph
   $(".prev-paragraph").click prevParagraph
   $(".new-paragraph").click newParagraph

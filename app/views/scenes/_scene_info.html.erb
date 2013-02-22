@@ -1,5 +1,9 @@
 <div class="scene-info span4">
   <div class="scene-info-inner span12">
+    <div class="scene-header">
+      <span class="scene-header-text">Scene</span>
+      <span class="label label-success pull-right">Accepting Alternatives</span>
+    </div>
     <div class="scene_text">
       <h1><%= Format.markdown(scene.title) if !scene.title.nil? %></h1>
       <%= Format.markdown(scene.content) %>
