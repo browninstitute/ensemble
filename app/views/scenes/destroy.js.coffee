@@ -1,7 +1,8 @@
 $ ->
-  $scene = $("#scene_<%= @scene.id %>")
+  $s = $("#scene_<%= @scene.id %>")
 
-  $scene.children(".scene-info")
+  $(".scene-info", $s)
     .replaceWith("<%= escape_javascript(render(:partial => 'scenes/new', :locals => { :scene => @scene })) %>")
-  $scene.children(".new-scene").click showScene
-  $scene.removeClass("open")
+  $(".new-scene", $s).click showScene
+  $s.removeClass("open")
+  $(".nav-tabs", $s).hide()
