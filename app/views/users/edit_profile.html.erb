@@ -1,0 +1,38 @@
+<div class="preferences row-fluid">
+  <%= render 'users/left_nav' %>
+
+  <div class="preferences-content span9">
+    <h1>Profile Settings</h1>
+    
+    <div class="preferences-inner">
+      <%= form_for(@user, :url => { :action => "edit_profile" }, :html => { :class => "form-horizontal" } ) do |f| %>
+        <div class="control-group">
+          <label class="control-label" for="name">
+            <%= f.label :name %> 
+          </label>
+          <div class="controls">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="avatar">
+            <%= f.label :avatar %> 
+          </label>
+          <div class="controls">
+            <% if @user.avatar.file? %>
+              <%= image_tag @user.avatar.url(:medium) %>
+            <% else %>
+              <%= image_tag "alien.svg", :style => "width: 300px;" %>
+            <% end %><br />
+            <%= f.file_field :avatar, :style => "line-height: 10px;"  %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%= f.submit "Update Profile", :class => "btn" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

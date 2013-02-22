@@ -3,33 +3,37 @@ class Ability
 
   def initialize(user)
 
-    return unless user
+    user ||= User.new
 
     if user.admin?
       can :manage, :all
     else
       can :read, :all
+      can :current, Story
+      can :history, Story
     end
 
-    # Owners of stories can...
-    can :manage, Story, :user_id => user.id
-    can :manage, Scene, :story => { :user_id => user.id }
-    can :manage, Paragraph, :scene => { :story => { :user_id => user.id }}
-    can :manage, Comment, :scene => { :story => { :user_id => user.id }}
+    unless user.id.blank?
+        # Owners of stories can...
+        can :manage, Story, :user_id => user.id
+        can :manage, Scene, :story => { :user_id => user.id }
+        can :manage, Paragraph, :scene => { :story => { :user_id => user.id }}
+        can :manage, Comment, :scene => { :story => { :user_id => user.id }}
 
-    # Trusted users can...
-    can :manage, Scene, :story => { :contributors => { :id => user.id } }
-    can :manage, Paragraph, :scene => { :story => { :contributors => { :id => user.id } } }
+        # Trusted users can...
+        can :manage, Scene, :story => { :contributors => { :id => user.id } }
+        can :manage, Paragraph, :scene => { :story => { :contributors => { :id => user.id } } }
 
-    # Anyone can...
-    can :like, Paragraph
-    can :history, Story
-    can :create, Paragraph
-    can :create, Story
-    can :create, Scene
-    can :manage, Comment, :user_id => user.id
-    can :manage, Post, :user_id => user.id
-    can :manage, Paragraph, :user_id => user.id
+        # Anyone can...
+        can :like, Paragraph
+        can :history, Story
+        can :create, Paragraph
+        can :create, Story
+        can :create, Scene
+        can :manage, Comment, :user_id => user.id
+        can :manage, Post, :user_id => user.id
+        can :manage, Paragraph, :user_id => user.id
+    end
 
     # Define abilities for the passed in user here. For example:
     #

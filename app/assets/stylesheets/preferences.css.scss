@@ -13,12 +13,28 @@
 
   .preferences-nav {
     ul {
+      background-color: #fcfcfc;
       list-style-type: none;
       margin: 0;
-      padding: 15px;
 
       li {
-        line-height: 1em;
+        &.active {
+          border-left: 2px solid #60c8f5;
+        }
+        a {
+          display: block;
+          line-height: 2em;
+          padding: 10px 13px;
+          border-left: 2px solid #fcfcfc;
+        }
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #fff;
+        &:hover {
+          background-color: #fefefe;
+          a {
+            text-decoration: none;
+          }
+        }
       }
     }
   }

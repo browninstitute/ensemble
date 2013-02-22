@@ -7,16 +7,19 @@
   <% end %>
   <div class="likes">
     <span class="like-count">
-      <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
+      <i class="icon-heart"></i>
+      <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span>
     </span> 
     &sdot;
-    <% if current_user.voted_up_on? paragraph %>
-      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link loved', :remote => true do %>
-        <i class="icon-heart"></i> Loved
-      <% end %>
-    <% else %>
-      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link', :remote => true do %>
-        <i class="icon-heart"></i> Love
+    <% if user_signed_in? %>
+      <% if current_user.voted_up_on? paragraph %>
+        <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link loved', :remote => true do %>
+          <i class="icon-heart"></i> Loved
+        <% end %>
+      <% else %>
+        <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link', :remote => true do %>
+          <i class="icon-heart"></i> Love
+        <% end %>
       <% end %>
     <% end %>
   </div>

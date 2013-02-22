@@ -1,11 +1,14 @@
 $ ->
-  $scene = $("#scene_<%= @scene.id %>")
+  $s = $("#scene_<%= @scene.id %>")
 
-  $scene.children(".scene-form").remove()
-  $scene.children(".new-scene").remove()
-  $scene.children(".scene-info").remove()
-  $scene.append("<%= escape_javascript(render(:partial => 'scenes/scene_info', :locals => { :scene => @scene })) %>")
+  $(".scene-form", $s).remove()
+  $(".new-scene", $s).remove()
+  $(".scene-info", $s).remove()
+  $s.append("<%= escape_javascript(render(:partial => 'scenes/scene_info', :locals => { :scene => @scene })) %>")
         .show()
-  $scene.children(".scene-info").children(".scene-info-inner").click showScene
-  $scene.addClass("open")
-  truncateSceneDesc($scene)
+  $(".scene-info .scene-info-inner", $s).click showScene
+  $s.addClass("open")
+  truncateSceneDesc($s)
+
+  $(".nav-tabs", $s).show()
+

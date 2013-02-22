@@ -34,6 +34,8 @@ gem 'uglifier', '>= 1.0.3' #needs to be placed outside of assets group
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
 gem 'therubyracer'
 gem 'less-rails' #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'twitter-bootstrap-rails'

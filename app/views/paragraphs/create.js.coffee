@@ -2,16 +2,12 @@ $ ->
   $s = $('#scene_<%= @scene.id %>')
   p = "<%= escape_javascript(render(:partial => 'paragraphs/paragraph', :locals => { :paragraph => @p, :scene => @scene, :paragraph_counter => 1 })) %>"
   $p = $(p)
-  $content = $p.children('.paragraph-content')
+  $content = $('.paragraph-content', $p)
   $content.html('<%= Format.markdown @p.content %>')
 
-  $s.children(".paragraph").children(".paragraphs-container").append(p)
-  $s.children('.paragraph-form').remove()
+  $(".tab-content", $s).append(p)
+  $('.paragraph-form', $s).remove()
+  $(".nav-tabs li:last", $s).before("<li><a href='#para_<%= @p.id %>' data-toggle='tab'>#<%= @p.id %></a></li>")
+  $(".nav-tabs li:nth-last-child(2) a", $s).click()
 
-  if $s.find('.paragraph-inner').size() > 1
-    $s.children('.paragraph').addClass('multiple')
-    $('.expand-paragraphs', $s).show()
-
-  $('.para-count', $s).html("<%= escape_javascript(pluralize(@scene.paragraphs.length, "alternative")) %>")
-  $s.children('.paragraph').show()
-  goToParagraph($s.children(".paragraph").children('.paragraphs-container'), <%= @p.id %>)
+  $('.paragraph', $s).show()

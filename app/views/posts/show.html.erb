@@ -18,6 +18,7 @@
 
 <%= nested_posts @post.descendants.arrange(:order => :created_at) %>
 
+<% if can? :create, Post %>
 <div class="message reply_box">
   <div class="message-user">
     <%= image_tag "alien.svg" %>
@@ -31,3 +32,4 @@
     <% end %>
   </div>
 </div>
+<% end %>
