@@ -21,6 +21,8 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to new_story_post_path(@story), :class => 'btn btn-primary', :remote => true do %>
-  <i class="icon-plus"></i> New Thread 
+<% if can? :create, Post %>
+  <%= link_to new_story_post_path(@story), :class => 'btn btn-primary', :remote => true do %>
+    <i class="icon-plus"></i> New Thread 
+  <% end %>
 <% end %>

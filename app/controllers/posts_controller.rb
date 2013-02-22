@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   impressionist
+  load_and_authorize_resource
   layout "stories"
 
   def index

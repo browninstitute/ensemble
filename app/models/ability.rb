@@ -9,6 +9,8 @@ class Ability
       can :manage, :all
     else
       can :read, :all
+      can :current, Story
+      can :history, Story
     end
 
     unless user.id.blank?
@@ -32,11 +34,6 @@ class Ability
         can :manage, Post, :user_id => user.id
         can :manage, Paragraph, :user_id => user.id
     end
-
-    can :view, Story
-    can :view, Paragraph
-    can :view, Scene
-    can :current, Story
 
     # Define abilities for the passed in user here. For example:
     #
