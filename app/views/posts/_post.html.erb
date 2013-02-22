@@ -9,7 +9,11 @@
     <% end %>
     <%= post.message %><br />
     <div class="actions">
-      <%= link_to "Reply", reply_story_post_path(@story, post), :remote => true %>
+      <% if can? :create, Post %>
+        <%= link_to "Reply", reply_story_post_path(@story, post), :remote => true %>
+      <% else %>
+        &nbsp;
+      <% end %>
       <% if can? :manage, post %>
          &sdot; <%= link_to "Edit", edit_story_post_path(@story, post), :remote => true %>
       <% end %>

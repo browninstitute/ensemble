@@ -4,6 +4,7 @@
       <div class="paper_sheet">
         <h1><%= @story.title %></h1>
         <%= @story.scenes.first.paragraphs.first.content.truncate(300) %>
+        <%= link_to "Read more?", current_stories_path %>
       </div>
     </div>
     <div class="span6">
