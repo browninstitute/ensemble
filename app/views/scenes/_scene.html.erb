@@ -18,7 +18,7 @@
         <% end %>
         <li>
           <% if !edit_mode && can?(:create, Paragraph) %>
-            <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" do %>
+            <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph", :data => {:toggle => "tooltip"} do %>
               <i class="icon-plus"></i>
             <% end %>
           <% end %>

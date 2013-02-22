@@ -1,6 +1,9 @@
 <% buttons = true if local_assigns[:buttons].nil? %>
 <div class="scene-form span4">
   <%= form_for scene, :remote => true, :html => { :class => "scene-form-inner" } do |f| %>
+    <div class="scene-header">
+      <span class="scene-header-text">Scene</span>
+    </div>
     <%= f.text_field :title, :placeholder => 'Scene title', :class => 'span12' %><br />
     <%= f.text_area :content, :rows => 3, 
                     :placeholder => 'What should happen in this scene?', 
