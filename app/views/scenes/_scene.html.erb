@@ -17,7 +17,7 @@
           <li class="<%= "active" if i == 0 %>"><a href="#para_<%= "edit_" if edit_mode %><%= p.id %>" data-toggle="tab">#<%= p.id %></a></li>
         <% end %>
         <li>
-          <% if !edit_mode %>
+          <% if !edit_mode && can?(:create, Paragraph) %>
             <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" do %>
               <i class="icon-plus"></i>
             <% end %>
