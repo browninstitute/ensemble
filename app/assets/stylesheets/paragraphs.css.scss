@@ -18,8 +18,11 @@ $lightaccent: #60C8F5;
 }
 
 .paragraphs-container.verticaltabs-container {
+  overflow: visible;
+
   .tab-content {
     position: static;
+    overflow: visible;
   }
 
   .nav-tabs {
