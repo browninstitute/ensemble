@@ -1,8 +1,8 @@
 $ ->
+  $s = $("#scene_<%= @p.scene.id %>")
   $p = $("#para_<%= @p.id %>")
-  $p.hide("slow", ->
-    doNotReset = $p.parent().parent().hasClass('expanded')
+  $p.fadeOut("slow", ->
     $(this).remove()
-    if (!doNotReset)
-      resetParagraphs($("#scene_<%= @scene.id %>").children(".paragraph").children('.paragraphs-container'))
+    $("li a[href='#para_<%= @p.id %>']", $s).parent().remove()
+    $(".nav-tabs li:first a", $s).click()
   )
