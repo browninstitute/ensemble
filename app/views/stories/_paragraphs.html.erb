@@ -97,12 +97,10 @@ $().ready(function() {
   $('.edit-mode').on('focus', '.txt', function() {
     prevSelectionStart = this.selectionStart;
   })
-  $('.edit-mode').on('keyup', '.txt', function(e) {
-    // console.log(this.selectionStart);
-
+  $('.edit-mode').on('keydown', '.txt', function(e) {
     // See if we want to jump to the next textarea
     if (this.selectionStart == prevSelectionStart || this.selectionStart == $(this).val().length) {
-      $next = $(this).parent().parent().parent().next().find('.txt');
+      $next = $(this).parents(".scene").next().find('.txt');
       if (e.keyCode == 40) { // Down arrow
         $next.focus();
       } else if (e.keyCode == 39 && this.selectionStart == $(this).val().length) { // Right arrow
@@ -119,6 +117,7 @@ $().ready(function() {
         $prev.focus();
         $prev[0].setSelectionRange($prev.val().length * 2, $prev.val().length * 2);
       } else if (e.keyCode == 8 && this.selectionStart == 0) { // Backspace - delete or merge depending
+        console.log("blah");
         if ($(this).val().length == 0 && $('.edit-mode .txt').length > 1) {
           $(this).parents(".scene").remove();
         } else if ($(this).parents(".scene").find('a[class~=new-scene]').length > 0) {
