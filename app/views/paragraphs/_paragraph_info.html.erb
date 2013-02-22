@@ -7,7 +7,8 @@
   <% end %>
   <div class="likes">
     <span class="like-count">
-      <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span> <i class="icon-heart"></i>
+      <i class="icon-heart"></i>
+      <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span>
     </span> 
     &sdot;
     <% if user_signed_in? %>

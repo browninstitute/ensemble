@@ -13,7 +13,7 @@
         <% end %>
       </div>
       <ul class="nav-tabs span1 <%= "hide" if !scene.open? %>">
-        <% scene.paragraphs.each_with_index do |p, i| %>
+        <% scene.ordered_paragraphs.each_with_index do |p, i| %>
           <li class="<%= "active" if i == 0 %>"><a href="#para_<%= "edit_" if edit_mode %><%= p.id %>" data-toggle="tab">#<%= p.id %></a></li>
         <% end %>
         <li>
