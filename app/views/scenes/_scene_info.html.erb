@@ -6,11 +6,16 @@
     </div>
     <div class="main-actions">
       <div class="pull-left">
-        <span class="comment-count"><%= scene.comments.length %></span> <i class="icon-comment"></i> &sdot; <%= link_to "Comment", "#", :class => "comment-link" %><br />
+        <span class="comment-count"><%= scene.comments.length %></span> <i class="icon-comment"></i>
+        <% if can? :create, Comment %>
+          &sdot; <%= link_to "Comment", "#", :class => "comment-link" %><br />
+        <% end %>
       </div>
       <div class="pull-right">
-        <span class="para-count"><%= pluralize(scene.paragraphs.length, "alternative") %></span> &sdot; 
-        <%= link_to "Add an alternative", new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" %>
+        <span class="para-count"><%= pluralize(scene.paragraphs.length, "alternative") %></span> 
+        <% if can? :create, Paragraph %>
+          &sdot; <%= link_to "Add an alternative", new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph" %>
+        <% end %>
         <span class="expand-paragraphs <%= "hide" if scene.paragraphs.length <= 1 %>">
           &sdot; 
           <%= link_to "See all", "#" %>
@@ -24,10 +29,12 @@
     <div id="scene_<%= scene.id %>_comment_box" class="scene-comment-box">
       <%= render :partial => "comments/form", :locals => { :scene => scene, :comment => Comment.new } %>
     </div>
-    <div class="link_actions pull-right">
-      <%= link_to "Edit", edit_scene_path(scene), :remote => true %>
-      &sdot;
-      <%= link_to "Delete", scene_path(scene), :method => :delete, :confirm => "Are you sure?", :remote => true %>
-    </div>
+    <% if can? :manage, scene %>
+      <div class="link_actions pull-right">
+        <%= link_to "Edit", edit_scene_path(scene), :remote => true %>
+        &sdot;
+        <%= link_to "Delete", scene_path(scene), :method => :delete, :confirm => "Are you sure?", :remote => true %>
+      </div>
+    <% end %>
   </div>
 </div>
