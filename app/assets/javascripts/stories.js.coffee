@@ -60,7 +60,7 @@ nextParagraph = ->
     current.hide("slide", { direction: "left" }, 400, ->
       next.show("slide", { direction: "right" }, 400, ->
         _this.click nextParagraph
-        truncateSceneDesc(_this.parent().parent().parent()) #.scene
+        truncateSceneDesc(_this.parents('.scene')) #.scene
       )
     )
 
@@ -83,7 +83,7 @@ prevParagraph = ->
     current.hide("slide", { direction: "right" }, 400, ->
       prev.show("slide", { direction: "left" }, 400, ->
         _this.click prevParagraph
-        truncateSceneDesc(_this.parent().parent().parent()) #.scene
+        truncateSceneDesc(_this.parents('.scene')) #.scene
       )
     )
 
@@ -188,7 +188,7 @@ showScene = (e) ->
     _this = $(this)
     if _this.hasClass("scene-selected")
       _this.removeClass("scene-selected")
-      truncateSceneDesc(_this.parent().parent()) # .scene
+      truncateSceneDesc(_this.parents('.scene')) # .scene
     else
       $(".scene-selected").removeClass("scene-selected")
       $(".cancel-scene").click()
@@ -269,13 +269,13 @@ truncateSceneDesc = ($scene = "all") ->
     # loop
     for s in $(".scene")
       $s = $(s)
-      if ($s.height() <= 110)
+      if ($s.height() <= 140)
         $(".scene_text > p", $s).trunk8({lines: 1})
       else
         $(".scene_text > p", $s).trunk8({lines: 3})
   else
     # truncate specific scene description
-    if ($scene.height() <= 110)
+    if ($scene.height() <= 140)
       $(".scene_text > p", $scene).trunk8({lines: 1})
     else
       $(".scene_text > p", $scene).trunk8({lines: 3})
