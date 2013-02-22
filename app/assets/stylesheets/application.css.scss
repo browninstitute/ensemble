@@ -89,6 +89,30 @@ header {
   }
 }
 
+footer {
+  border-top: 1px solid #eee;
+  padding-top: 5px;
+  margin-top: 2em;
+
+  a {
+    text-decoration: none;
+  }
+
+  .buglink {
+    font-weight: bold;
+  }
+
+  .outlinks {
+    width: 30%;
+    
+    a {
+      width: 50%;
+      display: block;
+      float: left;
+    }
+  }
+}
+
 /* Other overrides */
 .tooltip {
   line-height: 1.5em;
