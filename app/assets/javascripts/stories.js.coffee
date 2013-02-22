@@ -184,7 +184,7 @@ cancelScene = (e) ->
 
 # Shows a scene's details.
 showScene = (e) ->
-  if (e.target == this || e.target.tagName == "H1" || e.target.tagName == "P")
+  if (e.target == this || e.target.tagName == "H1" || e.target.tagName == "P" || e.target.tagName == "DIV")
     _this = $(this)
     if _this.hasClass("scene-selected")
       _this.removeClass("scene-selected")
