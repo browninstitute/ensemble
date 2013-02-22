@@ -8,6 +8,11 @@ class Scene < ActiveRecord::Base
   has_paper_trail :meta => {:story_id => :story_id}
   #validates :title, :presence => true, :on => :update
 
+  # Returns true if scene is open for contributions.
+  def open?
+    !self.title.blank?
+  end
+
   # Returns an array of User records representing the
   # individuals that have written paragraphs for the scene.
   def contributors
