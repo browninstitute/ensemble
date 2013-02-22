@@ -112,7 +112,7 @@ $().ready(function() {
 
     // See if we want to jump to the previous textarea
     if (this.selectionStart == prevSelectionStart || this.selectionStart == 0) {
-      $prev = $(this).parent().parent().parent().prev().find('.txt');
+      $prev = $(this).parents(".scene").prev().find('.txt');
       if (e.keyCode == 38) { // Up arrow
         $prev.focus();
       } else if (e.keyCode == 37) { // Left arrow
@@ -120,10 +120,10 @@ $().ready(function() {
         $prev[0].setSelectionRange($prev.val().length * 2, $prev.val().length * 2);
       } else if (e.keyCode == 8 && this.selectionStart == 0) { // Backspace - delete or merge depending
         if ($(this).val().length == 0 && $('.edit-mode .txt').length > 1) {
-          $(this).parent().parent().parent().remove();
-        } else if ($(this).parent().parent().parent().find('a[class~=new-scene]').length > 0) {
+          $(this).parents(".scene").remove();
+        } else if ($(this).parents(".scene").find('a[class~=new-scene]').length > 0) {
           $prev.val($prev.val() + $(this).val());
-          $(this).parent().parent().parent().remove();
+          $(this).parents(".scene").remove();
           tick();
         }
         $prev.focus();
@@ -136,11 +136,11 @@ $().ready(function() {
       <% temp = Scene.new %>
       var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => temp, :edit_mode => true }) %>");
       $para.attr("id", "temp_<%= temp.temp_id %>");
-      $(this).parent().parent().parent().after($para);
+      $(this).parents(".scene").after($para);
       var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
       var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
       $(this).val(prev);
-      var $next = $(this).parent().parent().parent().next().find('.txt');
+      var $next = $(this).parents(".scene").next().find('.txt');
       $next.val(next).focus();
       $('.txt', $para).autosize();
       $('.paragraph .txt').trigger('autosize');
