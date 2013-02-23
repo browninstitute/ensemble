@@ -1,34 +1,7 @@
 <div class="home row-fluid">
   <div class="hero-unit span12">
     <div class="screenshots span5">
-      <div class="flexslider">
-        <ul class="slides">
-          <li>
-            <%= image_tag "main-slideshow/regular.png" %>
-            <p class="flex-caption">
-              Write together with others in a new way
-            </p>
-          </li>
-          <li>
-            <%= image_tag "main-slideshow/write.png" %>
-            <p class="flex-caption">
-              Suggest alternatives for a story scene
-            </p>
-          </li>
-          <li>
-            <%= image_tag "main-slideshow/alternative.png" %>
-            <p class="flex-caption">
-              Browse and vote for alternatives
-            </p>
-          </li>
-          <li>
-            <%= image_tag "main-slideshow/comment.png" %>
-            <p class="flex-caption">
-              Discuss scenes with others
-            </p>
-          </li>
-        </ul>
-      </div>
+      <%= render :partial => "home/slideshow" %>
     </div>
     <div class="home-message span7">
       <div>
@@ -46,8 +19,6 @@
 
   <div class="stories-preview">
     <h2>Recent Stories</h2>
-    <% Story.find(:all, :limit => 3).each do |s| %>
-      <%= render :partial => 'home/story_preview', :locals => {:story => s} %>
-    <% end %>
+    <%= render :partial => 'home/story_preview', :collection => Story.find(:all, :limit => 3), :as => :story %>
   </div>
 </div>
