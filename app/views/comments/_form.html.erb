@@ -16,5 +16,7 @@
       <% end %>
       <span class="text-error"></span>
     </div>
+  <% elsif !user_signed_in? %>
+    <%= link_to "Login or register to post a comment.", new_user_session_path, :class => "comment-login-link" %>
   <% end %>
 </div>

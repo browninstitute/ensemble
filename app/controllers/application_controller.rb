@@ -3,7 +3,13 @@ class ApplicationController < ActionController::Base
   after_filter :flash_to_headers
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    if user_signed_in?
+      session[:user_return_to] = nil
+      redirect_to root_url, :alert => exception.message
+    else            
+      session[:user_return_to] = request.url
+      redirect_to new_user_session_url, :alert => "You must first login or register to do that action."
+    end 
   end
 
   def after_sign_in_path_for(resource_or_scope)

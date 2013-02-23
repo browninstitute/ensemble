@@ -9,7 +9,6 @@ $(document).ready ->
   $(".scene-info-inner .scene-header i").tooltip({title: "This scene is accepting alternatives."})
   $(".next-paragraph").click nextParagraph
   $(".prev-paragraph").click prevParagraph
-  $(".new-paragraph").click newParagraph
   $(".expand-paragraphs a").click toggleExpandParagraphs
 
   $(".scene-info-inner").click showScene
@@ -86,14 +85,6 @@ prevParagraph = ->
         truncateSceneDesc(_this.parents('.scene')) #.scene
       )
     )
-
-
-# Shows the new paragraph form in view mode.
-newParagraph = ->
-  _this = $(this)
-  parent = _this.parents('.scene')
-  parent.children('.paragraph').hide()
-  parent.children('.paragraph-form').show()
 
 # Cancels paragraph editing or creation in view mode.
 cancelParagraph = (e) ->

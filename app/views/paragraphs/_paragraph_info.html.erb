@@ -21,6 +21,10 @@
           <i class="icon-heart"></i> Love
         <% end %>
       <% end %>
+    <% else %>
+      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link' do %>
+        <i class="icon-heart"></i> Love
+      <% end %>
     <% end %>
   </div>
   <div class="paragraph-actions">
