@@ -1,0 +1,10 @@
+<%= link_to story, :class => "story-preview" do %>
+  <h1><%= story.title %> 
+    <small class="author">
+      Started by <%= story.user.name %>
+    </small>
+  </h1>
+  <div class="last-updated">
+    Last updated <%= time_ago_in_words(story.updated_at) %> ago
+  </div>
+<% end %>

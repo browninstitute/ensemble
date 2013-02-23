@@ -1,26 +1,53 @@
-<div class="hero-unit">
-  <div class="row-fluid">
-    <div class="span6">
-      <div class="paper_sheet">
-        <h1><%= @story.title %></h1>
-        <%= @story.scenes.first.paragraphs.first.content.truncate(300) %>
-        <%= link_to "Read more?", current_stories_path %>
+<div class="home row-fluid">
+  <div class="hero-unit span12">
+    <div class="screenshots span5">
+      <div class="flexslider">
+        <ul class="slides">
+          <li>
+            <%= image_tag "main-slideshow/regular.png" %>
+            <p class="flex-caption">
+              Write together with others in a new way
+            </p>
+          </li>
+          <li>
+            <%= image_tag "main-slideshow/write.png" %>
+            <p class="flex-caption">
+              Suggest alternatives for a story scene
+            </p>
+          </li>
+          <li>
+            <%= image_tag "main-slideshow/alternative.png" %>
+            <p class="flex-caption">
+              Browse and vote for alternatives
+            </p>
+          </li>
+          <li>
+            <%= image_tag "main-slideshow/comment.png" %>
+            <p class="flex-caption">
+              Discuss scenes with others
+            </p>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="span6">
-      <h1>Collaboratively write stories</h1>
-      <p>Ensemble is a platform for massively collaborative story writing.</p>
-      <p>
-        <% if user_signed_in? %>
-          <%= link_to current_stories_path, :class => "btn btn-primary btn-large" do %>
-            Start contributing to a story
-          <% end %>
-        <% else %>
-          <%= link_to new_user_registration_path, :class => "btn btn-primary btn-large" do %>
-            Sign up to start writing!
-          <% end %>
+    <div class="home-message span7">
+      <div>
+        <h1>Collaboratively write stories</h1>
+        <p class="lead">Ensemble is a platform for massive participatory story writing.</p>
+        <p>
+        <%= link_to current_stories_path, :class => "btn btn-primary btn-large" do %>
+          Start writing
+          <i class="icon-chevron-right"></i>
         <% end %>
-      </p>
+        </p>
+      </div>
     </div>
+  </div>
+
+  <div class="stories-preview">
+    <h2>Recent Stories</h2>
+    <% Story.find(:all, :limit => 3).each do |s| %>
+      <%= render :partial => 'home/story_preview', :locals => {:story => s} %>
+    <% end %>
   </div>
 </div>
