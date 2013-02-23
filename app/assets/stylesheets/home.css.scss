@@ -2,20 +2,56 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.paper_sheet {
-  h1 {
-    font-size: 36px;
-    line-height: 48px;
-  }
+.hero-unit {
   position: relative;
-  padding: 50px;
-  margin: 0 auto;
-  margin-right: 20px;
-  background-color: #fff;
-  border: 1px solid #cccccc;
-  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  height: 20em;
+  padding: 30px;
+  
+  .screenshots {
+    height: 100%;
+
+    .flex-caption {
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+ 
+  .home-message {
+    .lead {
+      margin-top: 10px;
+    }
+  }
+}
+
+.stories-preview {
+  .story-preview {
+    background-color: #eee; 
+    border-radius: 5px;
+    margin-bottom: 1em;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s ease-out;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 1.7em;
+      margin: 0;
+    }
+
+    .author {
+      font-size: 0.8em;
+    }
+
+    .last-updated {
+      color: #666;
+      font-style: italic;
+    }
+  }
 }
 
 .meta-nav {

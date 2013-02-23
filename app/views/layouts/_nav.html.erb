@@ -2,11 +2,8 @@
   <div class="navbar-inner">
     <%= link_to content_tag(:span, "En") + content_tag(:span, "semble"), root_path, :class => "brand" %>
 
-    <!--<form class="navbar-search pull-right">
-      <input type="text" class="search-query" placeholder="search" />
-    </form>-->
-
     <ul class="nav pull-right">
+      <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "About", about_path %></li>
       <li class="<%= 'active' if current_page?(current_stories_path) %>"><%= link_to "Current Story", current_stories_path %></li>
       <li class="<%= 'active' if current_page?(stories_path) %>"><%= link_to "Stories", stories_path %></li>

@@ -1,26 +1,24 @@
-<div class="hero-unit">
-  <div class="row-fluid">
-    <div class="span6">
-      <div class="paper_sheet">
-        <h1><%= @story.title %></h1>
-        <%= @story.scenes.first.paragraphs.first.content.truncate(300) %>
-        <%= link_to "Read more?", current_stories_path %>
+<div class="home row-fluid">
+  <div class="hero-unit span12">
+    <div class="screenshots span5">
+      <%= render :partial => "home/slideshow" %>
+    </div>
+    <div class="home-message span7">
+      <div>
+        <h1>Collaboratively write stories</h1>
+        <p class="lead">Ensemble is a platform for massive participatory story writing.</p>
+        <p>
+        <%= link_to current_stories_path, :class => "btn btn-primary btn-large" do %>
+          Start writing
+          <i class="icon-chevron-right"></i>
+        <% end %>
+        </p>
       </div>
     </div>
-    <div class="span6">
-      <h1>Collaboratively write stories</h1>
-      <p>Ensemble is a platform for massively collaborative story writing.</p>
-      <p>
-        <% if user_signed_in? %>
-          <%= link_to current_stories_path, :class => "btn btn-primary btn-large" do %>
-            Start contributing to a story
-          <% end %>
-        <% else %>
-          <%= link_to new_user_registration_path, :class => "btn btn-primary btn-large" do %>
-            Sign up to start writing!
-          <% end %>
-        <% end %>
-      </p>
-    </div>
+  </div>
+
+  <div class="stories-preview">
+    <h2>Recent Stories</h2>
+    <%= render :partial => 'home/story_preview', :collection => Story.find(:all, :limit => 3), :as => :story %>
   </div>
 </div>
