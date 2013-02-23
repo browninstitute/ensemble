@@ -4,5 +4,6 @@
 
 $(window).load ->
   $('.flexslider').flexslider({
-    slideshowSpeed: 4500
+    slideshowSpeed: 4500,
+    directionNav: false
   })
