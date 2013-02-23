@@ -17,11 +17,17 @@
           <li class="<%= "active" if i == 0 %>"><a href="#para_<%= "edit_" if edit_mode %><%= p.id %>" data-toggle="tab">#<%= p.id %></a></li>
         <% end %>
         <li>
-          <% if !edit_mode && can?(:create, Paragraph) %>
+        <% if !edit_mode %>
+          <% if can?(:create, Paragraph) %>
             <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph", :data => {:toggle => "tooltip"} do %>
               <i class="icon-plus"></i>
             <% end %>
+          <% else %>
+            <%= link_to new_scene_paragraph_path(scene), :class => "new-paragraph", :data => {:toggle => "tooltip"} do %>
+              <i class="icon-plus"></i>
+            <% end %>
           <% end %>
+        <% end %>
         </li>
       </ul>
     </div>

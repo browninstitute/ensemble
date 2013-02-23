@@ -1,10 +1,10 @@
 $ ->
   $s = $('#scene_<%= @scene.id %>')
- 
+
   # remove any other forms for the scene
   $s.children('.paragraph-form').remove()
-  
-  # add the form 
+
+  # add the form
   $s.children('.paragraph')
     .after("<%= escape_javascript(render(:partial => 'paragraphs/form', :locals => {:p => @p, :scene => @scene})) %>")
   $s.find('.paragraph-form .cancel-paragraph').click cancelParagraph
