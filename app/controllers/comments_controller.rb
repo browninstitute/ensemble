@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
-  
+  impressionist
+
   def index
   end
 
