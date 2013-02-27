@@ -8,17 +8,17 @@ module ParagraphsHelper
         :remote => true do
         "<i class='icon-heart'></i> Loved".html_safe
       end
-    elsif user_signed_in? && !current_user.voted_up_on?(p)
+    elsif user_signed_in? 
       link_to like_paragraph_path(p),
         :class => "love-link",
-        :id => "para_#{p.id}_link_button",
+        :id => "para_#{p.id}_like_button",
         :remote => true do
         "<i class='icon-heart'></i> Love".html_safe
       end
     else
       link_to like_paragraph_path(p),
         :class => 'love-link',
-        :id => "para_#{p.id}_link_button" do
+        :id => "para_#{p.id}_like_button" do
         "<i class='icon-heart'></i> Love".html_safe
       end
     end
