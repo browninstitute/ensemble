@@ -1,6 +1,7 @@
 class ParagraphsController < ApplicationController
   load_and_authorize_resource
-  
+  impressionist
+
   def edit
     @p = Paragraph.find(params[:id])
     @scene = @p.scene
@@ -73,6 +74,7 @@ class ParagraphsController < ApplicationController
       @para.liked_by current_user
       action = "like"
     end
+    impressionist(@para, message: action)
     Version.create!({:item_type => "Paragraph",
                     :item_id => @para.id,
                     :event => action,
@@ -88,23 +90,34 @@ class ParagraphsController < ApplicationController
   # Toggle winner status of a paragraph
   def winner
     @p = Paragraph.find(params[:id])
-    
-    if @p.is_winner?
-      @p.unset_as_winner
-      action = "unwin"
-    else
-      @p.set_as_winner
-      action = "win" 
-    end
+    @p.set_as_winner
     Version.create!({:item_type => "Paragraph",
                     :item_id => @p.id,
-                    :event => action,
+                    :event => "win",
                     :whodunnit => current_user.id,
                     :scene_id => @p.scene.id,
                     :story_id => @p.scene.story.id})
     
     respond_to do |format|
       format.js
+    end
+  end
+
+  # Unmark a paragraph as winner
+  def unwinner
+    @p = Paragraph.find(params[:id])
+    if @p.is_winner?
+      @p.unset_as_winner
+    end
+    Version.create!({:item_type => "Paragraph",
+                     :item_id => @p.id,
+                     :event => "unwin",
+                     :whodunnit => current_user.id,
+                     :scene_id => @p.scene.id,
+                     :story_id => @p.scene.story.id})
+  
+    respond_to do |format|
+      format.js { render :action => "winner" }
     end
   end
 end

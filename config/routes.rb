@@ -34,6 +34,7 @@ StoryCollab::Application.routes.draw do
 
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
   match 'paragraphs/:id/winner' => 'paragraphs#winner', :as => :winner_paragraph
+  match 'paragraphs/:id/unwinner' => 'paragraphs#unwinner', :as => :unwinner_paragraph
   
   # Non-model pages
   get "home/index"
