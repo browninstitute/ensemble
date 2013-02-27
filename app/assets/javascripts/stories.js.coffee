@@ -41,13 +41,13 @@ setupAnalytics = ($tab = "all") ->
     $(".nav-tabs li > a").not(".new-paragraph").click (e) ->
       if !$(e.target).parent().hasClass('active')
         paragraphID = parseInt(e.target.innerHTML.match(/[0-9]+/)[0])
-        _gaq.push(['_trackEvent', 'Paragraphs', 'View', '', paragraphID])
+        _gaq.push(['_trackEvent', 'paragraphs', 'view', '', paragraphID])
   else
     # Setup analytics for a single tab
     $tab.click (e) ->
       if !$(e.target).parent().hasClass('active')
         paragraphID = parseInt(e.target.innerHTML.match(/[0-9]+/)[0])
-        _gaq.push(['_trackEvent', 'Paragraphs', 'View', '', paragraphID])
+        _gaq.push(['_trackEvent', 'paragraphs', 'view', '', paragraphID])
 
 # Cancels paragraph editing or creation in view mode.
 cancelParagraph = (e) ->
@@ -72,9 +72,11 @@ cancelScene = (e) ->
 showScene = (e) ->
   if (e.target == this || e.target.tagName == "H1" || e.target.tagName == "P" || e.target.className == "scene-header")
     _this = $(this)
+    sceneID = parseInt(_this.parents('.scene').attr('data-id'))
     if _this.hasClass("scene-selected")
       _this.removeClass("scene-selected")
       truncateSceneDesc(_this.parents('.scene')) # .scene
+      _gaq.push(['_trackEvent', 'scene', 'closeview', '', sceneID])
     else
       $(".scene-selected").removeClass("scene-selected")
       $(".cancel-scene").click()
@@ -82,6 +84,7 @@ showScene = (e) ->
         $(".scene_text > p", _this).trunk8('revert')
       condenseComments($(".scene-comments", _this))
       _this.addClass("scene-selected")
+      _gaq.push(['_trackEvent', 'scene', 'view', '', sceneID])
 
 # Condenses a scene's comments so it's not a huge list.
 # Also sets up Comment shortcut link.
