@@ -15,8 +15,11 @@ $(document).ready ->
     truncateSceneDesc() # force this to only happen after CSS has loaded
   )
   setupComments()
+  setupAnalytics()
 
   # Make functions available for AJAX callbacks
+  window.setupAnalytics = setupAnalytics
+
   window.cancelParagraph = cancelParagraph
 
   window.cancelScene = cancelScene
@@ -31,6 +34,20 @@ $(document).ready ->
   window.toolbarBold = toolbarBold
   window.toolbarItalic = toolbarItalic
   window.toolbarUnorderedList = toolbarUnorderedList
+
+# Setup custom event tracking for Google Analytics
+setupAnalytics = ($tab = "all") ->
+  if $tab == "all"
+    $(".nav-tabs li > a").not(".new-paragraph").click (e) ->
+      if !$(e.target).parent().hasClass('active')
+        paragraphID = parseInt(e.target.innerHTML.match(/[0-9]+/)[0])
+        _gaq.push(['_trackEvent', 'Paragraphs', 'View', '', paragraphID])
+  else
+    # Setup analytics for a single tab
+    $tab.click (e) ->
+      if !$(e.target).parent().hasClass('active')
+        paragraphID = parseInt(e.target.innerHTML.match(/[0-9]+/)[0])
+        _gaq.push(['_trackEvent', 'Paragraphs', 'View', '', paragraphID])
 
 # Cancels paragraph editing or creation in view mode.
 cancelParagraph = (e) ->

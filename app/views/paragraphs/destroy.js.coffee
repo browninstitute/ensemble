@@ -4,5 +4,5 @@ $ ->
   $p.fadeOut("slow", ->
     $(this).remove()
     $("li a[href='#para_<%= @p.id %>']", $s).parent().remove()
-    $(".nav-tabs li:first a", $s).click()
+    $(".nav-tabs li:first a", $s).tab('show')
   )
