@@ -33,6 +33,7 @@ StoryCollab::Application.routes.draw do
   end
 
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
+  match 'paragraphs/:id/unlike' => 'paragraphs#unlike', :as => :unlike_paragraph
   match 'paragraphs/:id/winner' => 'paragraphs#winner', :as => :winner_paragraph
   match 'paragraphs/:id/unwinner' => 'paragraphs#unwinner', :as => :unwinner_paragraph
   

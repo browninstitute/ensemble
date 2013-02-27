@@ -11,21 +11,7 @@
       <span id="para_<%= paragraph.id %>_like_count"><%= paragraph.likes.size %></span>
     </span> 
     &sdot;
-    <% if user_signed_in? %>
-      <% if current_user.voted_up_on? paragraph %>
-        <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link loved', :remote => true do %>
-          <i class="icon-heart"></i> Loved
-        <% end %>
-      <% else %>
-        <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link', :remote => true do %>
-          <i class="icon-heart"></i> Love
-        <% end %>
-      <% end %>
-    <% else %>
-      <%= link_to like_paragraph_path(paragraph), :id => "para_" + paragraph.id.to_s + "_like_button", :class => 'love-link' do %>
-        <i class="icon-heart"></i> Love
-      <% end %>
-    <% end %>
+    <%= like_link(paragraph) %>
   </div>
   <div class="paragraph-actions">
     <% if can? :manage, paragraph %>
