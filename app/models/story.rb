@@ -47,11 +47,15 @@ class Story < ActiveRecord::Base
           end
         end
 
-        # Delete old scenes (cascades paragraph deletion)
+        # Delete old scenes and their paragraphs
         existing_scene_ids = Set.new(self.scenes.map { |scene| scene.id })
         new_scene_ids = Set.new(content.map { |scene| (scene.include? 'id') ? scene['id'].to_i : 0 })
         scenes_to_delete_ids = existing_scene_ids - new_scene_ids
         scenes_to_delete_ids.each do |scene_id|
+          # need to explicitly destroy paragraphs/comments 
+          # so paper_records the destroy event
+          Scene.find(scene_id).comments.destroy_all
+          Scene.find(scene_id).paragraphs.destroy_all
           Scene.find(scene_id).destroy
         end
 

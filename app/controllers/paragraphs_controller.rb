@@ -1,6 +1,7 @@
 class ParagraphsController < ApplicationController
   load_and_authorize_resource
-  
+  impressionist
+
   def edit
     @p = Paragraph.find(params[:id])
     @scene = @p.scene
@@ -62,20 +63,16 @@ class ParagraphsController < ApplicationController
     end
   end
 
-  # Toggle likes on a paragraph
+  # Like a paragraph
   def like
     @para = Paragraph.find(params[:id])
     
-    if current_user.voted_up_on? @para
-      @para.disliked_by current_user
-      action = "unlike"
-    else
+    if !current_user.voted_up_on? @para
       @para.liked_by current_user
-      action = "like"
     end
     Version.create!({:item_type => "Paragraph",
                     :item_id => @para.id,
-                    :event => action,
+                    :event => "like",
                     :whodunnit => current_user.id,
                     :scene_id => @para.scene.id,
                     :story_id => @para.scene.story.id})
@@ -84,27 +81,59 @@ class ParagraphsController < ApplicationController
       format.js
     end
   end
+
+  # Unlike a paragraph
+  def unlike
+    @para = Paragraph.find(params[:id])
+    
+    if current_user.voted_up_on? @para
+      @para.disliked_by current_user
+    end
+    Version.create!({:item_type => "Paragraph",
+                     :item_id => @para.id,
+                     :event => "unlike",
+                     :whodunnit => current_user.id,
+                     :scene_id => @para.scene.id,
+                     :story_id => @para.scene.story.id})
+    
+    respond_to do |format|
+      format.js { render :action =>  "like" }
+    end
+  end
   
-  # Toggle winner status of a paragraph
+  # Grant winner status of a paragraph
   def winner
     @p = Paragraph.find(params[:id])
-    
-    if @p.is_winner?
-      @p.unset_as_winner
-      action = "unwin"
-    else
+    if !@p.is_winner?
       @p.set_as_winner
-      action = "win" 
     end
     Version.create!({:item_type => "Paragraph",
                     :item_id => @p.id,
-                    :event => action,
+                    :event => "win",
                     :whodunnit => current_user.id,
                     :scene_id => @p.scene.id,
                     :story_id => @p.scene.story.id})
     
     respond_to do |format|
       format.js
+    end
+  end
+
+  # Unmark a paragraph as winner
+  def unwinner
+    @p = Paragraph.find(params[:id])
+    if @p.is_winner?
+      @p.unset_as_winner
+    end
+    Version.create!({:item_type => "Paragraph",
+                     :item_id => @p.id,
+                     :event => "unwin",
+                     :whodunnit => current_user.id,
+                     :scene_id => @p.scene.id,
+                     :story_id => @p.scene.story.id})
+  
+    respond_to do |format|
+      format.js { render :action => "winner" }
     end
   end
 end

@@ -6,6 +6,7 @@ class Paragraph < ActiveRecord::Base
   validates :content, :presence => true, :if => lambda {|p| p.user != p.scene.story.user}
   has_paper_trail :only => [:content], :meta => {:scene_id => :scene_id}
   acts_as_votable
+  is_impressionable
 
   before_destroy :paragraph_cleanup
 

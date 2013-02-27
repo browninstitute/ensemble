@@ -8,6 +8,7 @@ $ ->
   $(".tab-content", $s).append(p)
   $('.paragraph-form', $s).remove()
   $(".nav-tabs li:last", $s).before("<li><a href='#para_<%= @p.id %>' data-toggle='tab'>#<%= @p.id %></a></li>")
-  $(".nav-tabs li:nth-last-child(2) a", $s).click()
+  $(".nav-tabs li:nth-last-child(2) a", $s).tab('show')
+  setupAnalytics($(".nav-tabs li:nth-last-child(2) a", $s))
 
   $('.paragraph', $s).show()

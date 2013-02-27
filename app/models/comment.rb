@@ -4,4 +4,5 @@ class Comment < ActiveRecord::Base
   attr_accessible :content, :title
   has_paper_trail :only => [:content], :meta => {:scene_id => :scene_id}
   validates :content, :presence => true
+  is_impressionable
 end
