@@ -64,18 +64,15 @@ module StoriesHelper
         "Story was deleted by #{whodunnit}"
       end
     when "Scene"
-      if Scene.exists? activity.item_id
-        return
-      end
-      item = Scene.find(activity.item_id)
+      item = Scene.find_by_id(activity.item_id)
 
       case activity.event
       when "create"
-        "#{whodunnit} created scene ##{item.id}"
+        "#{whodunnit} created scene ##{activity.item_id}"
       when "update"
-        "#{whodunnit} edited scene ##{item.id}"
+        "#{whodunnit} edited scene ##{activity.item_id}"
       when "destroy"
-        "#{whodunnit} deleted scene ##{item.id}"
+        "#{whodunnit} deleted scene ##{activity.item_id}"
       end
     when "Paragraph"
       if !Paragraph.exists? activity.item_id
@@ -88,11 +85,11 @@ module StoriesHelper
       when "create"
         "#{whodunnit} wrote a paragraph for scene ##{scene.id}"
       when "update"
-        other = (item.user_id == activity.whodunnit) ? "their" : "#{User.find(item.user_id).name}'s"
-        "#{whodunnit} edited #{other} paragraph for the prompt \"#{scene.id}\""
+        other = (item.user_id.to_i == activity.whodunnit.to_i) ? "their" : "#{User.find(item.user_id).name}'s"
+        "#{whodunnit} edited #{other} paragraph for scene ##{scene.id}"
       when "destroy"
-        other = (item.user_id == activity.whodunnit) ? "their" : "#{User.find(item.user_id).name}'s"
-        "#{whodunnit} deleted #{other} paragraph for the prompt \"#{scene.id}\""
+        other = (item.user_id.to_i == activity.whodunnit.to_i) ? "their" : "#{User.find(item.user_id).name}'s"
+        "#{whodunnit} deleted #{other} paragraph for scene ##{scene.id}"
       when "win"
         other = link_to User.find(item.user_id).name, "#"
         "#{whodunnit} crowned the paragraph by #{other} as a winner"
@@ -111,15 +108,14 @@ module StoriesHelper
         return
       end
       item = Comment.find(activity.item_id)
-      scene = item.scene
-
+      
       case activity.event
       when "create"
-        "#{whodunnit} commented on scene ##{scene.id} and said: \"#{truncate(item.content, :length => 10)}\""
+        "#{whodunnit} commented on scene ##{item.scene_id} and said: \"#{truncate(item.content, :length => 10)}\""
       when "update"
-        "#{whodunnit} edited their comment on scene ##{scene.id}"
+        "#{whodunnit} edited their comment on scene ##{item.scene_id}"
       when "destroy"
-        "#{whodunnit} deleted their comment on scene ##{scene.id}"
+        "#{whodunnit} deleted their comment on scene ##{item.scene_id}"
       end
     end 
   end
