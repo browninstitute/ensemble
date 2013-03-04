@@ -79,6 +79,7 @@ showScene = (e) ->
       _gaq.push(['_trackEvent', 'scene', 'closeview', '', sceneID])
     else
       $(".scene-selected").removeClass("scene-selected")
+      truncateSceneDesc()
       $(".cancel-scene").click()
       revertSceneDesc(_this.parents('.scene'))
       condenseComments($(".scene-comments", _this))
