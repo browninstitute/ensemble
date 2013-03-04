@@ -160,6 +160,7 @@ truncateSceneDesc = ($scene = "all") ->
       $s = $(s)
       siblings = $(".scene_text > p ~ p", $s)
       siblings.hide()
+      $(".scene_text .scene-prompt", $s).hide()
       if ($s.height() <= 140)
         $(".scene_text > p:first", $s).trunk8({lines: 1})
       else
@@ -171,6 +172,7 @@ truncateSceneDesc = ($scene = "all") ->
     # truncate specific scene description
     siblings = $(".scene_text > p ~ p", $scene)
     siblings.hide()
+    $(".scene_text .scene-prompt", $scene).hide()
     if ($scene.height() <= 140)
       $(".scene_text > p:first", $scene).trunk8({lines: 1})
     else
@@ -183,6 +185,7 @@ revertSceneDesc = ($scene) ->
   if ($(".scene_text > p", $scene).attr('title')) || $(".scene_text > p ~ p")
     $(".scene_text > p:first span").remove()
     $(".scene_text > p", $scene).show()
+    $(".scene_text .scene-prompt", $scene).show()
     $(".scene_text > p:first", $scene).trunk8('revert')
 
 toolbarBold = ->

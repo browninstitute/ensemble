@@ -86,6 +86,15 @@ $lightaccent: #60C8F5;
             white-space: nowrap;
           }
         }
+
+        .scene-prompt {
+          font-family: Consolas, Lucida Console, Monaco, monospace;
+
+          .prompt-header {
+            text-transform: uppercase;
+            font-weight: bold;
+          }
+        }
       }
 
       .main-actions {

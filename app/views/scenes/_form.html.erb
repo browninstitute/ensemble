@@ -6,7 +6,10 @@
     </div>
     <%= f.text_field :title, :placeholder => 'Scene title', :class => 'span12' %><br />
     <%= f.text_area :content, :rows => 3, 
-                    :placeholder => 'What should happen in this scene?', 
+                    :placeholder => 'What happens in this scene?', 
+                    :class => 'span12' %><br />
+    <%= f.text_area :prompt, :rows => 3,
+                    :placeholder => 'For this scene, what question do you want the community to answer? For example, "How should Character X and Character Y meet?"',
                     :class => 'span12' %><br />
                     
     <span class="text-error">

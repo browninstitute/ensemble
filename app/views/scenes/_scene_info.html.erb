@@ -6,7 +6,13 @@
     </div>
     <div class="scene_text">
       <h1><%= Format.markdown(scene.title) if !scene.title.nil? %></h1>
-      <%= Format.markdown(scene.content) %>
+      <%= Format.markdown(scene.content) if !scene.content.nil? %>
+      <% if !scene.prompt.nil? %>
+      <div class="scene-prompt">
+        <div class="prompt-header">Prompt</div>
+        <%= Format.markdown(scene.prompt) %>
+      </div>
+      <% end %>
     </div>
     <div class="main-actions">
       <div class="pull-left">
