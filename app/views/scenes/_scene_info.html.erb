@@ -7,7 +7,7 @@
     <div class="scene_text">
       <h1><%= Format.markdown(scene.title) if !scene.title.nil? %></h1>
       <%= Format.markdown(scene.content) if !scene.content.nil? %>
-      <% if !scene.prompt.nil? %>
+      <% if !scene.prompt.blank? %>
       <div class="scene-prompt">
         <div class="prompt-header">Prompt</div>
         <%= Format.markdown(scene.prompt) %>
