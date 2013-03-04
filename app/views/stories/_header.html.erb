@@ -8,6 +8,9 @@
   </p>
 
   <div class="meta">
+    <div class="genres">
+      <%= "Genre: #{print_genres(@story)}" if !print_genres(@story).nil? %>
+    </div>
     <div class="author">
       Started by <%= link_to @story.user.name, "#" %>
       <span class="timestamp">

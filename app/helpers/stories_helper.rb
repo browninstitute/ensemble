@@ -1,14 +1,29 @@
 module StoriesHelper
   include Rails.application.routes.url_helpers
 
+  # Prints out the genres of a story
+  def print_genres(story)
+    if !story.genre1.nil? && !story.genre2.nil?
+      "#{Genre.find(story.genre1).name}/#{Genre.find(story.genre2).name}"
+    elsif !story.genre1.nil?
+      Genre.find(story.genre1).name
+    elsif !story.genre2.nil?
+      Genre.find(story.genre2).name
+    else
+      nil
+    end
+  end
+
   # Renders the example new story
   def render_new_story_example
     new_story_scenes = Array.new
     new_story_scenes[0] = Scene.new(:title => "Setting the stage",
-                                    :content => "How should the characters and the setting be introduced?",
+                                    :content => "In this scene, we introduce the characters and setting.",
+                                    :prompt => "What are the setting and characters?",
                                     :position => 1)
     new_story_scenes[1] = Scene.new(:title => "The big event", 
-                                    :content => "I need suggestions on the big event that changes the characters' lives and puts the story into motion.", 
+                                    :content => "Some big event happens that changes the characters' lives and puts the story into motion.",
+                                    :prompt => "I need suggestions on what this big event should be.", 
                                     :position => 2)
     new_story_scenes[2] = Scene.new(:position => 3)
     new_story_scenes[3] = Scene.new(:position => 4)
