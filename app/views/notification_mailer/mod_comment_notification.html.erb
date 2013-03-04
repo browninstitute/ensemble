@@ -1,0 +1,7 @@
+<%= @other.name %> made a comment on your story and wrote:
+
+<p style="font-style:italic;">
+<%= @comment.content %>
+</p>
+
+<%= link_to "Go to the story", story_url(@comment.scene.story) %>

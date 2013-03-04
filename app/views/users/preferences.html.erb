@@ -5,8 +5,33 @@
     <h1>Email Notifications</h1>
     
     <div class="preferences-inner">
-      <strong>Receive emails when:</strong>
       <%= form_for current_user, :url => { :action => "preferences" }, :html => {:class => 'email-prefs-form'} do |f| %>
+      <div class="mod-emails">
+        <strong>For stories I'm moderating,</strong> receive emails when:
+        <label class="checkbox">
+          <%= check_box_tag "email[mod.comment_notification]", 1, current_user.settings['email.mod.comment_notification'] %> 
+          Someone makes a comment
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[mod.paragraph_notification]", 1, current_user.settings['email.mod.paragraph_notification'] %>
+          Someone contributes a paragraph
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[mod.update_paragraph_notification]", 1, current_user.settings['email.mod.update_paragraph_notification'] %>
+          Someone edits a paragraph
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[mod.like_notification]", 1, current_user.settings['email.mod.like_notification'] %>
+          Someone likes a paragraph
+        </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[mod.winner_notification]", 1, current_user.settings['email.mod.winner_notification'] %>
+          Someone crowns a paragraph as a winner
+        </label>
+      </div>
+      <br />
+      <div class="participant-emails">
+        <strong>For stories I'm participating in,</strong> receive emails when:
         <label class="checkbox">
           <%= check_box_tag "email[comment_notification]", 1, current_user.settings['email.comment_notification'] %> 
           Someone replies to my comment
@@ -35,8 +60,13 @@
           <%= check_box_tag "email[like_notification]", 1, current_user.settings['email.like_notification'] %>
           Someone likes a paragraph you wrote
         </label>
-        <br />
-        <%= f.submit "Update Notification Settings", :class => "btn" %>
+        <label class="checkbox">
+          <%= check_box_tag "email[winner_notification]", 1, current_user.settings['email.winner_notification'] %>
+          A paragraph you wrote is crowned a winner
+        </label>
+       </div>
+       <br />
+       <%= f.submit "Save Preferences", :class => "btn" %>
       <% end %>
     </div>
   </div>

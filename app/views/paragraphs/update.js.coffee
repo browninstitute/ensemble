@@ -6,4 +6,3 @@ $ ->
   $p.parents('.scene').children('.paragraph-form').remove()
 
   $p.parents('.scene').children('.paragraph').show()
-  goToParagraph($p.parents('.paragraphs-container'), <%= @p.id %>)

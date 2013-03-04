@@ -1,0 +1,7 @@
+<%= @other.name %> wrote a paragraph for a scene in your story and wrote:
+
+<p style="font-style:italic;">
+<%= truncate(@para.content, :length => 100) %>
+</p>
+
+<%= link_to "Go to the story", story_url(@para.scene.story) %>

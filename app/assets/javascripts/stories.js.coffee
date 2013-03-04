@@ -79,9 +79,9 @@ showScene = (e) ->
       _gaq.push(['_trackEvent', 'scene', 'closeview', '', sceneID])
     else
       $(".scene-selected").removeClass("scene-selected")
+      truncateSceneDesc()
       $(".cancel-scene").click()
-      if ($(".scene_text > p", _this).attr('title'))
-        $(".scene_text > p", _this).trunk8('revert')
+      revertSceneDesc(_this.parents('.scene'))
       condenseComments($(".scene-comments", _this))
       _this.addClass("scene-selected")
       _gaq.push(['_trackEvent', 'scene', 'view', '', sceneID])
@@ -158,16 +158,32 @@ truncateSceneDesc = ($scene = "all") ->
     # loop
     for s in $(".scene")
       $s = $(s)
+      siblings = $(".scene_text > p ~ p", $s)
+      siblings.hide()
       if ($s.height() <= 140)
-        $(".scene_text > p", $s).trunk8({lines: 1})
+        $(".scene_text > p:first", $s).trunk8({lines: 1})
       else
-        $(".scene_text > p", $s).trunk8({lines: 3})
+        $(".scene_text > p:first", $s).trunk8({lines: 3})
+
+      if siblings.length != 0
+        $(".scene_text > p:first", $s).html($(".scene_text > p:first", $s).html() + "<span>&hellip;</span>")
   else
     # truncate specific scene description
+    siblings = $(".scene_text > p ~ p", $scene)
+    siblings.hide()
     if ($scene.height() <= 140)
-      $(".scene_text > p", $scene).trunk8({lines: 1})
+      $(".scene_text > p:first", $scene).trunk8({lines: 1})
     else
-      $(".scene_text > p", $scene).trunk8({lines: 3})
+      $(".scene_text > p:first", $scene).trunk8({lines: 3})
+
+    if siblings.length != 0
+      $(".scene_text > p:first", $scene).html($(".scene_text > p:first", $scene).html() + "<span>&hellip;</span>")
+
+revertSceneDesc = ($scene) ->
+  if ($(".scene_text > p", $scene).attr('title')) || $(".scene_text > p ~ p")
+    $(".scene_text > p:first span").remove()
+    $(".scene_text > p", $scene).show()
+    $(".scene_text > p:first", $scene).trunk8('revert')
 
 toolbarBold = ->
   $(selectedTextarea).each ->
