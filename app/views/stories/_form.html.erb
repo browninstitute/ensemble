@@ -14,7 +14,10 @@
 
   <div class="field">
     <%= f.text_field :title, :placeholder => 'Title', :class => 'largely' %><br />
-    <%= f.text_field :subtitle, :placeholder => 'Subtitle' %>
+    <%= f.text_field :subtitle, :placeholder => 'Subtitle' %><br />
+    Genre 1: <%= collection_select(:story, :genre1, Genre.all, :id, :name, :prompt => true) %>
+    Genre 2: <%= collection_select(:story, :genre2, Genre.all, :id, :name, :prompt => true) %>
+    
     <%= f.hidden_field :content %> 
 
     <div class="actions pull-right">
