@@ -76,8 +76,10 @@ function paragraphsToContent() {
       paragraphsJSON.push({'id': $(this).attr('data-id'), 'content': $(this).val(), 'user_id': parauser});
     });
     newContent.push({ 'id': $scenebox.attr('data-id'), 'position': $scenebox.attr('data-position'), 
-                      'content': $scenebox.children(".scene-form").children("form").children("textarea").val(), 
-                      'title': $scenebox.children(".scene-form").children("form").children("#scene_title").val(), 'paragraphs': paragraphsJSON });
+                      'content': $scenebox.children(".scene-form").children("form").children("#scene_content").val(), 
+                      'title': $scenebox.children(".scene-form").children("form").children("#scene_title").val(),
+                      'prompt': $(".scene-form form #scene_prompt", $scenebox).val(),
+                      'paragraphs': paragraphsJSON });
   });
   $('#story_content').val(JSON.stringify(newContent));
 }

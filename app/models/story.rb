@@ -71,6 +71,7 @@ class Story < ActiveRecord::Base
           end
           scene_obj.title = scene['title']
           scene_obj.content = scene['content']
+          scene_obj.prompt = scene['prompt']
           scene_obj.insert_at(scene_pos)
           scene_obj.save!
           

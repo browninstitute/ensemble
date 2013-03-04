@@ -4,8 +4,8 @@ class Scene < ActiveRecord::Base
   acts_as_list :scope => :story
   has_many :paragraphs, :order => :position, :dependent => :delete_all
   has_many :comments
-  attr_accessible :content, :title, :position, :temp_id, :paragraphs
-  has_paper_trail :only => [:content, :title], :meta => {:story_id => :story_id}
+  attr_accessible :content, :title, :prompt, :position, :temp_id, :paragraphs
+  has_paper_trail :only => [:content, :title, :prompt], :meta => {:story_id => :story_id}
   #validates :title, :presence => true, :on => :update
 
   # Returns true if scene is open for contributions.

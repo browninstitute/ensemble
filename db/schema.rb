@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221061613) do
+ActiveRecord::Schema.define(:version => 20130304052839) do
 
   create_table "comments", :force => true do |t|
     t.string   "title"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20130221061613) do
     t.datetime "updated_at", :null => false
     t.integer  "position"
     t.integer  "winner_id"
+    t.text     "prompt"
   end
 
   add_index "scenes", ["story_id"], :name => "index_scenes_on_story_id"

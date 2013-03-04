@@ -28,9 +28,6 @@ $(document).ready ->
   window.setupComments = setupComments
   window.truncateSceneDesc = truncateSceneDesc
 
-  window.nextTextbox = nextTextbox
-  window.prevTextbox = prevTextbox
-
   window.toolbarBold = toolbarBold
   window.toolbarItalic = toolbarItalic
   window.toolbarUnorderedList = toolbarUnorderedList
@@ -79,8 +76,8 @@ showScene = (e) ->
       _gaq.push(['_trackEvent', 'scene', 'closeview', '', sceneID])
     else
       $(".scene-selected").removeClass("scene-selected")
-      truncateSceneDesc()
       $(".cancel-scene").click()
+      truncateSceneDesc()
       revertSceneDesc(_this.parents('.scene'))
       condenseComments($(".scene-comments", _this))
       _this.addClass("scene-selected")
@@ -111,48 +108,6 @@ condenseComments = ($sc) ->
       $(this).hide()
     ).prependTo($sc)
 
-# Goes to the next textbox in edit mode.
-nextTextbox = ->
-  _this = $(this)
-
-  return if _this.hasClass('disabled')
-
-  current = _this.parent().parent().children(".paragraphs-container").children("textarea:visible")
-  next = current.next("textarea")
-
-  _this.parent().children('button').removeClass('disabled')
-  if next.next("textarea").length is 0
-    _this.addClass('disabled')
-
-  if (next.size() >= 1)
-    _this.unbind()
-    current.hide("slide", { direction: "up" }, 400, ->
-      next.show("slide", { direction: "down" }, 400, ->
-        _this.click nextTextbox
-      )
-    )
-
-# Goes to the previous textbox in edit mode.
-prevTextbox = ->
-  _this = $(this)
-
-  return if _this.hasClass('disabled')
-
-  current = _this.parent().parent().children(".paragraphs-container").children("textarea:visible")
-  prev = current.prev("textarea")
-
-  _this.parent().children('button').removeClass('disabled')
-  if prev.prev("textarea").length is 0
-    _this.addClass('disabled')
-
-  if (prev.size() >= 1)
-    _this.unbind()
-    current.hide("slide", { direction: "down" }, 400, ->
-      prev.show("slide", { direction: "up" }, 400, ->
-        _this.click prevTextbox
-      )
-    )
-
 truncateSceneDesc = ($scene = "all") ->
   if ($scene == "all")
     # loop
@@ -160,6 +115,7 @@ truncateSceneDesc = ($scene = "all") ->
       $s = $(s)
       siblings = $(".scene_text > p ~ p", $s)
       siblings.hide()
+      $(".scene_text .scene-prompt", $s).hide()
       if ($s.height() <= 140)
         $(".scene_text > p:first", $s).trunk8({lines: 1})
       else
@@ -171,6 +127,7 @@ truncateSceneDesc = ($scene = "all") ->
     # truncate specific scene description
     siblings = $(".scene_text > p ~ p", $scene)
     siblings.hide()
+    $(".scene_text .scene-prompt", $scene).hide()
     if ($scene.height() <= 140)
       $(".scene_text > p:first", $scene).trunk8({lines: 1})
     else
@@ -183,6 +140,7 @@ revertSceneDesc = ($scene) ->
   if ($(".scene_text > p", $scene).attr('title')) || $(".scene_text > p ~ p")
     $(".scene_text > p:first span").remove()
     $(".scene_text > p", $scene).show()
+    $(".scene_text .scene-prompt", $scene).show()
     $(".scene_text > p:first", $scene).trunk8('revert')
 
 toolbarBold = ->

@@ -6,12 +6,9 @@ $ ->
   $(".story-header").replaceWith("<%= escape_javascript(render :partial => "stories/form") %>")
   $(".story .navbar").remove()
   $(".content").addClass("edit-mode")
-  $(".para-navigation button").unbind()
-  $(".prev-paragraph").click prevTextbox
-  $(".next-paragraph").click nextTextbox
- 
+
   $('.content').sortable({
       handle: '.move',
-      stop: -> 
+      stop: ->
         paragraphsToContent()
   })
