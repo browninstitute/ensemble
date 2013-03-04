@@ -28,9 +28,6 @@ $(document).ready ->
   window.setupComments = setupComments
   window.truncateSceneDesc = truncateSceneDesc
 
-  window.nextTextbox = nextTextbox
-  window.prevTextbox = prevTextbox
-
   window.toolbarBold = toolbarBold
   window.toolbarItalic = toolbarItalic
   window.toolbarUnorderedList = toolbarUnorderedList
@@ -110,48 +107,6 @@ condenseComments = ($sc) ->
       $(".comment_box", $sc).show(500)
       $(this).hide()
     ).prependTo($sc)
-
-# Goes to the next textbox in edit mode.
-nextTextbox = ->
-  _this = $(this)
-
-  return if _this.hasClass('disabled')
-
-  current = _this.parent().parent().children(".paragraphs-container").children("textarea:visible")
-  next = current.next("textarea")
-
-  _this.parent().children('button').removeClass('disabled')
-  if next.next("textarea").length is 0
-    _this.addClass('disabled')
-
-  if (next.size() >= 1)
-    _this.unbind()
-    current.hide("slide", { direction: "up" }, 400, ->
-      next.show("slide", { direction: "down" }, 400, ->
-        _this.click nextTextbox
-      )
-    )
-
-# Goes to the previous textbox in edit mode.
-prevTextbox = ->
-  _this = $(this)
-
-  return if _this.hasClass('disabled')
-
-  current = _this.parent().parent().children(".paragraphs-container").children("textarea:visible")
-  prev = current.prev("textarea")
-
-  _this.parent().children('button').removeClass('disabled')
-  if prev.prev("textarea").length is 0
-    _this.addClass('disabled')
-
-  if (prev.size() >= 1)
-    _this.unbind()
-    current.hide("slide", { direction: "down" }, 400, ->
-      prev.show("slide", { direction: "up" }, 400, ->
-        _this.click prevTextbox
-      )
-    )
 
 truncateSceneDesc = ($scene = "all") ->
   if ($scene == "all")
