@@ -31,7 +31,7 @@ StoryCollab::Application.routes.draw do
     put "/users/edit_profile" => "users/registrations#update_profile"
     get "/users/preferences" => "users/registrations#preferences"
     match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
-    get "/users/:id" => "users/profiles#show"
+    get "/users/:id" => "users/profiles#show", :as => :user
   end
 
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph

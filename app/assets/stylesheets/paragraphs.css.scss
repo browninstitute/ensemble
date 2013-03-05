@@ -72,6 +72,10 @@ $lightaccent: #60C8F5;
     .paragraph-info {
       color: #444 !important;
       transition: all 0.4s ease;
+
+      .paragraph-author a {
+        color: #444 !important;
+      }
     }
 
     .paragraph-actions {
@@ -98,6 +102,12 @@ $lightaccent: #60C8F5;
       .paragraph-author, .likes, .paragraph-actions {
         font-size: 0.8em;
         line-height: 1.7em;
+      }
+
+      .paragraph-author {
+        a {
+          color: #999;
+        }
       }
 
       a {
