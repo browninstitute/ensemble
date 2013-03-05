@@ -40,6 +40,7 @@ StoryCollab::Application.routes.draw do
   # Non-model pages
   get "home/index"
   match '/about' => 'pages#about'
+  match '/storyslam' => 'pages#competition'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
