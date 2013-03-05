@@ -99,34 +99,45 @@ $().ready(function() {
   $('.edit-mode').on('focus', '.txt', function() {
     prevSelectionStart = this.selectionStart;
   })
+
   $('.edit-mode').on('keydown', '.txt', function(e) {
+
     // See if we want to jump to the next textarea
-    if (this.selectionStart == prevSelectionStart || this.selectionStart == $(this).val().length) {
+    if (this.selectionStart == $(this).val().length) {
       $next = $(this).parents(".scene").next().find('.txt');
       if (e.keyCode == 40) { // Down arrow
         $next.focus();
+        e.preventDefault();
       } else if (e.keyCode == 39 && this.selectionStart == $(this).val().length) { // Right arrow
         $next.focus();
+        e.preventDefault();
       }
     }
 
     // See if we want to jump to the previous textarea
-    if (this.selectionStart == prevSelectionStart || this.selectionStart == 0) {
+    if (this.selectionStart == 0) { 
       $prev = $(this).parents(".scene").prev().find('.txt');
       if (e.keyCode == 38) { // Up arrow
         $prev.focus();
+        e.preventDefault();
       } else if (e.keyCode == 37 && this.selectionStart == 0) { // Left arrow
         $prev.focus();
-        $prev[0].setSelectionRange($prev.val().length * 2, $prev.val().length * 2);
+        // $prev[0].setSelectionRange($prev.val().length, $prev.val().length);
+        e.preventDefault();
       } else if (e.keyCode == 8 && this.selectionStart == 0) { // Backspace - delete or merge depending
         if ($(this).val().length == 0 && $('.edit-mode .txt').length > 1) {
           $(this).parents(".scene").remove();
+          $prev.focus();
         } else if ($(this).parents(".scene").find('a[class~=new-scene]').length > 0) {
+          var prevLen = $prev.val().length;
           $prev.val($prev.val() + $(this).val());
           $(this).parents(".scene").remove();
           tick();
+          $prev.focus();
+          $prev[0].setSelectionRange(prevLen, prevLen);
+        } else {
+          $prev.focus();          
         }
-        $prev.focus();
         $('.paragraph .txt').trigger('autosize');
       }
     }

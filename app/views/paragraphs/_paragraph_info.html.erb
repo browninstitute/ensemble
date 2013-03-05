@@ -21,18 +21,20 @@
       <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
     <div class="admin-paragraphs">
-      <% 
-        if paragraph.is_winner?
-          path = unwinner_paragraph_path(paragraph)
-          text = "Unmark as winner"
-        else
-          path = winner_paragraph_path(paragraph)
-          text = "Mark as winner"
-        end
-      %>
-      <%= link_to text, path, 
-                :id => "para_" + paragraph.id.to_s + "_winner_button", 
-                :remote => true %>
+      <% if can? :winner, paragraph %>
+        <% 
+          if paragraph.is_winner?
+            path = unwinner_paragraph_path(paragraph)
+            text = "Unmark as winner"
+          else
+            path = winner_paragraph_path(paragraph)
+            text = "Mark as winner"
+          end
+        %>
+        <%= link_to text, path, 
+                  :id => "para_" + paragraph.id.to_s + "_winner_button", 
+                  :remote => true %>
+      <% end %>
     </div>
     <% end %>
   </div>

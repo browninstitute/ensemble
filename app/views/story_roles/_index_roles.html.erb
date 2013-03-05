@@ -1,3 +1,8 @@
+<% if @story.story_roles.count == 0 %>
+  <div class="alert alert-info">
+    This story doesn't have any moderators.
+  </div>
+<% end %>
 <table class="table table-condensed table-striped">
   <% @story.story_roles.each do |story_role| %>
     <tr>
@@ -12,6 +17,6 @@
 </table>
 <hr />
 <%= form_for [@story, @story_role], :remote => true, :html => { :class => "form-inline" } do |f| %>
-  <%= f.collection_select 'user_id', User.all, :id, :name, {:prompt => "Add a contributor?", :disabled => lambda{|user| @story.contributors.include? user }} %>
+  <%= f.collection_select 'user_id', User.all - [current_user], :id, :name, {:prompt => "Add a contributor?", :disabled => lambda{|user| @story.contributors.include? user }} %>
   <%= f.submit 'Add', :class => 'btn btn-primary' %>
 <% end %>
