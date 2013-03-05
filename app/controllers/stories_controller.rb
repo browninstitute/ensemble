@@ -149,4 +149,8 @@ class StoriesController < ApplicationController
       format.js { render :action => "error" }
     end
   end
+
+  # Preview the story before submitting it to the story slam
+  def preview_submit
+  end
 end

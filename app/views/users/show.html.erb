@@ -1,0 +1,31 @@
+<div class="profile row-fluid">
+  <div class="profile-info span3">
+    <% if @user.avatar.file? %>                                                                                     
+      <%= image_tag @user.avatar.url(:medium) %>                                                                    
+    <% else %>                                                                                                      
+      <%= image_tag "alien.svg", :style => "width: 300px;" %>                                                       
+    <% end %><br /> 
+
+    <h1><%= @user.name %></h1>
+  </div>
+
+  <div class="my-stories span9">
+    <h1>This author has started <%= pluralize @user.stories.length, "story" %> </h1>
+    <table class="table">
+    <% @user.stories.each do |s| %>
+      <tr class="my-story">
+        <td>
+          <h3><%= link_to s.title, s %></h3>
+          <%= s.subtitle %>
+        </td>
+        <td>
+          <%= link_to "View", s %>
+        </td>
+        <td>
+          <%= link_to "History", history_story_path(s) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  </div>
+</div>

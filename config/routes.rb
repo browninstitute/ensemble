@@ -9,6 +9,7 @@ StoryCollab::Application.routes.draw do
       get 'history'
       get 'history/:version', :action => 'view_version', :as => 'version'
       get 'cancel_edit'
+      get 'preview_submit'
     end
     resources :story_roles
     resources :posts do
@@ -30,6 +31,7 @@ StoryCollab::Application.routes.draw do
     put "/users/edit_profile" => "users/registrations#update_profile"
     get "/users/preferences" => "users/registrations#preferences"
     match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
+    get "/users/:id" => "users/profiles#show"
   end
 
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
