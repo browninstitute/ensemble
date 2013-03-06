@@ -1,7 +1,11 @@
 <div class="post_top">
   <div class="stat_box">
     <div class="pull-left">
-      <%= image_tag "alien.svg" %>
+      <% if @post.user.avatar.file? %>
+        <%= image_tag @post.user.avatar.url(:thumb) %>
+      <% else %>
+        <%= image_tag "alien.svg" %>
+      <% end %>
       <%= @post.user.name %>
     </div>
     <div class="pull-right">
@@ -21,7 +25,11 @@
 <% if can? :create, Post %>
 <div class="message reply_box">
   <div class="message-user">
-    <%= image_tag "alien.svg" %>
+    <% if current_user.avatar.file? %>
+      <%= image_tag current_user.avatar.url(:thumb) %>
+    <% else %>
+      <%= image_tag "alien.svg" %>
+    <% end %>
     <%= current_user.name %>
   </div>
   <div class="message-body">

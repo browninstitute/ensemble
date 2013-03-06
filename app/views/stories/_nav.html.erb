@@ -15,7 +15,7 @@
     <ul class="nav pull-right">
       <li>
         <%= link_to story_story_roles_path(@story), :remote => true do %>
-          <i class="icon-user"></i> Contributors (<span id="contributor_count"><%= @story.contributors.count %></span>)
+          <i class="icon-user"></i> Moderators (<span id="contributor_count"><%= @story.contributors.count %></span>)
         <% end %>
       </li>
       <li>

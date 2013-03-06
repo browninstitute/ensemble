@@ -1,6 +1,10 @@
 <div class="message" id="post_<%= post.id %>">
   <div class="message-user">
-    <%= image_tag "alien.svg" %>
+    <% if post.user.avatar.file? %>
+      <%= image_tag post.user.avatar.url(:thumb) %>
+    <% else %>
+      <%= image_tag "alien.svg" %>
+    <% end %>
     <%= post.user.name %>
   </div>
   <div class="message-body">
