@@ -18,38 +18,60 @@
   </div>  
 </div>
 
-<hr />
-
-<h2>Story Requirements</h2>
-<ul>
-  <li>Submit a single short story that fits the theme [TODO]. You can interpret the prompt broadly, and write in any safe-for-work genre you like.</li>
-  <li>Your story must be written and submitted through the Ensemble system.</li>
-  <li>Your story must be no more than 4000 words. A reader should be able to read the story in one sitting.</li>
-  <li>Your story must be original and unpublished.</li>
+<ul class="nav nav-tabs storyslam-tabs">
+  <li class="active"><a href="#rules" data-toggle="tab">Story Requirements</a></li>
+  <li><a href="#prizes" data-toggle="tab">Prizes</a></li>
+  <li><a href="#submit" data-toggle="tab">Submit Your Story</a></li>
 </ul>
 
-<strong>Collaboration</strong>
-<p>
-  All stories must show evidence that it is the result of collaboration. In other words, stories written by single authors only will not be eligible to win the prize.
-</p>
+<div class="tab-content">
+  <div class="tab-pane active" id="rules">
+    <h2>Story Requirements</h2>
+    <ul>
+      <li>Submit a single short story that fits the theme [TODO]. You can interpret the prompt broadly, and write in any safe-for-work genre you like.</li>
+      <li>Your story must be written and submitted through the Ensemble system.</li>
+      <li>Your story must be no more than 1000 words. A reader should be able to read the story in one sitting.</li>
+      <li>Your story must be original, unpublished, and not have been entered in any previous competition or contest.</li>
+    </ul>
 
-<strong>Deadline & Submission</strong>
-<p>
-All submissions must be submitted through Ensemble by 11:59pm, March [TODO], 2013, Pacific Standard Time. To submit your story, go to the <%= link_to "Submissions", "#" %> page.
-</p>
+    <strong>Collaboration</strong>
+    <p>
+      All stories must show evidence that it is the result of collaboration. In other words, stories written by single authors only will not be eligible to win the prize.
+    </p>
 
-<strong>Copyright</strong>
-<p>
-By submitting your work to this contest, you allow the Stanford Story Slam and [TODO] to publish your work at least: once in print, and once online. The collaborating authors will be given full credit. Besides this, the authors will retain all copyright and publishing rights.
-</p>
+    <strong>Deadline & Submission</strong>
+    <p>
+    All submissions must be submitted through Ensemble by <strong>11:59pm, April 5, 2013, Pacific Standard Time.</strong> To submit your story, click the Submit Your Story tab above. Again, the story must have been written and submitted through Ensemble.
+    </p>
 
-<h2>The Prize</h2>
-<p>
-  The winning collaboration will receive $500 (to be split amongst the collaborators in the form of Amazon.com gift cards) and publication in the [TODO] issue of [TODO].
-</p>
+    <strong>Copyright</strong>
+    <p>
+    By submitting work to this contest, the authors allow the Stanford Story Slam and [TODO] to publish your work once in print and once online. The collaborating authors will be given full credit. Besides this, the authors will retain all future copyright and publishing rights.
+    </p>
+  </div>
+  <div class="tab-pane" id="prizes">
+    <h2>The Prize</h2>
+    <p>
+      The winning collaboration will receive $500 (to be split amongst the collaborators in the form of Amazon.com gift cards) and publication in the [TODO] issue of [TODO].
+    </p>
 
-<strong>Judges</strong>
-<p>
-  The judges of the competition will include Stanford University creative writing professors and writers from the California Bay area, to be announced soon.
-</p>
-
+    <strong>Judges</strong>
+    <p>
+      The judges of the competition will include Stanford University creative writing professors and writers from the California Bay area, to be announced soon.
+    </p>
+  </div>
+  <div class="tab-pane" id="submit">
+    <h2>Submit Your Story</h2>
+    <p>
+      Select a story from the drop down list to preview it before submitting.
+    </p>
+    <p>
+      Only the starter of the story can submit a story into the competition. If the story you want to submit isn't there, you may not be the story owner.
+    </p>
+    <%= form_tag(preview_submit_stories_path) do %>
+      <%= select_tag "submission", options_from_collection_for_select(current_user.stories, "id", "title") %>
+      <br />
+      <%= submit_tag "Preview Submission", :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

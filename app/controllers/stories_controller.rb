@@ -152,5 +152,12 @@ class StoriesController < ApplicationController
 
   # Preview the story before submitting it to the story slam
   def preview_submit
+    @story = Story.find(params[:submission])
+    @story_slam_preview = true # to hide/show certain things in the header
+  end
+
+  # Submit story to the contest.
+  def storyslam_submit
+    render :layout => "application"
   end
 end

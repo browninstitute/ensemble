@@ -3,13 +3,14 @@ StoryCollab::Application.routes.draw do
   resources :stories do
     collection do
       get 'current'
+      post 'preview_submit'
     end
     member do
       match 'preview'
       get 'history'
       get 'history/:version', :action => 'view_version', :as => 'version'
       get 'cancel_edit'
-      get 'preview_submit'
+      post 'storyslam_submit'
     end
     resources :story_roles
     resources :posts do

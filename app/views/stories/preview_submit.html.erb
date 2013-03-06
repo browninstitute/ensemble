@@ -1,0 +1,5 @@
+<div class="preview-story">
+  <% @story.final_draft.each do |p| %>
+    <%= Format.markdown(p.content) %>
+  <% end %>
+</div>

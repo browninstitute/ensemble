@@ -2,6 +2,7 @@
 
 .story-slam-banner-wrapper {
   position: relative;
+  margin-bottom: 20px;
 }
 
 .story-slam-banner {
@@ -46,5 +47,21 @@
     width: 60%;
     margin-top: -150px;
     height: 527px; /* Non-responsive for now. Blah. */
+  }
+}
+
+.preview-story {
+  p {
+    font-family: Georgia,Cambria,"Times New Roman",Times,serif;                                                           
+    font-size: 1.5em;                                                                                                     
+    line-height: 1.8em;
+  }
+}
+
+.story-header {
+  .alert-block {
+    .btn {
+      margin-top: 10px;
+    }
   }
 }

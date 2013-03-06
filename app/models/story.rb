@@ -10,6 +10,26 @@ class Story < ActiveRecord::Base
   has_paper_trail :only => [:title, :subtitle]
   validates :title, :presence => true
 
+  # Returns an array of Paragraph objects that correspond to
+  # the top liked or winning paragraphs for each scene in the story.
+  def final_draft
+    paragraphs = []
+    self.scenes.each do |s|
+      paragraphs.push(s.ordered_paragraphs.first)
+    end
+    paragraphs
+  end
+
+  # Returns the word count for the final draft version
+  # of the story.
+  def word_count
+    count = 0
+    self.final_draft.each do |p|
+      count += p.word_count
+    end
+    count
+  end
+
   # Gets all Story activity as an array.
   def activity
     activity = []
