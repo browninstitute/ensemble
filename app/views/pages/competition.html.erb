@@ -66,12 +66,35 @@
       Select a story from the drop down list to preview it before submitting.
     </p>
     <p>
-      Only the starter of the story can submit a story into the competition. If the story you want to submit isn't there, you may not be the story owner.
+      Only the starter of the story can submit a story into the competition. You can submit the same story as many times as you like up until the deadline -- only the latest submission will be considered.
     </p>
     <%= form_tag(preview_submit_stories_path) do %>
-      <%= select_tag "submission", options_from_collection_for_select(current_user.stories, "id", "title") %>
+      <%= select_tag "submission", options_from_collection_for_select(current_user.stories, "id", "title"),
+                     :class => 'input-xxlarge' %>
       <br />
       <%= submit_tag "Preview Submission", :class => 'btn btn-primary' %>
+    <% end %>
+    <h3>Your Submissions</h3>
+    <% submissions = Submission.find(:all, :conditions => {:user_id => current_user}) %>
+    <% if submissions.length == 0 %>
+      You haven't submitted any stories yet.
+    <% else %>
+    <table class="table submissions-table">
+      <tr>
+        <th>Story</th>
+        <th>Time Submitted</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <% submissions.each do |s| %>
+      <tr id="submission_<%= s.id %>">
+        <td><%= s.title %></td>
+        <td><%= s.created_at %></td>
+        <td><%= link_to "View", submission_path(s) %></td>
+        <td><%= link_to "Delete", submission_path(s), :method => :delete, :confirm => "Are you sure you want to delete this submission? This cannot be undone.", :remote => true %></td>
+      </tr>
+      <% end %>
+    </table>
     <% end %>
   </div>
 </div>

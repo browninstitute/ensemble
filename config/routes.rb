@@ -35,6 +35,8 @@ StoryCollab::Application.routes.draw do
     get "/users/:id" => "users/profiles#show", :as => :user
   end
 
+  resources :submissions
+
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
   match 'paragraphs/:id/unlike' => 'paragraphs#unlike', :as => :unlike_paragraph
   match 'paragraphs/:id/winner' => 'paragraphs#winner', :as => :winner_paragraph

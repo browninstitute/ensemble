@@ -158,6 +158,15 @@ class StoriesController < ApplicationController
 
   # Submit story to the contest.
   def storyslam_submit
+    @story = Story.find(params[:id]) 
+    @submission = Submission.new(:title => @story.title,
+                                 :subtitle => @story.subtitle,
+                                 :genre1 => @story.genre1,
+                                 :genre2 => @story.genre2,
+                                 :content => @story.final_draft.map(&:content).join("\n\n"),
+                                 :user_id => current_user,
+                                 :story_id => @story.id)
+    @submission.save
     render :layout => "application"
   end
 end
