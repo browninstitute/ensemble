@@ -25,7 +25,7 @@
       <%= pluralize(@story.word_count, "words") %>
     </div>
     <div class="author">
-      Started by <%= link_to @story.user.name, "#" %>
+      Started by <%= link_to @story.user.name, @story.user %>
       <span class="timestamp">
         <%= time_ago_in_words(@story.created_at) %> ago
       </span>
