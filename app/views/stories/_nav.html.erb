@@ -12,20 +12,38 @@
         <%= link_to 'Activity', history_story_path(@story) %>
       </li>
     </ul>
-    <% if can? :edit, @story %>
     <ul class="nav pull-right">
-      <li>
-        <%= link_to story_story_roles_path(@story), :remote => true do %>
-          <i class="icon-user"></i> Moderators (<span id="contributor_count"><%= @story.contributors.count %></span>)
-        <% end %>
+      <% if can?(:edit, @story) || can?(:destroy, @story) %>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
+          Manage Story
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <% if can? :edit, @story %>
+            <li>
+            <%= link_to story_story_roles_path(@story), :remote => true do %>
+              <i class="icon-user"></i> Moderators (<span id="contributor_count"><%= @story.contributors.count %></span>)
+            <% end %>
+            </li>
+            <li class="divider"></li>
+            <li>
+            <%= link_to edit_story_path(@story), :remote => true do %>
+              <i class="icon-pencil"></i> Edit Story
+            <% end %>
+            </li>
+          <% end %>
+          <% if can? :destroy, @story %>
+          <li>
+          <%= link_to @story, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <i class="icon-remove"></i> Delete Story
+          <% end %>
+          </li>
+          <% end %>
+        </ul>
       </li>
-      <li>
-        <%= link_to edit_story_path(@story), :remote => true do %>
-          <i class="icon-pencil"></i> Edit
-        <% end %>
-      </li>
-    </ul>
     <% end %>
+    </ul>
   </div>
 </div>
 <% end %>

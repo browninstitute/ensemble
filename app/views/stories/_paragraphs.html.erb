@@ -86,7 +86,6 @@ function paragraphsToContent() {
 $().ready(function() {
   contentToParagraphs();
   $('.edit-mode').on('change', 'textarea, input[type=text]', function() {
-    console.log("change");
     paragraphsToContent();
   });
 });
@@ -104,19 +103,21 @@ $().ready(function() {
 
     // See if we want to jump to the next textarea
     if (this.selectionStart == $(this).val().length) {
-      $next = $(this).parents(".scene").next().find('.txt');
+      $next = $(this).parents(".scene").next().find('.txt.active');
       if (e.keyCode == 40) { // Down arrow
         $next.focus();
         e.preventDefault();
       } else if (e.keyCode == 39 && this.selectionStart == $(this).val().length) { // Right arrow
         $next.focus();
         e.preventDefault();
+      } else {
+        // Do nothing
       }
     }
 
     // See if we want to jump to the previous textarea
     if (this.selectionStart == 0) { 
-      $prev = $(this).parents(".scene").prev().find('.txt');
+      $prev = $(this).parents(".scene").prev().find('.txt.active');
       if (e.keyCode == 38) { // Up arrow
         $prev.focus();
         e.preventDefault();
@@ -128,15 +129,21 @@ $().ready(function() {
         if ($(this).val().length == 0 && $('.edit-mode .txt').length > 1) {
           $(this).parents(".scene").remove();
           $prev.focus();
+          e.preventDefault();
+          $prev[0].setSelectionRange($prev.val().length, $prev.val().length);
         } else if ($(this).parents(".scene").find('a[class~=new-scene]').length > 0) {
           var prevLen = $prev.val().length;
           $prev.val($prev.val() + $(this).val());
           $(this).parents(".scene").remove();
           tick();
           $prev.focus();
+          e.preventDefault();
           $prev[0].setSelectionRange(prevLen, prevLen);
         } else {
-          $prev.focus();          
+          $.bootstrapGrowl("You can't merge a paragraph which has a scene!", {type: 'error'});
+          $prev.focus();
+          e.preventDefault();
+          $prev[0].setSelectionRange($prev.val().length, $prev.val().length);
         }
         $('.paragraph .txt').trigger('autosize');
       }
@@ -145,13 +152,13 @@ $().ready(function() {
 
   $('.edit-mode').on('keyup', '.txt', function(e) { 
     // Create a new textarea with a double return
-    if($(this).val().indexOf("\n\n") !== -1) {
+    if($(this).val().indexOf("\n\n\n") !== -1) {
       <% temp = Scene.new %>
       var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => temp, :edit_mode => true }) %>");
       $para.attr("id", "temp_<%= temp.temp_id %>");
       $(this).parents(".scene").after($para);
-      var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n"));
-      var next = $(this).val().substring($(this).val().indexOf("\n\n") + 2);
+      var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n\n"));
+      var next = $(this).val().substring($(this).val().indexOf("\n\n\n") + 3);
       $(this).val(prev);
       var $next = $(this).parents(".scene").next().find('.txt');
       $next.val(next).focus();
@@ -159,6 +166,18 @@ $().ready(function() {
       $('.paragraph .txt').trigger('autosize');
     }
     prevSelectionStart = this.selectionStart;
+    tick();
+  });
+
+  $('#add-scene-break').click(function() {
+    <% temp = Scene.new %>
+    var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => temp, :edit_mode => true }) %>");
+    $para.attr("id", "temp_<%= temp.temp_id %>");
+    $(".scene:last").after($para);
+    var $next = $(".scene:last").find('.txt');
+    $next.focus();
+    $('.txt', $para).autosize();
+    $('.paragraph .txt').trigger('autosize');
     tick();
   });
 });    

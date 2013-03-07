@@ -1,5 +1,5 @@
 <% if scene.paragraphs.empty? %>
-  <textarea class="txt"><%= new_story_example_text(scene.position) if current_page?(new_story_path) %></textarea>
+  <textarea class="txt active"><%= new_story_example_text(scene.position) if current_page?(new_story_path) %></textarea>
 <% else %>
   <% scene.paragraphs.each_with_index do |p, i| %>  
     <textarea class="txt tab-pane <%= "active" if i == 0 %>" id="para_edit_<%= p.id %>" data-id="<%= p.id %>" data-user="<%= p.user_id %>"><%= p.content %></textarea>
