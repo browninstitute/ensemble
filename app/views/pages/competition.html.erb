@@ -50,7 +50,7 @@
     </p>
   </div>
   <div class="tab-pane" id="prizes">
-    <h2>The Prize</h2>
+    <h2>Prizes</h2>
     <p>
       The winning collaboration will receive $500 (to be split amongst the collaborators in the form of Amazon.com gift cards) and publication in the [TODO] issue of [TODO].
     </p>
@@ -68,11 +68,17 @@
     <p>
       Only the starter of the story can submit a story into the competition. You can submit the same story as many times as you like up until the deadline -- only the latest submission will be considered.
     </p>
-    <%= form_tag(preview_submit_stories_path) do %>
-      <%= select_tag "submission", options_from_collection_for_select(current_user.stories, "id", "title"),
+    <% if current_user.stories.length == 0 %>
+      <strong>
+        You don't yet have any stories to submit. <%= link_to "Go start one.", new_story_path %>
+      </strong>
+    <% else %>
+      <%= form_tag(preview_submit_stories_path) do %>
+        <%= select_tag "submission", options_from_collection_for_select(current_user.stories, "id", "title"),
                      :class => 'input-xxlarge' %>
-      <br />
-      <%= submit_tag "Preview Submission", :class => 'btn btn-primary' %>
+        <br />
+        <%= submit_tag "Preview Submission", :class => 'btn btn-primary' %>
+      <% end %>
     <% end %>
     <h3>Your Submissions</h3>
     <% submissions = Submission.find(:all, :conditions => {:user_id => current_user}) %>

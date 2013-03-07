@@ -25,15 +25,18 @@ StoryCollab::Application.routes.draw do
     resources :paragraphs
   end
 
-  devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" } do
+  devise_for :users, :controllers => { :registrations => "users/registrations", 
+                                       :omniauth_callbacks => "users/omniauth_callbacks" } do
     get "/users/change_password" => "users/registrations#change_password"
     put "/users/registrations/update_password" => "users/registrations#update_password"
     get "/users/edit_profile" => "users/registrations#edit_profile"
     put "/users/edit_profile" => "users/registrations#update_profile"
     get "/users/preferences" => "users/registrations#preferences"
     match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
-    get "/users/:id" => "users/profiles#show", :as => :user
   end
+  
+  # Make sure this comes AFTER the devise routes.
+  resources :users
 
   resources :submissions
 
