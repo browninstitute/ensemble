@@ -15,9 +15,3 @@
     </div>
   </div>
 </div>
-
-<% if can? :destroy, @story %>
-  <br />
-  <%= link_to 'Delete this story', @story, method: :delete, class: "btn btn-small pull-right", data: { confirm: 'Are you sure?' } %>
-  <br />
-<% end %>
