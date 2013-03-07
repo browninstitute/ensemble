@@ -5,6 +5,14 @@
   $('form').on('focus click', 'textarea', function() { selectedTextarea = this; });
   $('#stoolbar_bold').click(toolbarBold);
   $('#stoolbar_italic').click(toolbarItalic);
+  $().ready(function() {
+    // Replace 3 more more consecutive newlines with 2 newlines
+    $("#p_submit_<%= p.id %> input[type=submit]").click(function() {
+      $textarea = $(this).parents('form').find('textarea');
+      $textarea.val($textarea.val().replace(/([\n\n])\1\1+/gi, "\n\n"));
+      return true;
+    });
+  });
   </script>
 
   <div class="stoolbar row-fluid">
@@ -25,7 +33,7 @@
                   
   <span class="text-error">
   </span>
-  <div class="span11" style="padding-right: 20px;">
+  <div id="p_submit_<%= p.id %>" class="span11" style="padding-right: 20px;">
     <%= f.submit "Save", :class => 'btn btn-mini pull-right' %>
     <%= link_to "Cancel", "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
   </div>

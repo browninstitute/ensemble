@@ -6,6 +6,7 @@ $ ->
   $(".story-header").replaceWith("<%= escape_javascript(render :partial => "stories/form") %>")
   $(".story .navbar").remove()
   $(".content").addClass("edit-mode")
+  $('#add-scene-wrapper').show()
 
   $('.content').sortable({
       handle: '.move',

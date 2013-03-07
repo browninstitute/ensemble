@@ -1,4 +1,5 @@
 class StoryRolesController < ApplicationController
+
   def index
     @story = Story.find(params[:story_id])
     @story_role = StoryRole.new
@@ -14,7 +15,10 @@ class StoryRolesController < ApplicationController
     puts params.inspect
     @story_role = StoryRole.new(params[:story_role])
     @story = Story.find(params[:story_id])
+
     @story_role.story = @story
+
+    authorize! :manage, @story_role
     
     if @story_role.user != nil && @story_role.save
       @story_role = StoryRole.new
@@ -26,6 +30,9 @@ class StoryRolesController < ApplicationController
 
   def destroy
     @story_role = StoryRole.find(params[:id])
+
+    authorize! :manage, @story_role
+    
     @story_role.destroy
 
     @story = Story.find(params[:story_id])

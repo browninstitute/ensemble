@@ -19,6 +19,7 @@ class Ability
         can :manage, Scene, :story => { :user_id => user.id }
         can :manage, Paragraph, :scene => { :story => { :user_id => user.id }}
         can :manage, Comment, :scene => { :story => { :user_id => user.id }}
+        can :manage, StoryRole, :story => { :user_id => user.id }
 
         # Trusted users can...
         can :manage, Scene, :story => { :contributors => { :id => user.id } }
@@ -33,6 +34,10 @@ class Ability
         can :manage, Comment, :user_id => user.id
         can :manage, Post, :user_id => user.id
         can :manage, Paragraph, :user_id => user.id
+
+        # Only owners of stories can mark paragraphs as winners
+        cannot :winner, Paragraph
+        can :winner, Paragraph, :scene => { :story => { :user_id => user.id }}
     end
 
     # Define abilities for the passed in user here. For example:
