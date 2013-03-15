@@ -3,7 +3,7 @@
     <div class="banner-content">
       <h1>Stanford Story Slam 2013</h1>
       <p>
-        Submissions are now open for the very first Stanford Story Slam! The winning submission will be published in [TODO] and hold the distinction of pioneering collaborative story making on the web. The winning collaboration will also receive $500.
+      Submissions are now open for the very first Stanford Story Slam! The winning submission will be published in the <%= link_to "Stanford Arts Review", "http://stanfordartsreview.tumblr.com/" %> and hold the distinction of helping pioneer collaborative story making on the web. The winning collaboration will also receive $500.
       </p>
       <%= link_to new_story_path, :class => "btn btn-primary" do %>
         Start writing your entry
@@ -27,11 +27,21 @@
 <div class="tab-content">
   <div class="tab-pane active" id="rules">
     <h2>Story Requirements</h2>
+      <p>
+      With a team, submit a single short story that uses the following line somewhere in the story: 
+      </p>
+      <p>
+      <em>"It's not wise to let someone like that know your name."</em>
+      <br />
+      <small>Used with permission from <%= link_to "Luke Neff", "http://writingprompts.tumblr.com/" %></small>
+      </p>
+      <p>
+      You can interpret the above prompt broadly, and write in any safe-for-work genre you like.
+      </p>
     <ul>
-      <li>Submit a single short story that fits the theme [TODO]. You can interpret the prompt broadly, and write in any safe-for-work genre you like.</li>
-      <li>Your story must be written and submitted through the Ensemble system.</li>
-      <li>Your story must be no more than 1000 words. A reader should be able to read the story in one sitting.</li>
-      <li>Your story must be original, unpublished, and not have been entered in any previous competition or contest.</li>
+      <li>The story must be written and submitted through the Ensemble system.</li>
+      <li>The story must be no more than 1000 words. A reader should be able to read the story in one sitting.</li>
+      <li>The story must be original, unpublished, and not have been entered in any previous competition or contest.</li>
     </ul>
 
     <strong>Collaboration</strong>
@@ -41,23 +51,28 @@
 
     <strong>Deadline & Submission</strong>
     <p>
-    All submissions must be submitted through Ensemble by <strong>11:59pm, April 5, 2013, Pacific Standard Time.</strong> To submit your story, click the Submit Your Story tab above. Again, the story must have been written and submitted through Ensemble.
+    All submissions must be submitted through Ensemble by <strong>11:59pm, April 15, 2013, Pacific Standard Time.</strong> To submit your team's story, click the Submit Your Story tab above. Again, the story must have been written and submitted through Ensemble.
     </p>
 
     <strong>Copyright</strong>
     <p>
-    By submitting work to this contest, the authors allow the Stanford Story Slam and [TODO] to publish your work once in print and once online. The collaborating authors will be given full credit. Besides this, the authors will retain all future copyright and publishing rights.
+    By submitting work to this contest, the collaborating authors allow the Stanford Story Slam and the Stanford Arts Review to publish this work online. The collaborating authors will be given full credit. Besides this, the authors will retain all future copyright and publishing rights.
     </p>
   </div>
   <div class="tab-pane" id="prizes">
     <h2>Prizes</h2>
     <p>
-      The winning collaboration will receive $500 (to be split amongst the collaborators in the form of Amazon.com gift cards) and publication in the [TODO] issue of [TODO].
+    The winning collaboration will receive $500 (to be split amongst the collaborators in the form of Amazon.com gift cards) and publication in the <%= link_to "Stanford Arts Review", "http://stanfordartsreview.tumblr.com" %>.
+    </p>
+
+    <strong>Collaborators</strong>
+    <p>
+      When a team submits a story, the story leader needs to specify the people that are considered part of the entering team. To do that, the story leader should go to the story and click the "Collaborators" button on the story menu bar to add or remove collaborators. We will use this information to send collaborators their share of the prize money. 
     </p>
 
     <strong>Judges</strong>
     <p>
-      The judges of the competition will include Stanford University creative writing professors and writers from the California Bay area, to be announced soon.
+    The judges of the competition will include the <%= link_to "Stanford Story Slam staff", about_path %> and Stanford creative writing profesors and students that run the <%= link_to "Stanford Arts Review", "http://stanfordartsreview.tumblr.com" %>.
     </p>
   </div>
   <div class="tab-pane" id="submit">
@@ -66,7 +81,7 @@
       Select a story from the drop down list to preview it before submitting.
     </p>
     <p>
-      Only the starter of the story can submit a story into the competition. You can submit the same story as many times as you like up until the deadline -- only the latest submission will be considered.
+      Only the story leader (the starter of the story) can submit a story into the competition. You can submit the same story as many times as you like up until the deadline -- only the latest submission will be considered.
     </p>
     <% if current_user.stories.length == 0 %>
       <strong>
