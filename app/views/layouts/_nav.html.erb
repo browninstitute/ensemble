@@ -3,9 +3,9 @@
     <%= link_to content_tag(:span, "En") + content_tag(:span, "semble"), root_path, :class => "brand" %>
 
     <ul class="nav pull-right">
-      <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Story Slam", storyslam_path %></li>
+      <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
+      <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to "About", about_path %></li>
+      <li class="<%= 'active' if current_page?(storyslam_path) %>"><%= link_to "Story Slam", storyslam_path %></li>
       <li class="<%= 'active' if current_page?(stories_path) %>"><%= link_to "Stories", stories_path %></li>
       <li><%= link_to "Forums", "http://ensemble.boards.net/" %></li>
     </ul>
