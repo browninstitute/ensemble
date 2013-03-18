@@ -5,7 +5,9 @@
     <ul class="nav pull-right">
       <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
       <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to "About", about_path %></li>
-      <li class="<%= 'active' if current_page?(storyslam_path) %>"><%= link_to "Story Slam", storyslam_path %></li>
+      <% if StoryCollab::Application.config.story_slam %>
+        <li class="<%= 'active' if current_page?(storyslam_path) %>"><%= link_to "Story Slam", storyslam_path %></li>
+      <% end %>
       <li class="<%= 'active' if current_page?(stories_path) %>"><%= link_to "Stories", stories_path %></li>
       <li><%= link_to "Forums", "http://ensemble.boards.net/" %></li>
     </ul>
