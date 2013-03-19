@@ -3,7 +3,7 @@ StoryCollab::Application.configure do
 
   # Storyslam Configuration
   # Show story slam-related messages and links
-  config.story_slam = false;
+  config.story_slam = false
 
   # Code is not reloaded between requests
   config.cache_classes = true

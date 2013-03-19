@@ -8,6 +8,14 @@
     <%= link_to "Submit Story", storyslam_submit_story_path(@story), :method => :post, :class => "btn btn-primary" %>
   </div>
   <% end %>
+
+  <% if StoryCollab::Application.config.story_slam && @story.contributors.count == 0 && current_page?(story_path(@story)) %>
+    <div class="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Story Slam Participants:</strong> 
+      Remember to officially designate who your team members are by adding them to your story by clicking the "Contributors" button in the story menu bar. 
+    </div>
+  <% end %>
   
   <h1>
     <%= @story.title %>

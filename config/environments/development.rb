@@ -3,7 +3,7 @@ StoryCollab::Application.configure do
 
   # Storyslam Configuration
   # Show story slam-related messages and links
-  config.story_slam = false;
+  config.story_slam = true
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
