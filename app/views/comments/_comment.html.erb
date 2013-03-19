@@ -1,7 +1,7 @@
 <div id="comment_<%= comment.id %>" class="comment_box">
   <div class="comment-info">
     <div class="comment-name pull-left">
-      <%= comment.user.name %>
+      <%= link_to comment.user.name, comment.user %>
     </div>
     <div class="comment-time pull-right">
       <%= time_ago_in_words(comment.created_at) %> ago

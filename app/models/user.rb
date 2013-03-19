@@ -33,4 +33,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def stories
+    Story.find(:all, :conditions => {:user_id => self.id})
+  end
+
 end

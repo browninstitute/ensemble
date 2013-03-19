@@ -3,7 +3,7 @@
     <i class="icon-trophy" rel="tooltip"></i>
   </span>
   <% if paragraph.user %>
-    <span class="paragraph-author">By <strong><%= paragraph.user.name %></strong></span>
+    <span class="paragraph-author">By <strong><%= link_to paragraph.user.name, paragraph.user %></strong></span>
   <% end %>
   <div class="likes">
     <span class="like-count">

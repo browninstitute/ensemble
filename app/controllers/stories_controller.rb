@@ -149,4 +149,24 @@ class StoriesController < ApplicationController
       format.js { render :action => "error" }
     end
   end
+
+  # Preview the story before submitting it to the story slam
+  def preview_submit
+    @story = Story.find(params[:submission])
+    @story_slam_preview = true # to hide/show certain things in the header
+  end
+
+  # Submit story to the contest.
+  def storyslam_submit
+    @story = Story.find(params[:id]) 
+    @submission = Submission.new(:title => @story.title,
+                                 :subtitle => @story.subtitle,
+                                 :genre1 => @story.genre1,
+                                 :genre2 => @story.genre2,
+                                 :content => @story.final_draft.map(&:content).join("\n\n"),
+                                 :user_id => current_user,
+                                 :story_id => @story.id)
+    @submission.save
+    render :layout => "application"
+  end
 end

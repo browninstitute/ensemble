@@ -1,4 +1,22 @@
 <div class="story-header">
+  <% if @story_slam_preview %>
+  <div class="alert alert-block">
+    <h4>Your story has not yet been submitted.</h4>
+    Below is how your story will appear to judges. Make sure to read it over and make sure
+    that it follows competition requirements. When you're ready, press submit to submit your story.
+    <br />
+    <%= link_to "Submit Story", storyslam_submit_story_path(@story), :method => :post, :class => "btn btn-primary" %>
+  </div>
+  <% end %>
+
+  <% if StoryCollab::Application.config.story_slam && @story.contributors.count == 0 && current_page?(story_path(@story)) %>
+    <div class="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Story Slam Participants:</strong> 
+      Remember to officially designate who your team members are by adding them to your story by clicking the "Contributors" button in the story menu bar. 
+    </div>
+  <% end %>
+  
   <h1>
     <%= @story.title %>
   </h1>
@@ -11,8 +29,11 @@
     <div class="genres">
       <%= "Genre: #{print_genres(@story)}" if !print_genres(@story).nil? %>
     </div>
+    <div class="word-count">
+      <%= pluralize(@story.word_count, "words") %>
+    </div>
     <div class="author">
-      Started by <%= link_to @story.user.name, "#" %>
+      Started by <%= link_to @story.user.name, @story.user %>
       <span class="timestamp">
         <%= time_ago_in_words(@story.created_at) %> ago
       </span>

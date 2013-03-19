@@ -3,12 +3,14 @@ StoryCollab::Application.routes.draw do
   resources :stories do
     collection do
       get 'current'
+      post 'preview_submit'
     end
     member do
       match 'preview'
       get 'history'
       get 'history/:version', :action => 'view_version', :as => 'version'
       get 'cancel_edit'
+      post 'storyslam_submit'
     end
     resources :story_roles
     resources :posts do
@@ -23,7 +25,8 @@ StoryCollab::Application.routes.draw do
     resources :paragraphs
   end
 
-  devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" } do
+  devise_for :users, :controllers => { :registrations => "users/registrations", 
+                                       :omniauth_callbacks => "users/omniauth_callbacks" } do
     get "/users/change_password" => "users/registrations#change_password"
     put "/users/registrations/update_password" => "users/registrations#update_password"
     get "/users/edit_profile" => "users/registrations#edit_profile"
@@ -31,6 +34,11 @@ StoryCollab::Application.routes.draw do
     get "/users/preferences" => "users/registrations#preferences"
     match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
   end
+  
+  # Make sure this comes AFTER the devise routes.
+  resources :users
+
+  resources :submissions
 
   match 'paragraphs/:id/like' => 'paragraphs#like', :as => :like_paragraph
   match 'paragraphs/:id/unlike' => 'paragraphs#unlike', :as => :unlike_paragraph
@@ -40,6 +48,7 @@ StoryCollab::Application.routes.draw do
   # Non-model pages
   get "home/index"
   match '/about' => 'pages#about'
+  match '/storyslam' => 'pages#competition'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
