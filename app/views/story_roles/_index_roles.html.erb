@@ -1,9 +1,9 @@
-<% if @story.story_roles.count == 0 %>
-  <div class="alert alert-info">
-    This story doesn't have any other contributors.
-  </div>
-<% end %>
 <table class="table table-condensed table-striped">
+  <tr>
+    <td><%= @story.user.name %></td>
+    <td><span class="label label-success">Story Owner</span></td>
+    <td></td>
+  </tr>
   <% @story.story_roles.each do |story_role| %>
     <tr>
       <td><%= story_role.user.name %></td>
