@@ -17,6 +17,7 @@ $(document).ready ->
   setupComments()
   paragraphLinks()
   setupAnalytics()
+  $("input, textarea").placeholder() # for old browsers
 
   # Make functions available for AJAX callbacks
   window.setupAnalytics = setupAnalytics
