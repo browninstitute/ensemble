@@ -15,6 +15,7 @@ $(document).ready ->
     truncateSceneDesc() # force this to only happen after CSS has loaded
   )
   setupComments()
+  paragraphLinks()
   setupAnalytics()
 
   # Make functions available for AJAX callbacks
@@ -27,6 +28,7 @@ $(document).ready ->
 
   window.setupComments = setupComments
   window.truncateSceneDesc = truncateSceneDesc
+  window.paragraphLinksHelper = paragraphLinksHelper
 
   window.toolbarBold = toolbarBold
   window.toolbarItalic = toolbarItalic
@@ -107,6 +109,35 @@ condenseComments = ($sc) ->
       $(".comment_box", $sc).show(500)
       $(this).hide()
     ).prependTo($sc)
+
+# Replaces mentions of paragraph numbers in comments and scenes
+# with links
+paragraphLinks = ->
+  for c in $(".comment-content")
+    $c = $(c)
+    paragraphLinksHelper($c)
+
+# Takes a .comment-content element
+paragraphLinksHelper = ($comment) ->
+  # Remove existing paragraph links so they don't get doubled
+  $comment.children(".para_link").replaceWith ->
+    $(this).html()
+
+  # Add paragraph links
+  newContent = $comment.html().replace(/#(\d+)/g, "<a href='#para_$1' class='para_link'>#$1</a>")
+  $comment.html(newContent)
+
+  $(".para_link").click (e) ->
+    # First check to see if the paragraph exists
+    para = $(this).attr("href")
+    if ($(para).length > 0)
+      $("html, body").animate({
+        scrollTop: $(para).parents(".scene").offset().top
+      }, 500, ->
+        $("a[href='" + para + "']").tab('show')
+      )
+    else
+      $.bootstrapGrowl("That paragraph no longer exists.", { type: "error" })
 
 truncateSceneDesc = ($scene = "all") ->
   if ($scene == "all")
