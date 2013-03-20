@@ -38,7 +38,7 @@ $(document).ready ->
 # Setup custom event tracking for Google Analytics
 setupAnalytics = ($tab = "all") ->
   if $tab == "all"
-    $(".nav-tabs li > a").not(".new-paragraph").click (e) ->
+    $(".paragraphs-container .nav-tabs li > a").not(".new-paragraph").click (e) ->
       if !$(e.target).parent().hasClass('active')
         paragraphID = parseInt(e.target.innerHTML.match(/[0-9]+/)[0])
         _gaq.push(['_trackEvent', 'paragraphs', 'view', '', paragraphID])
