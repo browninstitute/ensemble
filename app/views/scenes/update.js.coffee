@@ -6,6 +6,7 @@ $ ->
   $(".scene-info", $s).remove()
   $s.append("<%= escape_javascript(render(:partial => 'scenes/scene_info', :locals => { :scene => @scene })) %>")
         .show()
+  $(".scene-form input, .scene-form textarea", $s).placeholder()
   $(".scene-info .scene-info-inner", $s).click showScene
   $s.addClass("open")
   truncateSceneDesc($s)
