@@ -1,6 +1,6 @@
 <div class="story-history">
   <% @versions.each do |v| %>
-    <% if !activity_text(v).nil? %>
+    <% if !activity_text(v).nil? && v.event != "unlike" && v.event != "unwin" %>
     <div class="activity">
       <%= activity_text(v).html_safe %>
       <span class="activity-time pull-right"><%= time_ago_in_words(v.created_at) %> ago</span>
