@@ -13,12 +13,14 @@
       </li>
     </ul>
     <ul class="nav pull-right">
-      <% if can?(:edit, @story) || can?(:destroy, @story) %>
-      <li>
-      <%= link_to story_story_roles_path(@story), :remote => true do %>
-        <i class="icon-user"></i> Contributors (<span id="contributor_count"><%= @story.contributors.count + 1 %></span>)
+      <% if can?(:manage, @story.story_roles.new) %>
+        <li>
+        <%= link_to story_story_roles_path(@story), :remote => true do %>
+          <i class="icon-user"></i> Contributors (<span id="contributor_count"><%= @story.contributors.count + 1 %></span>)
+        <% end %>
+        </li>
       <% end %>
-      </li>
+      <% if can?(:edit, @story) || can?(:destroy, @story) %>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
           Manage Story
