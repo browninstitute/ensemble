@@ -164,7 +164,7 @@ class StoriesController < ApplicationController
                                  :genre1 => @story.genre1,
                                  :genre2 => @story.genre2,
                                  :content => @story.final_draft.map(&:content).join("\n\n"),
-                                 :user_id => current_user,
+                                 :user_id => current_user.id,
                                  :story_id => @story.id)
     @submission.save
     render :layout => "application"
