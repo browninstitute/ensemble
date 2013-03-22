@@ -1,5 +1,5 @@
 .comment_box {
-  margin: 1em 0;
+  margin-top: 1em;
   overflow: auto;
 
   .comment_photo {
@@ -48,6 +48,14 @@
   line-height: 1.7em;
   margin-left: 42px;
   font-size: x-small;
+
+  form {
+    textarea {
+      width: 100%;
+      margin-bottom: 5px;
+      box-sizing: border-box;
+    }
+  }
 
   .controls {
     position: absolute;
