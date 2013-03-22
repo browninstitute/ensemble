@@ -20,17 +20,18 @@ class Ability
         can :manage, Paragraph, :scene => { :story => { :user_id => user.id }}
         can :manage, Comment, :scene => { :story => { :user_id => user.id }}
         can :manage, StoryRole, :story => { :user_id => user.id }
+        can :create, Scene, :story => {:id => user.id }
 
         # Trusted users can...
         can :manage, Scene, :story => { :moderators => { :id => user.id } }
         can :manage, Paragraph, :scene => { :story => { :moderators => { :id => user.id } } }
+        can :create, Scene, :story => { :moderators => {:id => user.id } }
 
         # Anyone can...
         can :like, Paragraph
         can :history, Story
         can :create, Paragraph
         can :create, Story
-        can :create, Scene
         can :manage, Comment, :user_id => user.id
         can :manage, Post, :user_id => user.id
         can :manage, Paragraph, :user_id => user.id
