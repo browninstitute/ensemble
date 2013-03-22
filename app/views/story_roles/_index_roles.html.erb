@@ -9,7 +9,7 @@
       <td><%= story_role.user.name %></td>
       <td>
         <span class="label <%= "label-info" if story_role.role == "moderator" %>">
-          <%= story_role.role.capitalize %>
+          <%= story_role.role.capitalize if story_role.role %>
         </span>
       </td>
       <td>
