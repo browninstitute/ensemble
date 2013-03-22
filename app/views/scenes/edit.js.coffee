@@ -18,4 +18,5 @@ $ ->
     else
       $(".new-scene", $scene).after("<%= escape_javascript(render(:partial => 'scenes/form', :locals => {:scene => @scene})) %>")
 
+  $(".scene-form input, .scene-form textarea", $scene).placeholder()
   $(".scene-form .scene-form-inner .cancel-scene", $scene).click cancelScene

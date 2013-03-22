@@ -7,6 +7,7 @@ $ ->
   $(".story .navbar").remove()
   $(".content").addClass("edit-mode")
   $('#add-scene-wrapper').show()
+  $("input, textarea").placeholder()
 
   $('.content').sortable({
       handle: '.move',
