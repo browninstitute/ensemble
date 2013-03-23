@@ -151,7 +151,7 @@ $().ready(function() {
   });
 
   $('.edit-mode').on('keyup', '.txt', function(e) { 
-    // Create a new textarea with a double return
+    // Create a new textarea with a triple return
     if($(this).val().indexOf("\n\n\n") !== -1) {
       <% temp = Scene.new %>
       var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => temp, :edit_mode => true }) %>");
