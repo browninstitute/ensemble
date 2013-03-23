@@ -26,7 +26,9 @@ class Story < ActiveRecord::Base
   def word_count
     count = 0
     self.final_draft.each do |p|
-      count += p.word_count
+      if !p.nil?
+        count += p.word_count
+      end
     end
     count
   end
