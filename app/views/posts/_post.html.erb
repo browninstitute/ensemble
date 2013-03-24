@@ -11,7 +11,7 @@
     <% unless post.title.blank? %>
       <strong><%= post.title %></strong><br />
     <% end %>
-    <%= post.message %><br />
+    <%= Format.markdown post.message %><br />
     <div class="actions">
       <% if can? :create, Post %>
         <%= link_to "Reply", reply_story_post_path(@story, post), :remote => true %>
