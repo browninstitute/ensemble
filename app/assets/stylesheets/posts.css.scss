@@ -9,7 +9,7 @@
 .post_top {
 
   img {
-    width: 65px;
+    height: 50px;
   }
 
   .info_box {
@@ -20,6 +20,28 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     margin-bottom: 16px;
+
+    .lead.message-body {
+      margin-bottom: 0;
+    }
+
+    hr {
+      margin: 5px 0;
+    }
+
+    .actions, .meta {
+      opacity: 0.7;
+      font-size: smaller;
+     
+      .edit-time {
+        font-style: italic;
+        margin-right: 5px;
+      }
+
+      &:hover {
+        opacity: 1.0;
+      }
+    }
   }
 
   .stat_box {
@@ -47,10 +69,10 @@
     font-size: smaller;
 
     img {
-      padding-bottom: 2px;
-      border: 1px solid gray;
+      padding: 10px;
+      border: 1px solid #cfcfcf;
       border-radius: 6px;
-      width: 50px;
+      height: 50px;
     }
   }
 
@@ -63,13 +85,18 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.07);
     background-color: #eee;
 
-    .actions {
+    hr {
+      margin: 5px 0;
+    }
+
+    .actions, .meta {
       opacity: 0.7;
       font-size: smaller;
-      border-top: 1px solid #fcfcfc;
-      margin-top: 4px;
-      padding-top: 4px;
-      margin-bottom: -8px;
+
+      .edit-time {
+        font-style: italic;
+        margin-right: 5px;
+      }
 
       &:hover {
         opacity: 1.0;

@@ -11,8 +11,9 @@
     <% unless post.title.blank? %>
       <strong><%= post.title %></strong><br />
     <% end %>
-    <%= post.message %><br />
-    <div class="actions">
+    <%= Format.markdown post.message %><br />
+    <hr />
+    <div class="actions pull-left">
       <% if can? :create, Post %>
         <%= link_to "Reply", reply_story_post_path(@story, post), :remote => true %>
       <% else %>
@@ -22,5 +23,16 @@
          &sdot; <%= link_to "Edit", edit_story_post_path(@story, post), :remote => true %>
       <% end %>
     </div>
+    <div class="meta pull-right">
+      <span class="edit-time">
+        <% if post.updated_at != post.created_at %>
+          Last edited at <%= post.updated_at %> 
+        <% end %>
+      </span>
+      <span>
+        Posted <%= time_ago_in_words(post.created_at) %> ago
+      </span>
+    </div>
+    <div class="clearfix"></div>
   </div>
 </div>
