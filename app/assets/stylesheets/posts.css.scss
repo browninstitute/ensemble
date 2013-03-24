@@ -9,7 +9,7 @@
 .post_top {
 
   img {
-    width: 65px;
+    height: 50px;
   }
 
   .info_box {
@@ -20,6 +20,18 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     margin-bottom: 16px;
+
+    .actions {
+      opacity: 0.7;
+      font-size: smaller;
+      border-top: 1px solid #fcfcfc;
+      margin-top: 4px;
+      padding-top: 4px;
+      margin-bottom: -16px;
+      &:hover {
+        opacity: 1.0;
+      }
+    }
   }
 
   .stat_box {
@@ -47,10 +59,10 @@
     font-size: smaller;
 
     img {
-      padding-bottom: 2px;
-      border: 1px solid gray;
+      padding: 10px;
+      border: 1px solid #cfcfcf;
       border-radius: 6px;
-      width: 50px;
+      height: 50px;
     }
   }
 

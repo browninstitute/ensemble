@@ -1,4 +1,4 @@
-<div class="post_top">
+<div class="post_top" id="post_<%= @post.id %>">
   <div class="stat_box">
     <div class="pull-left">
       <% if @post.user.avatar.file? %>
@@ -6,7 +6,8 @@
       <% else %>
         <%= image_tag "alien.svg" %>
       <% end %>
-      <%= @post.user.name %>
+      &nbsp;
+      <strong><%= @post.user.name %></strong>
     </div>
     <div class="pull-right">
       <%= pluralize @post.children.count, "reply" %> /
@@ -16,7 +17,16 @@
   </div>
   <div class="info_box">
     <h2><%= @post.title %></h2>
-    <p class="lead"><%= @post.message %></p>
+    <div class="lead message-body">
+      <p class="lead">
+        <%= @post.message %>
+      </p>
+      <div class="actions">
+        <% if can? :manage, @post %>
+          <%= link_to "Edit", edit_story_post_path(@story, @post), :remote => true %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
