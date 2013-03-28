@@ -19,12 +19,16 @@ class Post < ActiveRecord::Base
   # Returns true if itself or any of its children are 
   # unread by the given user.
   def thread_unread?(user)
+    return false if user.nil?
+
     self.unread?(user) || self.descendants.reduce(false) { |so_far, post| so_far || post.unread?(user) }
   end
 
   # Marks itself and any children as read by the given
   # user.
   def mark_thread_as_read!(user)
+    return if user.nil? 
+
     self.mark_as_read! :for => user
     self.descendants.each do |post|
       post.mark_as_read! :for => user
