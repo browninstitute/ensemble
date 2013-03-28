@@ -1,6 +1,17 @@
 class NotificationMailer < ActionMailer::Base
   default from: "ensemble@cs.stanford.edu"
 
+  ### OVERALL EMAILS ###
+  #
+  # Sends you an email when you're added as a contributor
+  # to a story.
+  def added_as_contributor_notification(mod, user, story_role)
+    @mod = mod
+    @user = user
+    @story_role = story_role
+    mail(:to => user.email, :subject => "#{mod.name} made you a #{story_role.role} for their story at Ensemble")
+  end
+
   ### MOD EMAILS ###
   #
   # Sends you an email when a user makes a comment on a

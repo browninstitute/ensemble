@@ -15,4 +15,5 @@ if Settings.table_exists? && User.table_exists? && !defined?(::Rake)
   User.settings['email.update_paragraph_notification'] = true
   User.settings['email.update_scene_notification'] = true
   User.settings['email.update_scene_para_notification'] = false
+  User.settings['email.added_as_contributor'] = true
 end

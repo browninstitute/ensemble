@@ -6,6 +6,14 @@
     
     <div class="preferences-inner">
       <%= form_for current_user, :url => { :action => "preferences" }, :html => {:class => 'email-prefs-form'} do |f| %>
+      <div class="general-emails">
+        <strong>Overall,</strong> receive emails when:
+        <label class="checkbox">
+          <%= check_box_tag "email[added_as_contributor]", 1, current_user.settings['email.added_as_contributor'] %>
+          I'm added as a contributor or moderator to a story
+        </label>
+      </div>
+      <br />
       <div class="mod-emails">
         <strong>For stories I'm moderating,</strong> receive emails when:
         <label class="checkbox">
