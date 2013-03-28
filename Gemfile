@@ -55,6 +55,7 @@ gem 'acts_as_votable', '~> 0.5.0'
 gem 'redcarpet'
 
 gem 'ancestry'
+gem 'unread'
 
 gem 'impressionist'
 gem 'google-analytics-rails'

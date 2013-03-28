@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130323014442) do
+ActiveRecord::Schema.define(:version => 20130328003517) do
 
   create_table "comments", :force => true do |t|
     t.string   "title"
@@ -98,6 +98,15 @@ ActiveRecord::Schema.define(:version => 20130323014442) do
   add_index "posts", ["ancestry"], :name => "index_posts_on_ancestry"
   add_index "posts", ["story_id"], :name => "index_posts_on_story_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "read_marks", :force => true do |t|
+    t.integer  "readable_id"
+    t.integer  "user_id",                     :null => false
+    t.string   "readable_type", :limit => 20, :null => false
+    t.datetime "timestamp"
+  end
+
+  add_index "read_marks", ["user_id", "readable_type", "readable_id"], :name => "index_read_marks_on_user_id_and_readable_type_and_readable_id"
 
   create_table "scenes", :force => true do |t|
     t.string   "title"

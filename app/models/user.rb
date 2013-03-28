@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   acts_as_voter
+  acts_as_reader
   has_settings
 
   # Include default devise modules. Others available are:

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @story = Story.find(params[:story_id])
-    @posts = Post.where(:story_id => params[:story_id], :ancestry => nil)
+    @posts = Post.ordered_posts(params[:story_id])
 
     respond_to do |format|
       format.html
@@ -37,6 +37,8 @@ class PostsController < ApplicationController
     @new_post = Post.new
     @new_post.parent = @post
 
+    @post.mark_thread_as_read! current_user
+
     respond_to do |format|
       format.html
     end
@@ -49,6 +51,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
+      @post.mark_as_read! :for => current_user # should not be unread by its creator
       respond_to do |format|
         format.js
       end
