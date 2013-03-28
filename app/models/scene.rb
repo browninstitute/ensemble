@@ -54,6 +54,7 @@ class Scene < ActiveRecord::Base
 
   # Returns paragraphs ordered by votes. By default, the winning paragraph
   # for a scene will be shown first, regardless of it's vote count.
+  # Paragraphs tied by vote count will be put in random order.
   #
   # order - a symbol denoting order (either :desc or :asc)
   # options
@@ -65,9 +66,21 @@ class Scene < ActiveRecord::Base
   def ordered_paragraphs(order = :desc, options = {})
     ordered = self.paragraphs.dup 
     if order == :asc 
-      ordered.sort! { |x, y| x.likes.size <=> y.likes.size }
+      ordered.sort! do |x, y| 
+        if x.likes.size == y.likes.size
+          rand <=> rand
+        else
+          x.likes.size <=> y.likes.size
+        end
+      end
     else # desc
-      ordered.sort! { |x, y| y.likes.size <=> x.likes.size }
+      ordered.sort! do |x, y| 
+        if x.likes.size == y.likes.size
+          rand <=> rand
+        else
+          y.likes.size <=> x.likes.size
+        end
+      end
     end
 
     if options[:id]
