@@ -5,7 +5,7 @@
       <li class="<%= 'active' if current_page?(story_path(@story)) || current_page?(current_stories_path) %>">
         <%= link_to 'Story', story_path(@story) %>
       </li>
-      <li class="<%= 'active' if current_page?(story_posts_path(@story)) %>">
+      <li class="<%= 'active' if params[:controller] == "posts" %>">
         <%= link_to story_posts_path(@story) do %>
           Discussion 
           <span class="badge"><%= Post.unread_by(current_user).count %></span>
