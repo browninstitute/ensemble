@@ -1,8 +1,12 @@
 class NotificationObserver < ActiveRecord::Observer
-  observe :comment, :paragraph, :version
+  observe :story_role, :comment, :paragraph, :version
 
   def after_create(record)
-    if record.is_a? Comment
+    if record.is_a? StoryRole
+      mod = User.find(record.story.user_id)
+      contributor = User.find(record.user_id)
+      NotificationMailer.delay.added_as_contributor_notification(mod, contributor, record)
+    elsif record.is_a? Comment
       commenter = User.find(record.user_id)
      
       if !record.scene.nil? && !record.scene.story.nil?
