@@ -9,14 +9,14 @@
     <% @posts.each do |post| %>
       <tr>
         <td>
-          <p class="lead" style="margin-bottom: 0;">
-            <strong><%= link_to post.title, [@story, post] %></strong><br />
+          <p class="lead <%= 'unread' if post.thread_unread?(current_user) %>" style="margin-bottom: 0;">
+            <%= link_to post.title, [@story, post] %><br />
             <%= truncate post.message %>
           </p>
         </td>
         <td><%= post.children.count %></td>
         <td><%= post.impressionist_count(:filter=>:session_hash) %></td>
-        <td><%= post.last_updated %></td>
+        <td><%= post.last_created %></td>
       </tr>
     <% end %>
   </tbody>

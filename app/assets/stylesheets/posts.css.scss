@@ -6,6 +6,14 @@
   margin-left: 86px;
 }
 
+table {
+  p.lead {
+    &.unread a {
+      font-weight: bold;
+    }
+  }
+}
+
 .post_top {
 
   img {
