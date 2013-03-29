@@ -40,4 +40,9 @@ class Post < ActiveRecord::Base
     posts = Post.where(:story_id => story, :ancestry => nil)
     posts.sort! { |a, b| b.last_created <=> a.last_created }
   end
+
+  # Retrieves all unread discussion posts for a given story and user
+  def self.unread_by_story(story_id, user)
+    Post.unread_by(user).find(:all, :conditions => {:story_id => story_id})
+  end
 end
