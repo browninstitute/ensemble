@@ -24,6 +24,7 @@ class Ability
         # Trusted users can...
         can :manage, Scene, :story => { :moderators => { :id => user.id } }
         can :manage, Paragraph, :scene => { :story => { :moderators => { :id => user.id } } }
+        can :manage, StoryRole, :story => { :moderators => { :id => user.id } }
 
         # Anyone can...
         can :like, Paragraph
