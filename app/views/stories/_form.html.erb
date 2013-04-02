@@ -13,6 +13,10 @@
   <% end %>
 
   <div class="field">
+    <div class="alert alert-info pull-right">
+      <strong>Tip:</strong> Press Enter 3 times to create a new scene.
+    </div>
+    
     <%= f.text_field :title, :placeholder => 'Title', :class => 'largely' %><br />
     <%= f.text_field :subtitle, :placeholder => 'Summary' %><br />
     Genre 1: <%= collection_select(:story, :genre1, Genre.all, :id, :name, :prompt => true) %>
