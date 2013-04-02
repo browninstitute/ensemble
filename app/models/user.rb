@@ -41,6 +41,16 @@ class User < ActiveRecord::Base
     Story.find(:all, :conditions => {:user_id => self.id})
   end
 
+  def mod_stories
+    @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "moderator" })
+    Story.find(@story_roles.map { |sr| sr.story_id })
+  end
+
+  def contribute_stories
+    @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "contributor" })
+    Story.find(@story_roles.map { |sr| sr.story_id })
+  end
+
   # A custom validation to check that all users are 13 or older.
   def birthday_older_than_13
     now = Time.now.utc.to_date
