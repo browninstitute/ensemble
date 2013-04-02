@@ -7,6 +7,11 @@
 
   <div><%= f.email_field :email, :placeholder => 'Email' %></div>
 
+  <div>
+    <%= text_field_tag "vis_birthday", nil, :placeholder => "Birthday" %>
+    <%= f.hidden_field :birthday %> 
+  </div>
+
   <div><%= f.password_field :password, :placeholder => 'Password' %></div>
 
   <div><%= f.password_field :password_confirmation, :placeholder => 'Retype Password' %></div>
