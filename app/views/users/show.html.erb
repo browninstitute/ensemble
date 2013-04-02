@@ -20,6 +20,34 @@
         </td>
       </tr>
     <% end %>
-  </table>
+    </table>
+
+    <% if @user.mod_stories.length > 0 %>
+    <h1>This author is moderating <%= pluralize @user.mod_stories.length, "story" %></h1>
+    <table class="table">
+      <% @user.mod_stories.each do |s| %>
+        <tr class="my-story">
+          <td>
+            <h3><%= link_to s.title, s %></h3>
+            <%= s.subtitle %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <% end %>
+
+    <% if @user.contribute_stories.length > 0 %>
+    <h1>This author is contributing to <%= pluralize @user.contribute_stories.length, "story" %></h1>
+    <table class="table">
+      <% @user.contribute_stories.each do |s| %>
+        <tr class="my-story">
+          <td>
+            <h3><%= link_to s.title, s %></h3>
+            <%= s.subtitle %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <% end %>
   </div>
 </div>
