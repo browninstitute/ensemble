@@ -73,6 +73,10 @@ $accent: #23ADE8;
 .story-form {
   form {
     margin: 0;
+
+    .alert-info {
+      max-width: 300px;
+    }
   }
 
   .actions {
