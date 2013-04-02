@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.sortable
 //= require jquery.ui.effect-slide
+//= require jquery.ui.datepicker
 //= require twitter/bootstrap
 //= require_tree .
 
