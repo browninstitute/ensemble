@@ -8,6 +8,6 @@ $(document).ready ->
 
 fillInBirthdayText = ->
   birthday = $("#user_birthday").val()
-  if birthday != ""
+  if birthday != "" && birthday?
     formattedBday = $.datepicker.formatDate("mm/dd/yy", $.datepicker.parseDate("yy-mm-dd 00:00:00 UTC", birthday))
     $("#vis_birthday").val(formattedBday)
