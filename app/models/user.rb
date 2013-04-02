@@ -44,7 +44,9 @@ class User < ActiveRecord::Base
   # A custom validation to check that all users are 13 or older.
   def birthday_older_than_13
     now = Time.now.utc.to_date
-    age = now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
-    errors.add(:birthday, "must show that you are 13 or older.") if age < 13
+    if !birthday.nil?
+      age = now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+    end
+    errors.add(:birthday, "must show that you are 13 or older.") if birthday.nil? || age < 13
   end
 end
