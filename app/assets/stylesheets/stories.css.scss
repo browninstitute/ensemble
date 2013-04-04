@@ -49,6 +49,21 @@ $accent: #23ADE8;
   margin-bottom: 10px;
 }
 
+.story-index {
+  .search {
+    form {
+      padding: 15px;
+      margin: 0;
+    }
+  }
+  .stories-list {
+    .genre {
+      font-size: 0.85em;
+      color: #666;
+    }
+  }
+}
+
 /* Editing Stories */
 #story_popover {
   z-index: 999;

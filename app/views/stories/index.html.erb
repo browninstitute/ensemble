@@ -1,22 +1,31 @@
-<h1>All stories</h1>
-<%= link_to content_tag(:i, "", :class => 'icon-plus-sign') + ' New Story', new_story_path, :class => "btn new-story" %>
+<%= link_to content_tag(:i, "", :class => 'icon-plus-sign') + ' Start a Story', new_story_path, :class => "btn new-story pull-right" %>
+<div class="clearfix"></div>
+<div class="story-index row-fluid">
+  <div class="search span3">
+    <h1>Search Stories</h1>
+    <%= search_form_for @q do |f| %>
+      <%= f.text_field :title_cont, :placeholder => "Story Title" %>
+      <%= f.text_field :user_name_cont, :placeholder => "Story Starter Name" %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </div>
+  <div class="stories-list span9">
+    <h1><%= params[:q] ? "#{@stories.length} stories found" : "All Stories" %></h1>
 
-<table class="table">
-  <tr>
-    <th>Title</th>
-    <th>Summary</th>
-    <th>Started By</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @stories.each do |story| %>
-  <tr>
-    <td><%= story.title %></td>
-    <td><%= story.subtitle %></td>
-    <td><%= story.user.name %></td>
-    <td><%= link_to 'Show', story %></td>
-    <td><%= link_to 'History', history_story_path(story) %></td>
-  </tr>
-<% end %>
-</table>
+    <table class="table">
+      <% @stories.each do |story| %>
+        <tr class="my-story">
+          <td>
+            <h3><%= link_to story.title, story %></h3>
+            <%= story.subtitle %>
+            <br />
+            <span class="genre">
+              <%= "Genre: #{print_genres(story)}" if !print_genres(story).nil? %> 
+            </span>
+          </td>
+          <td>Started by <%= link_to story.user.name, story.user %></td>
+        </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
