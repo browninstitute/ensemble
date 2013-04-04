@@ -51,7 +51,16 @@ $accent: #23ADE8;
 
 .story-index {
   .search {
-    border: none;
+    form {
+      padding: 15px;
+      margin: 0;
+    }
+  }
+  .stories-list {
+    .genre {
+      font-size: 0.85em;
+      color: #666;
+    }
   }
 }
 
