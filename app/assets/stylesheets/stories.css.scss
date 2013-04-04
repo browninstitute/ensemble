@@ -49,6 +49,12 @@ $accent: #23ADE8;
   margin-bottom: 10px;
 }
 
+.story-index {
+  .search {
+    border: none;
+  }
+}
+
 /* Editing Stories */
 #story_popover {
   z-index: 999;
