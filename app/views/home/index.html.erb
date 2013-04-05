@@ -1,7 +1,7 @@
 <% if StoryCollab::Application.config.story_slam %>
   <div class="alert alert-info">
     The <strong><%= link_to "Stanford Story Slam", storyslam_path %></strong> has begun! 
-    <%= link_to "Enter your story", storyslam_path %> by April 22, 2013 to win cash and get published!
+    Write your story using Ensemble and <%= link_to "enter your story", storyslam_path %> by April 22, 2013 to win cash and get published!
   </div>
 <% end %>
 <div class="home row-fluid">
@@ -14,8 +14,11 @@
         <h1>Collaboratively write stories</h1>
         <p class="lead">Ensemble is a platform for massive participatory story writing.</p>
         <p>
-        <%= link_to current_stories_path, :class => "btn btn-primary btn-large" do %>
-          Start writing
+        <%= link_to current_stories_path, :class => "btn btn-large" do %>
+          Demo Story
+        <% end %>
+        <%= link_to new_story_path, :class => "btn btn-primary btn-large" do %>
+          Start Writing
           <i class="icon-chevron-right"></i>
         <% end %>
         </p>
