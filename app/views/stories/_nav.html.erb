@@ -28,7 +28,7 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <% if can? :edit, @story %>
+          <% if can?(:edit, @story) && current_page?(story_path(@story)) %>
             <li>
             <%= link_to edit_story_path(@story), :remote => true do %>
               <i class="icon-pencil"></i> Edit Story
@@ -37,7 +37,7 @@
           <% end %>
           <% if can? :destroy, @story %>
           <li>
-          <%= link_to @story, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <%= link_to @story, method: :delete, data: { confirm: 'Are you sure you want to delete your story?' } do %>
             <i class="icon-remove"></i> Delete Story
           <% end %>
           </li>
