@@ -28,9 +28,9 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <% if can?(:edit, @story) && current_page?(story_path(@story)) %>
+          <% if can?(:edit, @story) %>
             <li>
-            <%= link_to edit_story_path(@story), :remote => true do %>
+            <%= link_to edit_story_path(@story) do %>
               <i class="icon-pencil"></i> Edit Story
             <% end %>
             </li>
