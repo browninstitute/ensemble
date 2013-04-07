@@ -37,6 +37,7 @@ class ScenesController < ApplicationController
     @scene = Scene.find(params[:id])
     @scene.title = ""
     @scene.content = ""
+    @story = @scene.story
 
     if @scene.save
       @scene.comments.destroy_all
