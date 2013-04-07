@@ -1,5 +1,4 @@
 StoryCollab::Application.routes.draw do
-
   resources :stories do
     collection do
       get 'current'
@@ -35,7 +34,12 @@ StoryCollab::Application.routes.draw do
     match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
   end
   
-  # Make sure this comes AFTER the devise routes.
+  devise_for :admins do
+    get '/admins/dashboard' => 'admins#dashboard'
+    post '/admins/send_announcement' => 'admins#send_announcement'
+  end
+  
+  # Make sure this comes AFTER the devise user routes.
   resources :users
 
   resources :submissions
