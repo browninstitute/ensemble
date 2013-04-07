@@ -1,6 +1,14 @@
 class NotificationMailer < ActionMailer::Base
   default from: "ensemble@cs.stanford.edu"
 
+  ### ADMIN EMAILS ###
+  #
+  # Sends an announcement email to one user.
+  def announcement_notification(email, subject, message)
+    @message = message
+    mail(:to => email, :subject => "[Announcement] #{subject}")
+  end
+
   ### OVERALL EMAILS ###
   #
   # Sends you an email when you're added as a contributor

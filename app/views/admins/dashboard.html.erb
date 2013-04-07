@@ -1,0 +1,55 @@
+<div class="preferences row-fluid">
+  <%= render 'admins/left_nav' %>
+
+  <div class="preferences-content span9">
+    <h1>Dashboard</h1>
+    
+    <div class="preferences-inner">
+      <h2>Send Announcement to All Users</h2>
+      <p>This is a dangerous form! Once you send a message, you will not be able to cancel it, so make absolutely sure it is correct. This form is also currently unable to handle HTML.</p>
+      <%= form_for @announcement, :url => admins_send_announcement_path, :html => { :class => "form-horizontal" } do |f| %>
+        <div class="control-group">
+          <label class="control-label" for="name">
+            <%= f.label :subject %> 
+          </label>
+          <div class="controls">
+            <%= f.text_field :subject, :class => "input-large" %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="message">
+            <%= f.label :message %> 
+          </label>
+          <div class="controls">
+            <%= f.text_area :message, :rows => 5, :class => "input-large" %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%= f.submit "Send Announcement", :class => "btn" %>
+          </div>
+        </div>
+      <% end %>
+      
+      <h2>Past Announcements</h2>
+      <% if Announcement.all.length == 0 %>
+        No announcements made.
+      <% else %>
+        <table class="table">
+          <tr>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Status</th>
+          </tr>
+          <% Announcement.all.each do |a| %>
+          <tr>
+            <td><%= a.subject %></td>
+            <td><%= a.message %></td>
+            <td><%= a.delivered?(true) ? "Delivered" : "Queued" %></td>
+          </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
