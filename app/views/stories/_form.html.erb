@@ -28,13 +28,13 @@
       <div class="text-error"></div>
       <%= f.submit "Publish", :class => "btn" %>
       <% if !current_page? new_story_path %>
-        <%= link_to "Cancel", cancel_edit_story_path(@story), 
-                  :class => "btn cancel-story", :remote => true %>
+        <%= link_to "Cancel", story_path(@story), 
+          :class => "btn cancel-story", :confirm => "This will discard all changes made to the story. Do you want to continue?" %>
       <% end %>
     </div>
   </div>
 
-  <% if !current_page?(new_story_path) %>
+  <% if !current_page?(new_story_path) && !current_page?(edit_story_path(@story)) %>
     <%= render 'stories/nav' %>
   <% end %>
   <%= render :partial => 'stories/toolbar' %>

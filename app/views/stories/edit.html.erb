@@ -1,4 +1,16 @@
 <%= render 'form' %>
+<div class="content edit-mode">
+  <% @story.scenes.each do |scene| %>
+    <%= render :partial => "scenes/scene", :locals => {:scene => scene, :edit_mode => true} %>
+  <% end %>
 
-<%= link_to 'Show', @story %> |
-<%= link_to 'Back', stories_path %>
+  <div class="row-fluid" id="add-scene-wrapper">                                                               
+    <div class="span8" id="add-scene-break">Add Scene Break</div>                                              
+  </div>  
+
+  <div class="edit-background span8">
+    <div class="span8 row-fluid">
+      <div class="edit-background-inner span11"></div>
+    </div>
+  </div>
+</div>

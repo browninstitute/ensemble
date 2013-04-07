@@ -1,5 +1,5 @@
 <div class="story"> 
-  <% if !@story.nil? && !@story.new_record? %>
+  <% if !@story.nil? && !@story.new_record? && !current_page?(edit_story_path(@story)) %>
     <%= render :partial => "stories/header" %>
   <% end %>
   <%= yield %>
