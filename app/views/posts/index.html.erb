@@ -14,7 +14,7 @@
             <%= truncate post.message %>
           </p>
         </td>
-        <td><%= post.children.count %></td>
+        <td><%= post.descendants.count %></td>
         <td><%= post.impressionist_count(:filter=>:session_hash) %></td>
         <td><%= post.last_created %></td>
       </tr>

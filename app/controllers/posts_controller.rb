@@ -78,10 +78,16 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+    @story = @post.story
+    thread = @post.ancestry.nil?
 
     if @post.destroy
-      respond_to do |format|
-        format.js
+      if thread
+        redirect_to story_posts_path(@story), notice: "Thread was successfully deleted."
+      else
+        respond_to do |format|
+          format.js
+        end
       end
     end
   end

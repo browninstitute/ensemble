@@ -1,5 +1,5 @@
 <%= form_for [@story, @post], :html => { :style => "margin: 0" }, :remote => true do |f| %>
   <%= f.hidden_field :parent_id %>
   <%= f.text_area :message, :rows => 10, :class => 'span8' %><br />
-  <%= f.submit :class => 'btn btn-primary', :value => "Edit" %>
+  <%= f.submit :class => 'btn btn-primary', :value => "Save" %>
 <% end %>

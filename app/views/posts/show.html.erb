@@ -24,7 +24,8 @@
       <hr />
       <div class="actions pull-left">
         <% if can? :manage, @post %>
-          <%= link_to "Edit", edit_story_post_path(@story, @post), :remote => true %>
+          <%= link_to "Edit", edit_story_post_path(@story, @post), :remote => true %> 
+          &sdot; <%= link_to "Delete", story_post_path(@story, @post), :method => :delete, :confirm => "Are you sure you want to delete this post? This will delete all of its replies as well." %> 
         <% end %>
       </div>
       <div class="meta pull-right">
