@@ -1,4 +1,4 @@
-class CreateAnnouncementsTable < ActiveRecord::Migration
+class CreateAnnouncements < ActiveRecord::Migration
   def change
     create_table :announcements do |t|                                                          
       t.string :email                                                                                        
