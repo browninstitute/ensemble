@@ -44,7 +44,7 @@
           <% Announcement.all.each do |a| %>
           <tr>
             <td><%= a.subject %></td>
-            <td><%= a.message %></td>
+            <td><%= simple_format a.message %></td>
             <td><%= a.delivered?(true) ? "Delivered" : "Queued" %></td>
           </tr>
           <% end %>

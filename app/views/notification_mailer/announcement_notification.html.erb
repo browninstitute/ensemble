@@ -3,10 +3,10 @@
 </p>
 
 <p>
-  <%= @message %>
+  <%= simple_format @message %>
 </p>
 
 <hr />
 <p style="font-size: smaller;">
-  You received this email because you have an account at <%= link_to "Ensemble", "http://ensemble.stanford.edu" %>. If you do not want to receive important announcements in the future, you may unsubscribe by editing your <%= link_to "email preferences", "http://ensemble.stanford.edu" + users_preferences_path %>.
+  You received this email because you have an account at <%= link_to "Ensemble", "http://ensemble.stanford.edu" %>. 
 </p>
