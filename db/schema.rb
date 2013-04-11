@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130407061138) do
+ActiveRecord::Schema.define(:version => 20130408074429) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(:version => 20130407061138) do
   add_index "admins", ["unlock_token"], :name => "index_admins_on_unlock_token", :unique => true
 
   create_table "announcements", :force => true do |t|
-    t.string   "email"
+    t.text     "email",      :limit => 255
     t.string   "subject"
     t.text     "message"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "sent",       :default => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.boolean  "sent",                      :default => false
   end
 
   create_table "comments", :force => true do |t|
