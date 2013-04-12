@@ -6,7 +6,4 @@
   <%= simple_format @message %>
 </p>
 
-<hr />
-<p style="font-size: smaller;">
-  You received this email because you have an account at <%= link_to "Ensemble", "http://ensemble.stanford.edu" %>. 
-</p>
+<%= render :partial => 'notification_mailer/footer' %>
