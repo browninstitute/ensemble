@@ -1,0 +1,9 @@
+<%= @other.name %> made a post in the discussion form for the story "<%= @post.story.title %> and wrote:
+
+<p style="font-style:italic;">
+<%= truncate(@post.message, :length => 200) %>
+</p>
+
+<%= link_to "Go to the story's discussion forum", story_posts_url(@post.story) %>
+
+<%= render :partial => 'notification_mailer/footer' %>

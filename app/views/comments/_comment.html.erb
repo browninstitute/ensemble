@@ -11,7 +11,7 @@
     <% if comment.user.avatar.file? %>
       <%= image_tag comment.user.avatar.url(:tiny) %>
     <% else %>
-      <%= image_tag "alien.svg" %>
+      <%= image_tag "default_profile.jpg" %>
     <% end %>
   </div>
   <div class="comment">

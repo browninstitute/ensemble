@@ -5,3 +5,5 @@ The paragraph you wrote was marked as a winner:
 </p>
 
 <%= link_to "Go to the story", story_url(@para.scene.story) %>
+
+<%= render :partial => 'notification_mailer/footer' %>

@@ -139,4 +139,13 @@ class NotificationMailer < ActionMailer::Base
     @para = paragraph
     mail(:to => user.email, :subject => "Your paragraph was crowned a winner on Ensemble")
   end
+
+  # Sends you an email when a story you're participating in
+  # as a post made to its discussion board.
+  def forum_notification(user, other, post)
+    @user = user
+    @other = other
+    @post = post
+    mail(:to => user.email, :subject => "#{other.name} made a discussion post for #{post.story.title} on Ensemble")
+  end
 end

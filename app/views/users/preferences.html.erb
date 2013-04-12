@@ -72,6 +72,10 @@
           <%= check_box_tag "email[winner_notification]", 1, current_user.settings['email.winner_notification'] %>
           A paragraph you wrote is crowned a winner
         </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[forum_notification]", 1, current_user.settings['email.forum_notification'] %>
+          Someone makes a post in the discussion forum
+        </label>
        </div>
        <br />
        <%= f.submit "Save Preferences", :class => "btn" %>

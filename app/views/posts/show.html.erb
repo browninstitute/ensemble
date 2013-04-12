@@ -4,7 +4,7 @@
       <% if @post.user.avatar.file? %>
         <%= image_tag @post.user.avatar.url(:thumb) %>
       <% else %>
-        <%= image_tag "alien.svg" %>
+        <%= image_tag "default_profile.jpg" %>
       <% end %>
       &nbsp;
       <strong><%= @post.user.name %></strong>
@@ -51,7 +51,7 @@
     <% if current_user.avatar.file? %>
       <%= image_tag current_user.avatar.url(:thumb) %>
     <% else %>
-      <%= image_tag "alien.svg" %>
+      <%= image_tag "default_profile.jpg" %>
     <% end %>
     <%= current_user.name %>
   </div>
