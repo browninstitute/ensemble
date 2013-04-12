@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     if request.env['omniauth.origin'] && request.env['omniauth.origin'] != new_user_session_url
       request.env['omniauth.origin']
     else
-      root_path
+      user_path(current_user)
     end
   end
 
