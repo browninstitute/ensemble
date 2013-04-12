@@ -3,7 +3,7 @@
     <% if post.user.avatar.file? %>
       <%= image_tag post.user.avatar.url(:thumb) %>
     <% else %>
-      <%= image_tag "alien.svg" %>
+      <%= image_tag "default_profile.jpg" %>
     <% end %>
     <%= post.user.name %>
   </div>
