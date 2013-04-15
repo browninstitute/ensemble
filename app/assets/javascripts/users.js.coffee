@@ -1,6 +1,7 @@
 $(document).ready ->
   $("#vis_birthday").datepicker({
     changeYear: true,
+    changeMonth: true,
     yearRange: "1900:" + (new Date).getFullYear(),
     altFormat: "yy-mm-dd 00:00:00 UTC",
     altField: "#user_birthday"})
