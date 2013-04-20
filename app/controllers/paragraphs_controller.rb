@@ -57,6 +57,9 @@ class ParagraphsController < ApplicationController
     @scene = @p.scene
     if @p.destroy
       flash.now[:notice] = "Contribution was deleted."
+      
+      @scene.destroy if @scene.paragraphs.length == 0
+
       respond_to do |format|
         format.js
       end

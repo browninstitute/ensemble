@@ -32,4 +32,14 @@ module ParagraphsHelper
     classes += " unwritten" if scene.paragraphs.length < 1
     classes
   end
+
+  # Generates destroy confirm message for paragraph
+  # deletion.
+  def destroy_para_confirm_message(scene)
+    if !scene.open? && scene.paragraphs.length <= 1
+      "Are you sure you want to delete this paragraph? Deleting this last paragraph will also remove this entire section from the story."
+    else
+      "Are you sure you want to delete this paragraph?"
+    end
+  end
 end

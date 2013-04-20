@@ -18,7 +18,7 @@
     <div class="edit-paragraphs">                                              
       <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %>
       &sdot;
-      <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: destroy_para_confirm_message(scene) } %>
     </div>
     <div class="admin-paragraphs">
       <% if can? :winner, paragraph %>
