@@ -62,6 +62,11 @@
     font-size: 1.5em;                                                                                                     
     line-height: 1.8em;
   }
+
+  .unresolved {
+    border: 2px dashed orange;
+    background: #FFF7E8;
+  }
 }
 
 .story-header {
