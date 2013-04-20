@@ -1,5 +1,14 @@
 <div class="preview-story">
-  <% @story.final_draft.each do |p| %>
-    <%= Format.markdown(p.content) %>
+  <% @story.scenes.each do |s| %>
+    <% next if s.paragraphs.length == 0 %>
+    <% if s.paragraphs.length == 1 %>
+      <%= Format.markdown(s.paragraphs.first.content) %>
+    <% elsif s.winner_id.nil? %>
+      <div class="unresolved">
+        <%= Format.markdown(s.paragraphs.first.content) %> 
+      </div>
+    <% else %>
+      <%= Format.markdown(Paragraph.find(s.winner_id).content) %>
+    <% end %>
   <% end %>
 </div>

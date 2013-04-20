@@ -8,6 +8,12 @@ class Scene < ActiveRecord::Base
   has_paper_trail :only => [:content, :title, :prompt], :meta => {:story_id => :story_id}
   #validates :title, :presence => true, :on => :update
 
+  # Returns true if scene is settled (has a declared winner
+  # or only has one paragraph)
+  def settled?
+    (self.paragraphs.length == 1) || !self.winner_id.nil?
+  end
+
   # Returns true if scene is open for contributions.
   def open?
     !self.title.blank?

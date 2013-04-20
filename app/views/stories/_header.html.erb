@@ -1,12 +1,21 @@
 <div class="story-header">
   <% if @story_slam_preview %>
-  <div class="alert alert-block">
-    <h4>Your story has not yet been submitted.</h4>
-    Below is how your story will appear to judges. Make sure to read it over and make sure
-    that it follows competition requirements. When you're ready, press submit to submit your story.
-    <br />
-    <%= link_to "Submit Story", storyslam_submit_story_path(@story), :method => :post, :class => "btn btn-primary" %>
-  </div>
+    <% if @story.settled? %>
+      <div class="alert alert-block">
+          <h4>Your story has not yet been submitted.</h4>
+        Below is how your story will appear to judges. Make sure to read it over and make sure
+        that it follows competition requirements. When you're ready, press submit to submit your story.
+        <br />
+        <%= link_to "Submit Story", storyslam_submit_story_path(@story), :method => :post, :class => "btn btn-primary" %>
+      </div>
+    <% else %>
+      <div class="alert alert-block alert-error">
+        <h4>Your story has not yet been submitted.</h4>
+        Your story cannot yet be submitted. You have sections of the story that have multiple alternatives and the system does not know which alternative you want to include in your submission. Review the highlighted sections below, then go to your story and declare a winner for the highlighted sections. Then, come back to this page and try submitting again.
+        <br />
+        <%= link_to "Submit Story", "#", :disabled => true, :class => "btn" %>
+      </div>
+    <% end %>
   <% end %>
 
   <% if StoryCollab::Application.config.story_slam && @story.is_a?(Story) && @story.contributors.count == 0 && current_page?(story_path(@story)) %>

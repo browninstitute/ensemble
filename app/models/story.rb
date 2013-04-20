@@ -11,6 +11,12 @@ class Story < ActiveRecord::Base
   has_paper_trail :only => [:title, :subtitle]
   validates :title, :presence => true
 
+  # Returns true if the entire story is settled (all scenes
+  # have a declared winner or only consist of one paragraph)
+  def settled?
+    self.scenes.inject {|res, s| res && s.settled?}
+  end
+
   # Returns an array of Paragraph objects that correspond to
   # the top liked or winning paragraphs for each scene in the story.
   def final_draft
