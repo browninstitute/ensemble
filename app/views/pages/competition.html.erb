@@ -96,7 +96,11 @@
     <p>
       Only the story leader (the starter of the story) can submit a story into the competition. You can submit the same story as many times as you like up until the deadline -- only the latest submission will be considered.
     </p>
-    <% if current_user.nil? || current_user.stories.length == 0 %>
+    <% if Date.parse('2013-04-22') < Date.today %>
+      <strong>
+        The Story Slam deadline has passed, and submissions are now closed.
+      </strong>
+    <% elsif current_user.nil? || current_user.stories.length == 0 %>
       <strong>
         You don't yet have any stories to submit. <%= link_to "Go start one.", new_story_path %>
       </strong>
