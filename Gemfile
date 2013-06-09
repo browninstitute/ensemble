@@ -34,17 +34,17 @@ gem 'uglifier', '>= 1.0.3' #needs to be placed outside of assets group
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem "paperclip"
 
 gem 'therubyracer'
 gem 'less-rails' #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '2.2.6'
 
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancan'
-gem 'ledermann-rails-settings', :require => 'rails-settings'
+gem 'ledermann-rails-settings', '1.2.1', :require => 'rails-settings'
 gem "ransack"
 
 gem 'acts_as_list'
