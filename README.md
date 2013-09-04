@@ -8,8 +8,10 @@ Notes
 
 Setup
 -----
-* Run `rake db:migrate`
+* Run `bundle install`
 * Rename `/config/initializers/devise.rb.sample` to `devise.rb` and modify the Facebook APP_ID and SECRET.
+* Set reconfirmable to false in `devise.rb` if needed.
+* Run `rake db:migrate`
 * Run `rails server` and you're up and running!
 
 Models
