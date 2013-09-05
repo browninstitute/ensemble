@@ -53,6 +53,7 @@ StoryCollab::Application.routes.draw do
   get "home/index"
   match '/about' => 'pages#about'
   match '/storyslam' => 'pages#competition'
+  match '/copyright' => 'pages#copyright'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
