@@ -1,7 +1,9 @@
-<div class="story"> 
-  <% if !@story.nil? && !@story.new_record? && !current_page?(edit_story_path(@story)) %>
-    <%= render :partial => "stories/header" %>
-  <% end %>
-  <%= yield %>
-</div>
-<%= parent_layout 'application' %>
+<% cache(@story) do %>
+  <div class="story"> 
+    <% if !@story.nil? && !@story.new_record? && !current_page?(edit_story_path(@story)) %>
+      <%= render :partial => "stories/header" %>
+    <% end %>
+    <%= yield %>
+  </div>
+  <%= parent_layout 'application' %>
+<% end %>

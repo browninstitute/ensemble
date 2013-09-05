@@ -134,4 +134,11 @@ module StoriesHelper
       end
     end 
   end
+
+  # Fragment cache key for stories
+  def cache_key_for_stories
+    count          = Story.count
+    max_updated_at = Story.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "stories/all-#{count}-#{max_updated_at}"
+  end 
 end
