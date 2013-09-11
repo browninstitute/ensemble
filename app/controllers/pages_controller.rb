@@ -3,4 +3,8 @@ class PagesController < ActionController::Base
   
   def about
   end
+
+  def arrowhead
+    @stories = Story.where(user_id: ARROWHEAD_USERIDS).order("title")
+  end
 end
