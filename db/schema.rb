@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408074429) do
+ActiveRecord::Schema.define(:version => 20130911043156) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -175,8 +175,10 @@ ActiveRecord::Schema.define(:version => 20130408074429) do
     t.text     "content"
     t.integer  "genre1"
     t.integer  "genre2"
+    t.string   "slug"
   end
 
+  add_index "stories", ["slug"], :name => "index_stories_on_slug", :unique => true
   add_index "stories", ["user_id"], :name => "index_stories_on_user_id"
 
   create_table "story_drafts", :force => true do |t|

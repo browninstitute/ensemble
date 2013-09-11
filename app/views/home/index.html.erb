@@ -4,6 +4,13 @@
     Write your story using Ensemble and <%= link_to "enter your story", storyslam_path %> by April 22, 2013 to win cash and get published!
   </div>
 <% end %>
+
+<% if StoryCollab::Application.config.arrowhead %>
+  <div class="alert alert-info">
+    The <strong><%= link_to "Arrowhead Story", arrowhead_path %></strong> is currently underway!
+  </div>
+<% end %>
+
 <div class="home row-fluid">
   <div class="hero-unit span12">
     <div class="screenshots span5">

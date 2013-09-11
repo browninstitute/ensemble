@@ -1,0 +1,5 @@
+module Arrowhead
+  def self.is_arrowhead_story?(story)
+    ARROWHEAD_USERIDS.include? story.user_id
+  end
+end

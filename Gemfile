@@ -65,6 +65,9 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'airbrake'
 
+gem 'meta-tags', :require => 'meta_tags'
+gem 'friendly_id'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

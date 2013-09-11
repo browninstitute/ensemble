@@ -3,7 +3,11 @@ StoryCollab::Application.configure do
 
   # Storyslam Configuration
   # Show story slam-related messages and links
-  config.story_slam = true
+  config.story_slam = false
+
+  # Arrowhead Configuration
+  # Show Arrowhead messages and links
+  config.arrowhead = true
 
   # Code is not reloaded between requests
   config.cache_classes = true

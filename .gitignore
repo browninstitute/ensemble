@@ -16,7 +16,7 @@
 
 *.swp
 config/deploy.rb
-config/initializers/devise.rb
+config/initializers/constants.rb
 config/initializers/setup_mail.rb
 config/initializers/errbit.rb
 /public/system

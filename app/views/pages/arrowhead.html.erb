@@ -1,0 +1,31 @@
+<div class="story-slam-banner-wrapper">
+  <div class="story-slam-banner">
+    <div class="banner-content">
+      <h1>Arrowhead Story</h1>
+      <p class="lead">
+      A young man who is accidentally shot in the head with an arrow.
+      </p>
+    </div>  
+    <p class="photo-credit">
+      Photo credit: 
+      <%= link_to '"Pen and Paper" by athena on Flickr', "http://www.flickr.com/photos/athena/325752626/" %>
+    </p>
+    <%= image_tag "story_slam_banner.jpg" %>
+  </div>  
+</div>
+
+<h2>Table of Contents</h2>
+<table class="table">
+  <% @stories.each do |story| %>
+    <tr class="my-story">
+      <td>
+        <h3><%= link_to story.title, story %></h3>
+        <%= story.subtitle %>
+        <br />
+        <span class="genre">
+          <%= "Genre: #{print_genres(story)}" if !print_genres(story).nil? %> 
+        </span>
+      </td>
+    </tr>
+<% end %>
+</table>
