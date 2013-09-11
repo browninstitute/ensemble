@@ -6,7 +6,7 @@
   $('#stoolbar_bold').click(toolbarBold);
   $('#stoolbar_italic').click(toolbarItalic);
   $().ready(function() {
-    // Replace 3 more more consecutive newlines with 2 newlines
+    // Replace 3 or more consecutive newlines with 2 newlines
     $("#p_submit_<%= p.id %> input[type=submit]").click(function() {
       $textarea = $(this).parents('form').find('textarea');
       $textarea.val($textarea.val().replace(/([\n\n])\1\1+/gi, "\n\n"));
