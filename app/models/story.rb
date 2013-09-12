@@ -11,6 +11,9 @@ class Story < ActiveRecord::Base
   has_paper_trail :only => [:title, :subtitle]
   validates :title, :presence => true
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   # Returns true if the entire story is settled (all scenes
   # have a declared winner or only consist of one paragraph)
   def settled?

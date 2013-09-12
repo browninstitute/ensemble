@@ -52,6 +52,7 @@ $().ready(function() {
 
 //
 // Paragraph <=> Content JSON Conversion
+//
 function contentToParagraphs() {
   $('.txt').autosize();
   tick();
@@ -126,7 +127,7 @@ $().ready(function() {
         // $prev[0].setSelectionRange($prev.val().length, $prev.val().length);
         e.preventDefault();
       } else if (e.keyCode == 8 && this.selectionStart == 0) { // Backspace - delete or merge depending
-        if ($(this).val().length == 0 && $('.edit-mode .txt').length > 1) {
+        if (($(this).val().length == 0 || (this.selectionStart == 0 && this.selectionEnd == $(this).val().length)) && $('.edit-mode .txt').length > 1) { // Either there's nothing in the current text box or all the text was selected
           $(this).parents(".scene").remove();
           $prev.focus();
           e.preventDefault();

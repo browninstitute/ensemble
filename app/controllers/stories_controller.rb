@@ -1,4 +1,5 @@
 require 'format'
+require 'arrowhead'
 
 class StoriesController < ApplicationController
   load_and_authorize_resource
@@ -21,6 +22,20 @@ class StoriesController < ApplicationController
   # GET /stories/1.json
   def show
     @story = Story.find(params[:id])
+
+    # Set meta information
+    @page_title = @story.title
+    @page_description = @story.subtitle
+
+    if Arrowhead.is_arrowhead_story? @story
+      set_meta_tags :og => {
+        :title    => @story.title,
+        :description => @story.subtitle,
+        :type     => 'article',
+        :url      => url_for(@story),
+        :image    => URI.join(root_url, view_context.image_path('arrowhead_ogimage.jpg'))
+      }
+    end
 
     respond_to do |format|
       format.html # show.html.erb
