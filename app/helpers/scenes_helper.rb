@@ -19,4 +19,11 @@ module ScenesHelper
       "scene_#{scene.id}"
     end
   end
+
+  # Fragment cache key for scenes
+  def cache_key_for_scenes
+    count          = Scene.count
+    max_updated_at = Scene.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "scenes/all-#{count}-#{max_updated_at}"
+  end
 end

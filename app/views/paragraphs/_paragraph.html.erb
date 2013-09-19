@@ -1,6 +1,8 @@
-<div class="paragraph-inner tab-pane row-fluid <%= "hide" if paragraph_counter != 0 %> <%= "active" if paragraph_counter == 0 %>" id="para_<%= paragraph.id %>">
-  <div class="paragraph-content span10">
-    <%= Format.markdown(paragraph.content) %>
+<% cache(paragraph) do %>
+  <div class="paragraph-inner tab-pane row-fluid <%= "hide" if paragraph_counter != 0 %> <%= "active" if paragraph_counter == 0 %>" id="para_<%= paragraph.id %>">
+    <div class="paragraph-content span10">
+      <%= Format.markdown(paragraph.content) %>
+    </div>
+    <%= render :partial => 'paragraphs/paragraph_info', :locals => {:scene => scene, :paragraph => paragraph} %>
   </div>
-  <%= render :partial => 'paragraphs/paragraph_info', :locals => {:scene => scene, :paragraph => paragraph} %>
-</div>
+<% end %>

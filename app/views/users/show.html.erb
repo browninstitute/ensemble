@@ -1,31 +1,19 @@
-<div class="profile row-fluid">
-  <div class="profile-info span3">
-    <% if @user.avatar.file? %>                                                                                     
-      <%= image_tag @user.avatar.url(:medium) %>                                                                    
-    <% else %>                                                                                                      
-      <%= image_tag "default_profile.jpg", :style => "width: 300px;" %>                                                       
-    <% end %>
+<% cache(@user) do %>
+  <div class="profile row-fluid">
+    <div class="profile-info span3">
+      <% if @user.avatar.file? %>                                                                                     
+        <%= image_tag @user.avatar.url(:medium) %>                                                                    
+      <% else %>                                                                                                      
+        <%= image_tag "default_profile.jpg", :style => "width: 300px;" %>                                                       
+      <% end %>
 
-    <h1><%= @user.name %></h1>
-  </div>
+      <h1><%= @user.name %></h1>
+    </div>
 
-  <div class="stories-list span9">
-    <h1>This author has started <%= pluralize @user.stories.length, "story" %> </h1>
-    <table class="table">
-    <% @user.stories.each do |s| %>
-      <tr class="my-story">
-        <td>
-          <h3><%= link_to s.title, s %></h3>
-          <%= s.subtitle %>
-        </td>
-      </tr>
-    <% end %>
-    </table>
-
-    <% if @user.mod_stories.length > 0 %>
-    <h1>This author is moderating <%= pluralize @user.mod_stories.length, "story" %></h1>
-    <table class="table">
-      <% @user.mod_stories.each do |s| %>
+    <div class="stories-list span9">
+      <h1>This author has started <%= pluralize @user.stories.length, "story" %> </h1>
+      <table class="table">
+      <% @user.stories.each do |s| %>
         <tr class="my-story">
           <td>
             <h3><%= link_to s.title, s %></h3>
@@ -33,21 +21,35 @@
           </td>
         </tr>
       <% end %>
-    </table>
-    <% end %>
+      </table>
 
-    <% if @user.contribute_stories.length > 0 %>
-    <h1>This author is contributing to <%= pluralize @user.contribute_stories.length, "story" %></h1>
-    <table class="table">
-      <% @user.contribute_stories.each do |s| %>
-        <tr class="my-story">
-          <td>
-            <h3><%= link_to s.title, s %></h3>
-            <%= s.subtitle %>
-          </td>
-        </tr>
+      <% if @user.mod_stories.length > 0 %>
+      <h1>This author is moderating <%= pluralize @user.mod_stories.length, "story" %></h1>
+      <table class="table">
+        <% @user.mod_stories.each do |s| %>
+          <tr class="my-story">
+            <td>
+              <h3><%= link_to s.title, s %></h3>
+              <%= s.subtitle %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
       <% end %>
-    </table>
-    <% end %>
+
+      <% if @user.contribute_stories.length > 0 %>
+      <h1>This author is contributing to <%= pluralize @user.contribute_stories.length, "story" %></h1>
+      <table class="table">
+        <% @user.contribute_stories.each do |s| %>
+          <tr class="my-story">
+            <td>
+              <h3><%= link_to s.title, s %></h3>
+              <%= s.subtitle %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

@@ -1,31 +1,32 @@
-<div id="comment_<%= comment.id %>" class="comment_box">
-  <div class="comment-info">
-    <div class="comment-name pull-left">
-      <%= link_to comment.user.name, comment.user %>
+<% cache(comment) do %>
+  <div id="comment_<%= comment.id %>" class="comment_box">
+    <div class="comment-info">
+      <div class="comment-name pull-left">
+        <%= link_to comment.user.name, comment.user %>
+      </div>
+      <div class="comment-time pull-right">
+        <%= time_ago_in_words(comment.created_at) %> ago
+      </div>
     </div>
-    <div class="comment-time pull-right">
-      <%= time_ago_in_words(comment.created_at) %> ago
-    </div>
-  </div>
-  <div class="comment_photo">
-    <% if comment.user.avatar.file? %>
-      <%= image_tag comment.user.avatar.url(:tiny) %>
-    <% else %>
-      <%= image_tag "default_profile.jpg" %>
-    <% end %>
-  </div>
-  <div class="comment">
-    <div class="controls">
-      <% if can? :update, comment %>
-        <%= link_to edit_scene_comment_path(scene, comment), :remote => true do %>
-          <i class="icon-edit"></i> Edit
-        <% end %>&nbsp;
-        <%= link_to "Delete", scene_comment_path(scene, comment), :method => :delete, :confirm => "Are you sure?", :remote => true %>
+    <div class="comment_photo">
+      <% if comment.user.avatar.file? %>
+        <%= image_tag comment.user.avatar.url(:tiny) %>
+      <% else %>
+        <%= image_tag "default_profile.jpg" %>
       <% end %>
     </div>
-    <div id="comment_<%= comment.id %>_content" class="comment-content">
-      <%= comment.content %>
+    <div class="comment">
+      <div class="controls">
+        <% if can? :update, comment %>
+          <%= link_to edit_scene_comment_path(scene, comment), :remote => true do %>
+            <i class="icon-edit"></i> Edit
+          <% end %>&nbsp;
+          <%= link_to "Delete", scene_comment_path(scene, comment), :method => :delete, :confirm => "Are you sure?", :remote => true %>
+        <% end %>
+      </div>
+      <div id="comment_<%= comment.id %>_content" class="comment-content">
+        <%= comment.content %>
+      </div>
     </div>
   </div>
-</div>
-
+<% end %>
