@@ -105,6 +105,10 @@
   padding: 5px;
   border-radius: 5px;
 
+  .comment .controls {
+    background-color: transparent;
+  }
+
   .comment-info {
     .comment-name {
       &:after {
