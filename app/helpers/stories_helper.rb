@@ -17,10 +17,7 @@ module StoriesHelper
   # Renders the example new story
   def render_new_story_example
     new_story_scenes = Array.new
-    new_story_scenes[0] = Scene.new(:title => "",
-                                    :content => "",
-                                    :prompt => "",
-                                    :position => 1)
+    new_story_scenes[0] = Scene.new(:position => 1)
     new_story_scenes[1] = Scene.new(:position => 2)
     new_story_scenes[2] = Scene.new(:position => 3)
     new_story_scenes[3] = Scene.new(:position => 4)
