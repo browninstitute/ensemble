@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408074429) do
+ActiveRecord::Schema.define(:version => 20130922220624) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -44,17 +44,8 @@ ActiveRecord::Schema.define(:version => 20130408074429) do
     t.boolean  "sent",                      :default => false
   end
 
-  create_table "comments", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "scene_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "comments", ["scene_id"], :name => "index_comments_on_scene_id"
-  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+# Could not dump table "comments" because of following StandardError
+#   Unknown type 'story_id' for column 'integer'
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -154,6 +145,16 @@ ActiveRecord::Schema.define(:version => 20130408074429) do
   add_index "scenes", ["story_id"], :name => "index_scenes_on_story_id"
   add_index "scenes", ["user_id"], :name => "index_scenes_on_user_id"
 
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
   create_table "settings", :force => true do |t|
     t.string   "var",                       :null => false
     t.text     "value"
@@ -175,8 +176,10 @@ ActiveRecord::Schema.define(:version => 20130408074429) do
     t.text     "content"
     t.integer  "genre1"
     t.integer  "genre2"
+    t.string   "slug"
   end
 
+  add_index "stories", ["slug"], :name => "index_stories_on_slug", :unique => true
   add_index "stories", ["user_id"], :name => "index_stories_on_user_id"
 
   create_table "story_drafts", :force => true do |t|
@@ -238,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20130408074429) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.datetime "birthday"
+    t.string   "unconfirmed_email"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

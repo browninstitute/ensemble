@@ -80,3 +80,21 @@
     }
   }
 }
+
+/* Story Comments */
+.story-comments {
+  .comment-count {
+    font-weight: bold
+  }
+
+  .comment_box {
+    .comment-info {
+      font-size: 1em;
+      margin-bottom: 5px;
+    }
+
+    .comment {
+      font-size: 1em;
+    }
+  }
+}

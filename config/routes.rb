@@ -12,6 +12,7 @@ StoryCollab::Application.routes.draw do
       post 'storyslam_submit'
     end
     resources :story_roles
+    resources :comments
     resources :posts do
       member do
         get 'reply'
@@ -53,6 +54,8 @@ StoryCollab::Application.routes.draw do
   get "home/index"
   match '/about' => 'pages#about'
   match '/storyslam' => 'pages#competition'
+  match '/copyright' => 'pages#copyright'
+  match '/arrowhead' => 'pages#arrowhead'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

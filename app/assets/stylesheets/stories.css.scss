@@ -29,6 +29,11 @@ $accent: #23ADE8;
     .meta {
       color: $lightgrey;
       font-size: 0.85em;
+
+      .social-buttons {
+        text-align: right;
+        float: right;
+      }
     }
 
     .editing {
@@ -41,6 +46,10 @@ $accent: #23ADE8;
   .content {
     line-height: 1.8em;
     margin-top: 15px;
+  }
+
+  hr {
+      clear: both;
   }
 }
 

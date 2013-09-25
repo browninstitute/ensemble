@@ -42,4 +42,11 @@ module ParagraphsHelper
       "Are you sure you want to delete this paragraph?"
     end
   end
+
+  # Fragment cache key for paragraphs
+  def cache_key_for_paragraphs
+    count          = Paragraph.count
+    max_updated_at = Paragraph.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "paragraphs/all-#{count}-#{max_updated_at}"
+  end
 end

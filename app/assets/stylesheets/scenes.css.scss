@@ -1,5 +1,10 @@
 $lightaccent: #60C8F5;
 
+.scene_divider:before {
+  width: 10%;
+  border-bottom: 1px solid #ccc;
+}
+
 .scene {
   position: relative;
   min-height: 160px;
