@@ -98,3 +98,24 @@
     }
   }
 }
+
+/* Arrowhead */
+.arrowhead-author-comment {
+  background: #FFD2A1;
+  padding: 5px;
+  border-radius: 5px;
+
+  .comment-info {
+    .comment-name {
+      &:after {
+        content: "Arrowhead Author";
+        background: #3a87ad;
+        color: #fff;
+        padding: 2px 4px;
+        border-radius: 5px;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        font-size: 0.8em;
+      }
+    }
+  }
+}
