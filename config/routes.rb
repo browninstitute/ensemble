@@ -12,6 +12,7 @@ StoryCollab::Application.routes.draw do
       post 'storyslam_submit'
     end
     resources :story_roles
+    resources :comments
     resources :posts do
       member do
         get 'reply'

@@ -1,0 +1,20 @@
+<div class="comment_box" id="<%= "story_comment_#{story_comment.id}" if story_comment.id %>">
+ <% if can? :create, Comment %>
+    <div class="comment_photo">
+      <% if current_user.avatar.file? %>
+        <%= image_tag current_user.avatar.url(:tiny) %>
+      <% else %>
+        <%= image_tag "default_profile.jpg" %>
+      <% end %>
+    </div>
+    <div class="comment">
+      <%= form_for [story, story_comment], :html => { :style => 'margin: 0' }, :remote => true do |f| %>
+        <%= f.text_area :content, :placeholder => 'Type a comment...', :rows => 2 %>
+        <%= f.submit :class => "btn", :value => 'Comment' %>
+      <% end %>
+      <span class="text-error"></span>
+    </div>
+  <% elsif !user_signed_in? %>
+    <%= link_to "Login or register to post a comment.", new_user_session_path, :class => "comment-login-link" %>
+  <% end %>
+</div>

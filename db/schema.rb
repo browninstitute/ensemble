@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130920212231) do
+ActiveRecord::Schema.define(:version => 20130922220624) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -44,17 +44,8 @@ ActiveRecord::Schema.define(:version => 20130920212231) do
     t.boolean  "sent",                      :default => false
   end
 
-  create_table "comments", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "scene_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "comments", ["scene_id"], :name => "index_comments_on_scene_id"
-  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+# Could not dump table "comments" because of following StandardError
+#   Unknown type 'story_id' for column 'integer'
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0

@@ -5,6 +5,7 @@ class Story < ActiveRecord::Base
   belongs_to :user
   attr_accessible :subtitle, :title, :genre1, :genre2, :public, :content
   has_many :scenes, :order => :position
+  has_many :comments
   has_many :story_roles
   has_many :contributors, :through => :story_roles, :source => :user
   has_many :moderators, :through => :story_roles, :source => :user, :conditions => ['role = ?', 'moderator']

@@ -9,8 +9,13 @@ class CommentsController < ApplicationController
   end
 
   def new
-    @scene = Scene.find(params[:scene_id])
-    @comment = @scene.comments.new
+    if params[:scene_id].nil?
+      @story = Story.find(params[:story_id])
+      @comment = @story.comments.new
+    else
+      @scene = Scene.find(params[:scene_id])
+      @comment = @scene.comments.new
+    end
 
     respond_to do |format|
       format.js
@@ -18,13 +23,23 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @scene = Scene.find(params[:scene_id])
-    @comment = @scene.comments.new(params[:comment])
-    @comment.user = current_user
+    if params[:scene_id].nil?
+      @story = Story.find(params[:story_id])
+      @comment = @story.comments.new(params[:comment])
+      @comment.user = current_user
+    else
+      @scene = Scene.find(params[:scene_id])
+      @comment = @scene.comments.new(params[:comment])
+      @comment.user = current_user
+    end
 
     respond_to do |format|
       if @comment.save
-        format.js
+        if params[:scene_id].nil?
+          format.js { render :action => "story_create" }
+        else
+          format.js
+        end
       else
         @errormsg = error_msgs(@comment)
         format.js { render :action => "error" }
@@ -35,7 +50,11 @@ class CommentsController < ApplicationController
   def edit
     @comment = Comment.find(params[:id])
     respond_to do |format|
-      format.js
+      if @comment.scene.nil?
+        format.js { render :action => "story_edit" }
+      else
+        format.js
+      end
     end
   end
 
@@ -45,7 +64,11 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.js
+        if @comment.scene.nil?
+          format.js { render :action => "story_update" }
+        else
+          format.js
+        end
       else 
         @errormsg = error_msgs(@comment)
         format.js { render :action => "error" }
@@ -57,7 +80,11 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     respond_to do |format|
       if @comment.destroy
-        format.js
+        if @comment.scene.nil?
+          format.js { render :action => "story_destroy" }
+        else
+          format.js
+        end
       end
     end
   end
