@@ -9,7 +9,6 @@
       <%= Format.markdown(scene.content) if !scene.content.nil? %>
       <% if !scene.prompt.blank? %>
       <div class="scene-prompt">
-        <span class="prompt-header">Write this:</span>
         <%= scene.prompt %>
       </div>
       <% end %>

@@ -17,14 +17,11 @@ module StoriesHelper
   # Renders the example new story
   def render_new_story_example
     new_story_scenes = Array.new
-    new_story_scenes[0] = Scene.new(:title => "Scene title",
+    new_story_scenes[0] = Scene.new(:title => "",
                                     :content => "",
                                     :prompt => "",
                                     :position => 1)
-    new_story_scenes[1] = Scene.new(:title => "This is an example scene.", 
-                                    :content => "By creating a scene, you allow people to contribute alternative ways of writing this scene. Here, you can provide a short description of what you think the scene should include.",
-                                    :prompt => "Give your collaborators a specific prompt to guide them in writing the scene. For example: 'What big event changes the characters' lives and puts the story into motion?'", 
-                                    :position => 2)
+    new_story_scenes[1] = Scene.new(:position => 2)
     new_story_scenes[2] = Scene.new(:position => 3)
     new_story_scenes[3] = Scene.new(:position => 4)
     new_story_scenes[4] = Scene.new(:position => 5)
