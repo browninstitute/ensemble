@@ -70,7 +70,7 @@ cancelScene = (e) ->
 
 # Shows a scene's details.
 showScene = (e) ->
-  if (e.target == this || e.target.tagName == "H1" || e.target.tagName == "P" || e.target.className == "scene-header")
+  if (e.target == this || e.target.tagName == "H1" || e.target.tagName == "P" || e.target.className == "scene-header" || e.target.className == "scene-close icon-remove")
     _this = $(this)
     sceneID = parseInt(_this.parents('.scene').attr('data-id'))
     if _this.hasClass("scene-selected")

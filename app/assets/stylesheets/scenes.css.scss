@@ -11,12 +11,25 @@ $lightaccent: #60C8F5;
  
   .scene-info {
     font-size: larger;
+
+    .scene-close {
+      display: none;
+    }
   }
 
   .scene-info, .scene-form {
     min-height: 40px;
     margin-bottom: 10px;
     position: relative;
+
+    .scene-close {
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: #999;
+      z-index: 999;
+    }
 
     .scene-header {
       text-align: left;
@@ -57,6 +70,10 @@ $lightaccent: #60C8F5;
 
         .scene-comments, .scene-comment-box {
           display: block;
+        }
+
+        .scene-close {
+          display: inline;
         }
 
         .scene-header {
@@ -173,6 +190,14 @@ $lightaccent: #60C8F5;
   }
 }
 
-.edit-mode .scene form.scene-form-inner {
-  position: relative;
+.edit-mode { 
+  .scene {
+    form.scene-form-inner {
+      position: relative;
+    }
+
+    .scene-close {
+      display: none;
+    }
+  }
 }
