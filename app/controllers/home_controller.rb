@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
 
   def index
-    @story = Story.find(:first)
+    @stories = Story.find(:all, :limit => 3, :order => "created_at DESC")
   end
-
 end

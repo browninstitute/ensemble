@@ -35,8 +35,8 @@
 
   <div class="stories-preview">
     <h2>Recent Stories</h2>
-    <% cache(cache_key_for_stories) do %>
-      <%= render :partial => 'home/story_preview', :collection => Story.find(:all, :limit => 3, :order => "created_at DESC"), :as => :story %>
+    <% cache @stories do %>
+      <%= render :partial => 'home/story_preview', :collection => @stories, :as => :story %>
     <% end %>
   </div>
 </div>
