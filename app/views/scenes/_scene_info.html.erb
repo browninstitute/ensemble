@@ -1,5 +1,6 @@
 <div class="scene-info span4">
   <div class="scene-info-inner span12">
+    <i class="scene-close icon-remove"></i>
     <div class="scene-header">
       <span class="scene-header-text">Scene</span>
       <span class="label label-success pull-right">Accepting Alternatives</span>
@@ -9,7 +10,6 @@
       <%= Format.markdown(scene.content) if !scene.content.nil? %>
       <% if !scene.prompt.blank? %>
       <div class="scene-prompt">
-        <span class="prompt-header">Write this:</span>
         <%= scene.prompt %>
       </div>
       <% end %>

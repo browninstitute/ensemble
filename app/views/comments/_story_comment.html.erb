@@ -1,5 +1,4 @@
-<% cache(story_comment) do %>
-  <div id="story_comment_<%= story_comment.id %>" class="comment_box">
+  <div id="story_comment_<%= story_comment.id %>" class="comment_box <%= comments_classes(story_comment, true) %>">
     <div class="comment-info">
       <div class="comment-name pull-left">
         <%= link_to story_comment.user.name, story_comment.user %>
@@ -29,4 +28,3 @@
       </div>
     </div>
   </div>
-<% end %>

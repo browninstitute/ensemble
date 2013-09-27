@@ -16,16 +16,16 @@
 
 <h2>Table of Contents</h2>
 <table class="table">
-  <% @stories.each do |story| %>
-    <tr class="my-story">
-      <td>
-        <h3><%= link_to story.title, story %></h3>
-        <%= story.subtitle %>
-        <br />
-        <span class="genre">
-          <%= "Genre: #{print_genres(story)}" if !print_genres(story).nil? %> 
-        </span>
-      </td>
-    </tr>
-<% end %>
+  <% cache [@stories, "arrowhead-table-of-contents"] do %>
+    <% @stories.each do |story| %>
+      <% cache [story, "arrowhead-story-listing"] do %>
+        <tr class="my-story">
+          <td>
+            <h3><%= link_to story.title, story %></h3>
+            <%= story.subtitle %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
 </table>

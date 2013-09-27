@@ -25,3 +25,4 @@ $ ->
 
   $(".scene-form input, .scene-form textarea", $scene).placeholder()
   $(".scene-form .scene-form-inner .cancel-scene", $scene).click cancelScene
+  $(".scene-form .scene-close", $scene).click cancelScene

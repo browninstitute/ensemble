@@ -1,4 +1,4 @@
-<% cache(story) do %>
+<% cache [story, 'index-preview'] do %>
   <%= link_to story, :class => "story-preview" do %>
     <h1><%= story.title %> 
       <small class="author">
@@ -6,7 +6,7 @@
       </small>
     </h1>
     <div class="last-updated">
-      Started <%= time_ago_in_words(story.created_at) %> ago
+      Started on <%= story.created_at.strftime("%B %d, %I:%M %p") %>
     </div>
   <% end %>
 <% end %>

@@ -10,12 +10,12 @@
     <% end %>
   </div>
   <div class="stories-list span9">
-    <h1><%= params[:q] ? "#{@stories.length} stories found" : "All Stories" %></h1>
+    <% cache [@stories, "stories-index"] do %>
+      <h1><%= params[:q] ? "#{@stories.length} stories found" : "All Stories" %></h1>
 
-    <% cache(cache_key_for_stories) do %>
       <table class="table">
         <% @stories.each do |story| %>
-          <% cache(story) do %>
+          <% cache [story, "story-index-listing"] do %>
             <tr class="my-story">
               <td>
                 <h3><%= link_to story.title, story %></h3>
