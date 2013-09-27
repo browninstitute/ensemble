@@ -22,7 +22,9 @@
     </div>
     <div class="clearfix"></div>
     <div id="scene_<%= scene.id %>_comments" class="scene-comments">
-      <%= render :partial => "comments/comment", :collection => scene.comments.order('created_at ASC'), :locals => { :scene => scene } %>
+      <% cache [scene.comments, "scene-comments"] do %>
+        <%= render :partial => "comments/comment", :collection => scene.comments.order('created_at ASC'), :locals => { :scene => scene } %>
+      <% end %>
     </div>
     <div id="scene_<%= scene.id %>_comment_box" class="scene-comment-box">
       <%= render :partial => "comments/form", :locals => { :scene => scene, :comment => Comment.new } %>

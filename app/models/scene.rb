@@ -1,6 +1,6 @@
 class Scene < ActiveRecord::Base
   belongs_to :user
-  belongs_to :story
+  belongs_to :story, :touch => true
   acts_as_list :scope => :story
   has_many :paragraphs, :order => :position, :dependent => :delete_all
   has_many :comments
