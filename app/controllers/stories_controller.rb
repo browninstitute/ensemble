@@ -10,7 +10,7 @@ class StoriesController < ApplicationController
   # GET /stories.json
   def index
     @q = Story.search(params[:q])
-    @stories = @q.result(:distinct => true).order("created_at DESC")
+    @stories = @q.result(:distinct => true).order("created_at DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
