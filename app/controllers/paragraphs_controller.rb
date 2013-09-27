@@ -79,6 +79,7 @@ class ParagraphsController < ApplicationController
                     :whodunnit => current_user.id,
                     :scene_id => @para.scene.id,
                     :story_id => @para.scene.story.id})
+    @para.touch
 
     respond_to do |format|
       format.js
@@ -98,6 +99,7 @@ class ParagraphsController < ApplicationController
                      :whodunnit => current_user.id,
                      :scene_id => @para.scene.id,
                      :story_id => @para.scene.story.id})
+    @para.touch
     
     respond_to do |format|
       format.js { render :action =>  "like" }

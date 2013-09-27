@@ -37,6 +37,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Outputs the role a given user has for a given story.
+  def self.role_for_story(user, story_id)
+    if user.nil?
+      return "loggedout"
+    end
+    
+    @story = Story.find(story_id)
+    @story_roles = StoryRole.find(:first, :conditions => {:user_id => user.id, :story_id => story_id})
+    
+    if @story.user.id == user.id
+      "owner"
+    elsif !@story_roles.nil?
+      @story_roles.role
+    else
+      "reader"
+    end
+  end
+
+
   def stories
     Story.find(:all, :conditions => {:user_id => self.id})
   end
