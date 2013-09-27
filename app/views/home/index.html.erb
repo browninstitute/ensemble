@@ -35,7 +35,7 @@
 
   <div class="stories-preview">
     <h2>Recent Stories</h2>
-    <% cache @stories do %>
+    <% cache [@stories, "recent-stories"] do %>
       <%= render :partial => 'home/story_preview', :collection => @stories, :as => :story %>
     <% end %>
   </div>
