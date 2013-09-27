@@ -5,6 +5,6 @@ class PagesController < ActionController::Base
   end
 
   def arrowhead
-    @stories = Story.where(user_id: ARROWHEAD_USERIDS).order("title")
+    @stories = Story.where(user_id: ARROWHEAD_USERIDS).order("title").all
   end
 end
