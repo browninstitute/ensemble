@@ -1,0 +1,20 @@
+<div class="scene row-fluid scene_divider" id="<%= scene_id_helper scene %>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
+  <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
+    <div class="paragraphs-container verticaltabs-container span12">
+      <div class="tab-content span11">
+        <%= render :partial => "paragraphs/story_edit_form", 
+          :locals => { :scene => scene, :scene_counter => 1 } %>
+      </div>
+      <ul class="nav-tabs span1 <%= "hide" if !scene.open? %>">
+        <% scene.ordered_paragraphs.each_with_index do |p, i| %>
+          <li class="<%= "active" if i == 0 %>"><a href="#para_edit_<%= p.id %>" data-toggle="tab">#<%= p.id %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% if !scene.open? %>
+    <%= render(:partial => 'scenes/new', :locals => { :scene => scene }) %>
+  <% else %>
+    <%= render :partial => 'scenes/form', :locals => { :scene => scene, :buttons => false } %>
+  <% end %>
+</div>

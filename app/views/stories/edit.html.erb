@@ -1,7 +1,7 @@
 <%= render 'form' %>
 <div class="content edit-mode">
   <% @story.scenes.each do |scene| %>
-    <%= render :partial => "scenes/scene", :locals => {:scene => scene, :edit_mode => true} %>
+    <%= render :partial => "scenes/edit_scene", :locals => {:scene => scene} %>
   <% end %>
 
   <div class="row-fluid" id="add-scene-wrapper">                                                               

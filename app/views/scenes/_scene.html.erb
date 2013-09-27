@@ -1,34 +1,26 @@
 <% cache [scene, User.role_for_story(current_user, scene.story), "scene-in-story"] do %>
-  <% edit_mode = false if local_assigns[:edit_mode].nil? %>
-  <div class="scene row-fluid<%= " open" if scene.open? && !edit_mode %><%= " scene_divider" if edit_mode %>" id="<%= scene_id_helper scene%>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
+  <div class="scene row-fluid<%= " open" if scene.open? %>" id="<%= scene_id_helper scene%>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
     <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
       <div class="paragraphs-container verticaltabs-container span12">
         <div class="tab-content span11">
-          <% if edit_mode %>
-            <%= render :partial => "paragraphs/story_edit_form", 
-            :locals => { :scene => scene, :scene_counter => 1 } %>
-          <% else %>
-            <%= render :partial => "paragraphs/paragraph", 
+          <%= render :partial => "paragraphs/paragraph", 
                    :collection => scene.ordered_paragraphs,
                    :locals => { :scene => scene } %>          
-          <% end %>
         </div>
         <ul class="nav-tabs span1 <%= "hide" if !scene.open? %>">
           <% scene.ordered_paragraphs.each_with_index do |p, i| %>
-            <li class="<%= "active" if i == 0 %>"><a href="#para_<%= "edit_" if edit_mode %><%= p.id %>" data-toggle="tab">#<%= p.id %></a></li>
+            <li class="<%= "active" if i == 0 %>"><a href="#para_<%= p.id %>" data-toggle="tab">#<%= p.id %></a></li>
           <% end %>
           <li>
-          <% if !edit_mode %>
-            <% if can?(:create, Paragraph) %>
-              <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph", :data => {:toggle => "tooltip"} do %>
-                <i class="icon-plus"></i>
-              <% end %>
-            <% else %>
-              <%= link_to new_scene_paragraph_path(scene), :class => "new-paragraph", :data => {:toggle => "tooltip"} do %>
-                <i class="icon-plus"></i>
-              <% end %>
+          <% if can?(:create, Paragraph) %>
+            <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph", :data => {:toggle => "tooltip"} do %>
+              <i class="icon-plus"></i>
             <% end %>
-          <% end %>
+          <% else %>
+            <%= link_to new_scene_paragraph_path(scene), :class => "new-paragraph", :data => {:toggle => "tooltip"} do %>
+              <i class="icon-plus"></i>
+            <% end %>
+           <% end %>
           </li>
         </ul>
       </div>
@@ -36,11 +28,7 @@
     <% if !scene.open? %>
       <%= render(:partial => 'scenes/new', :locals => { :scene => scene }) %>
     <% else %>
-      <% if edit_mode %>
-        <%= render :partial => 'scenes/form', :locals => { :scene => scene, :buttons => false } %>
-      <% else %>
-        <%= render :partial => 'scenes/scene_info', :locals => { :scene => scene } %>
-      <% end %>
+      <%= render :partial => 'scenes/scene_info', :locals => { :scene => scene } %>
     <% end %>
   </div>
 <% end %>

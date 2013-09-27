@@ -25,7 +25,7 @@ module StoriesHelper
    
     html = ""
     new_story_scenes.each do |s|
-      html += render :partial => "scenes/scene", :locals => {:scene => s, :edit_mode => true}
+      html += render :partial => "scenes/edit_scene", :locals => {:scene => s}
     end
     html.html_safe
   end

@@ -155,7 +155,7 @@ $().ready(function() {
     // Create a new textarea with a triple return
     if($(this).val().indexOf("\n\n\n") !== -1) {
       <% temp = Scene.new %>
-      var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => temp, :edit_mode => true }) %>");
+      var $para = $("<%= escape_javascript(render :partial => 'scenes/edit_scene', :locals => { :scene => temp }) %>");
       $para.attr("id", "temp_<%= temp.temp_id %>");
       $(this).parents(".scene").after($para);
       var prev = $(this).val().substring(0, $(this).val().indexOf("\n\n\n"));
@@ -172,7 +172,7 @@ $().ready(function() {
 
   $('#add-scene-break').click(function() {
     <% temp = Scene.new %>
-    var $para = $("<%= escape_javascript(render :partial => 'scenes/scene', :locals => { :scene => temp, :edit_mode => true }) %>");
+    var $para = $("<%= escape_javascript(render :partial => 'scenes/edit_scene', :locals => { :scene => temp }) %>");
     $para.attr("id", "temp_<%= temp.temp_id %>");
     $(".scene:last").after($para);
     var $next = $(".scene:last").find('.txt');
