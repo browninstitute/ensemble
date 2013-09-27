@@ -1,6 +1,5 @@
 require 'format'
 require 'set'
-require 'digest/md5'
 
 class Story < ActiveRecord::Base
   belongs_to :user
