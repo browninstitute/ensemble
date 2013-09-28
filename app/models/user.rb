@@ -55,19 +55,29 @@ class User < ActiveRecord::Base
     end
   end
 
-
   def stories
-    Story.find(:all, :conditions => {:user_id => self.id})
+    Story.find_published(:conditions => {:user_id => self.id})
   end
 
   def mod_stories
     @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "moderator" })
-    Story.find(@story_roles.map { |sr| sr.story_id })
+    Story.find_published(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
   end
 
   def contribute_stories
     @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "contributor" })
-    Story.find(@story_roles.map { |sr| sr.story_id })
+    Story.find_published(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
+  end
+
+  # Draft stories the user owns or is a moderator for
+  def draft_stories    
+    @stories = Story.find_drafts(:conditions => {:user_id => self.id})
+    @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "moderator" })
+    @mod_draft_stories = Story.find_drafts(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
+    if (!@mod_draft_stories.nil?)
+      @stories += @mod_draft_stories
+    end
+    @stories
   end
 
   # A custom validation to check that all users are 13 or older.

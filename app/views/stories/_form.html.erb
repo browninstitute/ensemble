@@ -26,7 +26,10 @@
 
     <div class="actions pull-right">
       <div class="text-error"></div>
-      <%= f.submit "Publish", :class => "btn" %>
+      <%= f.submit "Publish", :name => "publish", :class => "btn" %>
+      <% if current_page?(new_story_path) || @story.draft %>
+        <%= f.submit "Save Draft", :name => "draft", :class => "btn save-draft" %>
+      <% end %>
       <% if !current_page? new_story_path %>
         <%= link_to "Cancel", story_path(@story), 
           :class => "btn cancel-story", :confirm => "This will discard all changes made to the story. Do you want to continue?" %>

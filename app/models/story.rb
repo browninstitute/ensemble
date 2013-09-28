@@ -3,7 +3,7 @@ require 'set'
 
 class Story < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :subtitle, :title, :genre1, :genre2, :public, :content
+  attr_accessible :subtitle, :title, :genre1, :genre2, :public, :content, :draft
   has_many :scenes, :order => :position
   has_many :comments
   has_many :story_roles
@@ -14,6 +14,43 @@ class Story < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: :slugged
+
+  # Returns all story records that have been published (are not drafts)
+  def self.find_published(options)
+    with_scope(:find => { :conditions => { :draft => false } }) do
+      if options.kind_of?(Array) #presemably a list of story ids?
+        if (options.length == 1)
+          story = find_by_id(options)
+          if (!story.nil?)
+            [].push(story)
+          else
+            []
+          end
+        else
+          find(options)
+        end
+      else
+        find(:all, options)
+      end
+    end
+  end
+
+  # Returns all story records that are drafts (haven't been published)
+  def self.find_drafts(options)
+    with_scope(:find => { :conditions => { :draft => true } }) do
+      if options.kind_of?(Array) #presemably a list of story ids?
+        find(options)
+      else
+        find(:all, options)
+      end
+    end
+  end
+
+  # Returns true if the story is still in draft mode (has not been published
+  # yet).
+  def is_draft?
+    self.draft
+  end
 
   # Returns true if the entire story is settled (all scenes
   # have a declared winner or only consist of one paragraph)
