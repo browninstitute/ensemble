@@ -18,6 +18,7 @@ end
 group :production do
   gem 'rvm-capistrano'
   gem 'mysql2'
+  gem 'dalli'
 end
 
 # Gems used only for assets and not required
