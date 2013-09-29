@@ -10,7 +10,7 @@ class StoriesController < ApplicationController
   # GET /stories.json
   def index
     @q = Story.search(params[:q])
-    @stories = @q.result(:distinct => true).order("created_at DESC").all
+    @stories = @q.result(:distinct => true).order("created_at DESC").all(:conditions => { :draft => false })
 
     respond_to do |format|
       format.html # index.html.erb
@@ -75,6 +75,10 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(params[:story])
     @story.user_id = current_user.id
+
+    if !params[:draft].nil? 
+      @story.draft = true
+    end
     
     if @story.save && @story.update_contents(params[:story][:content])
       respond_to do |format|
@@ -92,6 +96,11 @@ class StoriesController < ApplicationController
   # PUT /stories/1.json
   def update
     @story = Story.find(params[:id])
+   
+    # If the user publishes it, mark the story as published
+    if params[:draft].nil?
+      @story.draft = false
+    end
 
     if @story.update_attributes(params[:story]) && @story.update_contents(params[:story][:content])
       respond_to do |format|

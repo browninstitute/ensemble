@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130922220624) do
+ActiveRecord::Schema.define(:version => 20130928210413) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -170,28 +170,18 @@ ActiveRecord::Schema.define(:version => 20130922220624) do
     t.string   "title"
     t.string   "subtitle"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.boolean  "public"
     t.text     "content"
     t.integer  "genre1"
     t.integer  "genre2"
     t.string   "slug"
+    t.boolean  "draft",      :default => false
   end
 
   add_index "stories", ["slug"], :name => "index_stories_on_slug", :unique => true
   add_index "stories", ["user_id"], :name => "index_stories_on_user_id"
-
-  create_table "story_drafts", :force => true do |t|
-    t.text     "content"
-    t.integer  "story_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "title"
-    t.string   "subtitle"
-    t.integer  "user_id"
-    t.boolean  "public"
-  end
 
   create_table "story_roles", :force => true do |t|
     t.integer  "story_id"
