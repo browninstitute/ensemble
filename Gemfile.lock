@@ -62,6 +62,7 @@ GEM
     columnize (0.3.6)
     commonjs (0.2.6)
     daemons (1.1.9)
+    dalli (2.6.4)
     debugger (1.6.0)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -247,6 +248,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   daemons
+  dalli
   debugger
   delayed_job_active_record
   devise
