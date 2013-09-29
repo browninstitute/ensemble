@@ -1,4 +1,4 @@
-<% if @story.is_draft? %>
+<% if @story.kind_of?(Story) && @story.is_draft? %>
   <div class="alert alert-info">
     This story is a <strong>draft</strong> and has not yet been published.
     <% if !current_page? edit_story_path(@story) %>
