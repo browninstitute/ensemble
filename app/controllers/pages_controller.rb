@@ -5,6 +5,6 @@ class PagesController < ActionController::Base
   end
 
   def arrowhead
-    @stories = Story.find_published( :order => "title", :conditions => ["user_id IN (?)", ARROWHEAD_USERIDS])
+    @stories = Story.find_published( :order => "created_at", :conditions => ["user_id IN (?)", ARROWHEAD_USERIDS])
   end
 end

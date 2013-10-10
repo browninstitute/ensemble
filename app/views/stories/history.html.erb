@@ -3,7 +3,9 @@
     <% if !activity_text(v).nil? && v.event != "unlike" && v.event != "unwin" %>
     <div class="activity">
       <%= activity_text(v).html_safe %>
-      <span class="activity-time pull-right"><%= time_ago_in_words(v.created_at) %> ago</span>
+      <span class="activity-time pull-right">
+        <%= v.created_at.strftime("%B %d, %I:%M %p") %>
+      </span>
     </div>
     <% end %>
   <% end %>

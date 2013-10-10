@@ -6,7 +6,7 @@
       </small>
     </h1>
     <div class="last-updated">
-      Started on <%= story.created_at.strftime("%B %d, %I:%M %p") %>
+      Started <%= timeago(story.created_at) %>
     </div>
   <% end %>
 <% end %>

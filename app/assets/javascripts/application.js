@@ -32,3 +32,8 @@ $(document).ajaxComplete(function(event, request) {
   }
   $.bootstrapGrowl(msg, { type: type });
 });
+
+// Time ago to convert times into words on the client side
+$(document).ready(function() {
+  $("abbr.timeago").timeago();
+});

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @story = Story.find(params[:story_id])
-    @posts = Post.ordered_posts(params[:story_id])
+    @posts = Post.ordered_posts(@story.id)
 
     respond_to do |format|
       format.html
