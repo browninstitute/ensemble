@@ -6,8 +6,11 @@
       Mystery surrounds a young man who is accidentally shot in the head with an arrow.
       </p>
       <p>
-        <strong>Arrowhead</strong> is a collaborative story being written by Stanford University Jones Lecturer <a href="http://creativewriting.stanford.edu/people/tom-kealey">Tom Kealey</a>, founder of NaNoWriMo <a href="http://www.chrisbaty.com/">Chris Baty</a>, and <strong>you!</strong> Click on the chapters below to participate in this story being written by people all over the web.
+        <strong>Arrowhead</strong> is a collaborative story being written by Stanford University Jones Lecturer <a href="http://creativewriting.stanford.edu/people/tom-kealey">Tom Kealey</a>, founder of NaNoWriMo <a href="http://www.chrisbaty.com/">Chris Baty</a>, and <strong>you!</strong>
       </p>
+      <%= link_to story_path(@stories.last), :class => "btn btn-primary" do %>
+        Contribute to the latest chapter <i class="icon-angle-right"></i>
+      <% end %>
     </div>  
     <p class="photo-credit">
       Photo credit: 
