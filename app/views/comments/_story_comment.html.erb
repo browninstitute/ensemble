@@ -5,7 +5,7 @@
         <%= link_to story_comment.user.name, story_comment.user %>
       </div>
       <div class="comment-time pull-right">
-        <%= time_ago_in_words(story_comment.created_at) %> ago
+        Posted <%= timeago(story_comment.created_at) %>
       </div>
     </div>
     <div class="comment_photo">

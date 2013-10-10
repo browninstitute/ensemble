@@ -31,11 +31,11 @@
       <div class="meta pull-right">
         <span class="edit-time">
           <% if @post.updated_at != @post.created_at %>
-            Last edited at <%= @post.updated_at %> 
+            Last edited <%= timeago(@post.updated_at) %>
           <% end %>
         </span>
         <span>
-          Posted <%= time_ago_in_words(@post.created_at) %> ago
+          Posted <%= timeago(@post.created_at) %>
         </span>
       </div>
       <div class="clearfix"></div>

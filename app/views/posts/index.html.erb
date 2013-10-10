@@ -16,7 +16,7 @@
         </td>
         <td><%= post.descendants.count %></td>
         <td><%= post.impressionist_count(:filter=>:session_hash) %></td>
-        <td><%= post.last_created %></td>
+        <td><%= post.last_created.strftime("%B %d, %I:%M %p") %></td>
       </tr>
     <% end %>
   </tbody>
