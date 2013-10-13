@@ -17,7 +17,7 @@ class Paragraph < ActiveRecord::Base
   }
 
   scope :by_author, -> {
-    joins(:user).reorder("users.name DESC")
+    joins(:user).reorder("users.name ASC")
   }
 
   before_destroy :paragraph_cleanup
