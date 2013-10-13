@@ -55,6 +55,10 @@ class ParagraphsController < ApplicationController
   def destroy
     @p = Paragraph.find(params[:id])
     @scene = @p.scene
+
+    # True if looking at scene view
+    @sceneview = URI.parse(request.env["HTTP_REFERER"]).path == scene_path(@scene)
+
     if @p.destroy
       flash.now[:notice] = "Contribution was deleted."
       
