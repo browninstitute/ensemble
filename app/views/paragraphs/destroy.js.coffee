@@ -5,6 +5,7 @@ $ ->
     $(this).remove()
     <% if @sceneview %>
     $("#para-nav-<%= @p.id %>").remove()
+    $(".paragraphs-nav .header h1", $s).html("<%= @p.scene.paragraphs.count %> Drafts")
     <% if @scene.paragraphs.length == 0 %>
     $(".paragraphs-container", $s).html("No drafts for this scene.")
     <% else %>

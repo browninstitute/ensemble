@@ -6,6 +6,7 @@ $ ->
   $content.html('<%= Format.markdown @p.content %>')
 
   <% if @sceneview %>
+  $(".paragraphs-nav .header h1").html("<%= @scene.paragraphs.count %> Drafts")
   $(".paragraphs-container", $s).append(p)
   $(".paragraphs-nav ul li:last", $s).before("<%= escape_javascript(render(:partial => "scenes/paragraph_nav_item", :locals => {:paragraph_nav_item => @p, :paragraph_nav_item_counter => 1, :scene => @scene})) %>")
   $(".paragraphs-nav #para-nav-<%= @p.id %>", $s).click()
