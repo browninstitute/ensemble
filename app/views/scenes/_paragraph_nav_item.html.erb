@@ -1,0 +1,26 @@
+<li id="para-nav-<%= paragraph_nav_item.id %>" class="<%= "active" if paragraph_nav_item_counter == 0 %> span6">
+<%= link_to scene_change_paragraph_path(scene, paragraph_nav_item), :remote => true do %>
+  <span class="preview">
+    <%= truncate(paragraph_nav_item.content, :length => 45) %>
+  </span>
+  <span>
+    <span class="like-count">
+      <i class="icon-heart"></i>
+      <span id="para_<%= paragraph_nav_item.id %>_like_count">
+        <%= paragraph_nav_item.likes.size %>
+      </span>
+    </span>
+
+    <span class="winner <%= "hide" if !paragraph_nav_item.is_winner? %>">
+      <i class="icon-trophy" rel="tooltip"></i>
+    </span>
+
+    <% if paragraph_nav_item.user %>
+      <span class="paragraph-author pull-right">
+        By <strong><%= paragraph_nav_item.user.name %></strong>
+      </span>
+    <% end %>
+  </span>
+<% end %>
+</li>
+

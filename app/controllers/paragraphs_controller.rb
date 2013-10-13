@@ -22,6 +22,10 @@ class ParagraphsController < ApplicationController
     @scene = Scene.find(params[:scene_id])
     @p = @scene.paragraphs.build(params[:paragraph])
     @p.user_id = current_user.id
+    
+    # True if looking at scene view
+    @sceneview = URI.parse(request.env["HTTP_REFERER"]).path == scene_path(@scene)
+
     if @p.save
       flash.now[:success] = "Contribution successfully saved."
       respond_to do |format|
