@@ -25,7 +25,7 @@
     <div class="paragraph span8">
       <div class="paragraphs-container span12">
         <%= render :partial => "paragraphs/paragraph",
-          :collection => @scene.ordered_paragraphs,
+          :collection => @paragraphs,
           :locals => { 
             :scene => @scene, :show_title => true } %>
       </div>
@@ -39,7 +39,7 @@
         <% end %>
       </div>
       <%= render :partial => "scenes/paragraph_nav",
-        :locals => { :scene => @scene, :paragraphs => @scene.ordered_paragraphs } %>
+        :locals => { :scene => @scene, :paragraphs => @paragraphs } %>
     </div>
   </div>
 </div>

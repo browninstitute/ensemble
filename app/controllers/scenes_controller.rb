@@ -11,6 +11,7 @@ class ScenesController < ApplicationController
 
   def show
     @scene = Scene.find(params[:id])
+    @paragraphs = @scene.ordered_paragraphs
 
     # To help generate the sort drafts dropdown
     @sort_urls = { "Highest loves" => "loves",
