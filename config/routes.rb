@@ -23,6 +23,7 @@ StoryCollab::Application.routes.draw do
   resources :scenes do
     resources :comments 
     resources :paragraphs
+    match "paragraphs/:pid/change_paragraph" => "scenes#change_paragraph", :as => "change_paragraph"
   end
 
   devise_for :users, :controllers => { :registrations => "users/registrations", 

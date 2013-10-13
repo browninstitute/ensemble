@@ -201,3 +201,74 @@ $lightaccent: #60C8F5;
     }
   }
 }
+
+/* Scene View */
+.container > .scene {
+  h1 {
+    font-weight: normal;
+  }
+
+  .scene-info {
+    background: #eee;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 40px;
+
+    .scene-prompt {
+      font-family: Consolas, Lucida Console, Monaco, monospace;
+    }
+  }
+
+  .paragraphs-container h1, .paragraphs-nav h1 {
+    color: #aaa;
+    font-size: 1.2em;
+    font-weight: lighter;
+    line-height: 1.2em;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  .paragraphs-nav {
+    ul {
+      margin: 0;
+
+      li {
+        border: 2px solid #aaa;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 0.9em;
+        cursor: pointer;
+        opacity: 0.8;
+
+        a {
+          color: #333;
+
+          &:hover {
+            text-decoration: none;
+            color: #333;
+          }
+        }
+
+        .preview {
+          text-align: center;
+          line-height: 1.5em;
+          min-height: 36px;
+        }
+
+        .preview, .p-info {
+          display: block;
+        }
+
+        .winner {
+          color: #FFCC40;
+        }
+
+        &:hover, &.active {
+          border-color: #23ade8;
+          opacity: 1;
+        }
+      }
+
+    }
+  }
+}

@@ -1,8 +1,14 @@
-<% cache [paragraph, User.role_for_story(current_user, scene.story), "paragraph"] do %>
-  <div class="paragraph-inner tab-pane row-fluid <%= "hide" if paragraph_counter != 0 %> <%= "active" if paragraph_counter == 0 %>" id="para_<%= paragraph.id %>">
+<% show_title = false if local_assigns[:show_title].nil? %>
+<div class="paragraph-inner tab-pane <%= "hide" if paragraph_counter != 0 %> <%= "active" if paragraph_counter == 0 %>" id="para_<%= paragraph.id %>">
+  <% if show_title %>
+    <h1>Draft #<%= paragraph.id %></h1>
+  <% end %>
+  <% cache [paragraph, User.role_for_story(current_user, scene.story), "paragraph"] do %>
+  <div class="row-fluid">
     <div class="paragraph-content span10">
       <%= Format.markdown(paragraph.content) %>
     </div>
     <%= render :partial => 'paragraphs/paragraph_info', :locals => {:scene => scene, :paragraph => paragraph} %>
   </div>
-<% end %>
+  <% end %>
+</div>

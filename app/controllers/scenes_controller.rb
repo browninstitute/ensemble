@@ -8,7 +8,15 @@ class ScenesController < ApplicationController
       format.js
     end
   end
-  
+
+  def show
+    @scene = Scene.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+    end
+  end
+
   def edit
     @scene = Scene.find(params[:id])
 
@@ -45,6 +53,15 @@ class ScenesController < ApplicationController
       respond_to do |format|
         format.js
       end
+    end
+  end
+
+  def change_paragraph
+    @p = Paragraph.find(params[:pid])
+    @scene = Scene.find(params[:scene_id])
+
+    respond_to do |format|
+      format.js { render :action => "change_paragraph" }
     end
   end
 end
