@@ -201,3 +201,125 @@ $lightaccent: #60C8F5;
     }
   }
 }
+
+/* Scene View */
+.container > .scene {
+  h1 {
+    font-weight: normal;
+  }
+
+  .scene-info {
+    background: #eee;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 40px;
+
+    .scene-prompt {
+      font-family: Consolas, Lucida Console, Monaco, monospace;
+    }
+  }
+
+  .paragraphs-container h1, .paragraphs-nav h1 {
+    color: #aaa;
+    font-size: 1.2em;
+    font-weight: lighter;
+    line-height: 1.2em;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  .paragraphs-nav {
+    .header {
+      h1 {
+        line-height: 20px;
+      }
+      
+      form {
+        margin: 0;
+
+        label {
+          display: inline;
+          font-size: smaller;
+        }
+
+        select {
+          font-size: 12px;
+          width: 130px;
+          height: 2em;
+        }
+      }
+
+      &:after {
+        clear: both;
+        content: " ";
+        display: block;
+        height: 0;
+      }
+    }
+
+    ul {
+      margin: 0;
+      list-style: none;
+
+      li {
+        border: 2px solid #aaa;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 0.9em;
+        cursor: pointer;
+        opacity: 0.8;
+        width: 45%;
+        float: left;
+        margin-bottom: 10px;
+      
+        &:nth-child(even) {
+          margin-left: 2%;
+        }
+
+        &.suggest-draft {
+          background: rgb(243, 136, 0);
+          border-color: #fff;
+          text-align: center;
+
+          a {
+            color: #fff;
+            font-weight: bold;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+
+        a {
+          color: #333;
+
+          &:hover {
+            text-decoration: none;
+            color: #333;
+          }
+        }
+
+        .preview {
+          text-align: center;
+          line-height: 1.5em;
+          min-height: 36px;
+        }
+
+        .preview, .p-info {
+          display: block;
+        }
+
+        .winner {
+          color: #FFCC40;
+        }
+
+        &:hover, &.active {
+          border-color: #23ade8;
+          opacity: 1;
+        }
+      }
+
+    }
+  }
+}

@@ -53,8 +53,8 @@ setupAnalytics = ($tab = "all") ->
 cancelParagraph = (e) ->
   _this = $(this)
   parent = _this.parents('.scene')
-  parent.children('.paragraph').show()
-  parent.children('.paragraph-form').remove()
+  parent.find('.paragraph').show()
+  parent.find('.paragraph-form').remove()
   e.preventDefault()
 
 # Cancels editing of a scene in view mode.

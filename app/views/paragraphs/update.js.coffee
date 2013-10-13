@@ -1,8 +1,8 @@
 $ ->
   $p = $('#para_<%= @p.id %>')
-  $content = $p.children('.paragraph-content')
+  $content = $p.find('.paragraph-content')
   $content.html('<%= Format.markdown @p.content %>')
 
-  $p.parents('.scene').children('.paragraph-form').remove()
+  $p.parents('.scene').find('.paragraph-form').remove()
 
-  $p.parents('.scene').children('.paragraph').show()
+  $p.parents('.scene').find('.paragraph').show()

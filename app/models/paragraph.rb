@@ -8,6 +8,18 @@ class Paragraph < ActiveRecord::Base
   acts_as_votable
   is_impressionable
 
+  scope :by_oldest_to_newest, -> {
+    reorder("created_at ASC")
+  }
+
+  scope :by_newest_to_oldest, -> {
+    reorder("created_at DESC")
+  }
+
+  scope :by_author, -> {
+    joins(:user).reorder("users.name DESC")
+  }
+
   before_destroy :paragraph_cleanup
 
   def set_as_winner

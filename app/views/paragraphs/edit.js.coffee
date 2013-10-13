@@ -6,9 +6,9 @@ $ ->
   $s.children('.paragraph-form').remove()
 
   # add the form
-  $s.children('.paragraph')
+  $s.find('.paragraph')
     .after("<%= escape_javascript(render(:partial => 'paragraphs/form', :locals => {:p => @p, :scene => @scene})) %>")
   $(".paragraph-form textarea", $s).placeholder()
   $('.cancel-paragraph', $s).click cancelParagraph
   $('textarea', $s).autosize().trigger('autosize')
-  $s.children('.paragraph').hide()
+  $s.find('.paragraph').hide()
