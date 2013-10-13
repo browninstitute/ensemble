@@ -3,7 +3,7 @@
     :collection => paragraphs,
     :locals => {:scene => scene} %>
   <% if can?(:create, Paragraph) %>
-    <li class="span6">
+    <li class="para-nav-item suggest-draft">
     <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new_paragraph" do %>
       <i class="icon-plus"></i> Suggest Draft
     <% end %>

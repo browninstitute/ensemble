@@ -9,11 +9,11 @@ class Paragraph < ActiveRecord::Base
   is_impressionable
 
   scope :by_oldest_to_newest, -> {
-    reorder("created_at DESC")
+    reorder("created_at ASC")
   }
 
   scope :by_newest_to_oldest, -> {
-    reorder("created_at ASC")
+    reorder("created_at DESC")
   }
 
   scope :by_author, -> {

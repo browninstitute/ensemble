@@ -259,6 +259,7 @@ $lightaccent: #60C8F5;
 
     ul {
       margin: 0;
+      list-style: none;
 
       li {
         border: 2px solid #aaa;
@@ -267,6 +268,28 @@ $lightaccent: #60C8F5;
         font-size: 0.9em;
         cursor: pointer;
         opacity: 0.8;
+        width: 45%;
+        float: left;
+        margin-bottom: 10px;
+      
+        &:nth-child(even) {
+          margin-left: 2%;
+        }
+
+        &.suggest-draft {
+          background: rgb(243, 136, 0);
+          border-color: #fff;
+          text-align: center;
+
+          a {
+            color: #fff;
+            font-weight: bold;
+
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
 
         a {
           color: #333;

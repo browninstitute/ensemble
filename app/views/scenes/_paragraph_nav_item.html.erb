@@ -1,4 +1,4 @@
-<li id="para-nav-<%= paragraph_nav_item.id %>" class="<%= "active" if paragraph_nav_item_counter == 0 %> span6">
+<li id="para-nav-<%= paragraph_nav_item.id %>" class="<%= "active" if paragraph_nav_item_counter == 0 %> para-nav-item">
 <%= link_to scene_change_paragraph_path(scene, paragraph_nav_item), :remote => true do %>
   <span class="preview">
     <%= truncate(paragraph_nav_item.content, :length => 45) %>
