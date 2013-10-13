@@ -15,7 +15,7 @@
   </div>
 <% end %>
 
-<% if Arrowhead.is_arrowhead_story? @story %>
+<% if StoryCollab::Application.config.arrowhead && Arrowhead.is_arrowhead_story? @story %>
     <hr />
     <div id="story_<%= @story.id %>_comments" class="story-comments">
       <% cache [@story.comments, User.role_for_story(current_user, @story), "story-comments"] do %>
