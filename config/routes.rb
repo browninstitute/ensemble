@@ -24,6 +24,7 @@ StoryCollab::Application.routes.draw do
     resources :comments 
     resources :paragraphs
     match "paragraphs/:pid/change_paragraph" => "scenes#change_paragraph", :as => "change_paragraph"
+    match "sort_drafts" => "scenes#sort_drafts", :as => "sort_drafts"
   end
 
   devise_for :users, :controllers => { :registrations => "users/registrations", 

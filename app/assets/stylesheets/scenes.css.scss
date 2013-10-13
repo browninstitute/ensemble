@@ -229,6 +229,34 @@ $lightaccent: #60C8F5;
   }
 
   .paragraphs-nav {
+    .header {
+      h1 {
+        line-height: 20px;
+      }
+      
+      form {
+        margin: 0;
+
+        label {
+          display: inline;
+          font-size: smaller;
+        }
+
+        select {
+          font-size: 12px;
+          width: 130px;
+          height: 2em;
+        }
+      }
+
+      &:after {
+        clear: both;
+        content: " ";
+        display: block;
+        height: 0;
+      }
+    }
+
     ul {
       margin: 0;
 
