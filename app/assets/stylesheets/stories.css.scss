@@ -14,7 +14,14 @@ $accent: #23ADE8;
 
   .story-header {
     position: relative;
-    
+   
+    &.arrowhead {
+      background-image: image-url('arrowhead_banner.png');
+      background-position: 400px 0px;
+      background-repeat: no-repeat;
+      background-size: 40%;
+    }
+
     h1 {
       font-family: 'Merriweather', Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
       font-size: 3.2em;
