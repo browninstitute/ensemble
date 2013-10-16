@@ -28,6 +28,11 @@ class StoriesController < ApplicationController
     @page_description = @story.subtitle
 
     if Arrowhead.is_arrowhead_story? @story
+      @arrowhead_stories = Arrowhead.stories
+      @i = @arrowhead_stories.find_index(@story)
+      @prev = @i > 0 ? @i - 1 : nil 
+      @next = @i < @arrowhead_stories.length - 1 ? @i + 1 : nil
+
       set_meta_tags :og => {
         :title    => @story.title,
         :description => @story.subtitle,

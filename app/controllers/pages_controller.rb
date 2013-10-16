@@ -1,3 +1,5 @@
+require 'arrowhead'
+
 class PagesController < ActionController::Base
   layout "application"
   
@@ -5,6 +7,6 @@ class PagesController < ActionController::Base
   end
 
   def arrowhead
-    @stories = Story.find_published( :order => "title", :conditions => ["user_id IN (?) AND title LIKE ?", ARROWHEAD_USERIDS, "Arrowhead%"])
+    @stories = Arrowhead.stories
   end
 end

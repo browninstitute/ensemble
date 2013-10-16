@@ -16,6 +16,25 @@
 <% end %>
 
 <% if StoryCollab::Application.config.arrowhead && Arrowhead.is_arrowhead_story?(@story) %>
+    <div class="arrowhead-nav" style="clear:both">
+      <% if @prev %>
+        <% @prev_story = @arrowhead_stories[@prev] %>
+        <div class="pull-left">
+          <%= link_to story_path(@prev_story) do %>
+            &lt; <%= @prev_story.title %> 
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @next %>
+        <% @next_story = @arrowhead_stories[@next] %>
+        <div class="pull-right">
+          <%= link_to story_path(@next_story) do %>
+            <%= @next_story.title %> &gt;
+          <% end %>
+        </div>
+      <% end %>
+    </div>
     <hr />
     <div id="story_<%= @story.id %>_comments" class="story-comments">
       <% cache [@story, @story.comments, current_user, "story-comments"] do %>

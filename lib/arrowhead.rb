@@ -6,4 +6,8 @@ module Arrowhead
   def self.is_arrowhead_author?(user_id)
     ARROWHEAD_USERIDS.include? user_id
   end
+
+  def self.stories
+    Story.find_published( :order => "title", :conditions => ["user_id IN (?) AND title LIKE ?", ARROWHEAD_USERIDS, "Arrowhead%"])
+  end
 end
