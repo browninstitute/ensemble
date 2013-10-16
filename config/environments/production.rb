@@ -59,7 +59,7 @@ StoryCollab::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :host => 'SOMEHOSTTHATNEEDSTOBECONFIGURED' }
+  config.action_mailer.default_url_options = { :host => 'ensemble.stanford.edu' }
 
   # Enable threaded mode
   # config.threadsafe!
@@ -77,4 +77,7 @@ StoryCollab::Application.configure do
 
   # Google Analytics
   GA.tracker = "UA-38501546-1"
+
+  # Paperclip
+  Paperclip.options[:command_path] = "/usr/bin/convert"
 end
