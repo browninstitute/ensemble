@@ -3,7 +3,7 @@
   <% if show_title %>
     <h1>Draft #<%= paragraph.id %></h1>
   <% end %>
-  <% cache [paragraph, User.role_for_story(current_user, scene.story), "paragraph"] do %>
+  <% cache [paragraph, current_user, "paragraph"] do %>
   <div class="row-fluid">
     <div class="paragraph-content span10">
       <%= Format.markdown(paragraph.content) %>

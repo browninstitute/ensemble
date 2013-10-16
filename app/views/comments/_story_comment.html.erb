@@ -1,4 +1,4 @@
-<% cache [story_comment, User.role_for_story(current_user, story_comment.story), "story-comment"] do %>
+<% cache [story_comment, current_user, "story-comment"] do %>
   <div id="story_comment_<%= story_comment.id %>" class="comment_box <%= comments_classes(story_comment, true) %>">
     <div class="comment-info">
       <div class="comment-name pull-left">

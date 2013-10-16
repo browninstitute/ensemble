@@ -25,6 +25,7 @@ class Ability
         can :manage, Story, :moderators => { :id => user.id }
         can :manage, Scene, :story => { :moderators => { :id => user.id } }
         can :manage, Paragraph, :scene => { :story => { :moderators => { :id => user.id } } }
+        can :manage, Comment, :scene => { :story => { :moderators => { :id => user.id } } }
         can :manage, StoryRole, :story => { :moderators => { :id => user.id } }
 
         # Anyone can...

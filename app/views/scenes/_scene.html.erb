@@ -1,4 +1,4 @@
-<% cache [scene, User.role_for_story(current_user, scene.story), "scene-in-story"] do %>
+<% cache [scene, current_user, "scene-in-story"] do %>
   <div class="scene row-fluid<%= " open" if scene.open? %>" id="<%= scene_id_helper scene%>" <%= if scene.id then "data-id='#{scene.id}'" end %> data-position="<%= scene.position %>">
     <div class="paragraph span8 <%= paragraphs_classes(@p, scene) %>">
       <div class="paragraphs-container verticaltabs-container span12">
