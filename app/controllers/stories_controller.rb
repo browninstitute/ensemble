@@ -30,9 +30,10 @@ class StoriesController < ApplicationController
     if Arrowhead.is_arrowhead_story? @story
       @arrowhead_stories = Arrowhead.stories
       @i = @arrowhead_stories.find_index(@story)
-      @prev = @i > 0 ? @i - 1 : nil 
-      @next = @i < @arrowhead_stories.length - 1 ? @i + 1 : nil
-
+      if @i
+        @prev = @i > 0 ? @i - 1 : nil 
+        @next = @i < @arrowhead_stories.length - 1 ? @i + 1 : nil
+      end
       set_meta_tags :og => {
         :title    => @story.title,
         :description => @story.subtitle,
