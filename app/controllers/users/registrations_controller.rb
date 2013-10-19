@@ -38,9 +38,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def save_preferences
     @emailprefs = params[:email]
-
     User.settings.all('email.').each do |k,v|
-      current_user.settings[k] = !@emailprefs[k.split('.',2).last].nil?
+      current_user.settings[k] = !(@emailprefs.nil? || @emailprefs[k.split('.',2).last].nil?)
     end
 
     redirect_to users_preferences_url, notice: 'Email notification preferences were saved.' 
