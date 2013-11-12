@@ -7,7 +7,7 @@ StoryCollab::Application.configure do
 
   # Arrowhead Configuration
   # Show Arrowhead messages and links
-  config.arrowhead = true
+  config.arrowhead = false
 
   # Code is not reloaded between requests
   config.cache_classes = true

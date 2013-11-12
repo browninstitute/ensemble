@@ -58,6 +58,7 @@ StoryCollab::Application.routes.draw do
   match '/storyslam' => 'pages#competition'
   match '/copyright' => 'pages#copyright'
   match '/arrowhead' => 'pages#arrowhead'
+  match '/featured' => 'pages#featured'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

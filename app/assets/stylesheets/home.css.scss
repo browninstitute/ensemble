@@ -85,3 +85,10 @@ nav {
     }
   }
 }
+
+.featured-story {
+  td:first-child {
+    width: 30%;
+    padding: 0;
+  }
+}

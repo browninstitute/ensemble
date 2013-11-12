@@ -7,7 +7,7 @@ StoryCollab::Application.configure do
 
   # Arrowhead Configuration
   # Show Arrowhead messages and links
-  config.arrowhead = true
+  config.arrowhead = false
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
