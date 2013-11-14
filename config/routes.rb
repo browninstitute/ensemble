@@ -35,6 +35,7 @@ StoryCollab::Application.routes.draw do
     put "/users/edit_profile" => "users/registrations#update_profile"
     get "/users/preferences" => "users/registrations#preferences"
     match 'users/preferences' => 'users/registrations#save_preferences', :via => :put
+    get "/users/autocomplete" => "users#autocomplete"
   end
   
   devise_for :admins do

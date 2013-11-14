@@ -22,15 +22,3 @@
     </tr>
   <% end %>
 </table>
-<hr />
-<% if can?(:create, @story.story_roles.new) %>
-  <%= form_for [@story, @story_role], :remote => true, :html => { :class => "form-inline" } do |f| %>
-    <%= f.collection_select 'user_id', User.all - [current_user], :id, :name, {:prompt => "Add a contributor?", :disabled => lambda{|user| @story.contributors.include?(user) || @story.user_id == user.id }} %>
-    <select id="story_role_role" name="story_role[role]">
-      <option value>Pick a role</option>
-      <option value="contributor">Contributor</option>
-      <option value="moderator">Moderator</option>
-    </select>
-    <%= f.submit 'Add', :class => 'btn btn-primary' %>
-  <% end %>
-<% end %>
