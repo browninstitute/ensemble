@@ -3,7 +3,14 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>Contributors</h3>
     <% if can?(:manage, @story) %>
-      <small>Designate other users as official contributors to the story. You can also designate certain users as moderators, who can edit scenes and paragraphs written by others.</small>
+      <p>
+      Designate other users as official contributors to the story. The different levels of power are:
+      </p>
+      <ul>
+        <li><strong>Contributors</strong> - These users have the same power as anyone else who visits your story. They can contribute by creating comments and scene drafts, and cannot directly edit over the story.</li>
+        <li><strong>Co-writers</strong> - These users can directly edit the text of your story.</li>
+        <li><strong>Moderators</strong> - These users can directly edit or delete any part of the story, and designate others as contributors/co-writers/moderators. They can also help moderate comments and scene drafts.</li>
+      </ul>
     <% end %>
   </div>
   <div class="modal-body">

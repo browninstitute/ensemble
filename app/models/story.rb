@@ -8,6 +8,7 @@ class Story < ActiveRecord::Base
   has_many :comments
   has_many :story_roles
   has_many :contributors, :through => :story_roles, :source => :user
+  has_many :cowriters, :through => :story_roles, :source => :user, :conditions => ['role = ?', 'cowriter']
   has_many :moderators, :through => :story_roles, :source => :user, :conditions => ['role = ?', 'moderator']
   has_paper_trail :only => [:title, :subtitle]
   validates :title, :presence => true

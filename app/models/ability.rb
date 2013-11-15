@@ -28,6 +28,11 @@ class Ability
         can :manage, Comment, :scene => { :story => { :moderators => { :id => user.id } } }
         can :manage, StoryRole, :story => { :moderators => { :id => user.id } }
 
+        # Co-writers can...
+        can :update, Story, :cowriters => { :id => user.id }
+        can :manage, Scene, :story => { :cowriters => { :id => user.id } }
+        can :manage, Paragraph, :scene => { :story => { :cowriters => { :id =>  user.id } } }
+
         # Anyone can...
         can :like, Paragraph
         can :history, Story

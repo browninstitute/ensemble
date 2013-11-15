@@ -64,15 +64,20 @@ class User < ActiveRecord::Base
     Story.find_published(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
   end
 
+  def cowrite_stories
+    @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "cowriter" })
+    Story.find_published(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
+  end
+
   def contribute_stories
     @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "contributor" })
     Story.find_published(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
   end
 
-  # Draft stories the user owns or is a moderator for
+  # Draft stories the user owns or is a moderator/cowriter for
   def draft_stories    
     @stories = Story.find_drafts(:conditions => {:user_id => self.id})
-    @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "moderator" })
+    @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => ["moderator", "cowriter"] })
     @mod_draft_stories = Story.find_drafts(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
     if (!@mod_draft_stories.nil?)
       @stories += @mod_draft_stories
