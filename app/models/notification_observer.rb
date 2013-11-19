@@ -5,7 +5,9 @@ class NotificationObserver < ActiveRecord::Observer
     if record.is_a? StoryRole
       mod = User.find(record.story.user_id)
       contributor = User.find(record.user_id)
-      NotificationMailer.delay.added_as_contributor_notification(mod, contributor, record)
+      if contributor.settings['email.added_as_contributor']
+        NotificationMailer.delay.added_as_contributor_notification(mod, contributor, record)
+      end
     elsif record.is_a? Post
       story = record.story
       poster = User.find(record.user_id)
