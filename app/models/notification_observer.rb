@@ -22,7 +22,6 @@ class NotificationObserver < ActiveRecord::Observer
       story = Story.find(record.story_id)
       user = story.user
       reason = record.reason
-      debugger
       if user.settings['email.mod.story_flagged']
         NotificationMailer.delay.mod_story_flagged(story, reason)
       end
