@@ -1,0 +1,35 @@
+<div id="flag_modal" class="modal fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Flag this Story</h3>
+  </div>
+  <div class="modal-body">
+    <% if @story.flagged? %>
+      <p>
+      This story has been flagged with the reason: <%= @story.flags.first.reason %>
+      </p>
+      <%= form_tag unflag_story_path(@story) do %>
+        <%= submit_tag "Unflag", :class => "btn" %>
+      <% end %>
+    <% else %>
+      <% if can?(:flag, @story) %>
+        <%= form_tag flag_story_path(@story) do %>
+          <p>
+          Choose reason for flagging this story:
+          </p>
+          <label class="radio">
+            <%= radio_button_tag(:reason, :inappropriate) %>
+            This story is inappropriate.
+          </label>
+          <label class="radio">
+            <%= radio_button_tag(:reason, :not_story) %>
+            This is not a story.
+          </label>
+          <%= submit_tag "Flag", :class => "btn" %>
+        <% end %>
+      <% else %>
+        You don't have permissions to flag this story.
+      <% end %>
+    <% end %>
+  </div>
+</div>

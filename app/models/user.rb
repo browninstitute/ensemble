@@ -61,24 +61,28 @@ class User < ActiveRecord::Base
 
   def mod_stories
     @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "moderator" })
-    Story.find_published(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
+    Story.find_published(:conditions => ["stories.id IN (?)", @story_roles.map { |sr| sr.story_id }])
   end
 
   def cowrite_stories
     @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "cowriter" })
-    Story.find_published(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
+    Story.find_published(:conditions => ["stories.id IN (?)", @story_roles.map { |sr| sr.story_id }])
   end
 
   def contribute_stories
     @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => "contributor" })
-    Story.find_published(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
+    Story.find_published(:conditions => ["stories.id IN (?)", @story_roles.map { |sr| sr.story_id }])
+  end
+
+  def flagged_stories
+    Story.by_flagged(true).where(:user_id => self.id)
   end
 
   # Draft stories the user owns or is a moderator/cowriter for
   def draft_stories    
     @stories = Story.find_drafts(:conditions => {:user_id => self.id})
     @story_roles = StoryRole.find(:all, :conditions => {:user_id => self.id, :role => ["moderator", "cowriter"] })
-    @mod_draft_stories = Story.find_drafts(:conditions => ["id IN (?)", @story_roles.map { |sr| sr.story_id }])
+    @mod_draft_stories = Story.find_drafts(:conditions => ["stories.id IN (?)", @story_roles.map { |sr| sr.story_id }])
     if (!@mod_draft_stories.nil?)
       @stories += @mod_draft_stories
     end
@@ -92,5 +96,23 @@ class User < ActiveRecord::Base
       age = now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
     end
     errors.add(:birthday, "must show that you are 13 or older.") if birthday.nil? || age < 13
+  end
+
+  # Users can flag stories
+  # Takes a story model and a string for reason.
+  def flag!(story, reason)
+    @story_flag = StoryFlag.new(:user_id => self.id, :story_id => story.id, :reason => reason)
+    @story_flag.save
+  end
+
+  def unflag!(story)
+    @flags = StoryFlag.where(:story_id => story.id)
+    @flags.each do |f|
+      f.destroy
+    end
+  end
+
+  def flags
+    StoryFlag.where(:user_id => self.id)
   end
 end

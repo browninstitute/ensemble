@@ -10,7 +10,7 @@ class StoriesController < ApplicationController
   # GET /stories.json
   def index
     @q = Story.search(params[:q])
-    @stories = @q.result(:distinct => true).order("created_at DESC").all(:conditions => { :draft => false })
+    @stories = @q.result(:distinct => true).by_flagged(false).order("created_at DESC").all(:conditions => { :draft => false }).to_a
 
     respond_to do |format|
       format.html # index.html.erb
@@ -200,5 +200,26 @@ class StoriesController < ApplicationController
                                  :story_id => @story.id)
     @submission.save
     render :layout => "application"
+  end
+
+  # Flag story
+  def flag
+    @story = Story.find(params[:id])
+    @reason = params[:reason]
+    if current_user.flag!(@story, @reason)
+      redirect_to @story, notice: "Story was flagged with reason: #{@reason}"
+    else
+      redirect_to @story, notice: "Something went wrong while flagging the story. Please try again."
+    end
+  end
+
+  # Unflag story
+  def unflag
+    @story = Story.find(params[:id])
+    if current_user.unflag!(@story)
+      redirect_to @story, notice: "Story was unflagged."
+    else
+      redirect_to @story, notice: "Something went wrong while unflagged the story. Please try again."
+    end
   end
 end

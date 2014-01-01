@@ -13,12 +13,20 @@ class Story < ActiveRecord::Base
   has_paper_trail :only => [:title, :subtitle]
   validates :title, :presence => true
 
+  scope :by_flagged, lambda { |flag|
+    if flag
+      joins('LEFT OUTER JOIN story_flags ON stories.id = story_flags.story_id').select('stories.*, count(story_flags.id) as flags_num').group("stories.id").having("flags_num > 0")
+    else
+      joins('LEFT OUTER JOIN story_flags ON stories.id = story_flags.story_id').select('stories.*, count(story_flags.id) as flags_num').group("stories.id").having("flags_num = 0")
+    end
+  }
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   # Returns all story records that have been published (are not drafts)
   def self.find_published(options)
-    with_scope(:find => { :conditions => { :draft => false } }) do
+    Story.by_flagged(false).where(:draft => false).with_scope do
       if options.kind_of?(Array) #presemably a list of story ids?
         if (options.length == 1)
           story = find_by_id(options)
@@ -38,7 +46,7 @@ class Story < ActiveRecord::Base
 
   # Returns all story records that are drafts (haven't been published)
   def self.find_drafts(options)
-    with_scope(:find => { :conditions => { :draft => true } }) do
+    Story.by_flagged(false).where(:draft => true).with_scope do
       if options.kind_of?(Array) #presemably a list of story ids?
         find(options)
       else
@@ -171,4 +179,12 @@ class Story < ActiveRecord::Base
     end
   end
 
+  # Returns true if the story was flagged by anyone.
+  def flagged?
+    !self.flags.empty?
+  end
+
+  def flags
+    StoryFlag.where(:story_id => self.id)
+  end
 end

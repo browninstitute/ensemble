@@ -23,6 +23,13 @@
         <i class="icon-user"></i> Contributors (<span id="contributor_count"><%= @story.contributors.count + 1 %></span>)
       <% end %>
       </li>
+      <% if can?(:flag, @story) && current_user.admin? %>
+        <li>
+        <%= link_to "#flag_modal", :data => {:toggle => "modal" }  do %>
+          <i class="icon-flag"></i> Flag
+        <% end %>
+        </li>
+      <% end %>
       <% if can?(:edit, @story) %>
         <li>
         <%= link_to edit_story_path(@story) do %>
@@ -40,4 +47,5 @@
     </ul>
   </div>
 </div>
+<%= render "flag_options" %>
 <% end %>
