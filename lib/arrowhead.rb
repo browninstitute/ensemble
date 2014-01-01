@@ -8,6 +8,6 @@ module Arrowhead
   end
 
   def self.stories
-    Story.find_published( :order => "title", :conditions => ["user_id IN (?) AND title LIKE ?", ARROWHEAD_USERIDS, "Arrowhead%"])
+    Story.find_published( :order => "title", :conditions => ["stories.user_id IN (?) AND title LIKE ?", ARROWHEAD_USERIDS, "Arrowhead%"])
   end
 end

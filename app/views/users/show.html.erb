@@ -78,7 +78,7 @@
       </table>
       <% end %>
 
-      <% if current_user.id == @user.id && @user.flagged_stories.length > 0 %>
+      <% if current_user && current_user.id == @user.id && @user.flagged_stories.length > 0 %>
         <h1>You have <%= pluralize @user.flagged_stories.length, "flagged story" %> (only you can see this)</h1>
         <table class="table">
           <% @user.flagged_stories.each do |s| %>
