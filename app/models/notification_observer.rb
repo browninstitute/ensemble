@@ -1,5 +1,5 @@
 class NotificationObserver < ActiveRecord::Observer
-  observe :post, :story_role, :comment, :paragraph, :version
+  observe :post, :story_role, :story_flag, :comment, :paragraph, :version
 
   def after_create(record)
     if record.is_a? StoryRole
@@ -17,6 +17,14 @@ class NotificationObserver < ActiveRecord::Observer
         if poster.id != noticee.id && noticee.settings['email.forum_notification']
           NotificationMailer.delay.forum_notification(noticee, poster, record)
         end
+      end
+    elsif record.is_a? StoryFlag
+      story = Story.find(record.story_id)
+      user = story.user
+      reason = record.reason
+      debugger
+      if user.settings['email.mod.story_flagged']
+        NotificationMailer.delay.mod_story_flagged(story, reason)
       end
     elsif record.is_a? Comment
       commenter = User.find(record.user_id)

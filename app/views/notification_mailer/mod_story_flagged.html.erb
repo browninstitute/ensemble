@@ -1,0 +1,9 @@
+Your story at Ensemble has been flagged by an Ensemble admin.
+
+<p>
+<strong>Reason:</strong> <%= @reason %>
+</p>
+
+<%= link_to "Go to the story", story_url(@story) %>
+
+<%= render :partial => 'notification_mailer/footer' %>

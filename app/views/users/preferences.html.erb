@@ -36,6 +36,10 @@
           <%= check_box_tag "email[mod.winner_notification]", 1, current_user.settings['email.mod.winner_notification'] %>
           Someone crowns a paragraph as a winner
         </label>
+        <label class="checkbox">
+          <%= check_box_tag "email[mod.story_flagged]", 1, current_user.settings['email.mod.story_flagged'] %>
+          My story is flagged by an admin
+        </label>
       </div>
       <br />
       <div class="participant-emails">

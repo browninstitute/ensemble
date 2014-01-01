@@ -5,6 +5,7 @@ if Settings.table_exists? && User.table_exists? && !defined?(::Rake)
   User.settings['email.mod.update_paragraph_notification'] = false
   User.settings['email.mod.like_notification'] = false
   User.settings['email.mod.winner_notification'] = false
+  User.settings['email.mod.story_flagged'] = true
   
   # Set setting defaults for users
   User.settings['email.comment_notification'] = true

@@ -22,6 +22,14 @@ class NotificationMailer < ActionMailer::Base
 
   ### MOD EMAILS ###
   #
+  # Sends an email to the story owner when their story is flagged.
+  def mod_story_flagged(story, reason)
+    @story = story
+    @user = story.user
+    @reason = reason
+    mail(:to => user.email, :subject => "Your story at Ensemble has been flagged")
+  end
+
   # Sends you an email when a user makes a comment on a
   # story you are moderating.
   def mod_comment_notification(user, other, comment)
