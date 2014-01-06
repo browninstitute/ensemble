@@ -1,0 +1,146 @@
+<div class="story-slam-banner-wrapper">
+  <div class="story-slam-banner">
+    <div class="banner-content">
+      <h1><%= @prompt.title %></h1>
+      <p>
+        <%= @prompt.description.html_safe %>
+      </p>
+      <%= link_to "http://ensemble.boards.net/", :class => "btn" do %>
+        Find collaborators
+      <% end %>
+      <%= link_to new_story_path, :class => "btn btn-primary" do %>
+        Start writing your story
+        <i class="icon-angle-right"></i>
+      <% end %>
+    </div>  
+    <% if @prompt.image_url.nil? || @prompt.image_url == "" %>
+      <p class="photo-credit">
+        Photo credit: 
+        <%= link_to '"Pen and Paper" by athena on Flickr', "http://www.flickr.com/photos/athena/325752626/" %>
+      </p>
+      <%= image_tag "story_slam_banner.jpg" %>
+    <% else %>
+      <p class="photo-credit">
+        Photo credit: 
+        <%= link_to @prompt.image_credit, @prompt.image_link_url %>
+      </p>
+      <%= image_tag @prompt.image_url %>
+    <% end %>
+  </div>  
+</div>
+
+<ul class="nav nav-tabs storyslam-tabs">
+  <li class="active"><a href="#rules" data-toggle="tab">Story Requirements</a></li>
+  <li><a href="#submit" data-toggle="tab">Submit Your Story</a></li>
+  <li><a href="#stories" data-toggle="tab">Stories Written</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="rules">
+    <h2>Story Requirements</h2>
+    <p>
+    With a team, <strong>use Ensemble</strong> to write and submit a single short story that uses the above prompt as inspiration.
+    </p>
+    <p>
+      Feel free to interpret this prompt extremely broadly and in unexpected ways -- this is merely to help you kickstart your brainstorming. You can write in any safe-for-work genre you like.
+    </p>
+    <ul>
+      <li>The story must be written and submitted <strong>through the Ensemble system.</strong> For example, you can't write the story in Google Docs and then copy-paste it into Ensemble.</li>
+      <li>The story must be no more than 1000 words. A reader should be able to read the story in one sitting.</li>
+      <li>The story must be original, unpublished, and not have been entered in any previous competition or contest.</li>
+    </ul>
+
+    <strong>Collaboration</strong>
+    <p>
+      All stories must show evidence that it is the result of collaboration. Stories should be created by a story leader, but written and/or brainstormed over by a team.
+    </p>
+    <p>
+    When a team submits a story, <strong>the story leader needs to specify the people that are considered part of the team for the story.</strong> To do that, the story leader should go to the story and click the "Contributors" button on the story menu bar to add or remove authors that are contributing to the story. We will use this information to notify team members if the team's story wins. 
+    </p>
+
+    <strong>Deadline & Submission</strong>
+    <p>
+    All submissions must be submitted through Ensemble by the story leader by <strong><%= @prompt.deadline.to_formatted_s(:long_ordinal) %> UTC/GMT</strong>. To submit your team's story, click the Submit Your Story tab above. Again, the story must have been written and submitted through Ensemble.
+    </p>
+
+    <strong>Copyright</strong>
+    <p>
+    By submitting work to this contest, the collaborating authors allow the Stanford Story Slam and the Stanford Arts Review to publish this work online. The collaborating authors will be given full credit. Besides this, the authors will retain all future copyright and publishing rights.
+    </p>
+  </div>
+  <div class="tab-pane" id="submit">
+    <h2>Submit Your Story</h2>
+    <p>
+    Select a story from the drop down list to preview it before submitting.
+    </p>
+    <p>
+    Only the story leader (the starter of the story) can submit a story for this prompt.
+    A story can only belong to one prompt. If you submit a story belonging to a different prompt, it will be submitted to this one instead.
+    </p>
+    <% if @prompt.deadline < Time.now %>
+      <strong>
+        The prompt deadline has passed, and submissions are now closed. Why don't you <%= link_to "try the next prompt", prompts_path %>?
+      </strong>
+    <% elsif current_user.nil? || current_user.stories.length == 0 %>
+      <strong>
+        You don't yet have any stories to submit. <%= link_to "Go start one.", new_story_path %>
+      </strong>
+    <% else %>
+      <%= form_tag(set_prompt_story_path) do %>
+        <%= select_tag "story", options_from_collection_for_select(current_user.stories, "id", "title"),
+                     :class => 'input-xxlarge' %>
+        <%= hidden_field_tag "prompt_id", @prompt.id %>
+        <br />
+        <%= submit_tag "Submit Story", :class => 'btn btn-primary' %>
+      <% end %>
+    <% end %>
+    <h3>Your Stories for this Prompt</h3>
+    <% stories = Story.find(:all, :conditions => {:prompt_id => @prompt.id, :user_id => current_user}) %>
+    <% if stories.length == 0 %>
+      You haven't submitted any stories yet.
+    <% else %>
+    <table class="table submissions-table">
+      <tr>
+        <th>Story</th>
+        <th>Time Submitted</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <% stories.each do |s| %>
+      <tr id="submission_<%= s.id %>">
+        <td><%= s.title %></td>
+        <td><%= s.created_at %></td>
+        <td><%= link_to "View", s %></td>
+        <td><%= link_to "Remove", remove_prompt_story_path(s), :method => :delete, :confirm => "Are you sure you want to undo this submission? This cannot be undone. This will not delete the story itself." %></td>
+      </tr>
+      <% end %>
+    </table>
+    <% end %>
+  </div>
+  <div class="tab-pane" id="stories">
+    <h2>Stories Written for this Prompt</h2>
+    <% if @stories.length == 0 %>
+      <em>
+        No stories written in response to this prompt yet. <%= link_to "Start a story?", new_story_path %>
+      </em>
+    <% else %>
+      <div class="stories-list">
+      <table class="table">
+      <% @stories.each do |story| %>
+        <tr class="my-story">
+          <td>
+            <h3><%= link_to story.title, story %></h3>
+            <%= story.subtitle %>
+            <br />
+            <span class="genre">
+              <%= "Genre #{print_genres(story)}" if !print_genres(story).nil? %>
+            </span>
+          </td>
+          <td>Started by <%= link_to story.user.name, story.user %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+    <% end %>
+  </div>
+</div>

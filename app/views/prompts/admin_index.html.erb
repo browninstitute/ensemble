@@ -1,0 +1,41 @@
+<div class="preferences row-fluid">
+  <%= render 'admins/left_nav' %>
+
+  <div class="preferences-content span9">
+    <h1>Community Prompts</h1>
+    
+    <div class="preferences-inner">
+      <h2>Create New Prompt</h2>
+      <%= render 'prompts/form' %>
+            
+      <h2>All Prompts</h2>
+      <% if @prompts.length == 0 %>
+        No prompts.
+      <% else %>
+        <table class="table">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Open Date</th>
+            <th>Deadline</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          <% @prompts.each do |p| %>
+          <tr>
+            <td><%= p.title %></td>
+            <td><%= p.description %></td>
+            <td><%= p.opendate %></td>
+            <td><%= p.deadline %></td>
+            <td><%= p.status %></td>
+            <td>
+              <%= link_to "View", admins_prompt_path(p) %> |
+              <%= link_to "Edit", admins_edit_prompt_path %> | 
+              <%= link_to "Delete", admins_destroy_prompt_path, :confirm => "Are you sure you want to delete this prompt?" %></td>
+          </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

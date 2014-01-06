@@ -12,6 +12,8 @@ StoryCollab::Application.routes.draw do
       post 'storyslam_submit'
       post 'flag'
       post 'unflag'
+      post 'set_prompt'
+      delete 'remove_prompt'
     end
     resources :story_roles
     resources :comments
@@ -40,9 +42,16 @@ StoryCollab::Application.routes.draw do
     get "/users/autocomplete" => "users#autocomplete"
   end
   
+  resources :prompts
+  
   devise_for :admins do
     get '/admins/dashboard' => 'admins#dashboard'
     post '/admins/send_announcement' => 'admins#send_announcement'
+    get '/admins/prompts' => 'prompts#admin_index'
+    get '/admins/prompts/:id' => 'prompts#show', :as => :admins_prompt
+    post '/admins/prompts/create' => 'prompts#create', :as => :admins_create_prompt
+    get '/admins/prompts/edit' => 'prompts#edit', :as => :admins_edit_prompt
+    delete '/admins/prompts/destroy' => 'prompts#destroy', :as => :admins_destroy_prompt
   end
   
   # Make sure this comes AFTER the devise user routes.

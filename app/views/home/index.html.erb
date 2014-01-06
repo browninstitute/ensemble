@@ -10,6 +10,22 @@
   </div>
 <% end %>
 
+<% if !Prompt.current.nil? %>
+  <div class="prompt-alert row-fluid">
+    <div class="prompt-alert-inner span12">
+      <div class="span8">
+        <h3>Current Community Writing Prompt</h3>
+        <p>
+        <strong><%= Prompt.current.title %></strong>. Submit your story before <%= Prompt.current.deadline %>.
+        </p>
+      </div>
+      <div class="span4">
+        <%= link_to "Learn More", Prompt.current, :class => "btn btn-primary btn-large" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <div class="home row-fluid">
   <div class="hero-unit span12">
     <div class="screenshots span5">

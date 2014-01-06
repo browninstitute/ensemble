@@ -12,6 +12,7 @@
         <li class="<%= 'active' if current_page?(arrowhead_path) %>"><%= link_to "Arrowhead", arrowhead_path %></li>
       <% end %>
       <li class="<%= 'active' if current_page?(featured_path) %>"><%= link_to "Featured", featured_path %></li>
+      <li class="<%= 'active' if current_page?(prompts_path) %>"><%= link_to "Community Prompts", prompts_path %></li>
       <li class="<%= 'active' if current_page?(new_story_path) %>"><%= link_to "Start a Story", new_story_path %></li>
       <li class="<%= 'active' if current_page?(stories_path) %>"><%= link_to "Stories", stories_path %></li>
       <li><%= link_to "Forums", "http://ensemble.boards.net/" %></li>

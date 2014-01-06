@@ -1,0 +1,15 @@
+.prompt-alert {
+  width: 100%;
+
+  .prompt-alert-inner {
+    margin-bottom: 30px;
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 10px 30px;
+
+    .span4 {
+      line-height: 90px;
+      text-align: right;
+    }
+  }
+}

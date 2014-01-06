@@ -222,4 +222,27 @@ class StoriesController < ApplicationController
       redirect_to @story, notice: "Something went wrong while unflagged the story. Please try again."
     end
   end
+
+  # Submit the story to a prompt
+  def set_prompt
+    @story = Story.find(params[:story])
+    @story.prompt_id = params[:prompt_id]
+    if @story.save
+      redirect_to prompt_path(params[:prompt_id]), notice: "Story was successfully added to prompt."
+    else
+      redirect_to prompt_path(params[:prompt_id]), notice: "Something went wrong. Please try again."
+    end
+  end
+
+  # Remove story from a prompt
+  def remove_prompt
+    @story = Story.find(params[:id])
+    @prompt = Prompt.find(@story.prompt_id)
+    @story.prompt_id = nil
+    if @story.save
+      redirect_to @prompt, notice: "Story was removed from this prompt."
+    else
+      redirect_to @prompt, notice: "Something went wrong. Please try again."
+    end
+  end
 end

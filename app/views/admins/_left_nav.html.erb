@@ -2,5 +2,6 @@
   <h1>Admin Area</h1>
   <ul>
     <li class="<%= 'active' if current_page?(admins_dashboard_path) %>"><%= link_to "Send Announcement to All Users", admins_dashboard_path %></li>
+    <li class="<%= 'active' if current_page?(admins_prompts_path) %>"><%= link_to "Manage Community Prompts", admins_prompts_path %></li>
   </ul>
 </div>

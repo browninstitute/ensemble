@@ -1,0 +1,35 @@
+<h1>Community Prompts</h1>
+<p class="lead">
+  Ensemble has a regular cycle of writing prompts to help kickstart ideas for your collaborative stories.
+  <small>
+    <%= link_to "Suggest a prompt?", "mailto:ensemble@cs.stanford.edu?subject='Suggest a Community Prompt'" %>
+  </small>
+</p>
+
+<% @prompts.each do |prompt| %>
+<table class="table table-bordered featured-story">
+  <tr>
+    <td>
+      <% if prompt.image_url.nil? || prompt.image_url == "" %>
+        <%= image_tag "story_slam_banner.jpg" %>
+      <% else %>
+        <%= image_tag prompt.image_url %>
+      <% end %>
+    </td>
+    <td>
+      <h2><%= link_to prompt.title, prompt %></h2>
+      <span class="label"><%= prompt.status %></span>
+      <p>
+        <%= prompt.description %>
+      </p>
+      <small>
+        <% if prompt.image_url.nil? || prompt.image_url == "" %>
+          Image credit: <%= link_to '"Pen and Paper" by athena on Flickr', "http://www.flickr.com/photos/athena/325752626/" %>
+        <% else %>
+          Image credit: <%= link_to prompt.image_credit, prompt.image_link_url %>
+        <% end %>
+      </small>
+    </td>
+  </tr>
+</table>
+<% end %>

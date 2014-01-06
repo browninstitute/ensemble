@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_filter :authenticate_admin!
+  before_filter :authenticate_adminuser!
  
   def dashboard
     @admin = current_admin

@@ -52,4 +52,13 @@ class ApplicationController < ActionController::Base
     
     { :story_id => story_id, :scene_id => scene_id }
   end
+
+  # For authenticating admins only.
+  def authenticate_adminuser!
+    if current_user.admin?
+      authenticate_user!
+    else
+      raise "Only admins are allowed to access the admin dashboard."
+    end
+  end
 end

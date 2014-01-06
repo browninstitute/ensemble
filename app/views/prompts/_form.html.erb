@@ -1,0 +1,65 @@
+<%= form_for @prompt, :url => admins_create_prompt_path, :html => { :class => "form-horizontal" } do |f| %>
+  <div class="control-group">
+    <label class="control-label" for="title">
+      <%= f.label :title %> 
+    </label>
+    <div class="controls">
+      <%= f.text_field :title, :class => "input-large" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="description">
+      <%= f.label :description %> 
+    </label>
+    <div class="controls">
+      <%= f.text_area :description, :rows => 5, :class => "input-large" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="image_url">
+      <%= f.label "image_url", "URL of Image Banner" %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :image_url %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="image_credit">
+      <%= f.label "image_credit", "Image Credit" %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :image_credit %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="image_link_url">
+      <%= f.label "image_link_url", "Image Credit URL" %>
+    </label>
+    <div class="controls">
+      <%= f.text_field :image_link_url %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="opendate">
+      <%= f.label :opendate, "Open Date (at midnight)" %>
+    </label>
+    <div class="controls">
+      <%= text_field_tag "vis_prompt_opendate", nil %>
+      <%= f.hidden_field :opendate %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="deadline">
+      <%= f.label :deadline, "Story Deadline (at midnight)" %>
+    </label>
+    <div class="controls">
+      <%= text_field_tag "vis_prompt_deadline", nil %>
+      <%= f.hidden_field :deadline %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit "Schedule Prompt", :class => "btn" %>
+    </div>
+  </div>
+<% end %>
