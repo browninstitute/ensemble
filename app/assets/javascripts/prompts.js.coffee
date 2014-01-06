@@ -4,16 +4,16 @@ $(document).ready ->
     changeMonth: true,
     minDate: 0,
     altFormat: "yy-mm-dd 00:00:00 UTC",
-    altField: "#prompt_opendate"})
+    altField: "#admins_prompt_opendate"})
   $("#vis_prompt_deadline").datepicker({
     changeYear: true,
     changeMonth: true,
     minDate: 0,
     altFormat: "yy-mm-dd 00:00:00 UTC",
-    altField: "#prompt_deadline"
+    altField: "#admins_prompt_deadline"
     })
-  fillInDateText("prompt_opendate")
-  fillInDateText("prompt_deadline")
+  fillInDateText("admins_prompt_opendate")
+  fillInDateText("admins_prompt_deadline")
 
 fillInDateText = (elementID) ->
   date = $("#" + elementID).val()

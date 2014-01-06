@@ -49,8 +49,9 @@ StoryCollab::Application.routes.draw do
     post '/admins/send_announcement' => 'admins#send_announcement'
     get '/admins/prompts' => 'prompts#admin_index'
     get '/admins/prompts/:id' => 'prompts#show', :as => :admins_prompt
-    post '/admins/prompts/create' => 'prompts#create', :as => :admins_create_prompt
+    post '/admins/prompts/create' => 'prompts#create', :as => :admins_prompt
     get '/admins/prompts/:id/edit' => 'prompts#edit', :as => :admins_edit_prompt
+    put '/admins/prompts/:id/update' => 'prompts#update', :as => :admins_rompt
     delete '/admins/prompts/:id/destroy' => 'prompts#destroy', :as => :admins_destroy_prompt
   end
   

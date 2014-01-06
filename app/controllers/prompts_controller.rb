@@ -16,7 +16,7 @@ class PromptsController < ApplicationController
   end
 
   def create
-    @prompt = Prompt.new(params[:prompt])
+    @prompt = Prompt.new(params[:admins_prompt])
 
     if @prompt.save
       redirect_to admins_prompts_path, notice: "Prompt was successfully scheduled."
@@ -26,9 +26,16 @@ class PromptsController < ApplicationController
   end
 
   def edit
+    @prompt = Prompt.find(params[:id])
   end
 
   def update
+    @prompt = Prompt.find(params[:id])
+    if @prompt.update_attributes(params[:admins_prompt])
+      redirect_to admins_prompts_path, notice: "Prompt was successfully updated."
+    else
+      redirect_to admins_edit_prompt_path(@prompt), notice: "Something went wrong while saving your prompt. Please try again."
+    end
   end
 
   def destroy
