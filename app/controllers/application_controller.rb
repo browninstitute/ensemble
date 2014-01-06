@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
   # For authenticating admins only.
   def authenticate_adminuser!
-    if current_user.admin?
+    if current_user && current_user.admin?
       authenticate_user!
     else
       raise "Only admins are allowed to access the admin dashboard."
