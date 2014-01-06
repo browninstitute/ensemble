@@ -32,5 +32,11 @@ class PromptsController < ApplicationController
   end
 
   def destroy
+    @prompt = Prompt.find(params[:id])
+    if @prompt.destroy
+      redirect_to admins_prompts_path, notice: "Prompt was successfully deleted."
+    else
+      redirect_to admins_prompts_path, notice: "Something went wrong while deleting your prompt. Please try again."
+    end
   end
 end
