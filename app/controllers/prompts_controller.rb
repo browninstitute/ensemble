@@ -1,5 +1,5 @@
 class PromptsController < ApplicationController
-  before_filter :authenticate_adminuser!
+  before_filter :authenticate_adminuser!, :only => [:admin_index, :create, :edit, :update, :destroy]
 
   def index
     @prompts = Prompt.where("opendate < ?", DateTime.now).order(:opendate).reverse_order

@@ -6,6 +6,10 @@
   </small>
 </p>
 
+<% if @prompts.length == 0 %>
+  No prompts yet. Stay tuned!
+<% end %>
+
 <% @prompts.each do |prompt| %>
 <table class="table table-bordered featured-story">
   <tr>
