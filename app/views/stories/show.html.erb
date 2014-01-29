@@ -6,6 +6,10 @@
       This story is no longer visible to the public and will not appear in search results. If you are the story owner or a story moderator, you may still edit your story. If you feel this story was flagged in error, <a href="mailto:ensemble@cs.stanford.edu?subject=Story Flag">email the Ensemble staff.</a>
     </p>
   </div>
+  <% if (current_user && current_user.admin?) || can?(:manage, @story) %>
+    <%= render 'stories/story' %>
+  <% end %>
 <% else %>
-  <%= render 'stories/story' %>
+    <%= render 'stories/story' %>
 <% end %>
+
