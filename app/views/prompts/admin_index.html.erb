@@ -18,6 +18,7 @@
             <th>Description</th>
             <th>Open Date</th>
             <th>Deadline</th>
+            <th>Vote Deadline</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -27,7 +28,8 @@
             <td><%= p.description %></td>
             <td><%= p.opendate %></td>
             <td><%= p.deadline %></td>
-            <td><%= p.status %></td>
+            <td><%= p.vote_deadline %></td>
+            <td><%= prompt_label(p) %></td>
             <td>
               <%= link_to "View", admins_prompt_path(p) %> |
               <%= link_to "Edit", admins_edit_prompt_path(p) %> | 

@@ -3,6 +3,9 @@
     <div class="banner-content">
       <h1><%= @prompt.title %></h1>
       <p>
+        <%= prompt_label(@prompt) %>
+      </p>
+      <p>
         <%= @prompt.description.html_safe %>
       </p>
       <%= link_to "http://ensemble.boards.net/", :class => "btn" do %>

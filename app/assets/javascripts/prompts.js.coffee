@@ -12,8 +12,16 @@ $(document).ready ->
     altFormat: "yy-mm-dd 00:00:00 UTC",
     altField: "#admins_prompt_deadline"
     })
+  $("#vis_prompt_vote_deadline").datepicker({
+    changeYear: true,
+    changeMonth: true,
+    minDate: 0,
+    altFormat: "yy-mm-dd 00:00:00 UTC",
+    altField: "#admins_prompt_vote_deadline"
+    })
   fillInDateText("admins_prompt_opendate")
   fillInDateText("admins_prompt_deadline")
+  fillInDateText("admins_prompt_vote_deadline")
 
 fillInDateText = (elementID) ->
   date = $("#" + elementID).val()

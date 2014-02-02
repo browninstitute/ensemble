@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140106001053) do
+ActiveRecord::Schema.define(:version => 20140202061743) do
 
   create_table "announcements", :force => true do |t|
     t.text     "email",      :limit => 255
@@ -99,6 +99,14 @@ ActiveRecord::Schema.define(:version => 20140106001053) do
   add_index "posts", ["story_id"], :name => "index_posts_on_story_id"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
+  create_table "prompt_votes", :force => true do |t|
+    t.integer  "prompt_id"
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "prompts", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -111,6 +119,8 @@ ActiveRecord::Schema.define(:version => 20140106001053) do
     t.string   "image_link_url"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.text     "prizes"
+    t.datetime "vote_deadline"
   end
 
   create_table "read_marks", :force => true do |t|

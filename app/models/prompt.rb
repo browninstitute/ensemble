@@ -1,13 +1,15 @@
 class Prompt < ActiveRecord::Base
-  attr_accessible :deadline, :description, :image_credit, :image_link_url, :image_url, :opendate, :suggested_by_id, :title, :word_count
+  attr_accessible :deadline, :description, :prizes, :image_credit, :image_link_url, :image_url, :opendate, :vote_deadline, :suggested_by_id, :title, :word_count
 
   def status
-    if Time.now > self.deadline
-      "Closed for submissions"
+    if (vote_deadline.nil? && Time.now > self.deadline) || Time.now > self.vote_deadline
+      :end
+    elsif Time.now > self.deadline
+      :voting
     elsif Time.now > self.opendate
-      "Open for submissions"
+      :open
     else
-      "Not started"
+      :notstarted
     end
   end
 

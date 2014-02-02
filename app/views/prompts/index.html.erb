@@ -22,7 +22,7 @@
     </td>
     <td>
       <h2><%= link_to prompt.title, prompt %></h2>
-      <span class="label"><%= prompt.status %></span>
+      <%= prompt_label(prompt) %>
       <p>
         <%= prompt.description %>
       </p>
