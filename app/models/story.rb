@@ -187,4 +187,9 @@ class Story < ActiveRecord::Base
   def flags
     StoryFlag.where(:story_id => self.id)
   end
+
+  # Returns the votes it has gotten for a certain prompt
+  def prompt_votes(prompt)
+    PromptVote.where(:prompt_id => prompt.id, :story_id => self.id)
+  end
 end

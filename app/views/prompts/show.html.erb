@@ -35,7 +35,8 @@
 <ul class="nav nav-tabs storyslam-tabs">
   <li class="active"><a href="#rules" data-toggle="tab">Story Requirements</a></li>
   <li><a href="#submit" data-toggle="tab">Submit Your Story</a></li>
-  <li><a href="#stories" data-toggle="tab">Stories Written</a></li>
+  <li><a href="#stories" data-toggle="tab">Submitted Stories & Vote</a></li>
+  <li><a href="#winners" data-toggle="tab">Winners</a></li>
 </ul>
 
 <div class="tab-content">
@@ -64,6 +65,18 @@
     <strong>Deadline & Submission</strong>
     <p>
     All submissions must be submitted through Ensemble by the story leader by <strong><%= @prompt.deadline.to_formatted_s(:long_ordinal) %> UTC/GMT</strong>. To submit your team's story, click the Submit Your Story tab above. Again, the story must have been written and submitted through Ensemble.
+    </p>
+
+    <strong>Winners & Prizes</strong>
+    <p>
+    A winner and a runner-up story will be determined by community vote. Any Ensemble user can vote for stories, even if they haven't submitted anything for this prompt. The voting period starts after the story submission deadline, and will end <strong><%= @prompt.vote_deadline.to_formatted_s(:long_ordinal) %> UTC/GMT</strong>.
+    </p>
+    <p>
+    <% if @prompt.prizes.nil? %>
+      Prizes will be determined shortly!
+    <% else %>
+      <%= @prompt.prizes.html_safe %>
+    <% end %>
     </p>
 
     <strong>Copyright</strong>
@@ -121,7 +134,16 @@
     <% end %>
   </div>
   <div class="tab-pane" id="stories">
-    <h2>Stories Written for this Prompt</h2>
+    <h2>Submitted Stories & Vote</h2>
+    <% if @prompt.status == :open %>
+      <p>
+      Once voting opens, you'll be able to vote for your favorite stories here.
+      </p>
+    <% elsif @prompt.status == :voting %>
+      <p>
+      Voting is now open! You have <strong><span class="user-vote-count"><%= pluralize(@user_vote_count, "vote") %></span></strong> left.
+      </p>
+    <% end %>
     <% if @stories.length == 0 %>
       <em>
         No stories written in response to this prompt yet. <%= link_to "Start a story?", new_story_path %>
@@ -130,7 +152,7 @@
       <div class="stories-list">
       <table class="table">
       <% @stories.each do |story| %>
-        <tr class="my-story">
+        <tr class="my-story" id="my-story-<%= story.id %>">
           <td>
             <h3><%= link_to story.title, story %></h3>
             <%= story.subtitle %>
@@ -140,10 +162,35 @@
             </span>
           </td>
           <td>Started by <%= link_to story.user.name, story.user %></td>
+          <td>
+            <%= link_to "View", story %>
+          </td>
+          <% if @prompt.status == :voting %>
+            <td class="vote-button">
+              <% if PromptVote.where(:story_id => story.id, :user_id => current_user.id, :prompt_id => @prompt.id).empty? %>
+                <%= link_to "Vote", prompt_votes_path(:prompt_id => @prompt.id, :story_id => story.id, :user_id => current_user.id), :method => :post, :class => "btn btn-success", :disabled => (@user_vote_count == 0), :remote => true %>
+              <% else %>
+                <strong>Voted!</strong>
+              <% end %>
+            </td>
+          <% end %>
+          <% if @prompt.status == :voting || @prompt.status == :ended %>
+            <td>
+              <strong><%= pluralize(story.prompt_votes(@prompt).count, "vote") %></strong>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </table>
   </div>
+    <% end %>
+  </div>
+  <div class="tab-pane active" id="winners">
+    <h2>Winners</h2>
+    <% if @prompt.status == :ended %>
+
+    <% else %>
+      This prompt is still in progress, so there aren't any winners yet. Check back once voting has ended.
     <% end %>
   </div>
 </div>

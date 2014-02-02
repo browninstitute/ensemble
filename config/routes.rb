@@ -43,6 +43,7 @@ StoryCollab::Application.routes.draw do
   end
   
   resources :prompts
+  resources :prompt_votes
   
   devise_for :admins do
     get '/admins/dashboard' => 'admins#dashboard'

@@ -12,7 +12,10 @@ class PromptsController < ApplicationController
 
   def show
     @prompt = Prompt.find(params[:id])
-    @stories = Story.where(:prompt_id => @prompt.id)
+    @stories = Story.where(:prompt_id => @prompt.id).sort {|a, b| a.prompt_votes(@prompt).count <=> b.prompt_votes(@prompt).count}
+
+    # The number of votes a user has left for this prompt
+    @user_vote_count = 3 - PromptVote.where(:prompt_id => @prompt.id, :user_id => current_user.id).count
   end
 
   def create
@@ -21,7 +24,7 @@ class PromptsController < ApplicationController
     if @prompt.save
       redirect_to admins_prompts_path, notice: "Prompt was successfully scheduled."
     else
-      redirect_to admins_prompts_path, ntoice: "Something went wrong while saving your prompt. Please try again."
+      redirect_to admins_prompts_path, notice: "Something went wrong while saving your prompt. Please try again."
     end
   end
 
