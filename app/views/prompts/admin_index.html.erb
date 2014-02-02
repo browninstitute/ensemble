@@ -31,7 +31,7 @@
             <td><%= p.vote_deadline %></td>
             <td><%= prompt_label(p) %></td>
             <td>
-              <%= link_to "View", admins_prompt_path(p) %> |
+              <%= link_to "View", prompt_path(p) %> |
               <%= link_to "Edit", admins_edit_prompt_path(p) %> | 
               <%= link_to "Delete", admins_destroy_prompt_path(p), :method => :delete, :confirm => "Are you sure you want to delete this prompt?" %></td>
           </tr>
