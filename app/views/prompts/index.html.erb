@@ -24,7 +24,7 @@
       <h2><%= link_to prompt.title, prompt %></h2>
       <%= prompt_label(prompt) %>
       <p>
-        <%= prompt.description %>
+        <%= prompt.description.html_safe %>
       </p>
       <small>
         <% if prompt.image_url.nil? || prompt.image_url == "" %>
