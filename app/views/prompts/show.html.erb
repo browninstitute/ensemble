@@ -113,7 +113,7 @@
     <h3>Your Stories for this Prompt</h3>
     <% stories = Story.find(:all, :conditions => {:prompt_id => @prompt.id, :user_id => current_user}) %>
     <% if stories.length == 0 %>
-      You haven't submitted any stories yet.
+      <em>You haven't submitted any stories yet.</em>
     <% else %>
     <table class="table submissions-table">
       <tr>
@@ -174,7 +174,7 @@
               <% end %>
             </td>
           <% end %>
-          <% if @prompt.status == :voting || @prompt.status == :ended %>
+          <% if @prompt.status == :voting || @prompt.status == :end %>
             <td>
               <strong><%= pluralize(story.prompt_votes(@prompt).count, "vote") %></strong>
             </td>
@@ -187,10 +187,27 @@
   </div>
   <div class="tab-pane active" id="winners">
     <h2>Winners</h2>
-    <% if @prompt.status == :ended %>
-
+    <% if @prompt.status == :end %>
+      <p>
+      <strong>Prize Winner</strong><br />
+      <% if @winner.nil? %>
+        There unfortunately weren't enough entries to determine a winner.
+      <% else %>
+        <%= link_to @winner.title, @winner %> started by <%= @winner.user.name %>
+      <% end %>
+      </p>
+      <p>
+      <strong>Runner-up</strong><br />
+      <% if @runnerup.nil? %>
+        There unfortunately weren't enough entries to determine a runner-up winner.
+      <% else %>
+        <%= link_to @runnerup.title, @runnerup %> started by <%= @runnerup.user.name %>
+      <% end %>
+      </p>
     <% else %>
-      This prompt is still in progress, so there aren't any winners yet. Check back once voting has ended.
+      <em>
+        This prompt is still in progress, so there aren't any winners yet. Check back once voting has ended.
+      </em>
     <% end %>
   </div>
 </div>

@@ -16,6 +16,9 @@ class PromptsController < ApplicationController
 
     # The number of votes a user has left for this prompt
     @user_vote_count = 3 - PromptVote.where(:prompt_id => @prompt.id, :user_id => current_user.id).count
+
+    @winner = @stories.first
+    @runnerup = @stories.second
   end
 
   def create
