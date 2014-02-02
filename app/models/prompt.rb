@@ -13,7 +13,9 @@ class Prompt < ActiveRecord::Base
     end
   end
 
+  # Grabs the current prompt. A prompt counts as current from its open date to one week
+  # after it ends.
   def self.current
-    Prompt.where("opendate < ? AND deadline > ?", DateTime.now, DateTime.now).order(:opendate).first
+    Prompt.where("opendate < ? AND vote_deadline > ?", DateTime.now, DateTime.now + 1.week).order(:opendate).first
   end
 end

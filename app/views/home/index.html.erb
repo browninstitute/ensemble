@@ -15,12 +15,22 @@
     <div class="prompt-alert-inner span12">
       <div class="span8">
         <h3><%= Prompt.current.title %></h3>
-        <p>
-        <%= truncate Prompt.current.description, length: 80 %>
-        </p>
-        <p>
-        Submit your story before <strong><%= Prompt.current.deadline.to_formatted_s(:long_ordinal) %> UTC/GMT</strong>.
-        </p>
+        <% if Prompt.current.status == :open %>
+          <p>
+          <%= truncate Prompt.current.description, length: 80 %>
+          </p>
+          <p>
+          Submit your story before <strong><%= Prompt.current.deadline.to_formatted_s(:long_ordinal) %> UTC/GMT</strong>.
+          </p>
+        <% elsif Prompt.current.status == :voting %>
+          <p>
+          Voting is now open! Submit your vote for the best story by <strong><%= Prompt.current.vote_deadline.to_formatted_s(:long_ordinal) %> UTC/GMT</strong>.
+          </p>
+        <% elsif Prompt.current.status == :end && DateTime.now < (Prompt.current.vote_deadline + 1.week) %>
+          <p>
+            Winners have been announced!
+          </p>
+        <% end %>
       </div>
       <div class="span4">
         <%= link_to "Learn More", Prompt.current, :class => "btn btn-primary btn-large" %>
