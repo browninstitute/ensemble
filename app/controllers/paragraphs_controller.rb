@@ -14,7 +14,7 @@ class ParagraphsController < ApplicationController
     @scene = Scene.find(params[:scene_id])
     @p = @scene.paragraphs.new
     
-    if current_or_guest_user.is_guest? && @p.scene.story.privacy != Story::Privacy::OPEN
+    if current_or_guest_user.is_guest? && !@p.scene.story.nil? && @p.scene.story.privacy != Story::Privacy::OPEN
       raise CanCan::AccessDenied.new("You must first login or register to do that action.", :create, @p)
       return
     end
