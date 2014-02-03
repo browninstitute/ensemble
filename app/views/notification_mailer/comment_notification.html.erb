@@ -1,4 +1,4 @@
-<%= @other.name %> replied to your comment and wrote:
+<%= @other.nil? ? "A guest user" : @other.name %> replied to your comment and wrote:
 
 <p style="font-style:italic;">
 <%= @comment.content %>

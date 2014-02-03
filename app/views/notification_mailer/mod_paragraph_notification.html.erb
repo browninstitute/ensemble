@@ -1,4 +1,4 @@
-<%= @other.name %> wrote a paragraph for a scene in your story and wrote:
+<%= @other.nil? ? "A guest user" : @other.name %> wrote a paragraph for a scene in your story and wrote:
 
 <p style="font-style:italic;">
 <%= truncate(@para.content, :length => 100) %>

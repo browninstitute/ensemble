@@ -1,4 +1,4 @@
-<%= @other.name %> made a comment on your story and wrote:
+<%= @other.nil? ? "A guest user" : @other.name %> made a comment on your story and wrote:
 
 <p style="font-style:italic;">
 <%= @comment.content %>

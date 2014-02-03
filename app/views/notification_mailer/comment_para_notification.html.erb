@@ -1,4 +1,4 @@
-<%= @other.name %> commented on a scene you wrote a paragraph for and wrote:
+<%= @other.nil? : "A guest user" : @other.name %> commented on a scene you wrote a paragraph for and wrote:
 
 <p style="font-style:italic;">
 <%= @comment.content %>
