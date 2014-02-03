@@ -2,14 +2,18 @@
   <div id="comment_<%= comment.id %>" class="comment_box <%= comments_classes(comment) %>">
     <div class="comment-info">
       <div class="comment-name pull-left">
-        <%= link_to comment.user.name, comment.user %>
+        <% if comment.user.nil? %>
+          Guest
+        <% else %>
+          <%= link_to comment.user.name, comment.user %>
+        <% end %>
       </div>
       <div class="comment-time pull-right">
         Posted <%= timeago(comment.created_at) %>
       </div>
     </div>
     <div class="comment_photo">
-      <% if comment.user.avatar.file? %>
+      <% if !comment.user.nil? && comment.user.avatar.file? %>
         <%= image_tag comment.user.avatar.url(:tiny) %>
       <% else %>
         <%= image_tag "default_profile.jpg" %>

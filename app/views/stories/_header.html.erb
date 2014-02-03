@@ -48,8 +48,10 @@
           <div class="author">
             Started by <%= link_to @story.user.name, @story.user %>
             <span class="timestamp">
-              Started <%= timeago(@story.created_at) %> 
+              <%= timeago(@story.created_at) %> 
             </span>
+            &sdot;
+            <em><%= privacy_description @story.privacy %></em>
           </div>
         </div>
         <div class="span4" class="social-buttons">

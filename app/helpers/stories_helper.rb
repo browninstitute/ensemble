@@ -1,6 +1,31 @@
 module StoriesHelper
   include Rails.application.routes.url_helpers
 
+  # Renders the privacy setting selection dropdown
+  def privacy_select_dropdown(selected_level = nil)
+    html = "<select name='story[privacy]'>"
+    Story::Privacy.each do |name, value|
+      html += "<option value='#{value}'"
+      html += " selected='selected'" if selected_level == value
+      html += ">"
+      html += privacy_description(value)
+      html += "</option>"
+    end
+    html += "</select>"
+    html.html_safe
+  end
+
+  def privacy_description(value)
+    case value
+    when Story::Privacy::PUBLIC
+      "Public (anyone can view story)"
+    when Story::Privacy::CONTRIBUTORS
+      "Only contributors can view story"
+    when Story::Privacy::OPEN
+      "Guest users can view and contribute to story"
+    end
+  end
+
   # Prints out the genres of a story
   def print_genres(story)
     if !story.genre1.nil? && !story.genre2.nil?

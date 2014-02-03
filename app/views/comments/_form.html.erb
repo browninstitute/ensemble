@@ -1,7 +1,7 @@
 <div class="comment_box" id="<%= "comment_#{comment.id}" if comment.id %>">
- <% if can? :create, Comment %>
+ <% if can? :create, comment %>
     <div class="comment_photo">
-      <% if current_user.avatar.file? %>
+      <% if !current_or_guest_user.is_guest? && current_user.avatar.file? %>
         <%= image_tag current_user.avatar.url(:tiny) %>
       <% else %>
         <%= image_tag "default_profile.jpg" %>
@@ -10,6 +10,7 @@
     <div class="comment">
       <%= form_for [scene, comment], :html => { :style => 'margin: 0' }, :remote => true do |f| %>
         <%= f.text_area :content, :placeholder => 'Type a comment...', :rows => 2 %>
+        <%= f.hidden_field :scene_id, :value => scene.id %>
         <%= f.submit :class => "btn", :value => 'Comment' %>
       <% end %>
       <span class="text-error"></span>

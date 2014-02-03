@@ -2,7 +2,7 @@ class Paragraph < ActiveRecord::Base
   belongs_to :user
   belongs_to :scene, :touch => true
   acts_as_list :scope => :scene
-  attr_accessible :content, :position, :title
+  attr_accessible :content, :position, :title, :scene_id
   validates :content, :presence => true, :if => lambda {|p| p.user != p.scene.story.user}
   has_paper_trail :only => [:content], :meta => {:scene_id => :scene_id}
   acts_as_votable
@@ -37,7 +37,11 @@ class Paragraph < ActiveRecord::Base
   end
 
   def word_count
-    return self.content.split.size
+    if self.content.nil?
+      0
+    else
+      self.content.split.size
+    end
   end
 
   # Checks if the deleted paragraph is a winner,

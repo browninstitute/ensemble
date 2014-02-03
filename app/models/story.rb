@@ -2,8 +2,27 @@ require 'format'
 require 'set'
 
 class Story < ActiveRecord::Base
+  class Privacy
+    def Privacy.add_item(key, value)
+      @hash ||= {}
+      @hash[key] = value
+    end
+
+    def Privacy.const_missing(key)
+      @hash[key]
+    end
+
+    def Privacy.each
+      @hash.each {|key, value| yield(key, value)}
+    end
+
+    Privacy.add_item :PUBLIC, 1 # Everyone can view your story, but editing privileges are normal
+    Privacy.add_item :CONTRIBUTORS, 2 # Only Contributors can view the story
+    Privacy.add_item :OPEN, 3 # Anyone can add Paragraphs and Comments
+  end
+
   belongs_to :user
-  attr_accessible :subtitle, :title, :genre1, :genre2, :public, :content, :draft
+  attr_accessible :subtitle, :title, :genre1, :genre2, :public, :content, :draft, :privacy
   has_many :scenes, :order => :position
   has_many :comments
   has_many :story_roles

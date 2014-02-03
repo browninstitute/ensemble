@@ -30,7 +30,8 @@ class CommentsController < ApplicationController
     else
       @scene = Scene.find(params[:scene_id])
       @comment = @scene.comments.new(params[:comment])
-      @comment.user = current_user
+      @comment.scene_id = @scene.id
+      @comment.user = current_or_guest_user.nil? ? nil : current_user
     end
 
     respond_to do |format|

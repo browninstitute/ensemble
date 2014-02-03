@@ -30,6 +30,7 @@
   <%= f.text_area :content, :rows => 5, 
                   :placeholder => 'How would you write this part?', 
                   :class => 'span11' %><br />
+  <%= f.hidden_field :scene_id, :value => scene.id %>
                   
   <span class="text-error">
   </span>

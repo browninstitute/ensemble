@@ -21,6 +21,8 @@
     <%= f.text_field :subtitle, :placeholder => 'Summary' %><br />
     Genre 1: <%= collection_select(:story, :genre1, Genre.all, :id, :name, :prompt => true) %>
     Genre 2: <%= collection_select(:story, :genre2, Genre.all, :id, :name, :prompt => true) %>
+    <br />
+    Privacy: <%= privacy_select_dropdown(@story.privacy) %>
     
     <%= f.hidden_field :content %> 
 

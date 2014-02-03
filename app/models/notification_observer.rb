@@ -26,42 +26,42 @@ class NotificationObserver < ActiveRecord::Observer
         NotificationMailer.delay.mod_story_flagged(story, reason)
       end
     elsif record.is_a? Comment
-      commenter = User.find(record.user_id)
+      commenter = record.user_id.nil? ? nil : User.find(record.user_id)
      
       if !record.scene.nil? # handle scene comments only
         if !record.scene.nil? && !record.scene.story.nil?
           mod = User.find(record.scene.story.user_id)
-          if mod.id != commenter.id && mod.settings['email.mod.comment_notification']
+          if (commenter.nil? || mod.id != commenter.id) && mod.settings['email.mod.comment_notification']
             NotificationMailer.delay.mod_comment_notification(mod, commenter, record)
             mod_comment_notification_sent = true
           end
         end
 
         record.scene.commenters.each do |noticee|
-          if !(noticee.id == mod.id && mod_comment_notification_sent) && commenter.id != noticee.id && noticee.settings['email.comment_notification']
+          if !(noticee.id == mod.id && mod_comment_notification_sent) && (commenter.nil? || commenter.id != noticee.id) && noticee.settings['email.comment_notification']
             NotificationMailer.delay.comment_notification(noticee, commenter, record)
           end
         end
           
         record.scene.contributors.each do |noticee|
-          if commenter.id != noticee.id && noticee.settings['email.comment_para_notification']
+          if (commenter.nil? || commenter.id != noticee.id) && noticee.settings['email.comment_para_notification']
             NotificationMailer.delay.comment_para_notification(noticee, commenter, record)
           end
         end
       end
     elsif record.is_a? Paragraph
-      contributor = User.find(record.user_id)
+      contributor = record.user_id.nil? ? nil : User.find(record.user_id)
 
       if !record.scene.nil? && !record.scene.story.nil?
         mod = User.find(record.scene.story.user_id)
-        if mod.id != contributor.id && mod.settings['email.mod.paragraph_notification']
+        if (contributor.nil? || mod.id != contributor.id) && mod.settings['email.mod.paragraph_notification']
           NotificationMailer.delay.mod_paragraph_notification(mod, contributor, record)
           mod_para_notification_sent = true
         end
       end
       
       record.scene.commenters.each do |noticee|
-        if !(noticee.id == mod.id && mod_para_notification_sent) && contributor.id != noticee.id && noticee.settings['email.paragraph_notification']
+        if !(noticee.id == mod.id && mod_para_notification_sent) && (contributor.nil? || contributor.id != noticee.id) && noticee.settings['email.paragraph_notification']
           NotificationMailer.delay.paragraph_notification(noticee, contributor, record)
         end
       end

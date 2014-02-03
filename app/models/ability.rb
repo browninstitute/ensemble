@@ -13,7 +13,7 @@ class Ability
       can :history, Story
     end
 
-    unless user.id.blank?
+    unless user.is_guest?
         # Owners of stories can...
         can :manage, Story, :user_id => user.id
         can :manage, Scene, :story => { :user_id => user.id }
@@ -46,6 +46,13 @@ class Ability
         # Only owners of stories can mark paragraphs as winners
         cannot :winner, Paragraph
         can :winner, Paragraph, :scene => { :story => { :user_id => user.id }}
+    end
+    
+    # Guest users
+    if user.is_guest?
+      can :create, Comment, :scene => { :story => { :privacy => Story::Privacy::OPEN }}
+      can :new, Paragraph
+      can :create, Paragraph, :scene => {:story => { :privacy => Story::Privacy::OPEN }}
     end
 
     # Define abilities for the passed in user here. For example:

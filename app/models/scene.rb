@@ -24,9 +24,11 @@ class Scene < ActiveRecord::Base
   def contributors
     users = []
     self.paragraphs.each do |para|
-      user = User.find(para.user_id)
-      if !users.include? user
-        users.push(user)
+      unless para.user_id.nil?
+        user = User.find(para.user_id)
+        if !users.include? user
+          users.push(user)
+        end
       end
     end
     users
@@ -37,9 +39,11 @@ class Scene < ActiveRecord::Base
   def commenters
     users = []
     self.comments.each do |comment|
-      user = User.find(comment.user_id)
-      if !users.include? user
-        users.push(user)
+      unless comment.user_id.nil?
+        user = User.find(comment.user_id)
+        if !users.include? user
+          users.push(user)
+        end
       end
     end
     users

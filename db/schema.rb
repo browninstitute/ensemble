@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140202061743) do
+ActiveRecord::Schema.define(:version => 20140202234835) do
 
   create_table "announcements", :force => true do |t|
     t.text     "email",      :limit => 255
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20140202061743) do
     t.string   "slug"
     t.boolean  "draft",      :default => false
     t.integer  "prompt_id"
+    t.integer  "privacy",    :default => 1
   end
 
   add_index "stories", ["slug"], :name => "index_stories_on_slug", :unique => true

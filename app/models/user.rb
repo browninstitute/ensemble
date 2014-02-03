@@ -98,6 +98,15 @@ class User < ActiveRecord::Base
     errors.add(:birthday, "must show that you are 13 or older.") if birthday.nil? || age < 13
   end
 
+  # Returns true if user is an owner or contributor to a story
+  def is_contributor?(story)
+    User.role_for_story(self, story.id) == "loggedout" || User.role_for_story(self, story.id) == "reader"
+  end
+
+  def is_guest?
+    self.name == "guest"
+  end
+
   # Users can flag stories
   # Takes a story model and a string for reason.
   def flag!(story, reason)

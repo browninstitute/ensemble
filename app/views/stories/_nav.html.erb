@@ -5,17 +5,19 @@
       <li class="<%= 'active' if current_page?(story_path(@story)) || current_page?(current_stories_path) %>">
         <%= link_to 'Story', story_path(@story) %>
       </li>
-      <li class="<%= 'active' if params[:controller] == "posts" %>">
-        <%= link_to story_posts_path(@story) do %>
-          Discussion 
-          <span class="badge <%= "badge-info" if !current_user.nil? && Post.unread_by_story(@story.id, current_user).count > 0 %>">
-            <%= current_user.nil? ? 0 : Post.unread_by_story(@story.id, current_user).count %>
-          </span>
-        <% end %>
-      </li>
-      <li class="<%= 'active' if current_page?(history_story_path(@story)) %>">
-        <%= link_to 'Activity', history_story_path(@story) %>
-      </li>
+      <% if !(@story.privacy == Story::Privacy::CONTRIBUTORS && current_or_guest_user.is_contributor?(@story)) %>
+        <li class="<%= 'active' if params[:controller] == "posts" %>">
+          <%= link_to story_posts_path(@story) do %>
+            Discussion 
+            <span class="badge <%= "badge-info" if !current_user.nil? && Post.unread_by_story(@story.id, current_user).count > 0 %>">
+              <%= current_user.nil? ? 0 : Post.unread_by_story(@story.id, current_user).count %>
+            </span>
+          <% end %>
+        </li>
+        <li class="<%= 'active' if current_page?(history_story_path(@story)) %>">
+          <%= link_to 'Activity', history_story_path(@story) %>
+        </li>
+      <% end %>
     </ul>
     <ul class="nav pull-right">
       <li>

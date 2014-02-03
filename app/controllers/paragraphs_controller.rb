@@ -11,8 +11,14 @@ class ParagraphsController < ApplicationController
   end
  
   def new
-    @p = Paragraph.new
     @scene = Scene.find(params[:scene_id])
+    @p = @scene.paragraphs.new
+    
+    if current_or_guest_user.is_guest? && @p.scene.story.privacy != Story::Privacy::OPEN
+      raise CanCan::AccessDenied.new("You must first login or register to do that action.", :create, @p)
+      return
+    end
+    
     respond_to do |format|
       format.js
     end
@@ -21,7 +27,7 @@ class ParagraphsController < ApplicationController
   def create
     @scene = Scene.find(params[:scene_id])
     @p = @scene.paragraphs.build(params[:paragraph])
-    @p.user_id = current_user.id
+    @p.user_id = current_or_guest_user.is_guest? ? nil : current_user.id
     
     # True if looking at scene view
     @sceneview = URI.parse(request.env["HTTP_REFERER"]).path == scene_path(@scene)

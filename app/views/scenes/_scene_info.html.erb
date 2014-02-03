@@ -27,7 +27,7 @@
       <% end %>
     </div>
     <div id="scene_<%= scene.id %>_comment_box" class="scene-comment-box">
-      <%= render :partial => "comments/form", :locals => { :scene => scene, :comment => Comment.new } %>
+      <%= render :partial => "comments/form", :locals => { :scene => scene, :comment => Comment.new(:scene_id => scene.id) } %>
     </div>
     <div class="link_actions pull-right">
       <%= link_to "View scene", scene_path(scene) %>
