@@ -70,7 +70,7 @@ class NotificationObserver < ActiveRecord::Observer
       if record.item_type == "Paragraph" && record.event == "like"
         voter = User.find(record.whodunnit)
         paragraph = Paragraph.find(record.item_id)
-        noticee = User.find(paragraph.user_id)
+        noticee = paragraph.user_id.nil? ? nil : User.find(paragraph.user_id)
         
         if !paragraph.scene.nil? && !paragraph.scene.story.nil?
           mod = User.find(paragraph.scene.story.user_id)
@@ -80,7 +80,7 @@ class NotificationObserver < ActiveRecord::Observer
           end
         end
         
-        if !(noticee.id == mod.id && mod_like_notification_sent) && voter.id != noticee.id && noticee.settings['email.like_notification']
+        if !noticee.nil? && !(noticee.id == mod.id && mod_like_notification_sent) && voter.id != noticee.id && noticee.settings['email.like_notification']
           NotificationMailer.delay.like_notification(noticee, voter, paragraph)
         end
       elsif record.item_type == "Paragraph" && record.event == "win"
