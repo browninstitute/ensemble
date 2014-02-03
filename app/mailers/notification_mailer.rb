@@ -36,7 +36,8 @@ class NotificationMailer < ActionMailer::Base
     @user = user
     @other = other
     @comment = comment
-    mail(:to => user.email, :subject => "#{other.name} made a comment on your story at Ensemble")
+    name = other.nil? ? "A guest user" : other.name
+    mail(:to => user.email, :subject => "#{name} made a comment on your story at Ensemble")
   end
 
   # Sends you an email when a user contributes to a scene on
@@ -45,7 +46,8 @@ class NotificationMailer < ActionMailer::Base
     @user = user
     @other = other
     @para = paragraph
-    mail(:to => user.email, :subject => "#{other.name} wrote for a scene in your story at Ensemble")
+    name = other.nil? ? "A guest user" : other.name
+    mail(:to => user.email, :subject => "#{name} wrote for a scene in your story at Ensemble")
   end
 
   # Sends you an email when a user updates a paragraph
@@ -83,7 +85,8 @@ class NotificationMailer < ActionMailer::Base
     @user = user
     @other = other
     @comment = comment
-    mail(:to => user.email, :subject => "#{other.name} replied to your comment on Ensemble")
+    name = other.nil? ? "A guest user" : other.name
+    mail(:to => user.email, :subject => "#{name} replied to your comment on Ensemble")
   end
 
   # Sends you an email when a user comments on a scene you
@@ -92,7 +95,8 @@ class NotificationMailer < ActionMailer::Base
     @user = user
     @other = other
     @comment = comment
-    mail(:to => user.email, :subject => "#{other.name} commented on a scene you wrote for on Ensemble")
+    name = other.nil? ? "A guest user" : other.name
+    mail(:to => user.email, :subject => "#{name} commented on a scene you wrote for on Ensemble")
   end
 
   # Sends you an email when a user contributes to a scene
@@ -101,7 +105,8 @@ class NotificationMailer < ActionMailer::Base
     @user = user
     @other = other
     @para = paragraph
-    mail(:to => user.email, :subject => "#{other.name} wrote for a scene you commented on at Ensemble")
+    name = other.nil? ? "A guest user" : other.name
+    mail(:to => user.email, :subject => "#{name} wrote for a scene you commented on at Ensemble")
   end
 
   # Sends you an email when another user edits a paragraph
