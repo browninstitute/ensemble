@@ -55,6 +55,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.purge_guests!
+    User.where(:name => "guest").where("created_at < ?", 1.week.ago).destroy_all
+  end
+
   def stories
     Story.find_published(:conditions => {:user_id => self.id})
   end

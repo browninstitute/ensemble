@@ -13,6 +13,7 @@ Setup
 * Set reconfirmable to false in `devise.rb` if needed.
 * Run `rake db:migrate`
 * Run `rails server` and you're up and running!
+* Remember to run `whenever --update-crontab story-collab` to set up a cron job on the production server that gets rid of guest user entries.
 
 Tests
 -----
