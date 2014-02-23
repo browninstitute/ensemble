@@ -1,8 +1,6 @@
 require 'arrowhead'
 
-class PagesController < ActionController::Base
-  layout "application"
-  
+class PagesController < ApplicationController
   def about
   end
 
