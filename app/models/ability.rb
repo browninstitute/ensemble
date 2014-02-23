@@ -32,13 +32,19 @@ class Ability
         can :update, Story, :cowriters => { :id => user.id }
         can :manage, Scene, :story => { :cowriters => { :id => user.id } }
         can :manage, Paragraph, :scene => { :story => { :cowriters => { :id =>  user.id } } }
+        can :manage, Comment, :scene => { :story => { :cowriters => { :id => user.id } } }
+
+        # Contributors can...
+        can :manage, Comment, :scene => { :story => { :contributors => { :id => user.id } } }
+        can :manage, Paragraph, :scene => { :story => { :contributors => { :id => user.id } } }
 
         # Anyone can...
         can :like, Paragraph
         can :history, Story
-        can :create, Paragraph
+        can :create, Paragraph, :scene => { :story => { :privacy => Story::Privacy::PUBLIC }}
         can :create, Story
         can :create, Scene
+        can :create, Comment, :scene => { :story => { :privacy => Story::Privacy::PUBLIC }}
         can :manage, Comment, :user_id => user.id
         can :manage, Post, :user_id => user.id
         can :manage, Paragraph, :user_id => user.id
