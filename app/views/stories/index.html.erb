@@ -1,17 +1,17 @@
-<%= link_to content_tag(:i, "", :class => 'icon-plus-sign') + ' Start a Story', new_story_path, :class => "btn new-story pull-right" %>
+<%= link_to content_tag(:i, "", :class => 'icon-plus-sign') + ' ' + t('stories.index.start_story'), new_story_path, :class => "btn new-story pull-right" %>
 <div class="clearfix"></div>
 <div class="story-index row-fluid">
   <div class="search span3">
-    <h1>Search Stories</h1>
+    <h1><%= t 'stories.index.search.title' %></h1>
     <%= search_form_for @q do |f| %>
-      <%= f.text_field :title_cont, :placeholder => "Story Title" %>
-      <%= f.text_field :user_name_cont, :placeholder => "Story Starter Name" %>
-      <%= f.submit "Search" %>
+      <%= f.text_field :title_cont, :placeholder => t('stories.index.search.form.title') %>
+      <%= f.text_field :user_name_cont, :placeholder => t('stories.index.search.form.user') %>
+      <%= f.submit t('application.actions.search'), class: "btn btn-default" %>
     <% end %>
   </div>
   <div class="stories-list span9">
     <% cache [@stories, "stories-index"] do %>
-      <h1><%= params[:q] ? "#{@stories.length} stories found" : "All Stories" %></h1>
+      <h1><%= params[:q] ? t('stories.index.story_count', count: @stories.length) : t('stories.index.all_stories') %></h1>
 
       <table class="table">
         <% @stories.each do |story| %>
@@ -22,10 +22,10 @@
                 <%= story.subtitle %>
                 <br />
                 <span class="genre">
-                  <%= "Genre: #{print_genres(story)}" if !print_genres(story).nil? %> 
+                  <%= "#{t('stories.index.story.genre')}: #{print_genres(story)}" if !print_genres(story).nil? %> 
                 </span>
               </td>
-              <td>Started by <%= link_to story.user.name, story.user %></td>
+              <td><%= t('stories.index.story.author_html', author: link_to(story.user.name, story.user).html_safe) %></td>
             </tr>
           <% end %>
         <% end %>

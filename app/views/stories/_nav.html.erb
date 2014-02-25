@@ -5,7 +5,7 @@
       <li class="<%= 'active' if current_page?(story_path(@story)) || current_page?(current_stories_path) %>">
         <%= link_to t('stories.show.navigation.story'), story_path(@story) %>
       </li>
-      <% if !(@story.privacy == Story::Privacy::CONTRIBUTORS && current_or_guest_user.is_contributor?(@story)) %>
+      <% if !(@story.privacy == Story::Privacy::CONTRIBUTORS && current_or_guest_user.is_contributor?(@story)) && params[:locale] == 'en' %>
         <li class="<%= 'active' if params[:controller] == "posts" %>">
           <%= link_to story_posts_path(@story) do %>
             <%= t('stories.show.navigation.discussion') %>

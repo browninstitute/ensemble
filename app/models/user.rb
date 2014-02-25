@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
     if !birthday.nil?
       age = now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
     end
-    errors.add(:birthday, "must show that you are 13 or older.") if birthday.nil? || age < 13
+    errors.add(:birthday, I18n.t('activerecord.errors.models.user.attributes.birthday.age')) if birthday.nil? || age < 13
   end
 
   # Returns true if user is an owner or contributor to a story

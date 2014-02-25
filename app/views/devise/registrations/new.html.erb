@@ -1,22 +1,23 @@
-<h2>Sign up</h2>
+<h2><%= t 'users.new.form.title' %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.text_field :name, :placeholder => 'Name', :autofocus => true %></div>
+  <div><%= f.text_field :name, :placeholder => t('users.new.form.name'), :autofocus => true %></div>
 
-  <div><%= f.email_field :email, :placeholder => 'Email' %></div>
+  <div><%= f.email_field :email, :placeholder => t('users.new.form.email') %></div>
 
   <div>
-    <%= text_field_tag "vis_birthday", nil, :placeholder => "Birthday" %>
+    <%= text_field_tag "vis_birthday", nil, :placeholder => t('users.new.form.birthday') %>
     <%= f.hidden_field :birthday %> 
   </div>
 
-  <div><%= f.password_field :password, :placeholder => 'Password' %></div>
+  <div><%= f.password_field :password, :placeholder => t('users.new.form.password') %></div>
 
-  <div><%= f.password_field :password_confirmation, :placeholder => 'Retype Password' %></div>
+  <div><%= f.password_field :password_confirmation, :placeholder => t('users.new.form.confirm_pass') %></div>
 
-  <div><%= f.submit "Sign up", :class => 'btn' %></div>
+  <div><%= f.submit t('users.new.form.title'), :class => 'btn' %></div>
+
 <% end %>
 
 <%= render "devise/shared/links" %>

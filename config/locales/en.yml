@@ -2,12 +2,54 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      story:
+        title: "Title"
+      comment:
+        content: "Content"
+      paragraph:
+        content: "Content"
+      user:
+        name: "Name"
+        birthday: "Birthday"
+        email: "Email"
+        password: "Password"
+    errors:
+      models:
+        story:
+          attributes:
+            title:
+              blank: " can't be blank"
+        comment:
+          attributes:
+            content:
+              blank: " can't be blank"
+        paragraph:
+          attributes:
+            content:
+              blank: " can't be blank"
+        user:
+          attributes:
+            name:
+              blank: " can't be blank"
+            birthday:
+              blank: " can't be blank"
+              age: " must show that you are 13 or older"
+            email:
+              blank: " can't be blank"
+              invalid: " is invalid"
+            password:
+              blank: " can't be blank"
+              confirmation: " doesn't match confirmation"
+              too_short: " is too short (minimum is 8 characters)"
   application:
     actions:
       cancel: "Cancel"
       save: "Save"
       edit: "Edit"
       delete: "Delete"
+      search: "Search"
     metanav:
       sign_in: "Sign in"
       sign_up: "Sign up"
@@ -45,6 +87,20 @@ en:
     title: "Featured Stories"
     lead: "Ensemble has been the home of a number of writing events and special stories. Stay tuned for more writing projects!"
   stories:
+    index:
+      search:
+        title: "Search Stories"
+        form:
+          title: "Story Title"
+          user: "Story Starter name"
+      all_stories: "All Stories"
+      story_count:
+        one: "1 story found"
+        other: "%{count} stories found"
+      story:
+        genre: "Genre"
+        author_html: "Started by %{author}"
+      start_story: "Start a Story"
     new:
       form:
         title: "Title"
@@ -160,3 +216,65 @@ en:
       time_html: "Posted %{timeago}"
     destroy:
       confirm: "Are you sure?"
+  users:
+    links:
+      sign_in: "Sign in"
+      sign_up: "Sign up"
+      forgot_password: "Forgot your password?"
+      confirmation: "Didn't receive confirmation instructions?"
+      provider: "Sign in with %{provider}"
+    new:
+      form:
+        title: "Sign up"
+        name: "Name"
+        email: "Email"
+        birthday: "Birthday"
+        password: "Password"
+        confirm_pass: "Retype Password"
+    login:
+      title: "Sign in"
+      email: "Email"
+      password: "Password"
+      remember_me: "Remember me"
+      with_facebook: "...with Facebook?"
+    forgot:
+      title: "Forgot your password?"
+      email: "Email"
+      send: "Send me reset password instructions"
+    confirmation:
+      title: "Resend confirmation instructions"
+      email: "Email"
+    preferences:
+      profile:
+        profile_settings: "Profile Settings"
+        name: "Name"
+        avatar: "Avatar"
+        choose_file: "Choose file"
+        no_file: "No file chosen"
+        update_profile: "Update Profile"
+      notifications:
+        email_notifications: "Email Notifications"
+        overall: "Overall, receive emails when:"
+        added_as_contributor: "I'm added as a contributor, co-writer, or moderator to a story"
+        moderating: "For stories I'm moderating, receive emails when:"
+        moderating_comment: "Someone makes a comment"
+        moderating_new_para: "Someone contributes a paragraph"
+        moderating_edit_para: "Someone edits a paragraph"
+        moderating_likes_para: "Someone likes a paragraph"
+        moderating_winner: "Someone crowns a paragraph as a winner"
+        moderating_flagged: "My story is flagged by an admin"
+        participating: "For stories I'm participating in, receive email when:"
+        participating_reply: "Someone replies to my comment"
+        participating_comments: "Someone comments on a scene you wrote a paragraph for"
+        participating_edit: "Someone makes edits to a paragraph you wrote"
+        participating_writes: "Someone writes a paragraph for a scene you commented on"
+        participating_edits_scene: "Someone makes edits to a scene you commented on"
+        participating_edits_scene_para: "Someone makes edits to a scene you wrote a paragraph for"
+        participating_likes: "Someone likes a paragraph you wrote"
+        participating_winner: "A paragraph you wrote is crowned a winner"
+        particiapting_post: "Someone makes a post in the discussion forum"
+      change_password:
+        change_password: "Change Password"
+        current_password: "Current password"
+        password: "Password"
+        password_confirmation: "Password confirmation"
