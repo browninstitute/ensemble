@@ -1,13 +1,13 @@
 <% if can?(:create, @story.story_roles.new) %>
   <%= form_for [@story, @story_role], :remote => true, :html => { :class => "form-inline" } do |f| %>
-    <input id="user_name" type="text" autocomplete="off" placeholder= "Type a username..." />
+    <input id="user_name" type="text" autocomplete="off" placeholder= "<%= t('story_roles.new.form.placeholder') %>" />
     <input id="story_role_id" name="story_role[user_id]" type="hidden" value="-1" />
     <select id="story_role_role" name="story_role[role]">
-      <option value>Pick a role</option>
-      <option value="contributor">Contributor</option>
-      <option value="cowriter">Co-writer</option>
-      <option value="moderator">Moderator</option>
+      <option value><%= t 'story_roles.new.form.pick_a_role' %></option>
+      <option value="contributor"><%= t 'story_roles.new.form.contributor' %></option>
+      <option value="cowriter"><%= t 'story_roles.new.form.cowriter' %></option>
+      <option value="moderator"><%= t 'story_roles.new.form.moderator' %></option>
     </select>
-    <%= f.submit 'Add', :class => 'btn btn-primary', :disabled => true %>
+    <%= f.submit t('story_roles.new.form.add'), :class => 'btn btn-primary', :disabled => true %>
   <% end %>
 <% end %>

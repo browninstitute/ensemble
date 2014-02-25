@@ -1,7 +1,7 @@
 <table class="table table-condensed table-striped">
   <tr>
     <td><%= @story.user.name %></td>
-    <td><span class="label label-success">Story Owner</span></td>
+    <td><span class="label label-success"><%= t 'story_roles.index.story_owner' %></span></td>
     <td></td>
   </tr>
   <% @story.story_roles.each do |story_role| %>
@@ -14,7 +14,7 @@
       </td>
       <td>
       <% if can?(:destroy, story_role) %>
-        <%= link_to [@story, story_role], method: :delete, remote: true, :data => { :confirm => "Really remove this user?" } do %>
+        <%= link_to [@story, story_role], method: :delete, remote: true, :data => { :confirm => t('story_roles.destroy.confirm') } do %>
           <i class="icon-remove"></i>
         <% end %>
       <% end %>

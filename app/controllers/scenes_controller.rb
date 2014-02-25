@@ -37,7 +37,7 @@ class ScenesController < ApplicationController
     @scene = Scene.find(params[:id])
 
     if @scene.update_attributes(params[:scene])
-      flash.now[:success] = "Scene was successfully updated."
+      flash.now[:success] = t('scenes.update.notice')
       respond_to do |format|
         format.js
       end
@@ -57,7 +57,7 @@ class ScenesController < ApplicationController
 
     if @scene.save
       @scene.comments.destroy_all
-      flash.now[:success] = "Scene was successfully deleted."
+      flash.now[:success] = t('scenes.destroy.notice')
       respond_to do |format|
         format.js
       end

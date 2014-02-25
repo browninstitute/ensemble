@@ -33,7 +33,7 @@ class ParagraphsController < ApplicationController
     @sceneview = URI.parse(request.env["HTTP_REFERER"]).path == scene_path(@scene)
 
     if @p.save
-      flash.now[:success] = "Contribution successfully saved."
+      flash.now[:success] = t('paragraphs.create.notice')
       respond_to do |format|
         format.js
       end
@@ -50,7 +50,7 @@ class ParagraphsController < ApplicationController
     @p = Paragraph.find(params[:id])
 
     if @p.update_attributes(params[:paragraph])
-      flash.now[:success] = "Contribution was successfully updated."
+      flash.now[:success] = t('paragraphs.update.notice')
       respond_to do |format|
         format.js
       end
@@ -70,7 +70,7 @@ class ParagraphsController < ApplicationController
     @sceneview = URI.parse(request.env["HTTP_REFERER"]).path == scene_path(@scene)
 
     if @p.destroy
-      flash.now[:notice] = "Contribution was deleted."
+      flash.now[:notice] = t("paragraphs.destroy.notice")
       
       @scene.destroy if @scene.paragraphs.length == 0
 

@@ -1,15 +1,15 @@
 <div id="contributors_modal" class="modal fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Contributors</h3>
+    <h3><%= t 'story_roles.index.title' %></h3>
     <% if can?(:manage, @story) %>
       <p>
-      Designate other users as official contributors to the story. The different levels of power are:
+      <%= t 'story_roles.index.description' %>
       </p>
       <ul>
-        <li><strong>Contributors</strong> - These users have the same power as anyone else who visits your story. They can contribute by creating comments and scene drafts, and cannot directly edit over the story.</li>
-        <li><strong>Co-writers</strong> - These users can directly edit the text of your story.</li>
-        <li><strong>Moderators</strong> - These users can directly edit or delete any part of the story, and designate others as contributors/co-writers/moderators. They can also help moderate comments and scene drafts.</li>
+        <li><strong><%= t 'story_roles.index.contributors' %></strong> - <%= t 'story_roles.index.contributors_desc' %></li>
+        <li><strong><%= t 'story_roles.index.cowriters' %></strong> - <%= t 'story_roles.index.cowriters_desc' %></li>
+        <li><strong><%= t 'story_roles.index.moderators' %></strong> - <%= t 'story_roles.index.moderators_desc' %></li>
       </ul>
     <% end %>
   </div>

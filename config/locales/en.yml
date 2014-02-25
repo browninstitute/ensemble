@@ -85,6 +85,36 @@ en:
         edit_story: "Edit Story"
         delete_story: "Delete Story"
         delete_story_confirm: "Are you sure you want to delete your story?"
+    flag:
+      title: "Flag this Story"
+      flag_notice: "This story has been flagged with the reason: %{reason}"
+      unflag: "Unflag"
+      flag: "Flag"
+      prompt: "Choose reason for flagging this story:"
+      inappropriate: "This story is inappropriate."
+      not_story: "This is not a story."
+      permissions: "You don't have permissions to flag this story."
+  story_roles:
+    index:
+      title: "Contributors"
+      description: "Designate other users as official contributors to the story. The different levels of power are:"
+      contributors: "Contributors"
+      contributors_desc: "These users have the same power as anyone else who visits your story. They can contribute by creating comments and scene drafts, and cannot directly edit over the story."
+      cowriters: "Co-writers"
+      cowriters_desc: "These users can directly edit the text of your story."
+      moderators: "Moderators"
+      moderators_desc: "These users can directly edit or delete any part of the story, and designate others as contributors/co-writers/moderators. They can also help moderate comments and scene drafts."
+      story_owner: "Story Owner"
+    new:
+      form:
+        placeholder: "Type a username..."
+        pick_a_role: "Pick a role"
+        contributor: "Contributor"
+        cowriter: "Co-writer"
+        moderator: "Moderator"
+        add: "Add"
+    destroy:
+      confirm: "Really remove this user?"
   scenes:
     new:
       create_scene: "Click to create a scene"
@@ -93,12 +123,15 @@ en:
         title: "Scene title"
         description: "What happens in this scene?"
         prompt: "For this scene, what question do you want the community to answer? For example, \"How should Character X and Character Y meet?\""
+    update:
+      notice: "Scene was successfully updated."
     show:
       header: "Scene"
       new_comment: "Comment"
       view_scene: "View scene"
     destroy:
       confirm: "Are you sure?"
+      notice: "Scene was successfully deleted."
   paragraphs:
     show:
       author_html: "By %{author}"
@@ -108,11 +141,16 @@ en:
       unwinner: "Unmark as winner"
       winner_tooltip: "Winner!"
       new_tooltip: "Add alternative"
+    create:
+      notice: "Contribution successfully saved."
     edit:
       placeholder: "How would you write this part?"
+    update:
+      notice: "Contribution was successfully updated."
     destroy:
       confirm: "Are you sure you want to delete this paragraph?"
       last_confirm: "Are you sure you want to delete this paragraph? Deleting this last paragraph will also remove this entire section from the story."
+      notice: "Contribution was deleted."
   comments:
     new:
       placeholder: "Type a comment..."
