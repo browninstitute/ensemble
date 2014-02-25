@@ -6,20 +6,20 @@ module ParagraphsHelper
         :class => "love-link loved", 
         :id => "para_#{p.id}_like_button",
         :remote => true do
-        "<i class='icon-heart'></i> Loved".html_safe
+        "<i class='icon-heart'></i> #{t('paragraphs.show.loved')}".html_safe
       end
     elsif user_signed_in? 
       link_to like_paragraph_path(p),
         :class => "love-link",
         :id => "para_#{p.id}_like_button",
         :remote => true do
-        "<i class='icon-heart'></i> Love".html_safe
+        "<i class='icon-heart'></i> #{t('paragraphs.show.love')}".html_safe
       end
     else
       link_to like_paragraph_path(p),
         :class => 'love-link',
         :id => "para_#{p.id}_like_button" do
-        "<i class='icon-heart'></i> Love".html_safe
+        "<i class='icon-heart'></i> #{t('paragraphs.show.love')}".html_safe
       end
     end
   end
@@ -37,9 +37,9 @@ module ParagraphsHelper
   # deletion.
   def destroy_para_confirm_message(scene)
     if !scene.open? && scene.paragraphs.length <= 1
-      "Are you sure you want to delete this paragraph? Deleting this last paragraph will also remove this entire section from the story."
+      t 'paragraphs.destroy.last_confirm'
     else
-      "Are you sure you want to delete this paragraph?"
+      t 'paragraphs.destroy.confirm'
     end
   end
 end

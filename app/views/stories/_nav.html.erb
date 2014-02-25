@@ -3,46 +3,46 @@
   <div class="navbar-inner">
     <ul class="nav">
       <li class="<%= 'active' if current_page?(story_path(@story)) || current_page?(current_stories_path) %>">
-        <%= link_to 'Story', story_path(@story) %>
+        <%= link_to t('stories.show.navigation.story'), story_path(@story) %>
       </li>
       <% if !(@story.privacy == Story::Privacy::CONTRIBUTORS && current_or_guest_user.is_contributor?(@story)) %>
         <li class="<%= 'active' if params[:controller] == "posts" %>">
           <%= link_to story_posts_path(@story) do %>
-            Discussion 
+            <%= t('stories.show.navigation.discussion') %>
             <span class="badge <%= "badge-info" if !current_user.nil? && Post.unread_by_story(@story.id, current_user).count > 0 %>">
               <%= current_user.nil? ? 0 : Post.unread_by_story(@story.id, current_user).count %>
             </span>
           <% end %>
         </li>
         <li class="<%= 'active' if current_page?(history_story_path(@story)) %>">
-          <%= link_to 'Activity', history_story_path(@story) %>
+          <%= link_to t('stories.show.navigation.activity'), history_story_path(@story) %>
         </li>
       <% end %>
     </ul>
     <ul class="nav pull-right">
       <li>
       <%= link_to story_story_roles_path(@story), :remote => true do %>
-        <i class="icon-user"></i> Contributors (<span id="contributor_count"><%= @story.contributors.count + 1 %></span>)
+        <i class="icon-user"></i> <%= t('stories.show.navigation.contributors') %> (<span id="contributor_count"><%= @story.contributors.count + 1 %></span>)
       <% end %>
       </li>
       <% if can?(:flag, @story) && current_user.admin? %>
         <li>
         <%= link_to "#flag_modal", :data => {:toggle => "modal" }  do %>
-          <i class="icon-flag"></i> Flag
+          <i class="icon-flag"></i> <%= t('stories.show.navigation.flag') %>
         <% end %>
         </li>
       <% end %>
       <% if can?(:edit, @story) %>
         <li>
         <%= link_to edit_story_path(@story) do %>
-          <i class="icon-pencil"></i> Edit Story
+          <i class="icon-pencil"></i> <%= t('stories.show.navigation.edit_story') %>
         <% end %>
         </li>
       <% end %>
       <% if can? :destroy, @story %>
       <li>
-      <%= link_to @story, method: :delete, data: { confirm: 'Are you sure you want to delete your story?' } do %>
-        <i class="icon-remove"></i> Delete Story
+      <%= link_to @story, method: :delete, data: { confirm: t('stories.show.navigation.delete_story_confirm') } do %>
+        <i class="icon-remove"></i> <%= t('stories.show.navigation.delete_story') %>
       <% end %>
       </li>
       <% end %>

@@ -18,11 +18,11 @@ module StoriesHelper
   def privacy_description(value)
     case value
     when Story::Privacy::PUBLIC
-      "Public (anyone can view story)"
+      t 'stories.new.form.privacy_public'
     when Story::Privacy::CONTRIBUTORS
-      "Only contributors can view story"
+      t 'stories.new.form.privacy_contributors'
     when Story::Privacy::OPEN
-      "Guest users can view and contribute to story"
+      t 'stories.new.form.privacy_guests'
     end
   end
 
@@ -58,23 +58,22 @@ module StoriesHelper
   def new_story_example_text(position)
     case position
     when 1
-      "Once upon a time..."
+      t 'stories.new.form.default_scenes.scene1' 
     when 2
-      "One day..."
+      t 'stories.new.form.default_scenes.scene2'
     when 3
-      "So they..."
+      t 'stories.new.form.default_scenes.scene3'
     when 4
-      "Finally, they..."
+      t 'stories.new.form.default_scenes.scene4'
     when 5
-      "And they lived happily ever after."
+      t 'stories.new.form.default_scenes.scene5'
     end
   end
 
   # Generates text displaying the published status of a story.
   def published_status(story)
     return if story.updated_at.nil?
-
-    "Last published #{time_ago_in_words(story.updated_at)} ago."
+    t 'stories.edit.last_published', timeago: time_ago_in_words(story.updated_at)
   end
 
   # Returns the right text for an activity item in the history feed.

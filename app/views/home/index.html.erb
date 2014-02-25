@@ -43,14 +43,14 @@
     </div>
     <div class="home-message span7">
       <div>
-        <h1>Collaboratively write stories</h1>
-        <p class="lead">Ensemble is a platform for massive participatory story writing.</p>
+        <h1><%= t 'home.hero.title' %></h1>
+        <p class="lead"><%= t 'home.hero.lead' %></p>
         <p>
         <%= link_to current_stories_path, :class => "btn btn-large" do %>
-          Demo Story
+          <%= t 'home.hero.demo_story' %>
         <% end %>
         <%= link_to new_story_path, :class => "btn btn-primary btn-large" do %>
-          Start Writing
+          <%= t 'home.hero.start_writing' %>
           <i class="icon-chevron-right"></i>
         <% end %>
         </p>
@@ -59,7 +59,7 @@
   </div>
 
   <div class="stories-preview">
-    <h2>Recent Stories</h2>
+    <h2><%= t 'home.recent.header' %></h2>
     <% cache [@stories, "recent-stories"] do %>
       <%= render :partial => 'home/story_preview', :collection => @stories, :as => :story %>
     <% end %>

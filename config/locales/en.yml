@@ -2,4 +2,110 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  application:
+    actions:
+      cancel: "Cancel"
+      save: "Save"
+      edit: "Edit"
+      delete: "Delete"
+    metanav:
+      sign_in: "Sign in"
+      sign_up: "Sign up"
+      sign_out: "Sign out"
+      bug: "Found a bug?"
+      profile: "Profile"
+      preferences: "Preferences"
+    navigation:
+      home: "Home"
+      about: "About"
+      featured: "Featured"
+      community_prompts: "Community Prompts"
+      start_a_story: "Start a Story"
+      stories: "Stories"
+      forums: "Forums"
+    footer:
+      copyright_policy: "Copyright Policy"
+  home:
+    hero:
+      title: "Collaboratively write stories"
+      lead: "Ensemble is a platform for massive participatory story writing."
+      demo_story: "Demo Story"
+      start_writing: "Start Writing"
+      summary1: "Write together with others in a new way"
+      summary2: "Suggest alternatives for a story scene"
+      summary3: "Browse and vote for alternatives"
+      summary4: "Discuss scenes with others"
+    recent:
+      header: "Recent Stories"
+      author: "Started by %{author}"
+      time_html: "Started %{time}"
+  about:
+    title: "About"
+  featured:
+    title: "Featured Stories"
+    lead: "Ensemble has been the home of a number of writing events and special stories. Stay tuned for more writing projects!"
+  stories:
+    new:
+      form:
+        title: "Title"
+        summary: "Summary"
+        genre1: "Genre 1"
+        genre2: "Genre 2"
+        select_genre: "Please select"
+        privacy: "Privacy"
+        privacy_public: "Public (anyone can view story)"
+        privacy_contributors: "Only contributors can view story"
+        privacy_guests: "Guest users can view and contribute to story"
+        tip_html: "<strong>Tip:</strong> While editing the story text, you can press Enter 3 times to create a new scene."
+        publish: "Publish"
+        save_draft: "Save Draft"
+        cancel_confirm: "This will discard all changes made to the story. Do you want to continue?"
+        scene_break: "Add Scene Break"
+        default_scenes:
+          scene1: "Once upon a time..."
+          scene2: "One day..."
+          scene3: "So they..."
+          scene4: "Finally, they..."
+          scene5: "And they lived happily ever after."
+    edit:
+      last_published: "Last published %{timeago} ago."
+    show:
+      header: 
+        word_count: 
+          one: '1 word'
+          other: '%{count} words'
+        genre: "Genre"
+        author_time_html: "Started by %{author} %{timeago}" 
+      navigation:
+        story: "Story"
+        discussion: "Discussion"
+        activity: "Activity"
+        contributors: "Contributors"
+        flag: "Flag"
+        edit_story: "Edit Story"
+        delete_story: "Delete Story"
+        delete_story_confirm: "Are you sure you want to delete your story?"
+  scenes:
+    new:
+      create_scene: "Click to create a scene"
+      form:
+        header: "Scene"
+        title: "Scene title"
+        description: "What happens in this scene?"
+        prompt: "For this scene, what question do you want the community to answer? For example, \"How should Character X and Character Y meet?\""
+    show:
+      
+  paragraphs:
+    show:
+      author_html: "By %{author}"
+      love: "Love"
+      loved: "Loved"
+      winner: "Mark as winner"
+      unwinner: "Unmark as winner"
+      winner_tooltip: "Winner!"
+      new_tooltip: "Add alternative"
+    edit:
+      placeholder: "How would you write this part?"
+    destroy:
+      confirm: "Are you sure you want to delete this paragraph?"
+      last_confirm: "Are you sure you want to delete this paragraph? Deleting this last paragraph will also remove this entire section from the story."

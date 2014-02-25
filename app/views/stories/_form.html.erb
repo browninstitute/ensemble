@@ -14,27 +14,27 @@
 
   <div class="field">
     <div class="alert alert-info pull-right">
-      <strong>Tip:</strong> While editing the story text, you can press Enter 3 times to create a new scene.
+      <%= t 'stories.new.form.tip_html' %>
     </div>
     
-    <%= f.text_field :title, :placeholder => 'Title', :class => 'largely' %><br />
-    <%= f.text_field :subtitle, :placeholder => 'Summary' %><br />
-    Genre 1: <%= collection_select(:story, :genre1, Genre.all, :id, :name, :prompt => true) %>
-    Genre 2: <%= collection_select(:story, :genre2, Genre.all, :id, :name, :prompt => true) %>
+    <%= f.text_field :title, :placeholder => t('stories.new.form.title'), :class => 'largely' %><br />
+    <%= f.text_field :subtitle, :placeholder => t('stories.new.form.summary') %><br />
+    <%= t 'stories.new.form.genre1' %>: <%= collection_select(:story, :genre1, Genre.all, :id, :name, :prompt => true) %>
+    <%= t 'stories.new.form.genre2' %>: <%= collection_select(:story, :genre2, Genre.all, :id, :name, :prompt => true) %>
     <br />
-    Privacy: <%= privacy_select_dropdown(@story.privacy) %>
+    <%= t 'stories.new.form.privacy' %>: <%= privacy_select_dropdown(@story.privacy) %>
     
     <%= f.hidden_field :content %> 
 
     <div class="actions pull-right">
       <div class="text-error"></div>
-      <%= f.submit "Publish", :name => "publish", :class => "btn" %>
+      <%= f.submit t('stories.new.form.publish'), :name => "publish", :class => "btn" %>
       <% if current_page?(new_story_path) || @story.draft %>
-        <%= f.submit "Save Draft", :name => "draft", :class => "btn save-draft" %>
+        <%= f.submit t('stories.new.form.save_draft'), :name => "draft", :class => "btn save-draft" %>
       <% end %>
       <% if !current_page? new_story_path %>
-        <%= link_to "Cancel", story_path(@story), 
-          :class => "btn cancel-story", :confirm => "This will discard all changes made to the story. Do you want to continue?" %>
+        <%= link_to t('application.actions.cancel'), story_path(@story), 
+          :class => "btn cancel-story", :confirm => t('stories.new.form.cancel_confirm') %>
       <% end %>
     </div>
   </div>

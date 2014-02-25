@@ -13,7 +13,7 @@
           <% end %>
           <li>
           <% if can?(:create, scene.paragraphs.new) %>
-            <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph", :data => {:toggle => "tooltip"} do %>
+            <%= link_to new_scene_paragraph_path(scene), :remote => true, :class => "new-paragraph", :title => t('paragraphs.show.new_tooltip'), :data => {:toggle => "tooltip"} do %>
               <i class="icon-plus"></i>
             <% end %>
           <% else %>

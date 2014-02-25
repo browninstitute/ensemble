@@ -1,14 +1,9 @@
 <div class="paragraph-info span2">
   <span class="winner <%= "hide" if !paragraph.is_winner? %>">
-    <i class="icon-trophy" rel="tooltip"></i>
+    <i class="icon-trophy" rel="tooltip" title="<%= t('paragraphs.show.winner_tooltip') %>"></i>
   </span>
-  <span class="paragraph-author">By <strong>
-    <% if paragraph.user %>
-      <%= link_to paragraph.user.name, paragraph.user %>
-    <% else %>
-      Guest
-    <% end %>
-    </strong>
+  <span class="paragraph-author">
+    <%= t 'paragraphs.show.author_html', author: "<strong>#{paragraph.user ? link_to(paragraph.user.name, paragraph.user) : 'Guest'}</strong>".html_safe %>
   </span>
   <div class="likes">
     <span class="like-count">
@@ -21,19 +16,19 @@
   <div class="paragraph-actions">
     <% if can? :manage, paragraph %>
     <div class="edit-paragraphs">                                              
-      <%= link_to "Edit", edit_scene_paragraph_path(scene, paragraph), :remote => true %>
+      <%= link_to t('application.actions.edit'), edit_scene_paragraph_path(scene, paragraph), :remote => true %>
       &sdot;
-      <%= link_to "Delete", scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: destroy_para_confirm_message(scene) } %>
+      <%= link_to t('application.actions.delete'), scene_paragraph_path(scene, paragraph), remote: true, method: :delete, data: { confirm: destroy_para_confirm_message(scene) } %>
     </div>
     <div class="admin-paragraphs">
       <% if can? :winner, paragraph %>
         <% 
           if paragraph.is_winner?
             path = unwinner_paragraph_path(paragraph)
-            text = "Unmark as winner"
+            text = t('paragraphs.show.unwinner')
           else
             path = winner_paragraph_path(paragraph)
-            text = "Mark as winner"
+            text = t('paragraphs.show.winner')
           end
         %>
         <%= link_to text, path, 

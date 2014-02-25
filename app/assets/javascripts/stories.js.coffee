@@ -4,8 +4,8 @@
 
 $(document).ready ->
   # Initialize
-  $(".winner i").tooltip({title: "Winner!"})
-  $(".scene .nav-tabs .new-paragraph").tooltip({title: "Add alternative"})
+  $(".winner i").tooltip()
+  $(".scene .nav-tabs .new-paragraph").tooltip()
   $(".scene-info-inner .scene-header i").tooltip({title: "This scene is accepting alternatives."})
 
   $(".scene-info-inner").click showScene

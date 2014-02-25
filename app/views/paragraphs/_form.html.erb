@@ -28,15 +28,15 @@
 
 
   <%= f.text_area :content, :rows => 5, 
-                  :placeholder => 'How would you write this part?', 
+                  :placeholder => t('paragraphs.edit.placeholder'), 
                   :class => 'span11' %><br />
   <%= f.hidden_field :scene_id, :value => scene.id %>
                   
   <span class="text-error">
   </span>
   <div id="p_submit_<%= p.id %>" class="span11" style="padding-right: 20px;">
-    <%= f.submit "Save", :class => 'btn btn-mini pull-right' %>
-    <%= link_to "Cancel", "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
+    <%= f.submit t('application.actions.save'), :class => 'btn btn-mini pull-right' %>
+    <%= link_to t('application.actions.cancel'), "#", :class => 'btn btn-mini pull-right cancel-paragraph' %>
   </div>
 <% end %>
 

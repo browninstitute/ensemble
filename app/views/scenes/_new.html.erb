@@ -1,5 +1,5 @@
 <% if @story.new_record? || scene.new_record? || can?(:edit, scene) %>
   <%= link_to new_or_edit_scene_path(scene), :class => "new-scene span4", :remote => true do %>
-    Click to create a scene 
+    <%= t 'scenes.new.create_scene' %>
   <% end %>
 <% end %>

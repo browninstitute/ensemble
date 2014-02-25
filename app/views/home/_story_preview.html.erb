@@ -2,11 +2,11 @@
   <%= link_to story, :class => "story-preview" do %>
     <h1><%= story.title %> 
       <small class="author">
-        Started by <%= story.user.name %>
+        <%= t 'home.recent.author', author: story.user.name %>
       </small>
     </h1>
     <div class="last-updated">
-      Started <%= timeago(story.created_at) %>
+      <%= t 'home.recent.time_html', time: timeago(story.created_at) %>
     </div>
   <% end %>
 <% end %>

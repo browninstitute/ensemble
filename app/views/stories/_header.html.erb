@@ -37,19 +37,17 @@
 
     <div class="meta">
       <div class="genres">
-        <%= "Genre: #{print_genres(@story)}" if !print_genres(@story).nil? %>
+        <%= "#{t('stories.show.header.genre')}: #{print_genres(@story)}" if !print_genres(@story).nil? %>
       </div>
       <div class="word-count">
-        <%= pluralize(@story.word_count, "words") %>
+        <%= t 'stories.show.header.word_count', count: @story.word_count %>
       </div>
 
       <div class="row-fluid">
         <div class="span8">
           <div class="author">
-            Started by <%= link_to @story.user.name, @story.user %>
-            <span class="timestamp">
-              <%= timeago(@story.created_at) %> 
-            </span>
+            <%= t 'stories.show.header.author_time_html', author: link_to(@story.user.name, @story.user),
+                   timeago: "<span class='timestamp'>#{timeago(@story.created_at)}</span>".html_safe %>
             &sdot;
             <em><%= privacy_description @story.privacy %></em>
           </div>

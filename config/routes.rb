@@ -1,5 +1,5 @@
 StoryCollab::Application.routes.draw do
-  scope "(:locale)", locale: /en/ do
+  scope "(:locale)", locale: /en|ht/ do
     resources :stories do
       collection do
         get 'current'
