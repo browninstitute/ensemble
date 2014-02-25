@@ -9,13 +9,13 @@
     </div>
     <div class="comment">
       <%= form_for [scene, comment], :html => { :style => 'margin: 0' }, :remote => true do |f| %>
-        <%= f.text_area :content, :placeholder => 'Type a comment...', :rows => 2 %>
+        <%= f.text_area :content, :placeholder => t('comments.new.placeholder'), :rows => 2 %>
         <%= f.hidden_field :scene_id, :value => scene.id %>
-        <%= f.submit :class => "btn", :value => 'Comment' %>
+        <%= f.submit :class => "btn", :value => t('comments.new.button') %>
       <% end %>
       <span class="text-error"></span>
     </div>
   <% elsif !user_signed_in? %>
-    <%= link_to "Login or register to post a comment.", new_user_session_path, :class => "comment-login-link" %>
+    <%= link_to t('comments.new.login'), new_user_session_path, :class => "comment-login-link" %>
   <% end %>
 </div>

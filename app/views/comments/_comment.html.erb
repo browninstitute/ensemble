@@ -9,7 +9,7 @@
         <% end %>
       </div>
       <div class="comment-time pull-right">
-        Posted <%= timeago(comment.created_at) %>
+        <%= t 'comments.show.time_html', timeago: timeago(comment.created_at) %>
       </div>
     </div>
     <div class="comment_photo">
@@ -23,9 +23,9 @@
       <div class="controls">
         <% if can? :update, comment %>
           <%= link_to edit_scene_comment_path(scene, comment), :remote => true do %>
-            <i class="icon-edit"></i> Edit
+            <i class="icon-edit"></i> <%= t 'application.actions.edit' %>
           <% end %>&nbsp;
-          <%= link_to "Delete", scene_comment_path(scene, comment), :method => :delete, :confirm => "Are you sure?", :remote => true %>
+          <%= link_to t('application.actions.delete'), scene_comment_path(scene, comment), :method => :delete, :confirm => t('comments.destroy.confirm'), :remote => true %>
         <% end %>
       </div>
       <div id="comment_<%= comment.id %>_content" class="comment-content">
