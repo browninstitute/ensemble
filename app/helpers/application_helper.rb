@@ -1,4 +1,8 @@
 module ApplicationHelper
+  # Override translate helper to be html_safe all the time
+  def t(string, options = {})
+    super(string, options).html_safe
+  end
   
   # Enables nested layouts.
   # http://m.onkey.org/nested-layouts-in-rails-3
