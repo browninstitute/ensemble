@@ -1,5 +1,5 @@
 <% cache [story, 'index-preview'] do %>
-  <%= link_to story, :class => "story-preview" do %>
+  <%= link_to story_path(story), :class => "story-preview" do %>
     <h1><%= story.title %> 
       <small class="author">
         <%= t 'home.recent.author', author: story.user.name %>
