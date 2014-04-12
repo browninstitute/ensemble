@@ -6,4 +6,12 @@ class Submission < ActiveRecord::Base
   def word_count
     self.content.split.size 
   end
+
+  def is_draft?
+    self.story.is_draf?
+  end
+
+  def privacy
+    self.story.privacy
+  end
 end
