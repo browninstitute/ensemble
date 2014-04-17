@@ -1,10 +1,10 @@
 <div class="preferences-nav span3">
   <h1><%= current_user.name %></h1>
   <ul>
-    <li class="<%= 'active' if current_page?(users_edit_profile_path) %>"><%= link_to "Profile Settings", users_edit_profile_path %></li>
-    <li class="<%= 'active' if current_page?(users_preferences_path) %>"><%= link_to "Email Notifications", users_preferences_path %></li>
+    <li class="<%= 'active' if current_page?(users_edit_profile_path) %>"><%= link_to t('users.preferences.profile.profile_settings'), users_edit_profile_path %></li>
+    <li class="<%= 'active' if current_page?(users_preferences_path) %>"><%= link_to t('users.preferences.notifications.email_notifications'), users_preferences_path %></li>
     <% if current_user.provider.blank? %>
-      <li class="<%= 'active' if current_page?(users_change_password_path) %>"><%= link_to "Change Password", users_change_password_path %></li>
+      <li class="<%= 'active' if current_page?(users_change_password_path) %>"><%= link_to t('users.preferences.change_password.change_password'), users_change_password_path %></li>
     <% end %>
   </ul>
 </div>

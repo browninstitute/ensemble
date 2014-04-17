@@ -2,83 +2,83 @@
   <%= render 'users/left_nav' %>
 
   <div class="preferences-content span9">
-    <h1>Email Notifications</h1>
+    <h1><%= t 'users.preferences.notifications.email_notifications' %></h1>
     
     <div class="preferences-inner">
       <%= form_for current_user, :url => { :action => "preferences" }, :html => {:class => 'email-prefs-form'} do |f| %>
       <div class="general-emails">
-        <strong>Overall,</strong> receive emails when:
+        <%= t 'users.preferences.notifications.overall' %>
         <label class="checkbox">
           <%= check_box_tag "email[added_as_contributor]", 1, current_user.settings['email.added_as_contributor'] %>
-          I'm added as a contributor, co-writer, or moderator to a story
+          <%= t 'users.preferences.notifications.added_as_contributor' %>
         </label>
       </div>
       <br />
       <div class="mod-emails">
-        <strong>For stories I'm moderating,</strong> receive emails when:
+        <%= t 'users.preferences.notifications.moderating' %>
         <label class="checkbox">
           <%= check_box_tag "email[mod.comment_notification]", 1, current_user.settings['email.mod.comment_notification'] %> 
-          Someone makes a comment
+          <%= t 'users.preferences.notifications.moderating_comment' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[mod.paragraph_notification]", 1, current_user.settings['email.mod.paragraph_notification'] %>
-          Someone contributes a paragraph
+          <%= t 'users.preferences.notifications.moderating_new_para' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[mod.update_paragraph_notification]", 1, current_user.settings['email.mod.update_paragraph_notification'] %>
-          Someone edits a paragraph
+          <%= t 'users.preferences.notifications.moderating_edit_para' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[mod.like_notification]", 1, current_user.settings['email.mod.like_notification'] %>
-          Someone likes a paragraph
+          <%= t 'users.preferences.notifications.moderating_likes_para' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[mod.winner_notification]", 1, current_user.settings['email.mod.winner_notification'] %>
-          Someone crowns a paragraph as a winner
+          <%= t 'users.preferences.notifications.moderating_winner' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[mod.story_flagged]", 1, current_user.settings['email.mod.story_flagged'] %>
-          My story is flagged by an admin
+          <%= t 'users.preferences.notifications.moderating_flagged' %>
         </label>
       </div>
       <br />
       <div class="participant-emails">
-        <strong>For stories I'm participating in,</strong> receive emails when:
+        <%= t 'users.preferences.notifications.participating' %>
         <label class="checkbox">
           <%= check_box_tag "email[comment_notification]", 1, current_user.settings['email.comment_notification'] %> 
-          Someone replies to my comment
+          <%= t 'users.preferences.notifications.participating_reply' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[comment_para_notification]", 1, current_user.settings['email.comment_para_notification'] %> 
-          Someone comments on a scene you wrote a paragraph for
+          <%= t 'users.preferences.notifications.participating_comments' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[update_paragraph_notification]", 1, current_user.settings['email.update_paragraph_notification'] %>
-          Someone makes edits to a paragraph you wrote
+          <%= t 'users.preferences.notifications.participating_edit' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[paragraph_notification]", 1, current_user.settings['email.paragraph_notification'] %>
-          Someone writes a paragraph for a scene you commented on
+          <%= t 'users.preferences.notifications.participating_writes' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[update_scene_notification]", 1, current_user.settings['email.update_scene_notification'] %>
-          Someone makes edits to a scene you commented on
+          <%= t 'users.preferences.notifications.participating_edits_scene' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[update_scene_para_notification]", 1, current_user.settings['email.update_scene_para_notification'] %>
-          Someone makes edits to a scene you wrote a paragraph for
+          <%= t 'users.preferences.notifications.participating_edits_scene_para' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[like_notification]", 1, current_user.settings['email.like_notification'] %>
-          Someone likes a paragraph you wrote
+          <%= t 'users.preferences.notifications.participating_likes' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[winner_notification]", 1, current_user.settings['email.winner_notification'] %>
-          A paragraph you wrote is crowned a winner
+          <%= t 'users.preferences.notifications.participating_winner' %>
         </label>
         <label class="checkbox">
           <%= check_box_tag "email[forum_notification]", 1, current_user.settings['email.forum_notification'] %>
-          Someone makes a post in the discussion forum
+          <%= t 'users.preferences.notifications.participating_post' %>
         </label>
        </div>
        <br />

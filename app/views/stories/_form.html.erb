@@ -19,8 +19,8 @@
     
     <%= f.text_field :title, :placeholder => t('stories.new.form.title'), :class => 'largely' %><br />
     <%= f.text_field :subtitle, :placeholder => t('stories.new.form.summary') %><br />
-    <%= t 'stories.new.form.genre1' %>: <%= collection_select(:story, :genre1, Genre.all, :id, :name, :prompt => true) %>
-    <%= t 'stories.new.form.genre2' %>: <%= collection_select(:story, :genre2, Genre.all, :id, :name, :prompt => true) %>
+    <%= t 'stories.new.form.genre1' %>: <%= collection_select(:story, :genre1, Genre.all, :id, :name, :prompt => t('stories.new.form.select_genre')) %>
+    <%= t 'stories.new.form.genre2' %>: <%= collection_select(:story, :genre2, Genre.all, :id, :name, :prompt => t('stories.new.form.select_genre')) %>
     <br />
     <%= t 'stories.new.form.privacy' %>: <%= privacy_select_dropdown(@story.privacy) %>
     

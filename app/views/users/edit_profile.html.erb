@@ -2,13 +2,13 @@
   <%= render 'users/left_nav' %>
 
   <div class="preferences-content span9">
-    <h1>Profile Settings</h1>
+    <h1><%= t 'users.preferences.profile.profile_settings' %></h1>
     
     <div class="preferences-inner">
       <%= form_for(@user, :url => { :action => "edit_profile" }, :html => { :class => "form-horizontal" } ) do |f| %>
         <div class="control-group">
           <label class="control-label" for="name">
-            <%= f.label :name %> 
+            <%= f.label t('users.preferences.profile.name') %> 
           </label>
           <div class="controls">
             <%= f.text_field :name %>
@@ -16,7 +16,7 @@
         </div>
         <div class="control-group">
           <label class="control-label" for="avatar">
-            <%= f.label :avatar %> 
+            <%= f.label t('users.preferences.profile.avatar') %> 
           </label>
           <div class="controls">
             <% if @user.avatar.file? %>
@@ -29,7 +29,7 @@
         </div>
         <div class="control-group">
           <div class="controls">
-            <%= f.submit "Update Profile", :class => "btn" %>
+            <%= f.submit t('users.preferences.profile.update_profile'), :class => "btn" %>
           </div>
         </div>
       <% end %>

@@ -272,7 +272,7 @@ en:
         participating_edits_scene_para: "Someone makes edits to a scene you wrote a paragraph for"
         participating_likes: "Someone likes a paragraph you wrote"
         participating_winner: "A paragraph you wrote is crowned a winner"
-        particiapting_post: "Someone makes a post in the discussion forum"
+        participating_post: "Someone makes a post in the discussion forum"
       change_password:
         change_password: "Change Password"
         current_password: "Current password"

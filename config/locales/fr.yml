@@ -273,7 +273,7 @@ fr:
         participating_edits_scene_para: "Quelqu'un a modifi&eacute; une sc&egrave;ne dont tu as &eacute;crit un paragraphe"
         participating_likes: "Quelqu'un a aim&eacute; un paragraphe que tu as &eacute;crit"
         participating_winner: "Un paragraphe que tu as &eacute;crit est courronn&eacute; gagnant"
-        particiapting_post: "Quelqu'un a post&eacute; quelques choses dans le forum de discusion"
+        participating_post: "Quelqu'un a post&eacute; quelques choses dans le forum de discusion"
       change_password:
         change_password: "Changer mot de passe"
         current_password: "Mot de passe actuel"
