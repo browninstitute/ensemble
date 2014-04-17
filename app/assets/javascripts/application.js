@@ -16,6 +16,7 @@
 //= require jquery.ui.effect-slide
 //= require jquery.ui.datepicker
 //= require twitter/bootstrap
+//= require rails-timeago-all
 //= require_tree .
 
 /* Global ajax handler to show flash messages. */

@@ -125,14 +125,14 @@ fr:
           scene4: "Finallement, ils..."
           scene5: "Et ils vivent heureux pour toujours."
     edit:
-      last_published: "Deni&egrave;re publication il y a %{timeago}."
+      last_published: "Deni&egrave;re publication %{timeago}."
     show:
       header: 
         word_count: 
           one: '1 mot'
           other: '%{count} mots'
         genre: "Genre"
-        author_time_html: "Commenc&eacute; par  %{author} il y a %{timeago}" 
+        author_time_html: "Commenc&eacute; par %{author} %{timeago}" 
       navigation:
         story: "Histoire"
         discussion: "Discussion"
@@ -214,7 +214,7 @@ fr:
       button: "Commentaire"
       login: "Connecter ou s'enrgistrer pour poster un commentaire."
     show:
-      time_html: "Post&eacute; il y a %{timeago}"
+      time_html: "Post&eacute; %{timeago}"
     destroy:
       confirm: "&Ecirc;tes vous sure?"
   users:

@@ -73,7 +73,7 @@ module StoriesHelper
   # Generates text displaying the published status of a story.
   def published_status(story)
     return if story.updated_at.nil?
-    t 'stories.edit.last_published', timeago: time_ago_in_words(story.updated_at)
+    t('stories.edit.last_published', timeago: timeago(story.updated_at))
   end
 
   # Returns the right text for an activity item in the history feed.

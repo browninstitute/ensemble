@@ -69,6 +69,7 @@ gem 'airbrake'
 gem 'meta-tags', :require => 'meta_tags'
 gem 'friendly_id'
 gem 'whenever', :require => false
+gem 'rails-timeago', '~> 2.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
