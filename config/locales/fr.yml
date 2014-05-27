@@ -63,25 +63,25 @@ fr:
       about: "A propos de"
       featured: "En vedette"
       community_prompts: "Community Prompts" #We need more contex to made a good translation of this string
-      start_a_story: "D&eacute;marer une Histoire"
+      start_a_story: "Commencer une histoire"
       stories: "Histoires"
       forums: "Forums"
     footer:
-      copyright_policy: "Politique de Droit d'Auteur"
+      copyright_policy: "Politique de droit d'auteur"
   home:
     hero:
-      title: "Ecrire une histoire en collaboration"
-      lead: "Ensemble est une plateforme pour l'&eacute;criture a participation massive."
-      demo_story: "Histoire Demo"
-      start_writing: "D&eacute;marrer &Eacute;criture"
-      summary1: "Ecrire avec les autres d'une nouvelle fa&cedil;on"
-      summary2: "Sug&eacute;rer des alternatifs pour une sc&egrave;ne d'histoire"
-      summary3: "Parcourir et voter pour les alternatifs"
-      summary4: "Discuter des sc&egrave;ne avec les autres"
+      title: "&Eacute;crire une histoire de mani&egrave;re collaborative"
+      lead: "Ensemble est une plateforme qui permet d'&eacute;crire des histoires de mani&egrave;re collaborative."
+      demo_story: "Voir un exemple"
+      start_writing: "Commencer une histoire"
+      summary1: "&Eacute;crire avec les autres d'une nouvelle mani&egrave;re"
+      summary2: "Sugg&eacute;rer des alternatives pour les diff&eacute;rentes sc&egrave;nes"
+      summary3: "Parcourir les diff&eacute;rentes version et voter pour la meilleure"
+      summary4: "Discuter des sc&egrave;nes avec les autres"
     recent:
-      header: "Histoires R&eacute;centes"
+      header: "Histoires r&eacute;centes"
       author: "Commenc&eacute; par %{author}"
-      time_html: "Commenc&eacute; a %{time}"
+      time_html: "Commenc&eacute; %{time}"
   about:
     title: "A propose de"
   featured:
