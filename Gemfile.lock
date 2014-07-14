@@ -39,6 +39,10 @@ GEM
     ancestry (2.0.0)
       activerecord (>= 3.0.0)
     arel (3.0.2)
+    aws-sdk (1.31.3)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
     cancan (1.6.10)
@@ -238,6 +242,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     unread (0.3.0)
       activerecord (>= 3)
+    uuidtools (2.1.4)
     warden (1.2.1)
       rack (>= 1.0)
     whenever (0.9.0)
@@ -252,6 +257,7 @@ DEPENDENCIES
   acts_as_votable (~> 0.5.0)
   airbrake
   ancestry
+  aws-sdk
   cancan
   coffee-rails (~> 3.2.1)
   daemons
