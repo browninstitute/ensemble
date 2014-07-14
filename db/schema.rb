@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140202234835) do
+ActiveRecord::Schema.define(:version => 20140714061027) do
 
   create_table "announcements", :force => true do |t|
     t.text     "email",      :limit => 255
@@ -172,16 +172,20 @@ ActiveRecord::Schema.define(:version => 20140202234835) do
     t.string   "title"
     t.string   "subtitle"
     t.integer  "user_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.boolean  "public"
     t.text     "content"
     t.integer  "genre1"
     t.integer  "genre2"
     t.string   "slug"
-    t.boolean  "draft",      :default => false
+    t.boolean  "draft",               :default => false
     t.integer  "prompt_id"
-    t.integer  "privacy",    :default => 1
+    t.integer  "privacy",             :default => 1
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
   end
 
   add_index "stories", ["slug"], :name => "index_stories_on_slug", :unique => true

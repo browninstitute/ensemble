@@ -22,15 +22,17 @@ class Story < ActiveRecord::Base
   end
 
   belongs_to :user
-  attr_accessible :subtitle, :title, :genre1, :genre2, :public, :content, :draft, :privacy
+  attr_accessible :subtitle, :title, :genre1, :genre2, :public, :content, :draft, :privacy, :banner
   has_many :scenes, :order => :position
   has_many :comments
   has_many :story_roles
   has_many :contributors, :through => :story_roles, :source => :user
   has_many :cowriters, :through => :story_roles, :source => :user, :conditions => ['role = ?', 'cowriter']
   has_many :moderators, :through => :story_roles, :source => :user, :conditions => ['role = ?', 'moderator']
+  has_attached_file :banner
   has_paper_trail :only => [:title, :subtitle]
   validates :title, :presence => true
+  validates_attachment_content_type :banner, :content_type => /\Aimage\/.*\Z/
 
   scope :by_flagged, lambda { |flag|
     if flag

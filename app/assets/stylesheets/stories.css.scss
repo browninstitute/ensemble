@@ -13,6 +13,9 @@ $accent: #23ADE8;
   font-family: 'Open Sans', Cambria, Georgia, Times, Times New Roman, serif;
 
   .story-header {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
    
     &.arrowhead {

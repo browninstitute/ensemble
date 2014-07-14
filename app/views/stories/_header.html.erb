@@ -1,5 +1,5 @@
 <% cache [@story, "story-header"] do %>
-  <div class="story-header <%= "arrowhead" if Arrowhead.is_arrowhead_story? @story %>">
+  <div class="story-header <%= "arrowhead" if Arrowhead.is_arrowhead_story? @story %>" style="<%= "background-image: url('#{@story.banner.url.html_safe}')" if !@story.banner_file_name.nil? %>">
     <% if @story_slam_preview %>
       <% if @story.settled? %>
         <div class="alert alert-block">
