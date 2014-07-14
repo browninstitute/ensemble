@@ -33,6 +33,8 @@ $(document).ready ->
 
   window.toolbarBold = toolbarBold
   window.toolbarItalic = toolbarItalic
+  window.toolbarImage = toolbarImage
+  window.toolbarVideo = toolbarVideo
   window.toolbarUnorderedList = toolbarUnorderedList
 
 # Setup custom event tracking for Google Analytics
@@ -226,3 +228,25 @@ toolbarUnorderedList = ->
         $(this).val().substring(end)
       )
       this.setSelectionRange(start + 2, end + 4)
+
+toolbarVideo = ->
+  $(selectedTextarea).each ->
+    code = "[video: YOUTUBE VIDEO ID HERE](CAPTION HERE)"
+    start = this.selectionStart
+    end = this.selectionEnd
+    $(this).val(
+      $(this).val().substring(0, start) + code +
+      $(this).val().substring(end)
+    )
+    this.setSelectionRange(start + 8, start + 29)
+
+toolbarImage = ->
+  $(selectedTextarea).each ->
+    code = "![IMAGE_DESCRIPTION_HERE](IMAGE_URL_HERE \"CAPTION_HERE\")"
+    start = this.selectionStart
+    end = this.selectionEnd
+    $(this).val(
+      $(this).val().substring(0, start) + code +
+      $(this).val().substring(end)
+    )
+    this.setSelectionRange(start + 2, start + 24)

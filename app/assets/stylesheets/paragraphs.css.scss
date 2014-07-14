@@ -96,6 +96,25 @@ $lightaccent: #60C8F5;
       p {
         margin-bottom: 20px;
       }
+
+      .embed-image, .embed-video {
+        display: inline;
+        float: right;
+        padding: 10px 0 10px 10px;
+        margin: 0;
+
+        iframe, img {
+          width: 300px;
+          height: 220px;
+        }
+
+        .caption {
+          display: block;
+          font-size: small;
+          color: #aaa;
+          font-family: sans-serif;
+        }
+      }
     }
     
     .paragraph-info {
